@@ -16,6 +16,15 @@ public class Eigenvector {
 		for (double x : v)
 			sum += Math.abs(x);
 		
+		// Make sure the first entry is positive so that the first eigenvector is positive
+		int index = 0;
+		while (index < v.length && (v[index] == -0.0 || v[index]==0.0)) {
+			index ++;
+		}
+		if (index != v.length && v[index]!=-0.0 && v[index] !=0.0) {
+			sum *= Math.signum(v[index]);
+		}
+		
 		vector = new double[v.length];
 		for (int i = 0; i <v.length; i++)
 			vector[i] = v[i]/sum;

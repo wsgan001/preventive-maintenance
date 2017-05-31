@@ -31,34 +31,39 @@ public class StationaryDistributionPlugin {
 	public static StationaryDistribution findDistribution(
 			  final PluginContext context,
 			  final XLog log) {
-		List<String> states = new ArrayList<>();
+		// Use the value of attribute concept:name of the event as state name
+		List<String> states = new ArrayList<String>();
 
 		// The graph: Each 'state' is mapped to a mapping from outgoing states to the number
 		// of times it occurred
-		Map<String,Map<String,Double>> transitions = new HashMap<>();
-
+		Map<String,Map<String,Double>> transitions = new HashMap<String,Map<String,Double>>();
+			
 		// Count transitions
 		for (XTrace trace : log) {
 			String previous = null;
 			for (XEvent event : trace) {
-				String eventID = id(event);
-				if (!states.contains(eventID))
-					states.add(eventID);
-
-				// If it is not the first event in the trace
-				if (previous != null) {
-					// Make sure the previous event has a hashmap
-					transitions.putIfAbsent(previous, new HashMap<String,Double>());
-
-					Map<String, Double> outgoing = transitions.get(previous);
-
-					// Make sure there is an 'edge' for this transition
-					outgoing.putIfAbsent(eventID, 0d);
-
-					// Increment
-					outgoing.put(eventID, outgoing.get(eventID)+1);
+				if (isStart(event)) {
+					String eventID = id(event);
+					if (!states.contains(eventID))
+						states.add(eventID);
+	
+					// If it is not the first event in the trace
+					if (previous != null) {
+						// Make sure the previous event has a hashmap
+						if (!transitions.containsKey(previous))
+							transitions.put(previous, new HashMap<String,Double>());
+	
+						Map<String, Double> outgoing = transitions.get(previous);
+	
+						// Make sure there is an 'edge' for this transition
+						if (!outgoing.containsKey(eventID))
+							outgoing.put(eventID, 0d);
+	
+						// Increment
+						outgoing.put(eventID, outgoing.get(eventID)+1);
+					}
+					previous = eventID;
 				}
-				previous = eventID;
 			}
 		}
 
@@ -82,12 +87,15 @@ public class StationaryDistributionPlugin {
 		// Do linear algebra
 		Matrix transitionMatrix = new Matrix(indices);
 		EigenvalueDecomposition ev = transitionMatrix.eig();
-		
 		return new StationaryDistribution(states.toArray(new String[states.size()]),ev);
 	}
 
 	static String id(XEvent event) {
 		return ((XAttributeLiteral)event.getAttributes().get("concept:name")).getValue();
+	}
+
+	static boolean isStart(XEvent event) {
+		return "start".equals(((XAttributeLiteral)event.getAttributes().get("lifecycle:transition")).getValue());
 	}
 	
 	static double[] getColumn(Matrix m, int c) {
