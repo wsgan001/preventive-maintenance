@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.deckfour.xes.model.XAttributeLiteral;
 import org.deckfour.xes.model.XEvent;
 import org.deckfour.xes.model.XLog;
 import org.deckfour.xes.model.XTrace;
@@ -103,8 +102,8 @@ public class DiscreteTimeMarkovChain implements Map<String,Map<String,Double>> {
 		for (XTrace trace : log) {
 			String previous = null;
 			for (XEvent event : trace) {
-				if (isStart(event)) {
-					String eventID = id(event);
+				if (XesAuxiliary.isStart(event)) {
+					String eventID = XesAuxiliary.id(event);
 					if (!states.contains(eventID))
 						states.add(eventID);
 	
@@ -137,15 +136,6 @@ public class DiscreteTimeMarkovChain implements Map<String,Map<String,Double>> {
 				dtmc.get(state).put(transition, dtmc.get(state).get(transition)/sum);
 		}
 
-	}
-
-	/* Functions for retrieving attributes: */
-	private static String id(XEvent event) {
-		return ((XAttributeLiteral)event.getAttributes().get("concept:name")).getValue();
-	}
-
-	private static boolean isStart(XEvent event) {
-		return "start".equals(((XAttributeLiteral)event.getAttributes().get("lifecycle:transition")).getValue());
 	}
 
 }

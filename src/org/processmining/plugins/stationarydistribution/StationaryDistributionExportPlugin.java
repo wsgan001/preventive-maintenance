@@ -13,8 +13,8 @@ import org.processmining.framework.plugin.PluginContext;
 import org.processmining.framework.plugin.annotations.Plugin;
 import org.processmining.framework.plugin.annotations.PluginVariant;
 
-@Plugin(name = "Probabilistic Transition System to Stationary Distribution",
-parameterLabels = { "Person", "File" },
+@Plugin(name = "Stationary Distribution Exporter",
+parameterLabels = { "Stationary Distribution", "File" },
 returnLabels = { },
 returnTypes = { },
 userAccessible = true)
