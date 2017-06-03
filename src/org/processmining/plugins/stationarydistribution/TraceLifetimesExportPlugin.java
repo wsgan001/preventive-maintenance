@@ -16,7 +16,7 @@ parameterLabels = { "Trace Lifetimes", "File" },
 returnLabels = { },
 returnTypes = { },
 userAccessible = true)
-@UIExportPlugin(description = "Regular txt file (.txt)", extension = "txt")
+@UIExportPlugin(description = "CSV-file (.csv)", extension = "csv")
 public class TraceLifetimesExportPlugin {
 	@UITopiaVariant(affiliation = "TU/e",
             author = "Martijn M. Gösgens",
@@ -29,7 +29,7 @@ public class TraceLifetimesExportPlugin {
             File file) throws IOException {
 		    FileWriter writer = new FileWriter(file);
 		    PrintWriter pwriter = new PrintWriter(writer);
-
+		    pwriter.println("Lifetime");
 		    // Print each lifetime on a new line
 		    for (Long lifetime : tl.getLifetimes())
 		    	pwriter.println(lifetime);

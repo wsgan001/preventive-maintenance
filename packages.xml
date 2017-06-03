@@ -1,14 +1,20 @@
 <packages>
 	<package name="StationaryDistributionPlugin" version="1.1.1" os="all" url="file:///C:/Users/s147569/Dropbox/School/BEP/Plugins/stationarydistribution-1.1.1/stationarydistribution-1.1.1.zip" desc="StationaryDistributionPlugin" org="Eindhoven University of Technology" auto="false" hasPlugins="true" license="L-GPL" author="MM Gosgens" maintainer="MM Gosgens" logo="http://www.promtools.org/prom6/packages66/prom_subtitle_hat_300.png" keywords="">
 		<dependency name="Widgets" />
-		<dependency name="TransitionSystems" />
 	</package>
 	<package name="StationaryDistributionExportPlugin" version="1.1.1" os="all" url="file:///C:/Users/s147569/Dropbox/School/BEP/Plugins/stationarydistribution-1.1.1/stationarydistribution-1.1.1.zip" desc="StationaryDistributionExportPlugin" org="Eindhoven University of Technology" auto="false" hasPlugins="true" license="L-GPL" author="MM Gosgens" maintainer="MM Gosgens" logo="http://www.promtools.org/prom6/packages66/prom_subtitle_hat_300.png" keywords="">
 		<dependency name="Widgets" />
-		<dependency name="TransitionSystems" />
 	</package>
 	<package name="XesImportPlugin" version="1.1.1" os="all" url="file:///C:/Users/s147569/Dropbox/School/BEP/Plugins/stationarydistribution-1.1.1/stationarydistribution-1.1.1.zip" desc="XesImportPlugin" org="Eindhoven University of Technology" auto="false" hasPlugins="true" license="L-GPL" author="MM Gosgens" maintainer="MM Gosgens" logo="http://www.promtools.org/prom6/packages66/prom_subtitle_hat_300.png" keywords="">
 		<dependency name="Widgets" />
-		<dependency name="TransitionSystems" />
+	</package>
+	<package name="DiscreteTimeMarkovChainPlugin" version="1.1.1" os="all" url="file:///C:/Users/s147569/Dropbox/School/BEP/Plugins/stationarydistribution-1.1.1/stationarydistribution-1.1.1.zip" desc="DiscreteTimeMarkovChainPlugin" org="Eindhoven University of Technology" auto="false" hasPlugins="true" license="L-GPL" author="MM Gosgens" maintainer="MM Gosgens" logo="http://www.promtools.org/prom6/packages66/prom_subtitle_hat_300.png" keywords="">
+		<dependency name="Widgets" />
+	</package>
+	<package name="TraceLifetimesExportPlugin" version="1.1.1" os="all" url="file:///C:/Users/s147569/Dropbox/School/BEP/Plugins/stationarydistribution-1.1.1/stationarydistribution-1.1.1.zip" desc="TraceLifetimesExportPlugin" org="Eindhoven University of Technology" auto="false" hasPlugins="true" license="L-GPL" author="MM Gosgens" maintainer="MM Gosgens" logo="http://www.promtools.org/prom6/packages66/prom_subtitle_hat_300.png" keywords="">
+		<dependency name="Widgets" />
+	</package>
+	<package name="TraceLifetimesPlugin" version="1.1.1" os="all" url="file:///C:/Users/s147569/Dropbox/School/BEP/Plugins/stationarydistribution-1.1.1/stationarydistribution-1.1.1.zip" desc="TraceLifetimesPlugin" org="Eindhoven University of Technology" auto="false" hasPlugins="true" license="L-GPL" author="MM Gosgens" maintainer="MM Gosgens" logo="http://www.promtools.org/prom6/packages66/prom_subtitle_hat_300.png" keywords="">
+		<dependency name="Widgets" />
 	</package>
 </packages>
