@@ -17,8 +17,13 @@ The first guess for a fitting distribution would be a normal distribution. Howev
 \includegraphics[width=0.8\textwidth]{Plots/CullenAndFray.png}
 \caption{Cullen and Fray graph of the data.}
 \end{figure}
-Above, a Cullen and Fray graph is plotted. The data is placed based on its kurtosis and skewness. A few well-known distributions are also plotted on this plane. This plot would suggest a beta distribution. However, the beta distribution has a support of $[0,1]$ while the lifetime of a trace is not bounded. Other distributions that have similar kurtosis and skewness are the Weibull distribution and the gamma distribution.
-
+Above, a Cullen and Fray graph is plotted. The data is placed based on its kurtosis and skewness. A few well-known distributions are also plotted on this plane. This plot would suggest a beta distribution. However, the beta distribution has a support of $[0,1]$ while the lifetime of a trace is not bounded. Other distributions that have similar kurtosis and skewness are the Weibull distribution and the gamma distribution.\\
+After estimating the parameters for each of these distributions and performing a Anderson-Darling Goodness-of-Fit test, the gamma-distribution seems to fit the data best with a p-value of $0.195$ versus a $p$-value of $0.00444$. Below, the cumulative gamma distribution with these parameters is plotted over the observed data.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{Plots/GammaCDF.png}
+\caption{The gamma distribution plotted over the data.}
+\end{figure}
 
 \bibliography{bibliography}
 
