@@ -1,7 +1,5 @@
 package org.processmining.plugins.stationarydistribution;
 
-import java.text.ParseException;
-
 import org.deckfour.xes.model.XAttributeLiteral;
 import org.deckfour.xes.model.XAttributeTimestamp;
 import org.deckfour.xes.model.XEvent;
@@ -26,13 +24,12 @@ public class XesAuxiliary {
 	}
 
 	/**
-	 * Gets the timestamp as long (number of milliseconds since 1970).
+	 * Gets the timestamp as long (number of seconds since 1970).
 	 * @param event
-	 * @return The number of milliseconds since 1970.
-	 * @throws ParseException If the value cannot be parsed.
+	 * @return The number of seconds since 1970.
 	 */
-	public static Long getTime(XEvent event) throws ParseException {
-		// Retrieve value and get the milliseconds since 1970.
-		return ((XAttributeTimestamp)event.getAttributes().get("time:timestamp")).getValue().getTime();
+	public static Long getTime(XEvent event) {
+		// Retrieve value and get the seconds since 1970.
+		return ((XAttributeTimestamp)event.getAttributes().get("time:timestamp")).getValue().getTime()/1000;
 	}
 }

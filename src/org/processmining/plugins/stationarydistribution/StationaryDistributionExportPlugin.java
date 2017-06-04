@@ -31,47 +31,44 @@ public class StationaryDistributionExportPlugin {
             File file) throws IOException {
 		    FileWriter writer = new FileWriter(file);
 		    PrintWriter pwriter = new PrintWriter(writer);
-		    
-		    // For rounding
-		    DecimalFormat df = new DecimalFormat("##.##");
-		    df.setRoundingMode(RoundingMode.HALF_UP);
-		    
-		    
-		    // Print eigenvalues on first row
-		    String previousNumber = "";
-		    for (Eigenvector ev : sd.getEigenvectors()) {
-		    	// Add tabs
-		    	int l = previousNumber.length();
-		    	while (l<12) {
-		    		pwriter.print("\t");
-		    		l+=4;
-		    	}
-		    	
-		    	String complexNumber = df.format(ev.getEigenvalueReal())
-		    			+(ev.getEigenvalueImaginary() == 0.0 ? "" : (ev.getEigenvalueImaginary() > 0 ? "+" : "")
-						+df.format(ev.getEigenvalueImaginary())+"i");
-		    	pwriter.print(complexNumber);
-		    	previousNumber = complexNumber;
-		    }
-		    pwriter.println();
-		    
-		    // Print eigenvectors in matrix
-		    for (int i = 0; i < sd.getStates().length; i++) {
-		    	pwriter.print(sd.getStates()[i]);
-		    	previousNumber = "";
-		    	for (Eigenvector ev : sd.getEigenvectors()) {
-		    		int l = previousNumber.length();
-		    		while (l<12) {
-		    			pwriter.print("\t");
-		    			l+=4;
-		    		}
-		    		previousNumber = df.format(ev.getVector()[i]);
-		    		pwriter.print(previousNumber);
-		    	}
-		    	pwriter.println();
-		    }
-		    pwriter.close();
-	  }
-	  
-	  
+	    // For rounding
+	    DecimalFormat df = new DecimalFormat("##.##");
+	    df.setRoundingMode(RoundingMode.HALF_UP);
+	    
+	    
+	    // Print eigenvalues on first row
+	    String previousNumber = "";
+	    for (Eigenvector ev : sd.getEigenvectors()) {
+	    	// Add tabs
+	    	int l = previousNumber.length();
+	    	while (l<12) {
+	    		pwriter.print("\t");
+	    		l+=4;
+	    	}
+	    	
+	    	String complexNumber = df.format(ev.getEigenvalueReal())
+	    			+(ev.getEigenvalueImaginary() == 0.0 ? "" : (ev.getEigenvalueImaginary() > 0 ? "+" : "")
+					+df.format(ev.getEigenvalueImaginary())+"i");
+	    	pwriter.print(complexNumber);
+	    	previousNumber = complexNumber;
+	    }
+	    pwriter.println();
+	    
+	    // Print eigenvectors in matrix
+	    for (int i = 0; i < sd.getOrdering().size(); i++) {
+	    	pwriter.print(sd.getOrdering().get(i));
+	    	previousNumber = "";
+	    	for (Eigenvector ev : sd.getEigenvectors()) {
+	    		int l = previousNumber.length();
+	    		while (l<12) {
+	    			pwriter.print("\t");
+	    			l+=4;
+	    		}
+	    		previousNumber = df.format(ev.getEntry(sd.getOrdering().get(i)));
+	    		pwriter.print(previousNumber);
+	    	}
+	    	pwriter.println();
+	    }
+	    pwriter.close();
+	}
 }

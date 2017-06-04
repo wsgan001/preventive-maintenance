@@ -1,10 +1,14 @@
 package org.processmining.plugins.stationarydistribution;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import Jama.EigenvalueDecomposition;
 import Jama.Matrix;
 
 public class StationaryDistribution {
-	private String[] states;
+	private List<String> ordering;
 	private Eigenvector[] eigenvectors;
 	
 	/**
@@ -13,7 +17,7 @@ public class StationaryDistribution {
 	 */
 	public StationaryDistribution(DiscreteTimeMarkovChain dtmc) {
 		// Keep states as an array
-		states = dtmc.getStatesInOrder().toArray(new String[dtmc.size()]);
+		ordering = dtmc.getStatesInOrder();
 		
 		// Fill matrix
 		double[][] indices = new double[dtmc.size()][dtmc.size()];
@@ -31,9 +35,9 @@ public class StationaryDistribution {
 		eigenvectors = new Eigenvector[dim];
 		for (int r = 0; r < dim; r++) {
 			// Retrieve the corresponding eigenvector
-			double[] vector = new double[dim];
-			for (int i = 0; i < vector.length; i ++) {
-				vector[i] = ev.getV().get(i, r);
+			Map<String,Double> vector = new HashMap<String,Double>();
+			for (int i = 0; i < dim; i ++) {
+				vector.put(ordering.get(i),ev.getV().get(i, r));
 			}
 			eigenvectors[r] = new Eigenvector(
 					ev.getRealEigenvalues()[r],
@@ -43,8 +47,12 @@ public class StationaryDistribution {
 		}
 	}
 	
-	public String[] getStates() {
-		return states;
+	public void setOrdering(List<String> ordering) {
+		this.ordering = ordering;
+	}
+	
+	public List<String> getOrdering() {
+		return ordering;
 	}
 	
 	public Eigenvector[] getEigenvectors() {
