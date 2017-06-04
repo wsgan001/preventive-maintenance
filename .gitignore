@@ -1,0 +1,10 @@
+R scripts/.Rhistory
+Report/bibliography.bib.bak
+*.log
+*.blg
+*.dvi
+*.ps
+*.aux
+*.gz
+*.out
+*.bbl
