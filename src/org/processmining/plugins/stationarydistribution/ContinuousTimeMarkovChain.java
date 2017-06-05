@@ -149,4 +149,8 @@ public class ContinuousTimeMarkovChain implements Map<String, Map<String, Double
 	public Set<java.util.Map.Entry<String, Map<String, Double>>> entrySet() {
 		return ctmc.entrySet();
 	}
+	
+	public Map<String,List<Long>> getTransitionTimes() {
+		return transitionTimes;
+	}
 }
