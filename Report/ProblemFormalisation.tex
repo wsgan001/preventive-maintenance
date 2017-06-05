@@ -1,0 +1,19 @@
+\input{Imports.tex}
+\begin{document}
+\section{Problem Formalisation}
+The problem of scheduling preventive maintenance in order to minimize cost can be modeled as a dynamical programming problem. 
+
+The set of possible actions will be $U(x_t)=U=\{"Repair", "No Repair"\}$. The random disturbances and the state space will follow from the stochastic model that will be chosen. We assume that preventive maintence has a certain cost $c("Repair")=c_p$ and corrective maintenace has a cost $c_c>c_p$.
+
+We assume that the problem can be modeled as a renewal process such that after each repair (corrective or preventive), the process starts over.
+
+We want to minimize the expected cost per time unit.
+
+Since the machine will not be immediately repaired when it is decided that this is necessary, a certain time lag could be applicable. For simplicity, we will omit this aspect for now.
+
+It can also be modelled as an optimal stopping problem.
+
+% Correlated disturbances
+
+\bibliography{bibliography}
+\end{document}
