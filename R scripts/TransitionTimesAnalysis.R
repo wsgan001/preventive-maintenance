@@ -12,7 +12,11 @@ transitionTimes <- CsvData
 weibullShapes <- numeric(56)
 weibullPs <- numeric(56)
 
-AnalyseTransitionTimesOf <- function(state) {
+minExpP <- 1
+minWeibullP <- 1
+
+
+for (state in 1:56) {
   # Compute
   times <- Filter(function(t) {return(!is.na(t) && t > 0)},transitionTimes[[state]])
   
@@ -36,13 +40,16 @@ AnalyseTransitionTimesOf <- function(state) {
   #lines(x,pnorm(x, mean=normFit$estimate[["mean"]],sd = normFit$estimate[["sd"]]), col="black") # Normal does not fit at all
   #print(weibullFit)
   weibullTest <- ad.test(times, pweibull,shape=weibullFit$estimate[["shape"]], scale = weibullFit$estimate[["scale"]])
+  expTest <- ad.test(times, pexp,rate = expFit$estimate[["rate"]])
   #shapiro <- shapiro.test(times)
-  print(paste(weibullFit$estimate[["shape"]],weibullTest$p.value[[1]]))
+  print(paste(expFit$estimate[["rate"]], weibullFit$estimate[["shape"]],expTest$p.value[[1]],weibullTest$p.value[[1]]))
+  
+  if (expTest$p.value[[1]] < minExpP)
+    minExpP <- expTest$p.value[[1]]
+  if (weibullTest$p.value[[1]] < minWeibullP)
+    minWeibullP <- weibullTest$p.value[[1]]
   
   #normFit <- fitdistr(times, "normal")
   #print(ad.test(times, pnorm,mean = normFit$estimate[["mean"]], sd=normFit$estimate[["sd"]]))
 }
-
-for (i in 1:56)
-  AnalyseTransitionTimesOf(i)
 

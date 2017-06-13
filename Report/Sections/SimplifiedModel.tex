@@ -1,0 +1,76 @@
+\section{Simplified models}
+Instead of tackling the complete problem at once, we start with a simplified version of the problem, solve this and then make the model incrementally more realistic.\\
+\\
+\subsection{First model}
+In our first and simplest model, the machine has a lifetime that follows some distribution $f(l)$ (cumulative function $F(l)$). When the machine breaks, it needs to be repaired and a certain cost for corrective maintenance needs to be paid ($c_c$). We start with an open loop problem where we have to choose at the beginning at what time the machine will be repaired. 
+When the machine is repaired, the problem starts again with a new lifetime according to the same distribution.\\
+We want to minimize the average cost. Since the machine is renewed after each repair, we can do this by minimizing the expected average cost until the first repair.
+
+If we decide to repair the machine at some time $u>0$, then the expected cost will be
+$$
+J(u)=\frac{(1-F(u))c_p}{u}+\int\limits_{0}^u\frac{f(l)c_c}{l}dl
+$$
+We want to minimize this, so we search for a zero of its derivative
+$$
+\frac{d}{du}J(x)=-\frac{c_p}{u^2} - \frac{f(u)c_p}{u} +\frac{F(u)c_p}{u^2}+\frac{f(u)c_c}{u}=0
+$$
+We multiply by $u^2$ ($u>0$ since preventive maintenance at time 0 would result in infinite average cost)
+$$
+c_pF(u)-c_p+uf(u)(c_c-c_p)=0
+$$
+Which can be solved either numerically or algebraic for some specific distribution. For example, for lifetimes uniformly distributed on the interval $[0,L]$, this would result in solving
+$$
+c_p\frac{u}{L}-c_p+\frac{u(c_c-c_p)}{L}=0\Rightarrow u=L\frac{c_p}{c_c}
+$$
+
+\subsection{Closed loop}
+We now make the problem a little more difficult by discretizing the time and having a limited set of options at each stage.
+There are two states, one where the machine is broken ($s_b$), and one where it is not ($s_0$). If the machine is broken, the only available action is $u_c$ (corrective maintenance) with cost $c_c$. After $u_c$, the machine is renewed. When the machine is not broken, there are two actions:
+\begin{itemize}
+\item Preventive maintenance ($u_p$) with cost $c_p<c_c$, renewing the machine.
+\item Do nothing ($u_w$) with cost 0.
+\end{itemize}
+For simplicity we introduce a discount $\alpha$ and are interested in the discounted cost instead of the average cost. The value function would then be 
+$$
+J_{k}(s_0)=\min\{c_p+\alpha J_0(s_0),\alpha p_kJ_{k+1}(s_0)+(1-p_k)J_{k+1}(s_b)\}
+$$
+$$
+J_{k}(s_b)=c_c+\alpha J_0(s_0)
+$$
+Where $p_k$ denotes the probability that the machine does not break until the next stage. If we discretize time as $t_k=k\Delta$, this probability would be $\mathbf{P}(L>t_{k+1}|L>t_k)=\frac{1-F(t_{k+1})}{1-F(t_k)}$.
+
+\subsection{Fluid models}
+The last problem could be seen as a fluid model with one state with rate $-1$ and a random initial fluid level (ignoring the broken state for now). We could extend this to fluid models of more states.
+We introduce a fluid model with two states: 
+\begin{itemize}
+\item $s_0$: With fluid rate $r_0<0$
+\item $s_1$: With fluid level $r_1<0$.
+\end{itemize}
+The system transitions in the fluid model occur as a CTMC when $u_w$ is chosen and the machine does not break, when $u_p$ is chosen, the system is renewed and transitions to $s_0$. When the machine breaks, it transitions to $s_b$ from which the only available action is $u_c$ which transitions to $s_0$.\\
+
+To calculate the probability that the machine breaks between two stages, we need to have the distribution of the fluid decrease in a period of length $\Delta$. Let $\overline{r}=\max{r_0,r_1}$ and $\underline{r}=\min{r_0,r_1}$. Let $\Delta\underline{r}<q<\Delta\overline{r}$, then the probability that the fluid decreases less than $q$ in the next period, equals the probability that the machine spends less than $\frac{q-\underline{r}\Delta}{\overline{r}-\underline{r}}$ time in the state with the lowest rate.
+Let $f_{i}^j(t^*,t)$ denote the density of spending $t^*$ out of $t$ time in state $j$ given that it starts in state $i$. We have that for small $h$:
+$$
+f_{0}^1(t^*,t)=\lambda_0hf_1^1(t^*,t-h)+(1-\lambda_0h)f_{0}^1(t^*,t-h)
+$$
+$$
+\Rightarrow \frac{f_{0}^1(t^*,t)-f_{0}^1(t^*,t-h)}{h}=\lambda_0(f_1^1(t^*,t-h)-f_{0}^1(t^*,t-h))
+$$
+And in the limit this results in
+$$
+\frac{d}{dt}f_{0}^1(t^*,t)=\lambda_0(f_1^1(t^*,t)-f_{0}^1(t^*,t))
+$$
+Similarly, for $f_1^1(t^*,t)$ we have
+$$
+(\frac{d}{dt}+\frac{d}{dt^*})f_1^1(t^*,t)=\lambda_1(f_0^1(t^*,t)-f_1^1(t^*,t))
+$$
+The first equation is an ordinary differential equation and can be solved using the method of the integrating factor, this leads to
+$$
+f_0^1(t^*,t)=\int\lambda_0f_1^1(t^*,t)e^{\lambda_0t}dte^{-\lambda_0t}
+$$
+(constants omitted for readability). The second equation is a partial differential equation and could be approached using the method of characteristics, which leads to
+$$
+f_1^1(t_0,t_0+x)=\int\limits^{x}\lambda_1f_0^1(t_0,t_0+y)e^{\lambda_1y}dyd^{-\lambda_1x}
+$$
+(Lower limit of the integral must be set such that $f_1^1(t_0,t_0)=e^{-\lambda_1t_0}$)
+I currently have not found a way to finish these differential equations.
