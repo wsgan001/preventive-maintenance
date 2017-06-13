@@ -39,7 +39,10 @@ $$
 J_{k}(s_b)=c_c+\alpha J_0(s_0)
 $$
 Where $p_k$ denotes the probability that the machine does not break until the next stage. If we discretize time as $t_k=k\Delta$, this probability would be $\mathbf{P}(L>t_{k+1}|L>t_k)=\frac{1-F(t_{k+1})}{1-F(t_k)}$.
-\added{Although you say that this is model with two states, it is not really. The machine spends exactly zero time in $s_b$, so that state can be eliminated. So effectively this is one state.}
+\added{Although you say that this is model with two states, it is not really. The machine spends exactly zero time in $s_b$, so that state can be eliminated. So effectively this is one state.
+$$
+J_{k}(s_0)=\min\{c_p+ J_0(s_0),p_k J_{k+1}(s_0)+(1-p_k) (c_c+ J_0(s_0))\}
+$$}
 
 \subsection{Fluid models}
 The last problem could be seen as a fluid model with one state with rate $-1$ and a random initial fluid level (ignoring the broken state for now). We could extend this to fluid models of more states.
