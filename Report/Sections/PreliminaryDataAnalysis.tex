@@ -37,6 +37,7 @@ After estimating the parameters for each of these distributions and performing a
 
 \subsubsection{Phase-Type distribution}
 As the class of Phase-Type distributions is dense in the space of positive continuous distributions, a Phase-Type distribution could also be used to model the lifetimes. However, Phase-Type distributions have a few disadvantages: The number of parameters grows quadratically with the amount of states and a lot of these parameters are redundant. Furthermore, convergence of the EM-algorithm (to estimate the parameters) is slow and can get stuck in saddle points and local maxima \cite{Asmussen1996}.
+\added{Phase-Type distributions do have lots extra parameters but they are needed to ensure that the matrices are stochastic or proper generators. However if you relax the interpretation that there should be a proper markov chain behind the model then you get to Matrix exponential distributions. These have the same analytic form, without the nice stochastic interpretation. Here you can parametrise the distribution with the minimal number of characteristic parameters. The second argument still holds. No need to do anything with this, it just FYI.}
 
 \subsubsection{Transition Times}
 If we view each event as a state and view switching from one event to another as a transition. Then we could model the machine as a transitioning system. It would then be interesting to see how the transition times are distributed; whether they are of the same family of distributions and whether they are independent. \\

@@ -10,6 +10,7 @@ If we decide to repair the machine at some time $u>0$, then the expected cost wi
 $$
 J(u)=\frac{(1-F(u))c_p}{u}+\int\limits_{0}^u\frac{f(l)c_c}{l}dl
 $$
+\added{You also want to check the value at $u=0$ and $u=\infty$. Derivative $=0$ is condition for extreme value only inside the domain where the function is analytic. And it says nothing about minima or maxima. As you see it on your hazard plot figure, there are going to be minima and mixima in there, so checking if this is an extreme value is not always enough.}
 We want to minimize this, so we search for a zero of its derivative
 $$
 \frac{d}{du}J(x)=-\frac{c_p}{u^2} - \frac{f(u)c_p}{u} +\frac{F(u)c_p}{u^2}+\frac{f(u)c_c}{u}=0
