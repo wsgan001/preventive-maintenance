@@ -39,6 +39,7 @@ $$
 J_{k}(s_b)=c_c+\alpha J_0(s_0)
 $$
 Where $p_k$ denotes the probability that the machine does not break until the next stage. If we discretize time as $t_k=k\Delta$, this probability would be $\mathbf{P}(L>t_{k+1}|L>t_k)=\frac{1-F(t_{k+1})}{1-F(t_k)}$.
+\added{Although you say that this is model with two states, it is not really. The machine spends exactly zero time in $s_b$, so that state can be eliminated. So effectively this is one state.}
 
 \subsection{Fluid models}
 The last problem could be seen as a fluid model with one state with rate $-1$ and a random initial fluid level (ignoring the broken state for now). We could extend this to fluid models of more states.
@@ -47,6 +48,7 @@ We introduce a fluid model with two states:
 \item $s_0$: With fluid rate $r_0<0$
 \item $s_1$: With fluid level $r_1<0$.
 \end{itemize}
+\added{Now this is proper two states, because the third $s_b$ is not listed :)}
 The system transitions in the fluid model occur as a CTMC when $u_w$ is chosen and the machine does not break, when $u_p$ is chosen, the system is renewed and transitions to $s_0$. When the machine breaks, it transitions to $s_b$ from which the only available action is $u_c$ which transitions to $s_0$.\\
 
 To calculate the probability that the machine breaks between two stages, we need to have the distribution of the fluid decrease in a period of length $\Delta$. Let $\overline{r}=\max{r_0,r_1}$ and $\underline{r}=\min{r_0,r_1}$. Let $\Delta\underline{r}<q<\Delta\overline{r}$, then the probability that the fluid decreases less than $q$ in the next period, equals the probability that the machine spends less than $\frac{q-\underline{r}\Delta}{\overline{r}-\underline{r}}$ time in the state with the lowest rate.
@@ -75,3 +77,7 @@ f_1^1(t_0,t_0+x)=\int\limits^{x}\lambda_1f_0^1(t_0,t_0+y)e^{\lambda_1y}dyd^{-\la
 $$
 (Lower limit of the integral must be set such that $f_1^1(t_0,t_0)=e^{-\lambda_1t_0}$)
 I currently have not found a way to finish these differential equations.
+
+\added{This is the brute force way of getting the distribution that we want and probably not in the simplest form. I suggest the following approach. Assume you start from a state and you want to get the distribution of the proportion of time spent in that state before $t$. Consider the following: The time spent in state $i$ is always the part of the trajectory that starts in $i$ and you spend there an exponential time. The distribution can be calculated based on what is the next state after $i$ and what is the distribution of time until return to $i$. This return distribution is exactly a phase-type distribution with properly chosen parameters. So you can work this out without solving those nasty integrals. After this is done, you can probably use law of total provability on the number of excursions from $i$ to $i$. My guess is that this approach will give you something that can be treated a bit better. Of you get the solution from this approach, even in form of infinite sums and such, you can check if that satisfies the d.e., as a sanity check.}
+
+\added{There is a reason why this approach works only for this simplified setup with two states. And why this cannot be extended for more states. Try to think about it.}
