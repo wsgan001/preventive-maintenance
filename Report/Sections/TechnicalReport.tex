@@ -22,5 +22,10 @@ Below is a list of the various plug-ins that were created during this project to
 \item \textbf{TraceLifetimesExportPlugin}: This takes a TraceLifetimes object as input and stores the lifetimes in a csv-file so that they can easily be analysed using an R-script.
 \end{itemize}
 
+\subsection{Event log}
+The data set that was analysed was a XES-file. XES stands for eXtensive Event Stream and is a format for event log files.
+% More about XES and OpenXES
+There were some issues when reading the data: The event logs had timestamps for the start and end-time of each transition. When inspecting the data more closely, I found out that there are some transitions occurring in negative time. Most of them had a length of -1 seconds, which is likely caused by rounding errors, but there were also two outliers; two transitions with length almost minus 3600 seconds. These both occurred on the last sunday of March around 3 o'clock in the night but in different years. This is of course the time that the clock is moved an hour forward to transition from winter to summer time. The most likely explanation is that the event logger of the machine did not use summer and winter time while the OpenXES framework that was used to extract the timestamp from the date-times did. This error was discovered for the transition to summer time but the clock is also moved back each year, which will likely cause an error as well.
+
 \subsection{R}
 R is a scripting language for statistics. During this project, it has been used to perform statistical analysis on data extracted from the event logs.
