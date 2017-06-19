@@ -1,0 +1,13 @@
+\section{Fluid models}
+Given a CTMC $X(t)$ with states $s_i$ for $i=1,...,n$ and infinitesimal generator matrix $Q$, we want to predict some event using a Fluid Model with fluid level $L(t)$ with initial distribution $F_L(q)$ and density $f_L(q)$, we want to find the rates $r_i\leq 0$ for each state $s_i$.\\
+Let $X_k$ denote the $k$-th state that the CTMC visits, let $T_k$ denote the time the CTMC spends in this state and let $F_k$ denote the occurrence of the event while the CTMC is in its $k$-th state. We assume that the event occurs when the fluid level reaches zero.\\
+We then have
+$$
+\mathbb{P}(F_k|X_k=s_i)=\int\limits_0^{\infty}\mathbb{P}(T_k>\frac{l}{-r_i})f_{L_i}(l)dl=\int\limits_0^{\infty}e^{-q_{ii}/r_i})f_{L_i}(l)dl
+$$
+Where $f_{L_i}$ denotes the density of the fluid level when the CTMC arrives in $s_i$.\\
+Given some density function $f_{L_i}$, we can use this to make a maximum likelihood estimator for $r_i$.
+Also another relation holds between the fluid levels of different states\citep{Gribaudo2007}:
+$$
+\frac{\partial}{\partial t}p_i(t,l)+\frac{\partial}{\partial l}r_ip_i(t,l)=\sum\limits_{k=1}^nq_{ki}p_k(t,l)
+$$

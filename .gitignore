@@ -9,3 +9,5 @@ Report/bibliography.bib.bak
 *.out
 *.bbl
 Report/Report.soc
+*.soc
+Report/Sections/bibliography.bib.bak

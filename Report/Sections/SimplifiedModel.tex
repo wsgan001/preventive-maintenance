@@ -2,59 +2,50 @@
 Instead of tackling the complete problem at once, we start with a simplified version of the problem, solve this and then make the model incrementally more realistic.\\
 \\
 \subsection{First model}
-In our first and simplest model, the machine has a lifetime $L$ that follows some distribution $f(l)$ (cumulative function $F(l)$). When the machine breaks, it needs to be repaired and a certain cost for corrective maintenance needs to be paid ($c_c$). We start with an open loop problem where we have to choose at the beginning at what time the machine will be repaired. 
+In our first and simplest model, the machine has a lifetime $L$ that follows some distribution $f_L(l)$ (cumulative function $F_L(l)$). When the machine breaks, it needs to be repaired and a certain cost for corrective maintenance needs to be paid ($c_c$). We start with an open loop problem where we have to choose at the beginning at what time the machine will be repaired. 
 When the machine is repaired, the problem starts again with a new lifetime according to the same distribution.\\
 We want to minimize the average cost. Since the machine is renewed after each repair, we can do this by minimizing the expected average cost until the first repair.
 
 If we decide to repair the machine at some time $u>0$, then the expected cost will be
 $$
-J(u)=\frac{(1-F(u))c_p}{u}+\int\limits_{0}^u\frac{f(l)c_c}{l}dl
+J(u)=\frac{(1-F_L(u))c_p}{u}+\int\limits_{0}^u\frac{f_L(l)c_c}{l}dl
 $$
-We want to minimize this. To find this minimum, we first try the extreme values. For $u=0$, there would be an infinite cost per time unit so this is clearly not minimal. $u=\inf$ is equivalent to not doing any preventive maintenance ($F(\inf)=1$ so the first term vanishes). As you can see, the expected cost then equals $c_c$ times the expected value of one divided by the lifetime. It can be computed by solving the integral or, if the moment generating function is known, by integrating the moment generating function. To find the minimum, we also need to check the function at points where it is not differentiable. The minimum can also be at a zero of the derivative of the cost function:
+We want to minimize this. To find this minimum, we first try the extreme values. For $u=0$, there would be an infinite cost per time unit so this is clearly not minimal. $u=\infty$ is equivalent to not doing any preventive maintenance ($F_L(\infty)=1$ so the first term vanishes). As you can see, the expected cost then equals $c_c$ times the expected value of one divided by the lifetime. It can be computed by solving the integral or, if the moment generating function is known, by integrating the moment generating function. To find the minimum, we also need to check the function at points where it is not differentiable. The minimum can also be at a zero of the derivative of the cost function:
 $$
-\frac{d}{du}J(x)=-\frac{c_p}{u^2} - \frac{f(u)c_p}{u} +\frac{F(u)c_p}{u^2}+\frac{f(u)c_c}{u}=0
+\frac{d}{du}J(x)=-\frac{c_p}{u^2} - \frac{f_L(u)c_p}{u} +\frac{F_L(u)c_p}{u^2}+\frac{f_L(u)c_c}{u}=0
 $$
 We multiply by $u^2$ ($u>0$ since preventive maintenance at time 0 would result in infinite average cost)
 $$
-c_pF(u)-c_p+uf(u)(c_c-c_p)=0
+c_pF(u)-c_p+uf_L(u)(c_c-c_p)=0
 $$
 Which can be solved either numerically or algebraic for some specific distribution. The minimum can then be found by comparing the costs at the extreme values, undifferentiable points and at the zeroes of the derivative. For example, for lifetimes uniformly distributed on the interval $[0,B]$, this would result in solving
 $$
-c_p\frac{u}{B}-c_p+\frac{u(c_c-c_p)}{B}=0\Rightarrow u=L\frac{c_p}{c_c}
+c_p\frac{u}{B}-c_p+\frac{u(c_c-c_p)}{B}=0\Rightarrow u=B\frac{c_p}{c_c}
 $$
 
 \subsection{Closed loop}
-We now make the problem a little more difficult by discretizing the time and having a limited set of options at each stage.
-There are two states, one where the machine is broken ($s_b$), and one where it is not ($s_0$). If the machine is broken, the only available action is $u_c$ (corrective maintenance) with cost $c_c$. After $u_c$, the machine is renewed. When the machine is not broken, there are two actions:
+We now make the problem a little more difficult by discretizing the time as $t_k=k\Delta$ and having a limited set of options at each stage.
+There is one state ($s_0$). At this state, there are two actions:
 \begin{itemize}
-\item Preventive maintenance ($u_p$) with cost $c_p<c_c$, renewing the machine.
-\item Do nothing ($u_w$) with cost 0. This action will lead to $s_0$ if the machine does not break in the next time interval, or to $s_b$ if it does break.
+\item Preventive maintenance ($u_p$) with cost $c_p$, renewing the machine.
+\item Do nothing ($u_w$) with cost 0 if the machine does not break and cost $c_c$ (for corrective maintenance) if the machine does break. Corrective maintenance renews the machine.
 \end{itemize}
-\added{
-But if the machine breaks between two stages, it moves to the broken state and spends one stage there. In the continuous case, the machine does indeed spend zero time there but in this descretized problem, it does spend $\Delta$ time there.
-}
-For simplicity we introduce a discount $\alpha$ and are interested in the discounted cost instead of the average cost. The value function would then be 
+Let $B_k$ denote the event that the machine breaks between stages $k$ and $k+1$. For simplicity we introduce a discount $\alpha$ and are interested in the discounted cost instead of the average cost. The value function would then be 
 $$
-J_{k}(s_0)=\min\{c_p+\alpha J_0(s_0),\alpha p_kJ_{k+1}(s_0)+(1-p_k)J_{k+1}(s_b)\}
+J_{k}(s_0)=\min\{c_p+ J_0(s_0),(1-p_k) J_{k+1}(s_0)+p_k(c_c+ J_0(s_0))\}
 $$
-$$
-J_{k}(s_b)=c_c+\alpha J_0(s_0)
-$$
-Where $p_k$ denotes the probability that the machine does not break until the next stage. If we discretize time as $t_k=k\Delta$, this probability would be $\mathbf{P}(L>t_{k+1}|L>t_k)=\frac{1-F(t_{k+1})}{1-F(t_k)}$.
-$$
-J_{k}(s_0)=\min\{c_p+ J_0(s_0),p_k J_{k+1}(s_0)+(1-p_k) (c_c+ J_0(s_0))\}
-$$
+Where $p_k=\mathbf{P}(B_k)=\mathbf{P}(L<t_{k+1}|L>t_k)=\frac{F_L(t_{k+1})-F_L(t_k)}{1-F_L(t_k)}$ denotes the probability that the machine breaks in the next stage.
 
 \subsection{Fluid models}
-The last problem could be seen as a fluid model with one state with rate $-1$ and a random initial fluid level (ignoring the broken state for now). We could extend this to fluid models of more states.
+The last problem could be seen as a fluid model with one state with rate $-1$ and a random initial fluid level according to distribution $F_L(l)$. We could extend this to fluid models of more states.
 We introduce a fluid model with two states: 
 \begin{itemize}
 \item $s_0$: With fluid rate $r_0<0$
 \item $s_1$: With fluid level $r_1<0$.
 \end{itemize}
-The system transitions in the fluid model occur as a CTMC when $u_w$ is chosen and the machine does not break, when $u_p$ is chosen, the system is renewed and transitions to $s_0$. When the machine breaks, it transitions to $s_b$ from which the only available action is $u_c$ which transitions to $s_0$.\\
+The system transitions in the fluid model occur as a CTMC when $u_w$ is chosen and the machine does not break, when $u_p$ is chosen or the machine breaks (and corrective maintenance is performed), the system is renewed and transitions to $s_0$. The initial fluid level is again given by the distribution $F_L(l)$.\\
 
-To calculate the probability that the machine breaks between two stages, we need to have the distribution of the fluid decrease in a period of length $\Delta$. Let $\overline{r}=\max{r_0,r_1}$ and $\underline{r}=\min{r_0,r_1}$. Let $\Delta\underline{r}<q<\Delta\overline{r}$, then the probability that the fluid decreases less than $q$ in the next period, equals the probability that the machine spends less than $\frac{q-\underline{r}\Delta}{\overline{r}-\underline{r}}$ time in the state with the lowest rate.
+To calculate the probability that the machine breaks between two stages, we need to have the distribution of the fluid decrease in a period of length $\Delta$. Let $\overline{r}=\max{r_0,r_1}$ and $\underline{r}=\min{r_0,r_1}$. Let $\Delta\underline{r}<q<\Delta\overline{r}$, then the probability that the fluid decreases more than $q$ in the next period, equals the probability that the machine spends less than $\frac{\overline{r}\Delta-q}{\overline{r}-\underline{r}}$ time in the state with the lowest rate.
 Let $f_{i}^j(t^*,t)$ denote the density of spending $t^*$ out of $t$ time in state $j$ given that it starts in state $i$. We have that for small $h$:
 $$
 f_{0}^1(t^*,t)=\lambda_0hf_1^1(t^*,t-h)+(1-\lambda_0h)f_{0}^1(t^*,t-h)
@@ -91,6 +82,6 @@ f_0^0(t^*,t)=\sum\limits_{k=1}^\infty g_0^{(k)}(t^*,t-t^*)
 $$
 And we have that $f_0^1(t^*,t)=f_0^0(t-t^*,t)$. Moreover, we can obtain $f_1^1(t_0,t_0+t_1)$ by interchanging $\lambda_0$ with $\lambda_1$ and interchanging $t_0$ with $t_1$ in the expression of $f_0^0(t_0,t_0+t_1)$.
 
-It can be seen that these expressions adhere to the differential equations mentioned earlier by filling them in.
+It can be seen that these expressions adhere to the differential equations mentioned earlier by simply filling them in.
 
 \added{So now the next difficulty will be integrating these expressions to obtain the cumulative distribution function.}
