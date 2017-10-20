@@ -1,51 +1,159 @@
 \section{Simplified models}
-Instead of tackling the complete problem at once, we start with a simplified version of the problem, solve this and then make the model incrementally more realistic.\\
+As a first attempt to investigate the relevant literature, as well as the underlying complexity of the underlying methodological aproach, we begin with a simple mathematical model before we incrementally add complexities to make it more realistic.
+Besides the above mentioned advantages, we envision that such a simplification will permit us to... \todo{TODO}
+\\
+%Instead of tackling the complete problem at once, we start with a simplified version of the problem, solve this and then make the model incrementally more realistic.\\
 \\
 \subsection{First model}
-In our first and simplest model, the machine has a lifetime $L$ that follows some distribution $f_L(l)$ (cumulative function $F_L(l)$). When the machine breaks, it needs to be repaired and a certain cost for corrective maintenance needs to be paid ($c_c$). We start with an open loop problem where we have to choose at the beginning at what time the machine will be repaired. 
+In our first and simplest model, we define the problem as a renewal process where the machine is renewed after it is replaced.
+The machine has a lifetime $L$ that follows some continuously differentiable distribution $f_L(l)$ (cumulative function $F_L(l)$).
+Replacing the machine has a certain cost $c>0$. When the machine breaks, it needs to be repaired and a certain additional cost for the downtime $A>0$ needs to be paid such that repairing the machine correctively has a cost $c+A$.
+Repairing the machine takes zero time. We start with a continuous time problem, i.e. we may choose any time at which the machine will be preventively repaired.
 When the machine is repaired, the problem starts again with a new lifetime according to the same distribution.\\
 We want to minimize the average cost. Since the machine is renewed after each repair, we can do this by minimizing the expected average cost until the first repair.
 
-If we decide to repair the machine at some time $u>0$, then the expected cost will be
+Imposing a policy of control-limit type, we will look for a policy where we decide to preventively repair the machine at some time $u>0$, then with probability $1-F_L(u)$ a cost of $c$ will occur after time $u$ and for each time $l<u$ the probability density a cost $c+A$ occurring is $f_L(l)$.
+This results in the expected average cost of\\
 $$
-J(u)=\frac{(1-F_L(u))c_p}{u}+\int\limits_{0}^u\frac{f_L(l)c_c}{l}dl
+J(u)=\frac{(1-F_L(u))c}{u}+\int\limits_{0}^u\frac{f_L(l)(c+A)}{l}dl.
 $$
-We want to minimize this. To find this minimum, we first try the extreme values. For $u=0$, there would be an infinite cost per time unit so this is clearly not minimal. $u=\infty$ is equivalent to not doing any preventive maintenance ($F_L(\infty)=1$ so the first term vanishes). As you can see, the expected cost then equals $c_c$ times the expected value of one divided by the lifetime. It can be computed by solving the integral or, if the moment generating function is known, by integrating the moment generating function. To find the minimum, we also need to check the function at points where it is not differentiable. The minimum can also be at a zero of the derivative of the cost function:
+We want to minimize this. To find this minimum, we first try the extreme values. For $u=0$, there would be an infinite cost per time unit so this is clearly not minimal. $u=\infty$ is equivalent to not doing any preventive maintenance ($F_L(\infty)=1$ so the first term vanishes). As you can see, the expected cost then equals $(c+A)\mathbb{E}[1/L]$. The minimum can also be at a zero of the derivative of the cost function:
 $$
-\frac{d}{du}J(x)=-\frac{c_p}{u^2} - \frac{f_L(u)c_p}{u} +\frac{F_L(u)c_p}{u^2}+\frac{f_L(u)c_c}{u}=0
+\frac{d}{du}J(x)=-\frac{c}{u^2} - \frac{f_L(u)c}{u} +\frac{F_L(u)c}{u^2}+\frac{f_L(u)(c+A)}{u}=0.
 $$
-We multiply by $u^2$ ($u>0$ since preventive maintenance at time 0 would result in infinite average cost)
+We multiply by $u^2$ ($u>0$ as preventive maintenance at time 0 would result in infinite average cost):
+
+\begin{equation}
+-c(1-F(u))+uf_L(u)A=0.
+\end{equation}
+Transforming this, we can recognise the hazard rate function in it
+
+\begin{equation}\label{eq:simplestEquation}
+H(u):=\frac{f(u)}{1-F(u)}=\frac{c}{uA}.
+\end{equation}
+
+Where $J(u)$ is decreasing iff $H(u)<\frac{c}{uA}$ and this inequality holds for sufficiently small $u$.\todo{Check edge cases where $L=0$}
+Hence, if the hazard rate decreases less than $\frac{c}{uA}$ for sufficiently large $u$, the optimal stopping time would be one of the solutions of \eqref{eq:simplestEquation}.
+\begin{example}
+For example, for lifetimes uniformly distributed on the interval $[0,B]$, this would result in solving
 $$
-c_pF(u)-c_p+uf_L(u)(c_c-c_p)=0
+\frac{1}{B-u}=\frac{c}{u A}\Rightarrow u A = c(B-u) \Rightarrow u = \frac{cB}{c+A}.
 $$
-Which can be solved either numerically or algebraic for some specific distribution. The minimum can then be found by comparing the costs at the extreme values, undifferentiable points and at the zeroes of the derivative. For example, for lifetimes uniformly distributed on the interval $[0,B]$, this would result in solving
+\end{example}
+
+\begin{example}
+
+For a Weibull distributed lifetime with scale $\lambda$ and shape $k$, filling in \eqref{eq:simplestEquation} results in\\
 $$
-c_p\frac{u}{B}-c_p+\frac{u(c_c-c_p)}{B}=0\Rightarrow u=B\frac{c_p}{c_c}
+\frac{ku^{k-1}}{\lambda^k}=\frac{c}{u A}\Rightarrow u=\lambda\sqrt[k]{\frac{c}{kA}}.
+$$
+For an exponentially distributed lifetime ($k=1$) with rate $\lambda^*=1/\lambda$ this results in
+$$
+u=\frac{c}{\lambda^* A}.
+$$
+\end{example}
+
+\subsection{Discounted model}
+\added{The previous calculation could also have been done using a continuous discount $\alpha$ such that costs occurring at some time $t>0$ are discounted by a factor $e^{-\alpha t}$.
+The expected cost of repairing at time $u>0$ is}
+\begin{equation}\label{eq:discountedCostEquation}
+J(u)=e^{-\alpha u}(c+J(u))(1-F_L(u))+(c+A+J(u))\int\limits_0^uf_L(t)e^{-\alpha t}dt.
+\end{equation}
+We can rewrite this to
+$$
+(1-e^{-\alpha u}(1-F_L(u))-\int\limits_0^uf_L(t)e^{-\alpha t}dt)J(u)=c(e^{-\alpha u}(1-F_L(u))+\int\limits_0^uf_L(t)e^{-\alpha t}dt)+A\int\limits_0^uf_L(t)e^{-\alpha t}dt.
+$$
+When we additionally notice that
+$$
+e^{-\alpha u}(1-F_L(u))-\int\limits_0^uf_L(t)e^{-\alpha t}dt=\mathbb{E}(e^{-\alpha \min\{L,u\}})
+$$
+and that
+$$
+\int\limits_0^uf_L(t)e^{-\alpha t}dt=\mathbb{E}(\mathds{1}\{L<u\}e^{-\alpha L}).
+$$
+Then, we can rewrite the discounted cost function to
+\begin{equation}\label{eq:discountedCostFunction}
+\begin{split}
+J(u)&=\frac{c\mathbb{E}(e^{-\alpha \min\{L,u\}})+A\mathbb{E}(\mathds{1}\{L<u\}e^{-\alpha L})}{1-\mathbb{E}(e^{-\alpha \min\{L,u\}})}\\
+&=\frac{c+A\mathbb{E}(\mathds{1}\{L<u\}e^{-\alpha L})}{1-\mathbb{E}(e^{-\alpha \min\{L,u\}})}-c.
+\end{split}
+\end{equation}
+
+We want to minimize this.
+Note that this minimum is again not at $u=0$ since then
+$$
+J(u)=c+J(u).
+$$
+The minimum could be at $u=\infty$.
+The resulting cost would be
+$$
+J(u)=(c+A+J(u))\mathbb{E}(e^{-\alpha L})\Rightarrow J(u)=\frac{(c+A)\mathbb{E}(e^{-\alpha L})}{1-\mathbb{E}(e^{-\alpha L})}.
+$$
+The minimum could also be a zero of the derivative of \eqref{eq:discountedCostEquation}:
+\begin{equation}
+\begin{split}
+0 = \frac{d}{du}J(u)&=-\alpha e^{-\alpha u}(c+J(u))(1-F_L(u))-f_L(u)e^{-\alpha u}(c+J(u))\\
+& + e^{-\alpha u}\frac{d}{du}J(u)(1-F_L(u)) \\
+&+f(u)e^{-\alpha u}\frac{d}{du}J(u) + (c+A+J(u))f_L(u)e^{-\alpha u}\\
+& =-\alpha e^{-\alpha u}(c+J(u))(1-F_L(u)) + Af_L(u)e^{-\alpha u}\\
+&\Rightarrow H(u)=\frac{\alpha(J(u)+c)}{A}.
+\end{split}
+\end{equation}
+Or, using \eqref{eq:discountedCostFunction}, a solution of
+$$
+H(u)=\frac{\alpha}{A}\frac{c+A\mathbb{E}(\mathds{1}\{L<u\}e^{-\alpha L})}{1-\mathbb{E}(e^{-\alpha \min\{L,u\}})}.
 $$
 
-\subsection{Closed loop}
-We now make the problem a little more difficult by discretizing the time as $t_k=k\Delta$ and having a limited set of options at each stage.
-There is one state ($s_0$). At this state, there are two actions:
+\subsection{Random jumps of constant size}
+We can extend the previous model
+
+\subsection{Discretized time}
+As in the real world the machine cannot be repaired at each instance, it would be interesting to discretize the time as $t_k=k\Delta$.
+There is one state ($s_0$). At this state, there are two actions:\todo{Replace cost notation.}
 \begin{itemize}
 \item Preventive maintenance ($u_p$) with cost $c_p$, renewing the machine.
 \item Do nothing ($u_w$) with cost 0 if the machine does not break and cost $c_c$ (for corrective maintenance) if the machine does break. Corrective maintenance renews the machine.
 \end{itemize}
-Let $B_k$ denote the event that the machine breaks between stages $k$ and $k+1$. For simplicity we introduce a discount $\alpha$ and are interested in the discounted cost instead of the average cost. The value function would then be 
+Let $B_k$ denote the event that the machine breaks between stages $k$ and $k+1$ and let $p_k=\mathbb{P}(B_k)$. For simplicity we introduce a discount $\alpha$ and are interested in the discounted cost instead of the average cost. When we choose to preventively repair the machine, a cost $c_p$ will be paid and the machine will be renewed in the next step. If we do not repair the machine, no immediate cost is paid and we will have a chance of $p_k$ of having to pay the cost for corrective maintenance and renewing the machine in the next step and a probability of $1-p_k$ of going to the next step without the machine failing. The value function would then be 
 $$
-J_{k}(s_0)=\min\{c_p+ J_0(s_0),(1-p_k) J_{k+1}(s_0)+p_k(c_c+ J_0(s_0))\}
+J_{k}(s_0)=\min\{c_p+ \alpha J_0(s_0),(1-p_k) \alpha J_{k+1}(s_0)+p_k \alpha (c_c+ J_0(s_0))\}.
 $$
-Where $p_k=\mathbf{P}(B_k)=\mathbf{P}(L<t_{k+1}|L>t_k)=\frac{F_L(t_{k+1})-F_L(t_k)}{1-F_L(t_k)}$ denotes the probability that the machine breaks in the next stage.
+
+
+\subsection{Continuous Time Markov Chain Model}
+If, in the previous problem, $p_k$ would be the same for each $k$, this would be equivalent to a Discrete Time Markov Chain with one state and a failure probability $p_k$ at each step. In this section we will extend this to general CTMCs where each state has some failing rate. This is useful since the lifetime of the machine would then be of Phase Type distribution and these are dense in the class of positive continuous distributions\citep{Buchholz2014}. We assume that the machine behaves as a continuous time Markov chain with $n+1$ states with an initial distribution $p_0(i)$ for $i=1,...,n$, where a failure occurs when a transition to some fail state $s_F=s_{n+1}$ is made. We assume perfect state information and the action of repairing the machine ($u_r$) can be taken at any time. The rest of the time, the action $u_w$ is chosen. Preventive maintenance and corrective maintenance have again costs $c_p$ and $c_c$. These costs occur immediately when deciding preventive maintenance or repairing the broken machine. After maintenance, the machine is renewed and enters in one of the initial states according to the initial distribution. We introduce continuous discount of the form $e^{-\beta t}$.
+\\
+\textbf{Making decisions when entering the state only}\\
+Since having spent some time in one state does not change anything about the transition probabilities, an optimal policy cannot choose preventive maintenance in between transitions if it did not choose to do so when entering the state. Hence, we only consider policies where decisions are made when entering a state.
+\\
+\textbf{Uniformization}\\
+We can then transform this problem to a decision problem with a discrete time Markov chain and a discount factor $\alpha=\frac{\nu}{\nu+\beta}$ (where $\nu$ is an upper bound for the transition rates) by uniformization\citep{Ross2014}. The adjusted transition probabilities would then be\cite{Ross2014}:
+$$
+	\tilde{p}_{ij}(u_w)=\frac{\nu_i{u_w}}{\nu}p_{ij}(u_w)+\delta_{ij}(1-\frac{\nu_i}{\nu}),
+$$
+where $\delta_{ij}=1$ if $i=j$ and zero else. The Bellman equations would then be for $i=1,...,n$:
+$$
+	J(i)=\min\{c_p+\sum\limits_{j=1}^np_0(j)J(j), \alpha\sum\limits_{j=1}^{n+1}p_{ij}(u_w)J(j)\}
+$$
+and for $i=n+1$:
+$$
+	J(n+1)=c_c+\sum\limits_{j=1}^np_0(j)J(j).
+$$
+Note that the costs in the failed state and for the preventive maintenance action are not multiplied by the discount factor, in order to make the repairs happen instantaneously.\\
+\textbf{Implementation}\\
+We used the event log of the machine to extract a continuous time Markov chain. We then implemented the approach described above together with the Gauss-Seidel version of \todo{process feedback}value iteration\citep{Bertsekas1995}. This was chosen because it is easy to implement and because the extra computation time it takes compared to policy iteration is no problem in the current setting. The choice for the Gauss-Seidel version was made because it converges slightly faster than the original Value Iteration algorithm and because it is easier to implement. The value iteration is stopped after 10000 iterations, which resulted in error bounds lower than $10^-5$ in the observed cases.
+\todo{Add results}
 
 \subsection{Fluid models}
-The last problem could be seen as a fluid model with one state with rate $-1$ and a random initial fluid level according to distribution $F_L(l)$. We could extend this to fluid models of more states.
-We introduce a fluid model with two states: 
+The previous problem could be seen as a Markov modulated fluid model with one state with rate $-1$ and a random initial fluid level according to distribution $F_L(l)$. We could extend this to fluid models of more states.
+We introduce a Markov modulated fluid model with two states: 
 \begin{itemize}
 \item $s_0$: With fluid rate $r_0<0$
 \item $s_1$: With fluid level $r_1<0$.
 \end{itemize}
 The system transitions in the fluid model occur as a CTMC when $u_w$ is chosen and the machine does not break, when $u_p$ is chosen or the machine breaks (and corrective maintenance is performed), the system is renewed and transitions to $s_0$. The initial fluid level is again given by the distribution $F_L(l)$.\\
 
-To calculate the probability that the machine breaks between two stages, we need to have the distribution of the fluid decrease in a period of length $\Delta$. Let $\overline{r}=\max{r_0,r_1}$ and $\underline{r}=\min{r_0,r_1}$. Let $\Delta\underline{r}<q<\Delta\overline{r}$, then the probability that the fluid decreases more than $q$ in the next period, equals the probability that the machine spends less than $\frac{\overline{r}\Delta-q}{\overline{r}-\underline{r}}$ time in the state with the lowest rate.
+Since, for the Bellman Equations, we need to have the transition probability densities for the fluid levels. To calculate the probability that the machine breaks between two stages, we need to have the distribution of the fluid decrease in a period of length $\Delta$. Let $\overline{r}=\max\{r_0,r_1\}$ and $\underline{r}=\min\{r_0,r_1\}$. Let $\Delta\underline{r}<q<\Delta\overline{r}$, then the probability that the fluid decreases more than $q$ in the next period, equals the probability that the machine spends less than $\frac{\overline{r}\Delta-q}{\overline{r}-\underline{r}}$ time in the state with the lowest rate.
 Let $f_{i}^j(t^*,t)$ denote the density of spending $t^*$ out of $t$ time in state $j$ given that it starts in state $i$. We have that for small $h$:
 $$
 f_{0}^1(t^*,t)=\lambda_0hf_1^1(t^*,t-h)+(1-\lambda_0h)f_{0}^1(t^*,t-h)
@@ -53,7 +161,7 @@ $$
 $$
 \Rightarrow \frac{f_{0}^1(t^*,t)-f_{0}^1(t^*,t-h)}{h}=\lambda_0(f_1^1(t^*,t-h)-f_{0}^1(t^*,t-h))
 $$
-And in the limit this results in
+And as $h\rightarrow 0$ this results in
 $$
 \frac{d}{dt}f_{0}^1(t^*,t)=\lambda_0(f_1^1(t^*,t)-f_{0}^1(t^*,t))
 $$
@@ -61,27 +169,43 @@ Similarly, for $f_1^1(t^*,t)$ we have
 $$
 (\frac{d}{dt}+\frac{d}{dt^*})f_1^1(t^*,t)=\lambda_1(f_0^1(t^*,t)-f_1^1(t^*,t))
 $$
-It is difficult to solve these equations, therefore we apply a probabilistic approach and check whether the results adhere to the differential equations afterwards. If we condition to the number of transitions that occur from $s_0$ to $s_1$, we can define 
-$
-g_0^{(k)}(t_0,t_1)
-$ as the density of spending $t_0$ out of $t_0+t_1$ time in $s_0$ given that $k$ transitions from $s_0$ to $s_1$ occurred. We assume that $s_1>0$. Now we can split this into two cases: One where the system is in $s_0$ at time $t_0+t_1$ and one where the system is in $s_1$ at that time. \\
-If the system ends in $s_0$, this means that the $k$-th transition from $s_1$ to $s_0$ occurred exactly after it has spent $t_1$ (total) time in $s_1$, while exactly $k$ transitions occurred from $s_0$ to $s_1$ in the $t_0$ time it has spent in $s_0$. This corresponds to the probability of $k$ arrivals of a Poisson process with rate $\lambda_0t_0$ multiplied with the density of an Erlang distributed variable with rate $\lambda_1$ and shape $k$ at time $t_1$.\\
-If the system ends in $s_1$, this means that exactly $k-1$ transitions from $s_1$ to $s_0$ occurred in the time $t_1$ it has spent in $s_1$ while the $k$-th transition from $s_0$ to $s_1$ occurred after spending $t_0$ time in $s_0$. This corresponds to the distribution of an Erlang distributed variable with rate $\lambda_0$ and shape $k$ at time $t_0$ multiplied by the probability of $k-1$ arrivals of a Poisson process with rate $\lambda_1t_1$.\\ Since these events are mutually exclusive, they can be summed. We introduce some notation: Let $P_{\lambda}$ be a Poisson distributed variable with rate $\lambda$, let $E_{\lambda,n}$ be an Erlang distributed random variable with rate $\lambda$ and shape $n$ and let $f_x(t)$ be the density of some random variable $X$. Then we can write:
+It is difficult to solve these equations, therefore we apply a probabilistic approach and check whether the results adhere to the differential equations afterwards. 
+Let $T_0(t)$ denote the random variable of the amount of time spent in state 0 out of total time $t$. Likewise $T_1(t)=t-T_0(t)$. Furthermore, Let $N(t)$ denote the total number of transitions that occurred between time zero and $t$. (Note: in the above definitions, we assumed that the model is in state 0 at time 0) If $N(t)$ is even, then the same number of transitions from $s_0$ to $s_1$ occurred as from $s_1$ to $s_0$. If $N(t)$ is odd, one transition must have occurred from $s_0$ to $s_1$ than from $s_1$ to $s_0$. Now we have
+\begin{equation}
+\begin{split}
+	f_0^0(t^*,t) & =\lim\limits_{h\rightarrow 0}\frac{1}{h}\mathbb{P}(t^*\leq T_0(t)<t^*+h) \\
+	 & =\lim\limits_{h\rightarrow 0}\frac{1}{h}\mathbb{P}(t^*\leq T_0(t)<t^*+h,\bigcup\limits_{n=0}^\infty N(t)=n) \\
+	 & =\lim\limits_{h\rightarrow 0}\frac{1}{h}\sum\limits_{n=0}^\infty \mathbb{P}(t^*\leq T_0(t)<t^*+h, N(t)=n)\\
+	  & =:\sum\limits_{n=0}^\infty g_0^{(n)}(t^*,t-t^*)
+\end{split}
+\end{equation}
+Where $g_0^{(n)}(t_0,t_1)$ denotes the density of $n$ transitions occurring and spending $t_0$ out of $t_0+t_1$ time in $s_0$. If $t_1>0$, then $g_0^{(n)}(t_0,t_1)=0$ for $n>0$. If $n$ is even, then the system ends in $s_0$, else it ends in $s_1$.
+If the system ends in $s_0$, this means that the $n/2$-th transition from $s_1$ to $s_0$ occurred exactly after it has spent $t_1$ (total) time in $s_1$, while exactly $n/2$ transitions occurred from $s_0$ to $s_1$ in the $t_0$ time it has spent in $s_0$. This corresponds to the probability of $n/2$ arrivals of a Poisson process with rate $\lambda_0t_0$ multiplied with the density of an Erlang distributed variable with rate $\lambda_1$ and shape $n/2$ at time $t_1$.\\
+If the system ends in $s_1$, this means that exactly $(n-1)/2$ transitions from $s_1$ to $s_0$ occurred in the time $t_1$ it has spent in $s_1$ while the $(n+1)/2$-th transition from $s_0$ to $s_1$ occurred after spending $t_0$ time in $s_0$. This corresponds to the distribution of an Erlang distributed variable with rate $\lambda_0$ and shape $(n+1)/2$ at time $t_0$ multiplied by the probability of $(n-1)/2$ arrivals of a Poisson process with rate $\lambda_1t_1$.\\  We introduce some notation: Let $P_{\lambda}$ be a Poisson distributed variable with rate $\lambda$, let $E_{\lambda,n}$ be an Erlang distributed random variable with rate $\lambda$ and shape $n$ and let $f_x(t)$ be the density of some random variable $X$. Then we can write:
 $$
-g_0^{(k)}(t_0,t_1)=\mathbf{P}(P_{\lambda_0t_0}=k)f_{E_{\lambda_1,k}}(t_1)+f_{E_{\lambda_0,k}}(t_0)\mathbf{P}(P_{\lambda_1t_1}=k-1)
+g_0^{(2k)}(t_0,t_1)=\mathbb{P}(P_{\lambda_0t_0}=k)f_{E_{\lambda_1,k}}(t_1)
 $$
 $$
-=\frac{(\lambda_0t_0)^ke^{-\lambda_0t_0}}{k!}\frac{\lambda_1^kt_1^{k-1}e^{-\lambda_1t_1}}{(k-1)!}+\frac{\lambda_0^kt_0^{k-1}e^{-\lambda_0t_0}}{(k-1)!}\frac{(\lambda_1t_1)^{k-1}e^{-\lambda_1t_1}}{(k-1)!}
+=\frac{(\lambda_0t_0)^ke^{-\lambda_0t_0}}{k!}\frac{\lambda_1^kt_1^{k-1}e^{-\lambda_1t_1}}{(k-1)!}
 $$
 $$
-=e^{-\lambda_0t_0-\lambda_1t_1}(\frac{(\lambda_0\lambda_1t_0)^kt_1^{k-1}}{k!(k-1)!}+\frac{\lambda_0^k(\lambda_1t_0t_1)^{k-1}}{(k-1)!^2})
+=e^{-\lambda_0t_0-\lambda_1t_1}(\frac{(\lambda_0\lambda_1t_0)^kt_1^{k-1}}{k!(k-1)!}
 $$
-The density $f_0^0(t^*,t)$ can then be obtained by summing over $k$ from 1 to infinity (note that since $t_1>0$ we have $t^*<t$):
+and
 $$
-f_0^0(t^*,t)=\sum\limits_{k=1}^\infty g_0^{(k)}(t^*,t-t^*)
+g_0^{(2k-1)}(t_0,t_1)=f_{E_{\lambda_0,k}}(t_0)\mathbf{P}(P_{\lambda_1t_1}=k-1)
+$$
+$$
+=\frac{\lambda_0^kt_0^{k-1}e^{-\lambda_0t_0}}{(k-1)!}\frac{(\lambda_1t_1)^{k-1}e^{-\lambda_1t_1}}{(k-1)!}
+$$
+$$
+=\frac{\lambda_0^k(\lambda_1t_0t_1)^{k-1}}{(k-1)!^2})
+$$
+The density $f_0^0(t^*,t)$ can then be obtained by summing these (assuming $t^*<t$ and hence $g_0^{(0)}(t^*,t-t^*)=0$:
+$$
+f_0^0(t^*,t)=\sum\limits_{n=1}^\infty g_0^{(n)}(t^*,t-t^*)
 $$
 And we have that $f_0^1(t^*,t)=f_0^0(t-t^*,t)$. Moreover, we can obtain $f_1^1(t_0,t_0+t_1)$ by interchanging $\lambda_0$ with $\lambda_1$ and interchanging $t_0$ with $t_1$ in the expression of $f_0^0(t_0,t_0+t_1)$.
 
 It can be seen that these expressions adhere to the differential equations mentioned earlier by simply filling them in.
-
-\added{So now the next difficulty will be integrating these expressions to obtain the cumulative distribution function.}
+\todo{Theorem and proof environments and connect to a solution}

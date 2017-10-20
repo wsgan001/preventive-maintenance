@@ -1,0 +1,68 @@
+\input{Imports.tex}
+\begin{document}
+\chapter{Convergence of value iteration}
+In this section, the convergence of value iteration for the simple discounted problem is proven.
+The proof is done similarly as in Bertsekas volume 1 p.298-299.[Will be replaced by proper citation in report]
+The Bellman equations that we are going to use, are
+\begin{equation}
+V(x_k)=\begin{cases}
+\min\{c+\alpha_\delta V(1),\alpha_\delta \mathbb{E}[V(S(x_k))]\},&\text{if}\ x_k>0 \\
+c+a+\alpha_\delta V(1),&\text{else.}
+\end{cases}
+\end{equation}
+Where $\mathbb{E}[V(S(x_k))]=\mathbb{P}(\omega_k=0)V(0)+\mathbb{P}(\omega_k=1)V(x_k+1)$.
+
+At each iteration the value function is updated as follows
+\begin{equation}
+\begin{split}
+V_{k+1}(x)=\begin{cases}
+\min\{c+\alpha_\delta V_k(1),\alpha_\delta\mathbb{P}(\omega(x)=0)V_k(0)+\alpha_\delta\mathbb{P}(\omega(x)=1)V_k(x+1)\},&\text{if}\ x>0 \\
+c+a+\alpha_\delta V_k(1),&\text{else.}
+\end{cases}
+\end{split}
+\end{equation}
+And the corresponding policy is given by
+\begin{equation}
+\begin{split}
+\mu_{k+1}(x)=\begin{cases}
+1,&\text{if}\ x=0\ \text{or}\\&c+\alpha_\delta V_k(1)<\alpha_\delta\mathbb{P}(\omega(x)=0)V_k(0)+\alpha_\delta\mathbb{P}(\omega(x)=1)V_k(x+1)\} \\
+x+1,&\text{else.}
+\end{cases}
+\end{split}
+\end{equation}
+Let $x_m^{(k)}$ ($m=0,...,k$) be such that $x_0^{(k)}=x$ and $x_{m+1}^{(k)}=f(x_m^{(k)},\mu_{k-m},\omega(x_m^{(k)}))$.
+In this way, it holds that
+$$
+\sum\limits_{m=0}^{k-1}\alpha_\delta^mg(x_m^{(k)},\mu_{k-m}(x_m^{(k)}))+\alpha_\delta^k V_0(x_{k}^{(k)})=V_k(x).
+$$
+
+And for every $\pi=\{\mu_0,\mu_1,...\}$ with corresponding $x_m$, we have
+\begin{equation}
+\begin{split}
+V_\pi(x_0)&=\sum\limits_{m=0}^{\infty}\alpha_\delta^mg(x_m,\mu_m(x_m))\\
+&=\sum\limits_{m=0}^{k-1}\alpha_\delta^mg(x_m,\mu_m(x_m))+\sum\limits_{m=k}^{\infty}\alpha_\delta^mg(x_m,\mu_m(x_m))\\
+&\leq \sum\limits_{m=0}^{k-1}\alpha_\delta^mg(x_m,\mu_m(x_m))+\sum\limits_{k=0}^\infty\alpha_\delta^k(c+a)\\
+&=\sum\limits_{m=0}^{k-1}\alpha_\delta^mg(x_m,\mu_m(x_m))+\alpha_\delta^k\frac{c+a}{1-\alpha_\delta}.
+\end{split}
+\end{equation}
+
+Now we choose an initial value $V_0$ such that there exists an $M$ such that for each $x$, $|V_0(x)|<M$ holds.
+We can now write
+\begin{equation}
+\begin{split}
+&-\alpha^k M + V_\pi(x_0)\\
+&\leq\mathbb{E}[\alpha_\delta^k V_0(x_k)+\sum\limits_{m=0}^{k-1}\alpha_\delta^mg(x_m,\mu_m(x_m))]+\alpha_\delta^k\frac{c+a}{1-\alpha_\delta}\\
+&\leq \alpha^k M + V_\pi(x_0).
+\end{split}
+\end{equation}
+The expectation in the middle equals the value produced by the value iteration algorithm.
+If we choose the $\pi$ that minimizes $V_\pi(x_0)$ will equal the optimal cost $V(x_0)$ and we have
+\begin{equation}
+\begin{split}
+&-\alpha^k M + V(x_0)\\
+&\leq V_k(x_0)+\alpha_\delta^k\frac{c+a}{1-\alpha_\delta}\\
+&\leq \alpha^k M + V(x_0).
+\end{split}
+\end{equation}
+\end{document}
+For $k\rightarrow \infty$ this results in $V_k(x_0)\rightarrow V(x_0)$ such that the convergence is proven for all bounded $J_0$.

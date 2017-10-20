@@ -1,0 +1,228 @@
+\section{Solving the simple discounted problem}
+In this section, the following Bellman equations will be solved
+
+\begin{equation}
+V(x)=\begin{cases}
+\min\{c+\alpha_\delta V(1),\alpha_\delta \mathbb{E}[V(S(x))]\},&\text{if}\ x>0 \\
+c+a+\alpha_\delta V(1),&\text{else.}
+\end{cases}
+\end{equation}
+Where $\mathbb{P}(S(x)=0)=\mathbb{P}(Q\leq x+\delta|Q\geq x)=\delta h(x)+o(\delta^2)$ (for lifetime $Q\sim F(x)$ and corresponding hazard rate $h(x)$) and $\mathbb{P}(S(x)=x+1)=1-\delta h(x)+o(\delta^2)$ and $\alpha_\delta=e^{-\beta \delta}=1-\beta \delta + o(\delta^2)$ for $\beta>0$.
+We define $V_\delta(n\delta):=V(n)$ and for convenience, we define $V_\delta(0^+):=V_\delta(\delta)$.
+If we assume that 
+$$
+c+\alpha_\delta V_\delta(0^+)>\alpha_\delta \mathbb{E}[V_\delta(S(x)\delta)],
+$$
+we can write
+\begin{equation}
+V_\delta(x)=\alpha_\delta \mathbb{P}(Q\leq x+\delta|Q\geq x) (c+a+\alpha_\delta V(0^+))+\alpha_\delta \mathbb{P}(Q>x+\delta|Q\geq x)V_\delta(x+\delta)
+\end{equation}
+We are now going to let $\delta$ approach zero.
+\begin{equation}
+\begin{split}
+\lim\limits_{\delta\rightarrow 0} V_\delta(x) &=
+\lim\limits_{\delta\rightarrow 0}(1-\beta\delta+o(\delta^2)) (\delta h(x)+o(\delta^2))(c+a+(1-\beta\delta+o(\delta^2)) V'(0^+))\\
+&+(1-\beta\delta+o(\delta^2)) (1-\delta h(x)+o(\delta^2))V_\delta(x+\delta).
+\end{split}
+\end{equation}
+Gathering the terms of $o(\delta^2)$, we get
+\begin{equation}\label{eq:gatheredDelta}
+\begin{split}
+\lim\limits_{\delta\rightarrow 0} V_\delta(x) =
+\lim\limits_{\delta\rightarrow 0}\delta h(x)(c+a+ V_\delta(0^+))+(1-\delta\beta-\delta h(x)) V_\delta(x+\delta)+o(\delta^2).
+\end{split}
+\end{equation}
+And by moving one $V_\delta(x+\delta)$ to the left and dividing by $-\delta$, we get
+\begin{equation}\label{eq:bellmannDifferential}
+\begin{split}
+\frac{d}{dx}V_0(x)&=\lim\limits_{\delta\rightarrow 0} \frac{V_\delta(x+\delta)-V_\delta(x)}{\delta} \\
+&=\lim\limits_{\delta\rightarrow 0} -h(x)(c+a+ V_\delta(0^+))+(\beta+ h(x)) V_\delta(x+\delta)+o(\delta)\\
+&=-h(x)(c+a+ V_0(0^+))+(\beta+ h(x)) V_0(x).
+\end{split}
+\end{equation}
+Where
+$$
+V_0(x):=\lim\limits_{\delta\rightarrow 0} V_\delta(x).
+$$
+(Note that $V_0(0^+)=V_0(0)-c-a$).
+This differential equation seems counterintuitive since for small $\beta$, $V_0(x)$ would be decreasing as $V_0(x)<c+e^{-\beta\delta} V_0(0^+)<c+a+V_0(x)$.
+We will try to solve this O.D.E. anyway.
+We use the method of the integrating factor.
+Our integrating factor will be
+$$
+e^{\int\limits_0^x (-\beta - h(q))dq}=e^{-\beta x -H(x)}.
+$$
+Where $H(x)$ is the cumulative hazard function.
+We get
+$$
+V_0(x)=e^{\beta x +H(x)} [C + \int\limits_0^x e^{-\beta q -H(q)}(-h(q)(c+a+V_0(0^+)))dq]
+$$
+$$
+=\frac{e^{\beta x}}{1-F(x)} [C - (c+a+V_0(0^+))\int\limits_0^x e^{-\beta q}f(q)dq].
+$$
+Using the identities $e^{H(x)}=(e^{-H(x)})^{-1}=\frac{1}{1-F(x)}$ and $h(x)e^{-H(x)}=f(x)$.
+The $C$ is an integrating constant and since $\lim\limits_{x\rightarrow 0}V_0(x)=V_0(0^+)$ should hold, we find $C=V_0(0^+)$.
+We can rewrite the expression to
+$$
+V_0(x)=\frac{e^{\beta x}}{1-F(x)} [V_0(0^+)  - (c+a+V_0(0^+))\mathbb{P}(Q<x)\mathbb{E}[e^{-\beta Q}|Q<x]].
+$$
+Concluding
+\begin{equation}\label{eq:solvedSimpleDiscounted}
+\begin{split}
+V_0(x)=\min\{&c+V_0(0^+),\\
+&\frac{ e^{\beta x}}{1-F(x)} [V_0(0^+) - (c+a+V_0(0^+))\mathbb{P}(Q<x)\mathbb{E}[e^{-\beta Q}|Q<x]]
+\}
+\end{split}
+\end{equation}
+and preventive maintenance is chosen if and only if $V_0(x)=c+V_0(0^+)$.
+However, the value of $V_0(0^+)$ depends on the policy that is chosen and it seems difficult to solve $V_0(x)=c+V_0(0^+)$ analytically for $x$.
+In the rest of this text we will write $V(x)$ instead of $V_0$ to not clutter the notation too much. 
+Let $\mu$ be the smallest positive $x$ that satisfies $V(x)=c+V(0^+)$ if such $x$ exist and $\mu=\infty$ else.
+The policy that we just derived, schedules preventive maintenance at time $\mu$ if the machine has not already failed by then.
+We denote the total discounted cost of this policy by $V(0^+,\mu)$.
+Distinguising these two cases (machine survives until $\mu$ and machine breaks before $\mu$), we get the following expression for $V(0^+,\mu)$
+\begin{equation}\label{eq:costToMinimize}
+V(0^+,\mu)=\mathbb{P}(Q>\mu)e^{-\beta \mu}(c+V(0^+,\mu))+\mathbb{P}(Q\leq \mu)\mathbb{E}[e^{-\beta Q}|Q\leq \mu](c+a+V(0^+,\mu)).
+\end{equation}
+While for any $0<x<\mu$ we get a similar expression for $V(x)$
+\begin{equation}
+\begin{split}
+V(x,\mu)&=\mathbb{P}(Q>\mu|Q>x)e^{-\beta (\mu-x)}(c+V(0^+,\mu))\\
+&+\mathbb{P}(Q\leq \mu|x<Q)\mathbb{E}[e^{-\beta (Q-x)}|x<Q\leq \mu](c+a+V(0^+,\mu)),
+\end{split}
+\end{equation}
+which also adheres to \eqref{eq:solvedSimpleDiscounted}.
+
+\begin{example}
+Let $Q\sim\text{Exp}(\lambda)$.
+Because of the memoryless property, we would expect $V(x)$ to be constant.
+Filling this in into \eqref{eq:bellmannDifferential}, we get
+$$
+\frac{d}{dx}V(x)=0=-\lambda(c+a+ V(0^+))+(\beta+ \lambda) V(x)=-\lambda(c+a+ V(0^+))+(\beta+ \lambda) V(0^+).
+$$
+Which results in
+$$
+V(0^+)=\frac{\lambda}{\beta}(c+a)
+$$
+which equals exactly the total discounted cost for control limit $\infty$.
+\end{example}
+
+Instead of minimizing $V(0^+,\mu)$ for $\mu$ using the Bellman equations, we can also minimize it by looking for extreme values of this function.
+We take its derivative to $\mu$
+\begin{equation}
+\begin{split}
+\frac{d}{d\mu}V(0^+,\mu)&=f(\mu)e^{-\beta \mu}(c+V(0^+,\mu))-\beta\mathbb{P}(Q>\mu)e^{-\beta \mu}(c+V(0^+,\mu))\\
+&+\frac{d}{d\mu}V(0^+,\mu)\mathbb{P}(Q>\mu|Q>x)e^{-\beta (\mu-x)}\\
+&+f(\mu)e^{-\beta \mu}(c+a+V(0^+,\mu))\\
+&+\frac{d}{d\mu}V(0^+,\mu)\mathbb{P}(Q\leq \mu|x<Q)\mathbb{E}[e^{-\beta (Q-x)}|x<Q\leq \mu].
+\end{split}
+\end{equation}
+We are interested in the zeroes of this derivative:
+$$
+0=-\beta\mathbb{P}(Q>\mu)e^{-\beta \mu}(c+V(0^+,\mu))+af(\mu)e^{-\beta \mu}.
+$$
+Which results in
+\begin{equation}\label{eq:hazardBound}
+\begin{split}
+\frac{f(\mu)}{\mathbb{P}(Q>\mu)}=h(\mu)=\beta\frac{c+V(0^+,\mu)}{a}
+\end{split}
+\end{equation}
+\eqref{eq:costToMinimize} can also attain its minimum at $\mu=\infty$.
+Note however, that $\mu=0$ results in replacing the machine infinitely often each instant and would hence result in infinite cost so that the minimum is not attained there.\
+
+So currently, we know about the optimal control limit $\mu$ that if $\mu<\infty$, it holds that $h(\mu)=\beta\frac{c+V(0^+,\mu)}{a}$ and from the Bellman equation approach, we know that $c+V(0^+,\mu)\leq V(\mu)$.
+It can be shown that the second implies the first.
+For this, we will briefly return to discretized time:
+If the control limit equals $\mu$, then in the time step before $\mu$, $c+V(0^+,\mu)\geq V(\mu-\delta)$.
+Using \eqref{eq:gatheredDelta}, we get
+$$
+c+V_\delta(0^+)\geq V_\delta(\mu-\delta)=\delta h(\mu)(c+a+ V_\delta(0^+))+(1-\delta\beta-\delta h(\mu)) V_\delta(\mu+\delta)+o(\delta^2).
+$$
+Since we repair in the next time step, we can write
+$$
+c+V_\delta(0^+)\geq \delta h(\mu)(c+a+ V_\delta(0^+))+(1-\delta\beta-\delta h(\mu)) (c+V_\delta(0^+))+o(\delta^2).
+$$
+Which simplifies to
+$$
+0\geq ah(\mu)-\beta (c+V_\delta(0^+))+o(\delta^2)
+$$
+and can be rewritten as
+$$
+h(\mu)\leq \beta\frac{c+V_\delta(0^+)}{a} +o(\delta^2)\rightarrow\beta\frac{c+V_\delta(0^+)}{a}.
+$$
+If we now look at control limit $\mu$, the Bellman equations yield
+$$
+c+V_\delta(0^+)\leq V_\delta(\mu-\delta)=\delta h(\mu)(c+a+ V_\delta(0^+))+(1-\delta\beta-\delta h(\mu)) V_\delta(\mu+\delta)+o(\delta^2)
+$$
+And using the same steps, we get
+$$
+h(\mu)\geq \beta\frac{c+V_\delta(0^+)}{a} +o(\delta^2)\rightarrow\beta\frac{c+V_\delta(0^+)}{a}
+$$
+such that the result is proven when $\delta$ approaches zero.
+From the above, it also follows that the hazard rate is increasing at the control limit.
+Hence, if the hazard rate is monotonously decreasing, preventive repair will never be chosen.
+
+\section{Value iteration}
+\eqref{eq:hazardBound} can also be challenging to solve analytically.
+Hence we will attempt a variation on value iteration.
+Consider a one state, continuous time, continuous decision space and infinite horizon problem where at each (discrete) decision time, a control limit is chosen.
+Let $\mu_i\in\mathbb{R}^+\cup\{\infty\}$ be the $i$'th control limit.
+The decision times have stochastic time intervals, dependent on the chosen control limit.
+The $i$'th time interval equals $I_i=\min\{Q_i,\mu_i\}$, where $Q_i$ is the $i$'th lifetime.
+The $i$'th decision time is hence $T_i=\sum_{j=0}^{i-1}I_j$.
+The cost that is incurred when a control $\mu_i$ is chosen equals
+$$
+g(i,\mu_i):=\mathbb{P}(Q>\mu_i)e^{-\beta \mu_i}c+\mathbb{P}(Q_i\leq \mu_i)\mathbb{E}[e^{-\beta Q_i}|Q_i\leq \mu_i](c+a).
+$$
+So that the total discounted cost for policy $\pi=\{\mu_0,\mu_1,...\}$ equals
+\begin{equation}
+V_\pi=\sum\limits_{i=0}^\infty e^{-\beta T_i}g(i,\mu_i).
+\end{equation}
+Assuming a stationary policy, (a variant of) the Bellman equations can be constructed
+\begin{equation}\label{eq:notBellman}
+V_{\mu^*}=\inf\limits_{\mu>0}\mathbb{E}[\mathbb{P}(Q>\mu)e^{-\beta \mu}(c+V_{\mu^*})+\mathbb{P}(Q\leq \mu)\mathbb{E}[e^{-\beta Q}|Q\leq \mu](c+a+V_{\mu^*})].
+\end{equation}
+This differs from the Bellman equations since it lacks the additive structure as the interdecision times depend on the chosen actions.
+
+We can now attempt to employ a variant of value iteration on it.
+We iteratively compute
+$$V_{n+1}=\inf\limits_{\mu_{n+1}>0}\mathbb{E}[\mathbb{P}(Q>\mu_{n+1})e^{-\beta \mu_{n+1}}(c+V_{n})+\mathbb{P}(Q\leq \mu_{n+1})\mathbb{E}[e^{-\beta Q}|Q\leq \mu_{n+1}](c+a+V_{n})]$$
+and $\mu_{n+1}$ is the control limit at which this infimum is achieved (or $\infty$).
+Similarly as \eqref{eq:hazardBound}, for $Q$ with continuously differentiable cumulative distribution function, this infimum can either be attained at $\infty$ or at some $\mu$ where
+$$
+h(\mu)= \beta\frac{c+V_n}{a}
+$$
+holds.
+Since \eqref{eq:notBellman} is not a Bellman equation, the convergence of this value iteration is not yet proven.
+When the iteration is started from an initial value $V_0$ which equals the total discounted cost of some control limit $\mu_0$, then 
+\begin{equation}
+\begin{split}
+V_1&=\inf\limits_{\mu_1>0}\mathbb{E}[\mathbb{P}(Q>\mu_1)e^{-\beta \mu_1}(c+V_0)+\mathbb{P}(Q\leq \mu_1)\mathbb{E}[e^{-\beta Q}|Q\leq \mu_1](c+a+V_0)]\\
+&\leq\mathbb{E}[\mathbb{P}(Q>\mu_0)e^{-\beta \mu_0}(c+V_0)+\mathbb{P}(Q\leq \mu_0)\mathbb{E}[e^{-\beta Q}|Q\leq \mu_0](c+a+V_0)]=V_0.
+\end{split}
+\end{equation}
+And by induction
+
+\begin{equation}
+\begin{split}
+V_{n+1}&=\inf\limits_{\mu_{n+1}>0}\mathbb{E}[\mathbb{P}(Q>\mu_{n+1})e^{-\beta \mu_{n+1}}(c+V_n)+\mathbb{P}(Q\leq \mu_{n+1})\mathbb{E}[e^{-\beta Q}|Q\leq \mu_{n+1}](c+a+V_n)]\\
+&\leq\mathbb{E}[\mathbb{P}(Q>\mu_n)e^{-\beta \mu_n}(c+V_n)+\mathbb{P}(Q\leq \mu_n)\mathbb{E}[e^{-\beta Q}|Q\leq \mu_n](c+a+V_n)]=V_n.
+\end{split}
+\end{equation}
+Such that this value iteration produces a monotonously decreasing sequence $V_0\geq V_1\geq...$.
+\subsection{Remarks}
+In many cases, it may be easier just to directly minimize \eqref{eq:costToMinimize}, as this method requires finding an intersection of the hazard rate function in each iteration.
+Furthermore, there may be multiple intersections of this hazard rate and these may need to be compared which requires determining $\mathbb{P}(Q\leq \mu_n)\mathbb{E}[e^{-\beta Q}|Q\leq \mu_n]$ which may be difficult.
+However, in cases where the hazard rate function is monotonously increasing (such as the Weibull distribution), this approach may be easier.
+%Returning to \eqref{eq:bellmannDifferential}, we can rewrite
+%\begin{equation}
+%\frac{d}{dx}V(x)=-h(x)(c+a+V(0^+)+(\beta+h(x))V(x)=h(x)(V(x)-V(0^+)-c-a)+\beta V(x).
+%\end{equation}
+%And since this differential equation only holds when $V(x)<V(0^+)+c$, we have
+%\begin{equation}
+%\frac{d}{dx}V(x)<-ah(x)+\beta V(x).
+%\end{equation}
+%Which is negative for $h(x)>\frac{\beta}{a}V(x)$.
+%This seems even more counterintuitive: a high hazard results in a decreasing expected total discounted cost when not repairing.
+%This could be because on the other hand, this high hazard also represents risks that have been overcome.
+%It is important to mention that this $V(x)$ is also very dependant on the hazard rate.

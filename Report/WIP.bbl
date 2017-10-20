@@ -1,0 +1,15 @@
+\begin{thebibliography}{1}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Gribaudo and Telek(2007)]{Gribaudo2007}
+Marco Gribaudo and Mikl{\'o}s Telek.
+\newblock Fluid models in performance analysis.
+\newblock In \emph{International School on Formal Methods for the Design of
+  Computer, Communication and Software Systems}, pages 271--317. Springer,
+  2007.
+
+\end{thebibliography}

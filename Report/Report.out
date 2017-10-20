@@ -1,0 +1,25 @@
+\BOOKMARK [1][-]{section.1}{Abstract}{}% 1
+\BOOKMARK [1][-]{section.2}{Introduction}{}% 2
+\BOOKMARK [1][-]{section.3}{LiteratureOverview}{}% 3
+\BOOKMARK [1][-]{section.4}{Simplified models}{}% 4
+\BOOKMARK [2][-]{subsection.4.1}{First model}{section.4}% 5
+\BOOKMARK [2][-]{subsection.4.2}{Discounted model}{section.4}% 6
+\BOOKMARK [2][-]{subsection.4.3}{Discretized time}{section.4}% 7
+\BOOKMARK [2][-]{subsection.4.4}{Continuous Time Markov Chain Model}{section.4}% 8
+\BOOKMARK [2][-]{subsection.4.5}{Fluid models}{section.4}% 9
+\BOOKMARK [1][-]{section.5}{Preliminary Data Analysis}{}% 10
+\BOOKMARK [2][-]{subsection.5.1}{Hazard Rate}{section.5}% 11
+\BOOKMARK [2][-]{subsection.5.2}{Time Until Failure}{section.5}% 12
+\BOOKMARK [3][-]{subsubsection.5.2.1}{Cullen and Frey graph}{subsection.5.2}% 13
+\BOOKMARK [3][-]{subsubsection.5.2.2}{Phase-Type distribution}{subsection.5.2}% 14
+\BOOKMARK [3][-]{subsubsection.5.2.3}{Transition Times}{subsection.5.2}% 15
+\BOOKMARK [1][-]{section.6}{Fluid models}{}% 16
+\BOOKMARK [2][-]{subsection.6.1}{Rate estimation}{section.6}% 17
+\BOOKMARK [2][-]{subsection.6.2}{Finding jump states}{section.6}% 18
+\BOOKMARK [1][-]{section.7}{Technical report}{}% 19
+\BOOKMARK [2][-]{subsection.7.1}{ProM}{section.7}% 20
+\BOOKMARK [3][-]{subsubsection.7.1.1}{Plug-in development}{subsection.7.1}% 21
+\BOOKMARK [3][-]{subsubsection.7.1.2}{Plug-ins created}{subsection.7.1}% 22
+\BOOKMARK [2][-]{subsection.7.2}{Event log}{section.7}% 23
+\BOOKMARK [2][-]{subsection.7.3}{R}{section.7}% 24
+\BOOKMARK [1][-]{section.8}{Literature}{}% 25

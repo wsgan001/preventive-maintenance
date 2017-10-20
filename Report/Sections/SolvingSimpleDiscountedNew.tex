@@ -1,0 +1,26 @@
+\input{Imports.tex}
+\begin{document}
+We are going to solve
+
+\begin{equation}
+V(x)=\begin{cases}
+\min\{c+\alpha_\delta V(1),\alpha_\delta \mathbb{E}[V(S(x))]\},&\text{if}\ x_k>0 \\
+c+a+\alpha_\delta V(1),&\text{else.}
+\end{cases}
+\end{equation}
+Where $\mathbb{P}(S(x)=0)=\mathbb{P}(Q\leq x+\delta|X\geq x)=\delta h(x)+o(\delta^2)$ and $mathbb{P}(S(x)=x+1)=1-\delta h(x)+o(\delta^2)$ and $\alpha_\delta=e^{-\beta \delta}=1-\beta \delta + o(\delta^2)$ for $\beta>0$.
+We define $V'_\delta(n\delta):=V(n)$ and for convenience, we define $V'_\delta(0^+):=V'_\delta(\delta)$.
+If we assume that 
+$$
+c+\alpha_\delta V'(0^+)>\alpha_\delta \mathbb{E}[V'(S(x)\delta)],
+$$
+we can write
+\begin{equation}
+V'_\delta(x)=\alpha_\delta \mathbb{P}(Q\leq x+\delta|X\geq x) (c+a+\alpha_\delta V'(0^+))+\alpha_\delta \mathbb{P}(Q>x+\delta|X\geq x)V'_\delta(x+\delta)
+\end{equation}
+We are now going to let $\delta$ approach zero.
+\begin{equation}
+\lim\limits_{\delta\rightarrow 0} V'_\delta(x)=
+\lim\limits_{\delta\rightarrow 0}(1-\beta\delta+o(\delta^2)) (\delta h(x)+o(\delta^2))(c+a+(1-\beta\delta+o(\delta^2)) V'(0^+))+(1-\beta\delta+o(\delta^2)) (1-\delta h(x)+o(\delta^2))V'_\delta(x+\delta)
+\end{equation}
+\end{document}

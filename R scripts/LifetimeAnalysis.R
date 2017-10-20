@@ -6,7 +6,7 @@ library(PhaseType)
 library(actuar)
 
 # Load data
-setwd('C:/Users/s147569/Dropbox/School/BEP/Plugins/R scripts')
+setwd('C:/Users/s147569/Dropbox/School/BEP/SVN/Trunk/R scripts')
 CsvData <-read.csv("TraceLifetimes.csv", header=TRUE)
 lifetimes <- CsvData$Lifetime / (3600*1000) # In hours
 
@@ -31,22 +31,6 @@ descdist(lifetimes, discrete = FALSE)
 normalFit <- fitdistr(lifetimes, "normal")
 weibullFit <- fitdistr(lifetimes, "weibull")
 gammaFit <- fitdistr(lifetimes, "gamma")
-
-# Prior on starting state
-dirpi <- c(1, 0, 0)
-# Gamma prior: shape hyperparameters (one per matrix element, columnwise)
-nu <- c(0, 1, 1, 1, 0, 1, 1, 1,0)
-# Gamma prior: reciprocal scale hyperparameters (one per matrix row)
-zeta <- c(1, 1, 1)
-# Define dimension of model to fit
-n <- 3
-# Perform 20 MCMC iterations (fix inner Metropolis-Hastings to one iteration
-# since starts in stationarity here). Do more in practise!!
-res1 <- phtMCMC(lifetimes, n, dirpi, nu, zeta, 20, mhit=5)
-print(res1)
-
-dPhaseType <- dphtype(x=1:2, c(1, 0, 0), matrix(c(0,res1$nu$S21,res1$nu$S31,res1$nu$S12,0,res1$nu$S13,res1$nu$S31,res1$nu$S23,0),3), log = FALSE)
-
 # Test GoF
 normalTest <-ad.test(lifetimes,pnorm, mean=average, sd=standardDeviation)
 gammaTest <- ad.test(lifetimes,pgamma,shape=gammaFit$estimate[["shape"]], rate = gammaFit$estimate[["rate"]])
@@ -65,7 +49,7 @@ lines(x,pgamma(x,shape=gammaFit$estimate[["shape"]], rate = gammaFit$estimate[["
 # Density
 plot(probDens,xlim=c(min(lifetimes),max(lifetimes)), col="green", xlab="time", ylab="density",main="Observed density vs theoretical density")
 lines(x,dgamma(x,shape=gammaFit$estimate[["shape"]], rate = gammaFit$estimate[["rate"]]), col="red")
-lines(x,dPhaseType, col="black")
+lines(x,0.8*dgamma(x,shape=30, rate = gammaFit$estimate[["rate"]])+0.2*dgamma(x,shape=50, rate = gammaFit$estimate[["rate"]]), col="black")
 
 # Hazard
 plot(hazard,xlim=c(min(lifetimes),max(lifetimes)), col="green", xlab="time", ylab="hazard rate",main="Hazard rate over time")

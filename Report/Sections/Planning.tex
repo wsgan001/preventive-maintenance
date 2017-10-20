@@ -1,0 +1,25 @@
+\section{Planning}
+I am planning to focus my research on finding a preventive maintenance policy based on fluid models. This can be divided into two parts:
+\begin{itemize}
+\item Estimating the parameters of the fluid model. Possible simplifications to start with are fluid models without jumps or fluid models with jumps but with all rates equal to $-1$.
+\item Basing a maintenance policy on this fluid model.
+\end{itemize}
+
+\subsection{Tasks}
+Below are a few things that might be useful to do in order to find preventive maintenance policies for the data. I have ordered them in the order that seems most useful and feasible to me.
+\begin{enumerate}
+\item Plot density of time-to-live for each state and gather averages and other statistics.
+\item Find (candidate) jump states. This could for instance be done by comparing the average time-to-live of a state with the time-to-live from each incoming state, if it is higher than all incoming states, it is a candidate jump state.
+\item Find (distribution of) jump quantities. This could be done based on the difference between subsequent time-to-live distributions.
+\item Improve clustering algorithm such that it minimizes cut values.
+\item Prove the optimality of the CTMC policy that resulted from the value iteration. I hope to find some argument based on the fact that all repair states are in the same cluster.
+\item Find rates for each state. A while ago, I came up with some estimator that could be used, but it requires some distribution of the fluid quantity.
+\item Find method for deriving policies for fluid models without jumps. I've managed to reduce the cost equations for when no preventive maintenance is scheduled to a nonhomogeneous matrix differential equation which should be feasible to solve. Currently, the main obstacle seems to be finding initial conditions for this differential equation.
+\item Find method for deriving policies for fluid models with jumps but with rates equal to $-1$.
+\item Try combining the above two methods to find a method to derive policies for fluid models with jumps and different rates.
+\end{enumerate}
+
+\subsection{Timeline}
+I will try to do the first two tasks in week 32 and 33 (as I don't have much time in these weeks). In week 34, I will have more time and will work on task 3, 4 and 5. In week 35 I will work on task 6 and 7. After that, the academic year has started again and we can meet and plan the rest of the project. \\
+\\
+This planning is of course a draft, it will likely be changed when obstacles are met.

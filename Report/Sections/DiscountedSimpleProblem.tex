@@ -1,0 +1,90 @@
+\input{Imports.tex}
+\begin{document}
+\section{Solving the simple discounted problem}
+We are going to solve problem with the following Bellman equations:
+$$
+J(l,1)=\min\{
+c+e^{-\alpha dt} J(0,1),
+e^{-\alpha dt} \mathbb{E}[J(l+dt,I(t_{k+1}))]
+\}.
+$$
+$$
+J(l,0)=c + a + e^{-\alpha h} J(0,1).
+$$
+Where $I(t_{k+1})$ is a random variable and it is $0$ if $l<Q_{n(t_k)}<l+dt$ and $1$ else. Let the $Q_i$'s have cdf $F(.)$, pdf $f(.)$, hazard rate $h(.)$ and cumulative hazard rate $H(.)$. Then
+$$
+\mathbb{P}(l<Q_{n(t_k)}<l+dt|l<Q_{n(t_k)})=\mathbb{P}(l<Q_0<l+dt|l<Q_0)
+$$
+$$
+=\frac{F(l+dt)-F(l)}{1-F(l)}=\frac{dt\,f(l)+o(dt^2)}{1-F(l)}=dt\,h(l)+o(dt^2).
+$$
+So that $I(t_{k+1})=0$ with probability $dth(l)+o(h^2)$ and $1$ with probability $1-dt\,h(l)+o(dt^2)$. Resulting in
+$$
+J(l,1)=\min\{
+c+e^{-\alpha dt} J(0,1), 
+e^{-\alpha dt} [dt\,h(l)J(l+dt,0) + (1-dt\,h(l))J(l+dt,1) +o(dt^2)]
+\}.
+$$
+When we assume that $J(l+dt,1)<c+e^{-\alpha dt} J(0,1)$, we can write
+$$
+J(l,1)=
+(1-\alpha dt +o(dt^2)) [dt\,h(l)J(l+dt,0) + (1-dt\,h(l))J(l+dt,1) +o(dt^2)]
+$$
+$$
+=dt\,h(l)J(l+dt,0) + (1-dt\,h(l))J(l+dt,1) - \alpha dt J(l+dt,1) +o(dt^2)
+.
+$$
+Or equivalently
+$$
+J(l,1)-J(l+dt,1)=
+dt[h(l)J(l+h,0) - (\alpha +h(l))J(l+dt,1)] +o(dt^2)
+.
+$$
+Dividing by $-dt$ results in
+$$
+\frac{J(l+dt,1)-J(l,1)}{dt}=
+-h(l)J(l+dt,0) + (\alpha +h(l))J(l+dt,1) +o(dt)
+.
+$$
+Since we know that $J(l+dt,0)=c + a + e^{-\alpha dt} J(0,1)=c+a+(1+o(dt))J(0,1)$, we can write
+$$
+\frac{J(l+dt,1)-J(l,1)}{dt}=
+-h(l)(c+a+J(0,1)) + (\alpha +h(l))J(l+dt,1) +o(dt)
+.
+$$
+If we let $dt$ approach $0$, this results in
+$$
+\frac{d}{dl}J(l,1)=
+-h(l)(c+a+J(0,1)) + (\alpha +h(l))J(l,1)
+.
+$$
+Which seems counterintuitive since for small $\alpha$, $J(l,1)$ would be decreasing as $J(l,1)<c+e^{-\alpha dt} J(0,1)<c+a+J(0,1)$.
+We will try to solve this O.D.E. anyway.
+We use the method of the integrating factor.
+Our integrating factor will be
+$$
+e^{\int\limits_0^l (-\alpha - h(x))dx}=e^{-\alpha l -H(l)}.
+$$
+So that we get
+$$
+J(l,1)=e^{\alpha l +H(l)} [C + \int\limits_0^l e^{-\alpha x -H(x)}(-h(x)(c+a+J(0,1)))dx]
+$$
+$$
+=\frac{e^{\alpha l}}{1-F(l)} [C - (c+a+J(0,1))\int\limits_0^l e^{-\alpha x}f(x)dx].
+$$
+Using the identities $e^{H(l)}=(e^{-H(l)})^{-1}=\frac{1}{1-F(l)}$ and $h(l)e^{-H(l)}=f(l)$.
+The $C$ is an integrating constant and since $J(l)=J(0,1)$ should hold, we find $C=J(0,1)$.
+We can rewrite the expression to
+$$
+J(l,1)=\frac{e^{\alpha l}}{1-F(l)} [J(0,1)  - (c+a+J(0,1))\mathbb{P}(L<l)\mathbb{E}[e^{-\alpha L}|L<l]].
+$$
+Concluding
+$$
+J(l,1)=\min\{
+c+J(0,1),
+\frac{ e^{\alpha l}}{1-F(l)} [J(0,1) - (c+a+J(0,1))\mathbb{P}(L<l)\mathbb{E}[e^{-\alpha L}|L<l]]
+\}
+$$
+and preventive maintenance is chosen if and only if $J(l,1)=c+J(0,1)$.
+However, the value of $J(0,1)$ depends on the policy that is chosen and it seems difficult to solve $J(l,1)=c+J(0,1)$ analytically for $l$.
+\end{document}

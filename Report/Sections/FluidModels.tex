@@ -1,9 +1,12 @@
 \section{Fluid models}
+\todo{Add introduction defining markov modulated fluid models and outlining relevant theory}
+
+\subsection{Rate estimation}
 Given a CTMC $X(t)$ with states $s_i$ for $i=1,...,n$ and infinitesimal generator matrix $Q$, we want to predict some event using a Fluid Model with fluid level $L(t)$ with initial distribution $F_L(q)$ and density $f_L(q)$, we want to find the rates $r_i\leq 0$ for each state $s_i$.\\
 Let $X_k$ denote the $k$-th state that the CTMC visits, let $T_k$ denote the time the CTMC spends in this state and let $F_k$ denote the occurrence of the event while the CTMC is in its $k$-th state. We assume that the event occurs when the fluid level reaches zero.\\
 We then have
 $$
-\mathbb{P}(F_k|X_k=s_i)=\int\limits_0^{\infty}\mathbb{P}(T_k>\frac{l}{-r_i})f_{L_i}(l)dl=\int\limits_0^{\infty}e^{-q_{ii}/r_i})f_{L_i}(l)dl
+\mathbb{P}(F_k|X_k=s_i)=\int\limits_0^{\infty}\mathbb{P}(T_k>\frac{l}{-r_i})f_{L_i}(l)dl=\int\limits_0^{\infty}e^{-q_{ii}l/r_i}f_{L_i}(l)dl
 $$
 Where $f_{L_i}$ denotes the density of the fluid level when the CTMC arrives in $s_i$.\\
 Given some density function $f_{L_i}$, we can use this to make a maximum likelihood estimator for $r_i$.
@@ -11,3 +14,13 @@ Also another relation holds between the fluid levels of different states\citep{G
 $$
 \frac{\partial}{\partial t}p_i(t,l)+\frac{\partial}{\partial l}r_ip_i(t,l)=\sum\limits_{k=1}^nq_{ki}p_k(t,l)
 $$
+\subsection{Finding jump states}
+Some transitions that the machine makes, are beneficial for its lifetime\todo{Add examples}. To model this behavior, we can add jump transitions. Certain transitions could add a certain (stochastic) amount to the fluid quantity. We define a jump state as a state for which each leading transition is a jump transition. For simplicity, we will start by looking for jump states.\\
+\\
+
+As a jump transtion increases the fluid quantity and a higher fluid quantity is beneficial for the machine, a jump transition will likely increase the expected lifetime. Hence, we call a transition a jump transition when its source state has a lower expected time to live than the destination state. A jump state is then a state which has a greater time to live than each of its incoming states.\\
+\\
+
+We implemented this method by calculating the expected lifetime in each state (in each state we took the average of the time until the end of the trace for each occurrence). And then we compared this to the incoming states. This resulted in finding state $1$ and $39$ as jump states.\\
+\\
+Of course, this method should mostly be seen as a heuristic for finding interesting states rather than a way to prove that these states are jump states.

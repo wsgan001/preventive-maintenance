@@ -1,0 +1,47 @@
+\input{imports.tex}
+\begin{document}
+\section{Simple discounted problem}
+We are going to solve
+$$
+V(q)=\min\{
+c+\alpha_{\delta} \mathbb{E}[V(Q)],
+\alpha_{\delta} V(q-\delta)
+\}
+$$
+for $q>0$ and
+$$
+V(q)=c + a + \alpha_{\delta} \mathbb{E}[V(Q)],
+$$
+else.
+If $0<q\leq\delta$, then 
+\begin{equation}\begin{split}
+V(q)&=\min\{
+c+\alpha_{\delta} \mathbb{E}[V(Q)],\alpha_{\delta} V(q-\delta)\}\\
+&=\min\{
+c+\alpha_{\delta} \mathbb{E}[V(Q)],\alpha_{\delta}(c+a+\alpha_{\delta} \mathbb{E}[V(Q)])\}\\
+&=c+\alpha_{\delta} \mathbb{E}[V(Q)]
+\end{split}
+\end{equation}
+(Assuming $a>\frac{1-\alpha_\delta}{\alpha_\delta}(c+\alpha_\delta\mathbb{E}[V(Q)])$).
+And by induction, we can prove that for $(k-1)\delta<q\leq k\delta$ ($k>0$)
+\begin{equation}\begin{split}
+V(q)&=\min\{
+c+\alpha_{\delta} \mathbb{E}[V(Q)],\alpha_{\delta} V(q-\delta)\}\\
+&=\min\{
+c+\alpha_{\delta} \mathbb{E}[V(Q)],\alpha_{\delta} \alpha_{\delta}^{k-2}(c+\alpha_\delta\mathbb{E}[V(Q)])\}\\
+&=\alpha_{\delta}^{k-1}(c+\alpha_\delta\mathbb{E}[V(Q)]).
+\end{split}
+\end{equation}
+As you can see, the cost does not depend on $a$ as correctively repairing never occurs. This is because in this formulation, the fluid level is known when making the decision (when choosing the minimum). Such that we will repair at the last opportunity before the machine breaks down.
+If, for instance, we choose $alpha_\delta=e^{-\beta \delta}$ for $\beta>0$, we have for $(k-1)\delta<q\leq k\delta$
+$$
+V(q)=e^{-\beta(k-1)\delta}(c+\alpha_\delta\mathbb{E}[V(Q)]).
+$$
+If we let $\delta$ approach zero, the cost approaches 
+$$
+V(q)=e^{-\beta q}(c+\alpha_\delta\mathbb{E}[V(Q)]).
+$$
+As you can see, this is the cost of repairing the machine preventively at exactly the instant that it will break.
+
+Because in our real world problem, we can't observe the current fluid level of the machine, this policy cannot be realistically employed. Hence, we will reformulate the problem such that the policy will only depend on observable information.
+\end{document}

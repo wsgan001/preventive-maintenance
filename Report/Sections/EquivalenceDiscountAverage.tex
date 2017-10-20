@@ -1,0 +1,29 @@
+\section{Equivalence average cost and discounted cost}
+For a machine with lifetime $L \sim F(.)$, preventive cost $c$ and corrective cost $c+a$, the average cost $J(u)$ of planning preventive maintenance after a time $u$ has passed equals
+$$
+J(u)=\frac{(c+a)\mathbb{P}(L<u)+c\mathbb{P}(L\geq u)}{\mathbb{E}[\min\{L,u\}]}
+=\frac{c+aF(u)}{\mathbb{E}[\min\{L,u\}]}.
+$$
+For continuous discount $e^{-\alpha t}$, the discounted cost equals
+$$
+J_\alpha(u)=(c+a+J_\alpha(u))\mathbb{P}(L<u)\mathbb{E}[e^{-\alpha L}|L<u] + (c+J_\alpha(u))e^{-\alpha u}\mathbb{P}(L\geq u)
+$$
+$$
+\Rightarrow J_\alpha(u)(1-\mathbb{P}(L<u)\mathbb{E}[e^{-\alpha L}|L<u]-e^{-\alpha u}\mathbb{P}(L\geq u))
+$$
+$$
+=c(\mathbb{P}(L<u)\mathbb{E}[e^{-\alpha L}|L<u]+e^{-\alpha u}\mathbb{P}(L\geq u))+a\mathbb{P}(L<u)\mathbb{E}[e^{-\alpha L}|L<u]
+$$
+$$
+\Rightarrow J_\alpha(u)=\frac{c(\mathbb{P}(L<u)\mathbb{E}[e^{-\alpha L}|L<u]+e^{-\alpha u}\mathbb{P}(L\geq u))+a\mathbb{P}(L<u)\mathbb{E}[e^{-\alpha L}|L<u]}{1-\mathbb{P}(L<u)\mathbb{E}[e^{-\alpha L}|L<u]-e^{-\alpha u}\mathbb{P}(L\geq u)}
+$$
+$$
+=\frac{c\mathbb{E}[e^{-\alpha\min\{L,u\}}]+aF(u)\mathbb{E}[e^{-\alpha L}|L<u]}{\mathbb{E}[1-e^{-\alpha \min\{L,u\}}]}
+$$
+Then 
+$$
+\lim\limits_{\alpha\rightarrow 0} \alpha J_\alpha(u)=\lim\limits_{\alpha\rightarrow 0}\alpha\frac{c\mathbb{E}[e^{-\alpha\min\{L,u\}}]+aF(u)\mathbb{E}[e^{-\alpha L}|L<u]}{\mathbb{E}[\alpha \min\{L,u\}+o(\alpha^2)]}
+$$
+$$
+=\lim\limits_{\alpha\rightarrow 0}\frac{c\mathbb{E}[e^{-\alpha\min\{L,u\}}]+aF(u)\mathbb{E}[e^{-\alpha L}|L<u]}{\mathbb{E}[ \min\{L,u\}+o(\alpha)]}=\frac{c+aF(u)}{\mathbb{E}[\min\{L,u\}]}=J(u).
+$$

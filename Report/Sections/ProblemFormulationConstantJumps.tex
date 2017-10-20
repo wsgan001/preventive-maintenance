@@ -1,0 +1,62 @@
+
+\section{Constant fitness jumps at Exponentially distributed intervals}
+The deterioration of the condition of the machine in the previous problem can be viewed as a fluid quantity that drains over time.
+Let the machine start with a fluid quantity of $Q_m>0$ after it has been repaired the $m$'th time.
+We assume these $Q_m$'s to be i.i.d. random variables.
+We can then write $\omega_k(x_k)=\mathds{1}\{Q_m>x_k\}$ if the machine has been repaired $m$ times at the $k$'th step.
+We can extend this by allowing the occurrence of instantanious increases (jumps) in this fluid quantity.
+These jumps all have the same known size $J$.
+We denote the time between the $i$'th jump and the $i+1$'th jump by $T_i$, these are assumed to be exponentially distributed with rate $\lambda$.
+The number of jumps that occurred in a time interval of length $\tau$ is denoted by $K(\tau)$ so that $K(\tau)$ is a Poisson distributed random variable with rate $\lambda \tau$.)
+We denote the number of jumps that occurred in the $k$'th time interval by $K_k$ and this has the same distribution as $K(\delta)$.
+The times at which jumps have occurred are known.
+When a jump occurs while the machine is being repaired, these have no effect on the fluid level.
+As state information, we keep track of the net amount of fluid $q_k$ that has been drained (the time since the last repair minus the accumulated jump quantities).
+We also keep track of the maximum net amount of fluid $q^*_k$ since the last time the machine has been repaired. 
+Hence $x_k:=(q_k,q^*_k)$ and we define a failed state $x_f$.
+We also redefine $\omega_k(x_k)=\mathds{1}\{Q_m>q_k+K_kJ\}$.
+The decision space remains the same, i.e. $U(x_f)=\{a_R\}$ and $U(x)=\{a_R,a_W\}$ for $x\neq x_f$.
+The state evolves in the following way
+\begin{equation}
+\begin{split}
+x_{k+1}&=f(x_k,u_k,\omega_k,K_k)\\
+&:=\begin{cases}
+(\delta,\delta),&\text{if}\ u_k=a_R \\
+x_f,&\text{if}\ u_k=a_W\ \text{and}\ \omega_k=0 \\
+(q_k+\delta-K_kJ,\max\{q_k+\delta-K_kJ,q^*_k\}),&\text{if}\ u_k=a_W\ \text{and}\ \omega_k=1.
+\end{cases}
+\end{split}
+\end{equation}
+The Bellman equations then read
+\begin{equation}
+V^*(x_k)=\begin{cases}
+c+a+\alpha_\delta V^*(0,0),&\text{if}\ x_k=x_f\\
+\min\{c+\alpha_\delta V^*(0,0),\alpha_\delta \mathbb{E}[V^*(f(x_k,a_W,\omega_k,K_k))]\},&\text{else.}
+\end{cases}
+\end{equation}
+
+
+\subsection{Alternative models}
+\subsubsection{Instantaneous repairs}
+Again, we could make the repairs take zero time. This could be done similarly as in the previous problem.
+
+\subsubsection{Stochastic inter-decision times}
+In the same fassion as with the previous model, we could introduce stochastic inter-decision times. In this case, however, we could also model the problem such that decisions are only made when a jump occurs.
+Again, a continuous discount $e^{-\beta t}$ is introduced.
+The state evolution would be as follows
+
+\begin{equation}
+x_{k+1}=f(x_k,u_k,\omega_k,T_k):=\begin{cases}
+(T_k,T_k),&\text{if}\ u_k=a_R \\
+x_f,&\text{if}\ u_k=a_W\ \text{and}\ \omega_k=0 \\
+(q_k+T_k-J,\max\{q^*_k,q_k+T_k-J\},&\text{if}\ u_k=a_W\ \text{and}\ \omega_k=1.
+\end{cases}
+\end{equation}
+The Bellman equations should then be changed to
+\begin{equation}
+V^*(x_k)=\begin{cases}
+\min\{c+\mathbb{E}[e^{-\beta T} V^*(T)],\mathbb{E}[e^{-\beta T} V^*(f(x_k,a_W,\omega_k,T))],&\text{if}\ x_k\neq x_f \\
+c+a+\mathbb{E}[e^{-\beta T} V^*(T)],&\text{else.}
+\end{cases}
+\end{equation}
+Where repair would again take one inter-decision time. Where $T$ is of the same family of i.i.d. random variables as the $T_i$'s.

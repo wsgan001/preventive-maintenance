@@ -1,13 +1,25 @@
-\documentclass[a4paper]{article}
+\documentclass[a4paper]{report}
 \usepackage[english]{babel}
 \usepackage{amsfonts}
+\usepackage{amsmath} % Equation numbering
 \usepackage[square,sort,comma,numbers]{natbib}
 
 \usepackage{graphicx} % Figures
 \usepackage{grffile} % For recognising the png-extension
 \usepackage{float} % For floating figures
 
-\usepackage{changes} % for track changed extensions
+\usepackage{changes} % For track changed extensions
+\usepackage{todonotes}
+
+\usepackage{dsfont} % For indicator function
 
 \usepackage{hyperref}
 \bibliographystyle{plainnat}
+
+% For example environment
+\usepackage{amsthm}
+\theoremstyle{definition}
+\newtheorem{example}{Example}[section]
+
+% For theorem environment
+\newtheorem{theorem}{Theorem}
