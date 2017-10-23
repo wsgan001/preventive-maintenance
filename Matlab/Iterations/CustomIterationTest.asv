@@ -9,11 +9,11 @@ discount = 5;
 x=1;
 v=1;
 
-convergenceProfile = [];
+convergenceProfile = zeros(1,51);
 
 for i=1:50
-    [x,v] = PolicyImprovementIteration(x,v,c,a,discount,pdf,cdf,hazard);
-    convergenceProfile = [convergenceProfile x];
+    [x,v] = CustomIteration(x,v,c,a,discount,pdf,cdf,hazard);
+    convergenceProfile(i) = v;
 end
 
 plot(convergenceProfile)
