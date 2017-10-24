@@ -1,27 +1,27 @@
 % Set distribution
 shape = 2;
 rate = 2;
-%PDF = @(t) wblpdf(t,rate,shape);
-%CDF = @(t) wblcdf(t,rate,shape);
-%hazard = @(t)  (shape/rate) .*(t/rate).^(shape-1);
-PDF = @(t) pdf('Gamma',t,3.5,3.5);
-CDF = @(t) cdf('Gamma',t,3.5,3.5);
-hazard = @(t) PDF(t)/(1-CDF(t));
+PDF = @(t) wblpdf(t,rate,shape);
+CDF = @(t) wblcdf(t,rate,shape);
+hazard = @(t)  (shape/rate) .*(t/rate).^(shape-1);
+%PDF = @(t) pdf('Gamma',t,2,2);
+%CDF = @(t) cdf('Gamma',t,2,2);
+%hazard = @(t) PDF(t)/(1-CDF(t));
 
 % Set other problem parameters
 c = 1;
-a = 100;
-cDiscount= 3;
+a = 1;
+cDiscount= 1;
 
 % Get the corresponding total discounted cost
 tdc = TotalDiscountedCost( c,a,cDiscount,PDF);
 
 % Set numerical parameters
 numIterations = 50;
-timeStep = 0.1;
+timeStep = 0.01;
 discount=exp(-cDiscount.*timeStep);
 numSteps = 1000;
-x_init = 0.1;
+x_init = 10;
 v_init = tdc(x_init);
 initValue = zeros(numSteps+1,1);
 initValue(1) = v_init+a;
@@ -42,4 +42,14 @@ end
 
 % Plot results
 X=1:(numIterations+1);
+figure
 plot(X,customX,X,improvementX,X,valueX);
+legend('Custom Iteration','Policy Improvement','Value Iteration')
+xlabel('Iterations')
+ylabel('Control Limit')
+
+figure
+plot(X,customV,X,improvementV,X,valueV);
+legend('Custom Iteration','Policy Improvement','Value Iteration')
+xlabel('Iterations')
+ylabel('Total Discounted Cost')
