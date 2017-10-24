@@ -11,7 +11,7 @@ for i=1:numIterations
     v_convergence(i+1) = valueFunction(x_convergence(i+1)); 
     difference = v_convergence(i+1) - v_convergence(i);
     if (difference > 0)
-       muStep = -muStep/2.1;
+       muStep = -muStep*0.45;
     end
 end
 end
