@@ -6,12 +6,12 @@ v_convergence = zeros(1,numIterations+1);
 x_convergence(1) = x_init;
 v_convergence(1) = valueFunction(x_init);
 for i=1:numIterations
-  x_convergence(i+1) = x_convergence(i) + muStep;
-  v_convergence(i+1) = valueFunction(x_convergence(i+1)); 
-  difference = v_convergence(i+1) - v_convergence(i);
-  if (difference > 0)
-     muStep = -muStep/2.1;
-  end
+    % I've set 0.001 as the minimum value of x
+    x_convergence(i+1) = max(0.001,x_convergence(i) + muStep);
+    v_convergence(i+1) = valueFunction(x_convergence(i+1)); 
+    difference = v_convergence(i+1) - v_convergence(i);
+    if (difference > 0)
+       muStep = -muStep/2.1;
+    end
 end
-
 end
