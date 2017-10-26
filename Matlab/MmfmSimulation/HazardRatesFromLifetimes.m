@@ -17,7 +17,7 @@ for cdfIndex=1:length(pts)
     while x(ecdfIndex) < pts(cdfIndex)
         ecdfIndex= ecdfIndex+1;
     end
-    CDF(cdfIndex) = ECDF(ecdfIndex);
+    CDF(cdfIndex) = ECDF(min(ecdfIndex,length(x)));
 end
 
 hazard = PDF ./ (ones(length(pts),1)-CDF);

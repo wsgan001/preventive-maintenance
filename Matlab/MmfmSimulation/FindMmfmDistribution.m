@@ -1,5 +1,5 @@
 generator = [-3, 1, 2; 1, -2, 1; 0,1,-1];
-fluidJumps = [10,0,10;0,0,0;0,0,0];
+fluidJumps = [0,0,5;0,0,0;0,0,0];
 fluidRates = [1;2;3];
 
 numExperiments = 10000;
@@ -15,4 +15,7 @@ end
 
 figure
 plot(ptsWithJumps, hazardWithJumps,ptsNoJumps,hazardNoJumps);
+legend('With Jumps','Without Jumps')
+xlabel('Time')
+ylabel('Hazard Rate')
 
