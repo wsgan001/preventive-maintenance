@@ -1,4 +1,4 @@
-\begin{thebibliography}{16}
+\begin{thebibliography}{28}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -10,12 +10,25 @@ S{\o}ren Asmussen, Olle Nerman, and Marita Olsson.
 \newblock Fitting phase-type distributions via the em algorithm.
 \newblock \emph{Scandinavian Journal of Statistics}, pages 419--441, 1996.
 
+\bibitem[Bertsekas(2017)]{Bertsekas2017}
+Dimitri~P Bertsekas.
+\newblock Value and policy iterations in optimal control and adaptive dynamic
+  programming.
+\newblock \emph{IEEE transactions on neural networks and learning systems},
+  28\penalty0 (3):\penalty0 500--509, 2017.
+
 \bibitem[Bertsekas and Yu(2012)]{Bertsekas2012}
 Dimitri~P Bertsekas and Huizhen Yu.
 \newblock Q-learning and enhanced policy iteration in discounted dynamic
   programming.
 \newblock \emph{Mathematics of Operations Research}, 37\penalty0 (1):\penalty0
   66--94, 2012.
+
+\bibitem[Bertsekas and Yu(2013)]{Bertsekas2013}
+Dimitri~P Bertsekas and Huizhen Yu.
+\newblock Stochastic shortest path problems under weak conditions.
+\newblock \emph{Lab. for Information and Decision Systems Report LIDS-P-2909,
+  MIT}, 2013.
 
 \bibitem[Bertsekas et~al.(1995)Bertsekas, Bertsekas, Bertsekas, and
   Bertsekas]{Bertsekas1995}
@@ -42,6 +55,16 @@ Jun Chen and Ratnesh Kumar.
 \newblock \emph{IFAC Proceedings Volumes}, 47\penalty0 (2):\penalty0 1--6,
   2014.
 
+\bibitem[Derman(1963)]{Derman1963}
+Cyrus Derman.
+\newblock On optimal replacement rules when changes of state are markovian.
+\newblock \emph{Mathematical optimization techniques}, 396, 1963.
+
+\bibitem[Dongen(2000)]{Dongen2000}
+S~VAN Dongen.
+\newblock \emph{Graph clustering by flow simulation}.
+\newblock PhD thesis, Standardization and Knowledge Transfer, 2000.
+
 \bibitem[Fournier-Viger et~al.(2017)Fournier-Viger, Lin, Kiran, Koh, and
   Thomas]{Fournier-Viger2017}
 Philippe Fournier-Viger, Jerry Chun-Wei Lin, Rage~Uday Kiran, Yun~Sing Koh, and
@@ -49,6 +72,16 @@ Philippe Fournier-Viger, Jerry Chun-Wei Lin, Rage~Uday Kiran, Yun~Sing Koh, and
 \newblock A survey of sequential pattern mining.
 \newblock \emph{Data Science and Pattern Recognition}, 1\penalty0 (1):\penalty0
   54--77, 2017.
+
+\bibitem[Glynn(2013{\natexlab{a}})]{Glynn2013-10}
+Peter~W. Glynn.
+\newblock Martingales.
+\newblock In \emph{Stochastic Systems}, 2013{\natexlab{a}}.
+
+\bibitem[Glynn(2013{\natexlab{b}})]{Glynn2013-11}
+Peter~W. Glynn.
+\newblock Stochastic control.
+\newblock In \emph{Stochastic Systems}, 2013{\natexlab{b}}.
 
 \bibitem[Gribaudo and Telek(2007)]{Gribaudo2007}
 Marco Gribaudo and Mikl{\'o}s Telek.
@@ -77,11 +110,24 @@ Yasunari Inamura et~al.
   observed data.
 \newblock Technical report, Bank of Japan, 2006.
 
+\bibitem[Jiang and Jiang(2013)]{Jiang2013}
+Zhong-Ping Jiang and Yu~Jiang.
+\newblock Robust adaptive dynamic programming for linear and nonlinear systems:
+  An overview.
+\newblock \emph{European Journal of Control}, 19\penalty0 (5):\penalty0
+  417--425, 2013.
+
 \bibitem[Kalosi et~al.(2016)Kalosi, Kapodistria, and Resing]{Kalosi2016}
 Szilard Kalosi, Stella Kapodistria, and Jacques~AC Resing.
 \newblock Condition-based maintenance at both scheduled and unscheduled
   opportunities.
 \newblock \emph{arXiv preprint arXiv:1607.02299}, 2016.
+
+\bibitem[Lai and Xie(2006)]{Lai2006}
+Chin-Diew Lai and Min Xie.
+\newblock Concepts and applications of stochastic ageing.
+\newblock \emph{Stochastic Ageing and Dependence for Reliability}, pages 7--70,
+  2006.
 
 \bibitem[Lee and Lin(2010)]{Lee2010}
 Simon~CK Lee and X~Sheldon Lin.
@@ -90,11 +136,29 @@ Simon~CK Lee and X~Sheldon Lin.
 \newblock \emph{North American Actuarial Journal}, 14\penalty0 (1):\penalty0
   107--130, 2010.
 
+\bibitem[Liu and Stewart(2011)]{Liu2011}
+Ning Liu and William~J Stewart.
+\newblock Markov chains and spectral clustering.
+\newblock In \emph{Performance Evaluation of Computer and Communication
+  Systems. Milestones and Future Challenges}, pages 87--98. Springer, 2011.
+
 \bibitem[Okamura and Dohi(2006)]{Okamura2006}
 Hiroyuki Okamura and Tadashi Dohi.
 \newblock Building phase-type software reliability models.
 \newblock In \emph{Software Reliability Engineering, 2006. ISSRE'06. 17th
   International Symposium on}, pages 289--298. IEEE, 2006.
+
+\bibitem[Ross(1970)]{Ross1970}
+Sheldon~M Ross.
+\newblock Average cost semi-markov decision processes.
+\newblock \emph{Journal of Applied Probability}, 7\penalty0 (3):\penalty0
+  649--656, 1970.
+
+\bibitem[Serfozo(1979)]{Serfozo1979}
+Richard~F Serfozo.
+\newblock Technical note—an equivalence between continuous and discrete time
+  markov decision processes.
+\newblock \emph{Operations Research}, 27\penalty0 (3):\penalty0 616--620, 1979.
 
 \bibitem[Tzenova et~al.(2005)Tzenova, Adan, and Kulkarni]{Tzenova2005}
 Elena~I Tzenova, Ivo~JBF Adan, and Vidyadhar~G Kulkarni.
@@ -106,5 +170,11 @@ Jianyong Wang and Jiawei Han.
 \newblock Bide: Efficient mining of frequent closed sequences.
 \newblock In \emph{Data Engineering, 2004. Proceedings. 20th International
   Conference on}, pages 79--90. IEEE, 2004.
+
+\bibitem[Zacks(2012)]{Zacks2012}
+Shelemyahu Zacks.
+\newblock \emph{Introduction to reliability analysis: probability models and
+  statistical methods}.
+\newblock Springer Science \& Business Media, 2012.
 
 \end{thebibliography}

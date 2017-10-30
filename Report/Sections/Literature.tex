@@ -2,9 +2,8 @@
 \begin{itemize}
 \item \citep{Asmussen1996} Discusses the Phase-Type distribution and methods to estimate the parameters.
 \item \citep{Bertsekas1995} Book on dynamic programming and optimal control.
-\item \citep{Bertsekas2012} Introduces a new policy iteration-like
-algorithm for finding the optimal state costs or Q-factors and proves convergence properties.
-\item \citep{Birge2011}
+\item \citep{Bertsekas2012} Introduces a new policy iteration-like algorithm for finding the optimal state costs or Q-factors and proves convergence properties.
+\item \citep{Birge2011} Book on stochastic programming.
 \item \citep{Buchholz2014} Concerns the Phase-Type distribution. Shows properties and proposes methods to estimate the parameters. Mentions the difficulties: Many parameters ($n^2$ for $n$ states), of which, most are redundant but in most cases there is no canonical representation for each class ($2n-1$ independent parameters).
 \item \citep{Chen2014} Uses BIDE to mine closed frequent sequential patterns.
 \item \citep{Fournier-Viger2017} A Survey of Sequential Pattern Mining. Describes general concepts, problem variants and the existing algorithms.
@@ -20,5 +19,13 @@ algorithm for finding the optimal state costs or Q-factors and proves convergenc
 \item\citep{Serfozo1979} Proves that for every CTMC decision problem (where decisions are made at the beginning of the sojourn time) there is an equivalent DTMC decision problem.
 \item\citep{Liu2011} (Section "Markov Chains and Spectral Clustering") Regards spectral clustering, shows that paritioning the state to minimize the cut is equivalent to minimizing to maximize the internal cohesion of the clusters. Clusters can be formed by grouping on the entries of the eigenvectors corresponding to the subdominant eigenvalues. Clusters can be made by grouping on multiple eigenvectors or by iteratively partitioning a cluster on the subdominant eigenvector.
 \item\citep{Dongen2000} Introduces the MCL algorithm for clustering graphs. Focusses mainly on undirected graphs and there are not many characteristics of the resulting clusters proven.
+\item\citep{Derman1963} Describes a preventive maintenance problem where the machine is modelled as a DTMC where there is a certain drift to a failure state. Proves that there exists an ordering of the states such that for each set of problem parameters, there is a certain control limit state, so that the optimal policy is to preventively repair the machine for all states above the control limit.
+\item\citep{Ross1970} Shows the equivalence between average cost and discounted cost.
+\item\citep{Zacks2012} A book about reliability analysis. Contains a list of standard lifetime distributions and their properties. It also contains a lot of analysis on preventive maintenance policies. The big difference between this and our preventive maintenance policy, is that in this book the availability is maximized instead. Also contains chapters on maximum likelihood and Bayesian estimation methods for finding the lifetime distribution.
+\item\citep{Bertsekas2017} Discusses value iteration for discrete time infinite horizon problems of optimal control to a terminal set of states. Provides convergence results for value and policy iteration.
+\item\citep{Bertsekas2013} Discusses stochastic shortest path problems.
+\item\citep{Lai2006} Describes various classes of lifetime distributions and also lists example distributions for each of these. Discusses properties of these distributions and general properties of hazard rates (e.g. bounds for the moments).
+\item\citep{Glynn2013-10} Introduces martingales (and sub- and supermartingales) and proves key properties. It also demonstrates how martingales can be constructed from DTMCs. 
+\item\citep{Glynn2013-11} Shows that the total discounted cost of a MDP can be viewed as a martingale and derives the Bellman equations from this.
 
 \end{itemize}
