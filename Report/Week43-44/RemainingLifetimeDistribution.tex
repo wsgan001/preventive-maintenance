@@ -1,0 +1,76 @@
+\input{../Sections/Imports.tex}
+
+\begin{document}
+\chapter{The evolution of the distribution of the fluid level}
+In this section, we will derive the distribution of the remaining fluid level in a Markov Modulated Fluid Model with constant jumps.
+In this model, the initial fluid level is a random variable $Q_0\sim F(q)$ with corresponding hazard rate $h(q)$ which is assumed to be nondecreasing.
+A CTMC with $n$ states $s_1,...,s_n$ and initial state $s_1$ is considered.
+Each state has a corresponding fluid rate $r_i>0$ so that when the machine is in state $i$ for a time period of length $\tau$, then the fluid level will decrease by $r_i\tau$.
+When a transition occurs between state $i$ and $j$, the fluid level instantaneously increases by $J_{ij}$.
+We denote the random variable representing the fluid level at time $t$ by $Q(t)$.
+\section{State description}
+As time passes and jumps occur, the distribution of the remaining fluid changes.
+If the first jump (with quantity $J$) happens at time $t$ after the process has started (in initial state $s_1$), we know at time $t$ that $Q_0>r_1t$ and that $Q(t)\geq J$.
+This suggests that we can determine the distribution of the remaining fluid level from the distribution of $Q_0$, a lower bound $l_0$ on $Q_0$ and a lower bound of the current fluid level $l_c$.
+Hence, we describe the state of the process at time $t$ in the following way:
+$$
+X(t)=(S(t),L_0(t),L_c(t)).
+$$
+Where $S(t)$ denotes the CTMC state the process is in at time $t$, $L_0(t)$ is the lower bound of $Q_0$ at time $t$ and $L_c(t)$ is the lower bound of $Q(t)$ at time $t$.
+Initially $S(0)=s_1$ and $L_0(0)=L_c(0)=0$, when the process is in state $(s_i,l_0,l_c)$ and a CTMC jump to $s_j$ occurs, the state evolves in the following way
+$$
+(s_i,l_0,l_c)\mapsto (s_j,l_0,l_c+J_{ij}).
+$$
+And when in state $(s_i,l_0,l_c)$, a time period of length $\tau$ passes, the fluid level decreases by $\tau r_i$.
+The lower bound of the current level then decreases maximally by $\tau r_i$ and it increases the lower bound of $Q_0$ maximally by the same quantity.
+The exact evolution happens in the following way
+$$
+(s_i,l_0,l_c)\mapsto (s_i,l_0+\max\{0,\tau r_i-l_c\},l_c-\min\{l_c,\tau r_i\}).
+$$
+\begin{theorem}
+At time $t$, the fluid level is given by
+\begin{equation}\label{eq:fluidEvolution}
+Q(t)=L_c(t)+Q_0-L_0(t)
+\end{equation}
+\end{theorem}
+\begin{proof}
+At time $t=0$, $L_0(0)=L_c(0)=0$ and $Q(0)=Q_0$ so that \eqref{eq:fluidEvolution} holds.
+When \eqref{eq:fluidEvolution} holds at time $t$ and a time period $\tau$ passes while the machine stays in the same state $s_i$, then the left side of \eqref{eq:fluidEvolution} decreases by $r_i\tau$ while the right side decreases by
+\begin{equation}
+\begin{split}
+\min\{r_i\tau,l_c\}+\max\{0,r_i\tau-l_c\}&=\min\{r_i\tau,l_c\}-\min\{0,l_c-r_i\tau\}\\
+&=\min\{r_i\tau,l_c\}-\min\{r_i\tau,l_c\}+r_i\tau\\
+&=r_i\tau.
+\end{split}
+\end{equation}
+\end{proof}
+Hence, passage of time preserves \eqref{eq:fluidEvolution}.
+When \eqref{eq:fluidEvolution} holds at time $t$ and a jump from $s_i$ to $s_j$ occurs, the left side of \eqref{eq:fluidEvolution} increases by $J_{ij}$ and $L_c$ also increases by this quantity such that fluid jumps also preserve \eqref{eq:fluidEvolution}.
+\section{Evolution of the distribution}
+Given that we are in state $X(t)=(S,L_0,L_c)$, we can calculate the distribution of the current fluid level in the following way
+\begin{equation}
+\begin{split}
+\mathbb{P}_{X}(Q<q)&=\mathbb{P}(L_c+Q_0-L_0<q|Q_0>L_0)\\
+&=\mathbb{P}(Q_0<q+L_0-L_c|Q_0>L_0)\\
+&=\frac{F(q+L_0-L_c)-F(L_0)}{1-F(L_0)}.
+\end{split}
+\end{equation}
+The hazard rate is given by
+\begin{equation}
+\begin{split}
+h_{X}(q)&=\lim\limits_{\delta\rightarrow 0}\frac{1}{\delta}\mathbb{P}_{X}(q<Q<q+\delta|Q>q,Q>L_c)\\
+&=\begin{cases}
+0&\text{ if }q<L_c\\
+\begin{split}
+\lim\limits_{\delta\rightarrow 0}&\frac{1}{\delta}\mathbb{P}(Q_0<q+L_0-L_c+\delta|q+L_0-L_c<Q_0)\\
+&=h(q+L_0-L_c)
+\end{split}&\text{ else.}
+\end{cases}
+\end{split}
+\end{equation}
+The next theorem follows from the assumption that $h$ is nondecreasing.
+\begin{theorem}
+$h_{X}(q)$ is nondecreasing in $q$ for all states $X$ in the state space.
+\end{theorem}
+
+\end{document}
