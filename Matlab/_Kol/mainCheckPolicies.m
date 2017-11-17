@@ -20,8 +20,18 @@ EQ = sum(dist.p.*(0:dist.K-1));
 
 [mu, costcurve] = getOptimalControlLimitForAverageCost(dist, cp, cc);
 
-%figure
-%plot(costcurve)
+T = 1000000;
+costcurve2 = costcurve*0;
+for (muk = 1:length(costcurve))
+    costcurve2(muk) = getTotalCostUntilTime(dist, muk, T, cp, cc, 0);
+end
+
+figure
+hold on
+plot(costcurve)
+plot(costcurve2/T)
+hold off
+
 
 
 
