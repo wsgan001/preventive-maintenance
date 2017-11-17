@@ -13,10 +13,11 @@ else
     load('dist', 'dist');
 end
 
-%figure
-%plot(dist.Hazard)
+figure
+plot(dist.Hazard)
 
-EQ = sum(dist.p.*(0:dist.K-1));
+EQ = sum(dist.p.*(1:dist.K));
+cc/EQ
 
 [mu, costcurve] = getOptimalControlLimitForAverageCost(dist, cp, cc);
 

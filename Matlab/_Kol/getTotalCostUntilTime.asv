@@ -11,8 +11,8 @@ function [cost] = getTotalCostUntilTime(dist, mu, T, cp, cc, beta)
     % the total cost up until now, start with 0
     x.cost = 0;
     
-    t = 1;
-    while (t<=T)
+    
+    for (t=1:T)
         % we are at the beginning of the t-th slot
         
         pFailure = dist.Hazard(x.lifetime);
@@ -28,7 +28,9 @@ function [cost] = getTotalCostUntilTime(dist, mu, T, cp, cc, beta)
             x.lifetime = 1;
             % we pay a discounted cost corresponding to the end time of the
             % previous cycle
-            x.cost = x.cost + cc*exp(-beta*(t-1));
+            x.cost = x.cost + cc*exp(-beta*(t));
+            
+            % the time is not passing, as we handled only the end of (t-1)+
         else
             % no failure
             if (x.lifetime == mu)
@@ -42,6 +44,9 @@ function [cost] = getTotalCostUntilTime(dist, mu, T, cp, cc, beta)
                 x.lifetime = x.lifetime + 1;
                 % cost is not changed
             end
+            
+            % in both cases the time is increased as we handled (t+1)-
+            t = t+1;
         end
         % check if we should replace at the end of the slot
     end

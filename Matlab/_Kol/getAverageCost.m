@@ -13,18 +13,36 @@ function [avgk] = getAverageCost(mu, dist, cp, cc)
      Elife = 0;
      
      for k=1:mu
-         Elife = Elife + (k-1)*dist.p(k);
+         if (k <= dist.K)
+            Elife = Elife + k*dist.p(k);
+         else
+             % this does not add to the expectation
+         end
      end
      for k=mu+1:dist.K
-         Elife = Elife + (mu)*dist.p(k);
+         if (k <= dist.K)
+            Elife = Elife + (mu)*dist.p(k);
+         else
+             % this does not add to the expectation
+         end
      end
      
      Ecost = 0;
-     for k=1:mu
-         Ecost = Ecost + cc*dist.p(k);
+     % failure can occure at the latest before the replacement is done at
+     % the end of mu-th section (epsilon before failure if that would happen at that slot)
+     for k=1:(mu-1)
+         if (k <= dist.K)
+            Ecost = Ecost + cc*dist.p(k);
+         else
+             % this does not add to the expectation
+         end
      end
-     for k=mu+1:dist.K
-         Ecost = Ecost + cp*dist.p(k);
+     for k=mu:dist.K
+         if (k <= dist.K)
+            Ecost = Ecost + cp*dist.p(k);
+         else
+             % this does not add to the expectation
+         end
      end
      
      avgk = Ecost/Elife;

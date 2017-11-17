@@ -2,15 +2,14 @@ function [dist] = getRandomDistribution(K)
 %
 %   Gets a random discrete distribution over the support [1, ... K].
 %
-%   p_k means that the machine failed at the end of the (k-1)th slot, so
-%   p_1 = 0.
+%   p_k means that the machine will fail at the end of the k-th slot.
 %
 %
 
     p = zeros(1, K);
     
     % get K uniform points in 
-    p(2:end) = drchrnd(ones(1, K-1)); 
+    p = drchrnd(ones(1, K)); 
     
     % get CDF
     
