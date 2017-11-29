@@ -14,7 +14,7 @@ end
 CDF = zeros(length(pts),1);
 ecdfIndex = 1;
 for cdfIndex=1:length(pts)
-    while x(ecdfIndex) < pts(cdfIndex)
+    while ecdfIndex <= length(x) && x(ecdfIndex) < pts(cdfIndex)
         ecdfIndex= ecdfIndex+1;
     end
     CDF(cdfIndex) = ECDF(min(ecdfIndex,length(x)));
