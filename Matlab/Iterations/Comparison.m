@@ -1,17 +1,17 @@
 % Set distribution
 shape = 2;
-rate = 2;
-PDF = @(t) wblpdf(t,rate,shape);
-CDF = @(t) wblcdf(t,rate,shape);
-hazard = @(t)  (shape/rate) .*(t/rate).^(shape-1);
+scale = 10;
+PDF = @(t) wblpdf(t,scale,shape);
+CDF = @(t) wblcdf(t,scale,shape);
+hazard = @(t)  (shape/scale) .*(t/scale).^(shape-1);
 %PDF = @(t) pdf('Gamma',t,2,2);
 %CDF = @(t) cdf('Gamma',t,2,2);
 %hazard = @(t) PDF(t)/(1-CDF(t));
 
 % Set other problem parameters
 c = 1;
-a = 1;
-cDiscount= 1;
+a = 100;
+cDiscount= 0.2;
 
 % Get the corresponding total discounted cost
 tdc = TotalDiscountedCost( c,a,cDiscount,PDF);
@@ -53,3 +53,6 @@ plot(X,customV,X,improvementV,X,valueV);
 legend('Custom Iteration','Policy Improvement','Value Iteration')
 xlabel('Iterations')
 ylabel('Total Discounted Cost')
+
+% Two state
+[twoStateX, twoStateV] = TwoStateJumpIteration(x_init,v_init,c,a,cDiscount,3,0.1,PDF,CDF,hazard,numIterations);
