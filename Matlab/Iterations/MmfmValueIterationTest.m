@@ -10,14 +10,17 @@ numTimeSteps = 400;
 discount = 0.2;
 maxT = 25;
 maxL0 = 10;
+global maxLC
 maxLC =10;
 c=1;
 a=100;
 cdf = @(t) wblcdf(t,scale,shape);
-[policy,costs]=MmfmValueIteration(cdf,generator,rates,jumps,numTimeSteps,discount,maxT,maxL0,maxLC,c,a,false);
+[policy,costs]=MmfmValueIteration(cdf,generator,rates,zeros(2),numTimeSteps,discount,maxT,maxL0,maxLC,c,a,false);
 %relevantPolicy = policy(:,:,1,1);
 %relevantCosts = costs(:,:,1,1);
 %arraySize=size(costs);
 %firstCostSlice = zeros(arraySize(2),arraySize(3));
 %firstCostSlice(:,:) = costs(1,:,:,1);
+
+PlotPolicy3D(costs,policy,1,maxT/numTimeSteps)
 

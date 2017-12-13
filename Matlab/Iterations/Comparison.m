@@ -40,10 +40,13 @@ end
 [improvementX, improvementV] = PolicyImprovement(PDF,CDF,c,a,cDiscount,numIterations,x_init);
 [valueX, valueV] = ValueIteration(CDF, timeStep, discount,numIterations,c,a,initValue, x_init);
 
+% Two state
+[twoStateX, twoStateV] = TwoStateJumpIteration(x_init,v_init,c,a,cDiscount,3,0.1,PDF,CDF,hazard,numIterations);
+
 % Plot results
 X=1:(numIterations+1);
 figure
-plot(X,customX,X,improvementX,X,valueX);
+plot(X,customX,X,improvementX,X,valueX,TwoState);
 legend('Custom Iteration','Policy Improvement','Value Iteration')
 xlabel('Iterations')
 ylabel('Control Limit')
@@ -53,6 +56,3 @@ plot(X,customV,X,improvementV,X,valueV);
 legend('Custom Iteration','Policy Improvement','Value Iteration')
 xlabel('Iterations')
 ylabel('Total Discounted Cost')
-
-% Two state
-[twoStateX, twoStateV] = TwoStateJumpIteration(x_init,v_init,c,a,cDiscount,3,0.1,PDF,CDF,hazard,numIterations);
