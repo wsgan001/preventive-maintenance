@@ -1,0 +1,6 @@
+\BOOKMARK [0][-]{chapter.1}{MMFM Optimal Policy}{}% 1
+\BOOKMARK [1][-]{section.1.1}{One CTMC-state, no jumps}{chapter.1}% 2
+\BOOKMARK [1][-]{section.1.2}{One CTMC-state, constant jumps at exponentially distributed time intervals}{chapter.1}% 3
+\BOOKMARK [2][-]{subsection.1.2.1}{Calculation of the expected total discounted cost}{section.1.2}% 4
+\BOOKMARK [1][-]{section.1.3}{Multiple CTMC-states with equal fluid rates}{chapter.1}% 5
+\BOOKMARK [1][-]{section.1.4}{Multiple CTMC-states with different fluid rates}{chapter.1}% 6

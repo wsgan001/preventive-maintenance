@@ -1,0 +1,376 @@
+\input{../Sections/Imports.tex}
+
+\begin{document}
+\chapter{MMFM Optimal Policy}
+In this section, the structure of the optimal policy for a machine which deteriorates according to the Markov Modulated Fluid Model will be determined.
+We will start with the simple model from earlier and will incrementally add complexity.
+
+\section{One CTMC-state, no jumps}
+The initial fluid level is given by $Q_0\sim F(q)$ and the fluid rate in this single state equals $r$.
+The hazard rate then equals
+\begin{equation}
+\begin{split}
+\lim\limits_{\delta\rightarrow0}\frac{1}{\delta}\mathbb{P}(rx<Q_0<r(x+\delta)|rx<Q_0)&=\lim\limits_{\delta\rightarrow0}\frac{\mathbb{P}(rx<Q_0<r(x+\delta))}{\delta\mathbb{P}(rx<Q_0)}\\
+&=rh(rx).
+\end{split}
+\end{equation}
+The rest of the problem can be solved in the same way as the simple problem.
+Hence, the optimal control limit $\mu^*$ is the first $\mu$ such that
+\begin{equation}
+rh(r\mu)=\beta\frac{c+V_\mu}{a}
+\end{equation}
+(where $V_\mu$ is the expected total discounted cost when using control limit $\mu$), or $\mu^*=\infty$ else.
+
+\section{HJB Equations and control limit for MMFM with constant jumps}
+In this section, the Hamilton-Jacobi-Bellman equations for the MMFM will be derived and these will be used to derive equations for the control limits.
+As earlier, we denote the state of the machine at time $t$ by
+$$
+X(t)=(S(t),L_0(t),L_c(t)).
+$$
+The expected total discounted cost when starting in a state $X=(s_i,l_0,l_c)$ will be denoted by $V_i(l_0,l_c)$.
+The initial state is $X_0=(s_0,0,0)$, transition intensities from state $s_i$ to $s_j$ are given by $\lambda_{ij}$ and we will use $\lambda_i=\sum\limits_j \lambda_{ij}$.
+When a jump occurs between state $s_i$ and $s_j$, the fluid level increases by $J_{ij}>0$.
+When the machine is in state $s_i$, the fluid rate will decrease with rate $r_i>0$.
+
+From a state $X=(s_i,l_0,0)$, in a small interval of length $\delta$, a a few things can happen:
+\begin{itemize}
+\item The machine can fail with probability $\delta r_ih(l_0)+o(\delta^2)$, in this case a cost $c+a$ is paid and the process is restarted.
+\item The machine can make a jump to a state $s_j$ with probability $\delta\lambda_{ij}+o(\lambda^2)$, $l_c$ is increased by $J_{ij}$ in this case. As the probability of two jumps occurring in this time interval is $o(\delta^2)$, this possibility is neglected.
+\item The machine does not fail and no jump occurs with probability $1-\delta(r_ih(l_0)+\lambda_{ij})$. In this case $l_0$ increases by $\delta r_i$.
+\end{itemize}
+
+Hence, for the expected cost of not repairing the machine, we have
+\begin{equation}
+\begin{split}
+V_i(l_0,0)&=\delta r_i h(l_0)(c+a+V_0(0,0))\\
+&+\delta\sum\limits_{j\neq i}\lambda_{ij}V_j(l_0,J_{ij})\\
+&+(1-\delta(r_ih(l_0)+\lambda_i))e^{-\beta\delta}V_i(l_0+\delta r_i,0)+o(\delta^2)\\
+&=\delta r_i h(l_0) (c+a+V_0(0,0))\\
+&+\delta\sum\limits_{j\neq i}\lambda_{ij}V_j(l_0,J_{ij})\\
+&+(1-\delta(\beta+r_ih(l_0)+\lambda_i))V_i(l_0+\delta r_i,0)+o(\delta^2).
+\end{split}
+\end{equation}
+And preventive maintenance is chosen if this $V_i(l_0,0)$ exceeds $c+V_0(0,0)$.
+Suppose $\mu_i$ is the optimal control limit in this state.
+If $X=(s_i,\mu_i,0)$ but we were to wait another time $\delta$ with maintenance, we would have
+\begin{equation}
+\begin{split}
+c+V_0(0,0)&\leq\delta r_i h(\mu_i) (c+a+V_0(0,0))\\
+&+\delta\sum\limits_{j\neq i}\lambda_{ij}V_j(\mu_i,J_{ij})\\
+&+(1-\delta(\beta+r_ih(\mu_i)+\lambda_i))V_i(\mu_i+\delta r_i,0)+o(\delta^2).
+\end{split}
+\end{equation}
+But we know that $V_i(\mu_i+\delta r_i,0)=c+V_0(0,0)$.
+So we can substitute that and subtract $c+V_0(0,0)$ from both sides:
+\begin{equation}
+\begin{split}
+0&\leq\delta r_i h(\mu_i) (c+a+V_0(0,0))\\
+&+\delta\sum\limits_{j\neq i}\lambda_{ij}V_j(\mu_i,J_{ij})\\
+&+-\delta(\beta+r_ih(\mu_i)+\lambda_i)(c+V_0(0,0))+o(\delta^2).
+\end{split}
+\end{equation}
+Which can be rewritten to
+\begin{equation}
+\begin{split}
+r_i h(\mu_i)a+\sum\limits_{j\neq i}\lambda_{ij}V_j(\mu_i,J_{ij})&\geq(\beta+\lambda_i)(c+V_0(0,0)).
+\end{split}
+\end{equation}
+When we repeat this, but use $\mu_i-\delta$ as starting point instead of $\mu_i$, we get
+\begin{equation}
+\begin{split}
+r_i h(\mu_i)a+\sum\limits_{j\neq i}\lambda_{ij}V_j(\mu_i,J_{ij})&\leq(\beta+\lambda_i)(c+V_0(0,0)).
+\end{split}
+\end{equation}
+Hence, $\mu_i$ should be chosen such that 
+\begin{equation}\label{eq:complexControlLimit}
+\begin{split}
+r_i h(\mu_i)a+\sum\limits_{j\neq i}\lambda_{ij}V_j(\mu_i,J_{ij})&=(\beta+\lambda_i)(c+V_0(0,0)),
+\end{split}
+\end{equation}
+and maintenance will be chosen if $L_c(t)=0$ and $L_0(t)\geq \mu_{S(t)}$.
+% Iets over dat jumps de limit doen stijgen
+This intersection is difficult to find as the expected total discounted costs depend on the chosen control limits.
+Note that for $\lambda_{ij}=0$, this equation simplifies to the earlier control limits.
+Also, the right hand side is a constant and the left hand side is increasing so that there cannot be multiple intersections.
+Before we are going to solve these equations, we are first going to solve them for a simpler problem.
+
+\section{Two equivalent CTMC-states with constant jumps at exponentially distributed time intervals}
+We simplify the model from the previous section by taking two CTMC-states with equal transition rates, fluid rates and jump sizes.
+The time intervals between jumps have rate $\lambda$ and fluid quantity $J$.
+The fluid rate equals zero.
+As earlier, we denote the state of the machine at time $t$ by
+$$
+X(t)=(S(t),L_0(t),L_c(t)),
+$$
+but in this simple two-state problem $S(t)$ isn't relevant since the two states are equivalent.
+When we fill in \eqref{eq:complexControlLimit}, we get
+
+\begin{equation}\label{eq:simpleJumpControlLimit}
+\begin{split}
+h(\mu)a+\lambda V(\mu,J)&=(\beta+\lambda)(c+V(0,0))
+\end{split}
+\end{equation}
+
+Note that we will never preventively repair the machine when $L_c>0$ since the machine cannot fail then.
+Hence, if we denote by $D(J)$ the expected discount over the time that the fluid has decreased by $J$, we can write $V(\mu,J)=D(J)V(\mu,0)$.
+In the following section we will define this quantity and prove properties about it.
+
+\subsection{Time until control limit}
+Let $T_t(q)$ be the random variable denoting the time until the fluid level is $q$ lower than it was at time $t$, i.e.
+$$
+T_t(q)=\min\{\tau\geq0|Q(t+\tau)\leq Q(t)-q\}.
+$$
+Note that, using this definition, $T_0(\mu)$ equals the time until the control limit is reached ($L_0(t)=\mu$) and $T(Q_0)$ equals the time until the machine fails.
+\begin{lemma}
+$Q_0\leq\mu\Leftrightarrow T_t(Q_0)\leq T_t(\mu)$
+\end{lemma}
+\begin{proof}
+$\Rightarrow$: 
+\begin{equation}
+\begin{split}
+Q_0\leq\mu&\Rightarrow Q(t)-\mu\leq Q(t)-Q_0\\
+&\Rightarrow (Q(t+\tau)\leq Q(t)-\mu\Rightarrow Q(t+\tau)\leq Q(t)-Q_0)\\
+&\Rightarrow T_t(Q_0)\leq T_t(\mu)\\
+\end{split}
+\end{equation}
+$\Leftarrow$: We will prove that $Q_0>\mu\Rightarrow T_t(Q_0)> T_t(\mu)$:\\
+We know that
+$$
+Q_0>\mu\Rightarrow Q(t)-\mu > Q(t)-Q_0.
+$$
+Since $Q(t)$ is piecewise continuous and does not decrease at the discontinuities, we know that 
+$$
+Q(t+T_t(\mu))=Q(t)-\mu>Q(t)-Q_0\Rightarrow T_t(Q_0)> T_t(\mu).
+$$
+\end{proof}
+
+To find the distribution of $T(q)$, we will condition on the number of jumps.
+Let $N_t(q)$ be the random variable denoting the number of jumps that occur in the interval $(t,t+T_t(q)]$.
+We will now compute its distribution.
+For simplicity, we will assume that $r=1$.
+The probability that zero jumps occur equals the probability that the exponentially distributed time interval is larger than $q$:
+$$
+\mathbb{P}(N_t(q)=0)=e^{-\lambda q}.
+$$
+The probability that exactly one jump occurs equals the probability that exactly one Poisson event happens in the interval $(t,t+q]$ while none happen in $(t+q,t+q+J]$. Resulting in
+$$
+\mathbb{P}(N_t(q)=1)=\lambda q e^{-\lambda q} e^{-\lambda J}=\lambda q e^{-\lambda (q+J)}.
+$$
+
+For each $k\geq0$, by conditioning on the time until the first jump, we get the following recursion
+\begin{equation}\label{eq:recursionFormula}
+\begin{split}
+\mathbb{P}(N_t(q)=k+1)&=\int\limits_0^{q}\lambda e^{-\lambda x}\mathbb{P}(N_t(q-x+J)=k)dx\\
+&=\int\limits_0^{q}\lambda e^{-\lambda (q-y)}\mathbb{P}(N_t(y+J)=k)dy,
+\end{split}
+\end{equation}
+since after this first jump, the fluid level equals $q-x+J$ and $k$ jumps should occur. The second equality follows after the substition $y=q-x$.
+The solution of this recursion, is given by
+$$
+\mathbb{P}(N_t(q)=k)=\lambda q\frac{(\lambda (q+kJ))^{k-1}}{k!}e^{-\lambda(q+kJ)}.
+$$
+Which can be seen by substituting it into \eqref{eq:recursionFormula} and setting $k=1$ to see that it also satisfies the calculated expression for $\mathbb{P}(N_t(q)=1)$.
+
+Now we can define the quantity $D(q)$ in the following way
+$$
+D(q)=\mathbb{E}[e^{-\beta T(q)}]=\sum\limits_{k=0}^\infty e^{-\beta(q+kJ)}\mathbb{P}(N_t(q)=k).
+$$
+This quantity has the following properties
+\begin{lemma}
+$D(A)D(B)=D(A+B)$
+\end{lemma}
+\begin{proof}
+\begin{equation}
+\begin{split}
+D(A)D(B)&=\left[\sum\limits_{k=0}^\infty e^{-\beta(A+kJ)}\mathbb{P}(N_t(A)=k)][\sum\limits_{m=0}^\infty e^{-\beta(B+mJ)}\mathbb{P}(N_t(B)=m)\right]\\
+&=\sum\limits_{n=0}^\infty e^{-\beta(A+B+nJ)}\sum\limits_{k=0}^n \mathbb{P}(N_t(A)=k)\mathbb{P}(N_t(B)=n-k)\\
+&=\sum\limits_{n=0}^\infty e^{-\beta(A+B+nJ)} \mathbb{P}(N_t(A+B)=n).\\
+\end{split}
+\end{equation}
+The last step holds since on the second last line, the second sum equals the probability that $n$ jumps occur before a fluid quantity $A+B$ is drained, conditioned on the number of jumps that occur before a quantity $A$ is drained.
+\end{proof}
+
+\begin{lemma}
+$$\frac{d}{dA}D(A)=-(\beta+\lambda)D(A)+\lambda D(A+J)$$
+\end{lemma}
+\begin{proof}
+TODO
+\end{proof}
+
+\subsection{Control limit}
+We can now rewrite \eqref{eq:simpleJumpControlLimit} as
+\begin{equation}
+\begin{split}
+h(\mu)a+\lambda D(J)V(\mu,0)&=(\beta+\lambda)(c+V(0,0)).
+\end{split}
+\end{equation}
+And since we will repair when control limit $\mu$ is reached, we get
+\begin{equation}
+\begin{split}
+h(\mu)a+\lambda D(J)(c+V(0,0))&=(\beta+\lambda)(c+V(0,0))\\
+\Rightarrow h(\mu)&=\frac{c+V(0,0)}{a}[\beta+\lambda(1-D(J))].
+\end{split}
+\end{equation}
+Note that for $\lambda=0$ or $J=0$ ($D(0)=1$) this reduces to the control limit of the simple problem.
+Another nice thing to mention is that this control limit is equivalent to the simple problem with discount $\beta^*=\beta+\lambda(1-D(J))$ and hence we could use the same iteration methods.
+However, given a control limit $\mu$, $V(0,0)$ is still difficult to compute.
+
+\subsection{Calculation of the expected total discounted cost}
+The presence of jumps complicates the calculation of the time between repairs.
+We can derive the distribution of the time length of a run with initial fluid level $Q_0$ random with density function $f_{Q_0}(q)$.
+This distribution $f(x)$, is given by
+\begin{equation}
+\begin{split}
+f(x)&=\lim\limits_{\delta\rightarrow 0}\frac{1}{\delta}\mathbb{P}(x<T_0(Q_0)<x+\delta)\\
+&=\sum\limits_{k=0}^{\lfloor\frac{x}{J}\rfloor}\mathbb{P}(N_0(q-kJ)=k)\lim\limits_{\delta\rightarrow 0}\frac{1}{\delta}\mathbb{P}(x-kJ<Q_0<x-kJ+\delta)\\
+&=\sum\limits_{k=0}^{\lfloor\frac{x}{J}\rfloor}\mathbb{P}(N_0(q-kJ)=k)f_{Q_0}(x-kJ)\\
+\end{split}
+\end{equation}
+
+The total discounted cost $V^\mu$ when using control limit $\mu$ can, similarly as with the simple problem, be calculated in the following way
+\begin{equation}
+V^\mu=\frac{(c+a)\mathbb{P}(Q_0<\mu)\mathbb{E}[e^{-\beta Q_0}|Q_0<\mu]+c\mathbb{P}(Q_0\geq \mu)D(\mu)}{1-\mathbb{E}e^{-\beta T(\mu\wedge Q_0)}}.
+\end{equation}
+Alternatively, we could also find the optimal value for $\mu$ by differentiating the above equation by $\mu$.
+
+TODO
+\section{Multiple CTMC-states with different fluid rates}
+When there are states with different jump quantities, transition rates and fluid rates, a few complications arise:
+\begin{enumerate}
+\item The computation of $D(q)$ is more difficult as we need to take multiple paths with different probabilities and jump sizes into account. Moreover, it is also relevant from which state you start and where you end.
+\item There are different control limits $\mu_i$ for different states, all depending on each other.
+\item A jump can cause the machine to be repaired after the control limit. 
+\end{enumerate}
+
+Disregarding the possibility of the machine breaking before the fluid level has decreased by an amount $q$ (for instance, by assuming $Q(t)>q$), we define 
+$$D^{t}_{ij}(q):=\mathbb{E}[e^{-\beta T(q)}\mathds{1}\{S(t+T_t(q))=s_j\}|S(t)=s_i]$$
+and
+$$D^{t}_{i}(q):=\sum\limits_{j}D^{t}_{ij}(q).$$
+We will refer to these quantities as expected discounts.
+Since these quantities don't really depend on $t$, this will be suppressed in the notation.
+
+\subsection{Calculating the expected discounts}
+We will now investigate the evolution of $D_{ij}$. For small $\delta$:
+\begin{equation}
+\begin{split}
+D_{ij}(q+r_i\delta)&=e^{-\beta\delta}\left[\sum\limits_{k\neq i}\lambda_{ik}\delta D_{kj}(q+J_{ik})+(1-\lambda_i\delta)D_{ij}(q)+o(\delta^2)\right]\\
+&=(1-\beta\delta+o(\delta^2))\left[\sum\limits_{k\neq i}\lambda_{ik}\delta D_{kj}(q+J_{ik})+(1-\lambda_i\delta)D_{ij}(q)+o(\delta^2)\right]\\
+&=\sum\limits_{k\neq i}\lambda_{ik}\delta D_{kj}(q+J_{ik})+(1-\lambda_i\delta-\beta\delta)D_{ij}(q)+o(\delta^2)\\
+&=\sum\limits_{k\neq i}\lambda_{ik}\delta \sum\limits_mD_{km}(J_{m})D_{mj}(q)+(1-\lambda_i\delta-\beta\delta)D_{ij}(q)+o(\delta^2)\\
+&=\sum\limits_m\delta\left[\sum\limits_{k\neq i}\lambda_{ik}D_{km}(J_{m})\right] D_{mj}(q)+(1-\lambda_i\delta-\beta\delta)D_{ij}(q)+o(\delta^2)\\
+\Rightarrow r_i\frac{d}{dq}D_{ij}(q)&=\sum\limits_m\left[\sum\limits_{k\neq i}\lambda_{ik}D_{km}(J_{m})\right] D_{mj}(q)-(\lambda_i+\beta\delta)D_{ij}(q)
+\end{split}
+\end{equation}
+% EXPLAIN STEPS
+With boundary conditions $D_{ij}(0)=\mathds{1}\{i=j\}$.
+%When calculating a total discounted cost, we are not really interested in the exact times that costs are paid, only by how much they are discounted.
+%Since all critical events (machine failures and preventive repairs) happen whenever $L_c(t)=0$, we are only interested in the 
+This suggests the following definition
+
+\begin{equation}
+\begin{split}
+\Lambda^D_{im}(q):=\begin{cases}
+\sum\limits_{k\neq i}\frac{\lambda_{ik}}{r_i}D_{km}(J_{ik})-\frac{(\lambda_i+\beta)}{r_i}&\text{ if }i=m\\
+\sum\limits_{k\neq i}\frac{\lambda_{ik}}{r_i}D_{km}(J_{ik})&\text{ else.}
+\end{cases}
+\end{split}
+\end{equation}
+such that
+\begin{equation}
+D_{im}(q)=\left(e^{\Lambda^D q}\right)_{im}
+\end{equation}
+as long as no control limit is reached before an amount $q$ fluid has depleted.
+
+\subsubsection{Stochastic shortest path}
+We introduce the following simple lemma:
+\begin{lemma}
+For each $L_0(t)$, there is a $t'$ such that $L_0(t')=L_0(t)$ and $L_c(t')=0$.
+\end{lemma}
+\begin{proof}
+Since $L_0(t)$ decreases continuously and only decreases whenever $L_c(t)=0$, we know that for each $L_0(t)$, there is a $t'$ such that $L_0(t')=L_(t)$ and $L_c(t')=0$.
+\end{proof}
+
+With the above definition of $\Lambda^D(q)$, we could view the process as a continuous time stochastic shortest path problem.
+The underlying CTMC is given by $\Lambda^D(q)$ with in each state $s_i$ a transition rate to a terminating state given by
+$$
+-\sum_j \Lambda^D(q)_{ij}
+$$
+with terminal cost zero.
+When preventive repair is chosen, a cost $c+V^\pi$ is paid and the process terminates.
+When the machine fails, a cost$c+a+V^\pi$ is paid and the process also terminates.
+Instead of the system evolving over time $t$, the system evolves over increasing $L_0(t)$.
+The above lemma assures us that for each $l_0$ there is a next state (unless it fails or is repaired).
+Note that in this definition, the transitions to the terminal state with zero cost are slightly abused to model the discounts.
+
+\subsubsection{Expected discounts and control limits}
+To take the control limits into account, we define
+$$D_{im}(q,\pi):=\mathbb{E}\left[e^{-\beta T(q)}\mathds{1}\left\{\begin{split}
+S(t+T_t(q))&=s_j,\\
+\forall_{t'\in[t,t+T_t(q)]}&:L_c(t')>0\vee\mu_{S(t')}>L_0(t')\\
+\end{split}\right\}\middle|S(t)=s_i\right]$$
+to take into account that, from its path from $s_i$ to $s_j$, no control limit must have been reached.
+Hence we update the definition
+\begin{equation}
+\begin{split}
+\Lambda^D_{im}(q,\pi):=\begin{cases}
+0&\text{ if }\mu_i<q\\
+\Lambda^D_{im}&\text{ else.}
+\end{cases}
+\end{split}
+\end{equation}
+Such that again,
+\begin{equation}
+D_{im}(q,\pi)=\left(e^{\int_0^q\Lambda^D(q,\pi)dq}\right)_{im}
+\end{equation}
+if $q<\mu_m$.
+Note that this $\Lambda^D(q,\pi)$ is constant whenever $q\not\in\{\mu_1,...,\mu_N\}$.
+
+\subsection{Calculating the total discounted cost of a policy}
+Given some policy $\pi=\{\mu_1,...,\mu_N\}$, we will define $D^+_i=:=\sum\limits_{\mu_j>q}D_{ij}(q)$, the expected discount after the fluid has decreased by $q$ and no repair has taken place in the meantime.
+Furthermore, we will also define $\Gamma_{i}(q,\pi)$ for $q\not\in\{\mu_1,...,\mu_N\}$ as the density of repairing when $L_0=q$.
+This is given by
+\begin{equation}
+\Gamma_{i}(q,\pi)=\sum\limits_{\mu_j>q}D_{ij}(q,\pi)\sum\limits_{\mu_k<q}\Lambda_{jk}^D.
+\end{equation}
+At each time, the current run can end for two reasons:
+\begin{enumerate}
+\item The machine breaks.
+\item The machine is repaired because the machine is in some state $s_i$ where $L_0(t)\geq \mu_i$.
+\end{enumerate}
+\subsubsection{The machine breaks}
+When the machine breaks, it means that $L_0(t)$ has reached $Q$ without encountering a control limit.
+Hence, the repair costs are discounted at $D_0^+(Q)$.
+The density of this event happening is $f(Q)$ (disregarding the possibility of repairing before $Q$).
+Hence the possibility of failing results in a term 
+$$
+(c+a+V^{\pi})\int\limits_0^\infty f(q)D_0^+(q)dq
+$$
+in the expression of the expected total discounted cost.
+
+\subsubsection{A control limit is encountered}
+A control limit can be encountered in two ways:
+\begin{enumerate}
+\item $L(t)=\mu_i$ and $L_c(t)=0$ while $S(t)=s_i$: The machine was in state $s_i$ when the tresshold was reached.
+\item $L(t)=q>\mu_i$, $L_c(t)=0$ and $S(t)=s_i$: The machine had already depleted $q$ fluid at some time $t'<t$ when it was in some other state $s_j$ (with buffer $L_c(t')=0$), transitioned to $s_i$ (and stayed here until buffer $L_c(t)$ reached $0$ again). 
+\end{enumerate}
+
+In the first case, the costs are discounted at $D_0i(\mu_i)$.
+Furthermore, the machine must not have broken down before this control limit is reached, hence $Q>\mu_i$ must also hold.
+Hence, this results in a term
+$$
+(c+V^{\pi})\sum\limits_i\mathbb{P}(Q>\mu_i)D_0i(\mu_i)
+$$
+
+In the second case, the discount and density are given by $\Gamma_0(q,\pi)$ and also $Q>\mu_i$ must hold, resulting in a term
+$$
+(c+V^{\pi})\int\limits_0^\infty \mathbb{P}(Q>\mu_i)\Gamma_{i}(q,\pi)dq
+$$
+
+Resulting in the following expression for the expected total discounted cost
+\begin{equation}
+V^\pi=(c+a+V^{\pi})\int\limits_0^\infty f(q)D_0^+(q)dq+(c+V^{\pi})\left[\sum\limits_i\mathbb{P}(Q>\mu_i)D_0i(\mu_i)+\int\limits_0^\infty \mathbb{P}(Q>q)\Gamma_{0}(q,\pi)dq\right]
+\end{equation}
+
+% EXPLAIN expected remaining total cost and computation of D_jk(J_ij)
+
+\end{document}

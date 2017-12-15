@@ -1,0 +1,61 @@
+\input{../Sections/Imports.tex}
+
+\begin{document}
+\chapter{Maximum Likelihood estimators for MMFM fluid rates and constant jump quantities}
+In these notes, a maximum likelihood estimator will be presented to estimate the fluid rates and jump quantities of a Markov Modulated fluid model using the lifetimes.
+We assume that all transition rates $\lambda_{ij}$ and the initial distribution $f(q)$ are already known.
+
+Suppose we have observed a run of the machine and have seen that it started in state $s_{i_1}$, stayed there for a period time of length $\tau_1$.
+Suppose also that after this time, a transition occurred to $s_{i_2}$ and the machine stayed there for a time $\tau_2$ and so forth.
+Hence we have observations in the following form
+$$
+\sigma=\left[[i_1,\tau_1],...,[i_L,\tau_L] \right].
+$$
+We assume that no preventive maintenance is done so that after the last observation in the trace, it fails.
+
+For a given MMFM model $M$ with rates $r_i$ and jump quantities $J_{ij}$, this would mean that initially the fluid level was
+$$
+q_0(M,\sigma)=\tau_1r_{i_1}+\sum\limits_{k=2}^{L}\tau_kr_{i_k}-J_{i_{k-1}i_k}
+$$
+Such that the likelihood of this trace would be
+$$
+L(\sigma)=f(q_0(M,\sigma))\left[\prod\limits_{k=1}^{L-1}\lambda_{i_ki_{k+1}}e^{-\lambda_{i_k}\tau_k}\right]e^{-\lambda_{i_L}\tau_L}
+$$
+using $\lambda_i=\sum_j\lambda_{ij}$.
+
+To determine the ratein $s_i$, we can derive this to $r_i$.
+For simplicity, we take the log likelihood.
+$$
+\frac{d}{dr_i}\log L(\sigma)
+=\frac{d}{dr_i}\left(\log f(q_0(M,\sigma))
++\left[\sum\limits_{k=1}^{L-1}\log(\lambda_{i_ki_{k+1}}e^{-\lambda_{i_k}\tau_k}\right]
++\log(e^{-\lambda_{i_L}\tau_L})\right).
+$$
+Note that only $\log f(q_0(M,\sigma))$ depends on $r_i$ such that all other terms vanish and we get
+$$
+\frac{d}{dr_i}\log L(\sigma)=\frac{d}{dr_i}\log f(q_0(M,\sigma))=\frac{f'(q_0(M,\sigma))}{f(q_0(M,\sigma))}\tau(i,\sigma).
+$$
+Where 
+$$
+\tau(i,\sigma)=\sum\limits_{k|i_k=i}\tau_k.
+$$
+Similarly, for the jump quantities $J_{ij}$, we'll get
+$$
+\frac{d}{dJ_{ij}}\log L(\sigma)=\frac{d}{dr_i}\log f(q_0(M,\sigma))=\frac{f'(q_0(M,\sigma))}{f(q_0(M,\sigma))}\#(i,\sigma)
+$$
+where $\#(i,\sigma)$ is the number of times a jump to $s_i$ was observed in $\sigma$.
+
+For multiple measurements  $\sigma_1,...,\sigma_K$, where
+$$
+\sigma_n=\left[[i_1^{(n)},\tau_1^{(n)}],...,[i_{L^{(n)}}^{(n)},\tau_{L^{(n)}}^{(n)}] \right],
+$$
+the MLE will be the solution of the following equations
+$$
+\frac{d}{dr_i}\log L(\sigma_1,...,\sigma_K)=\sum\limits_{n=1}^K\frac{f'(q_0(M,\sigma_n))}{f(q_0(M,\sigma_n))}\tau(i,\sigma_n)=0
+$$
+for all $i$ and 
+$$
+\frac{d}{dJ_{ij}}\log L(\sigma_1,...,\sigma_K)=\sum\limits_{n=1}^K\frac{f'(q_0(M,\sigma_n))}{f(q_0(M,\sigma_n))}\#(i,\sigma_n)=0
+$$
+for all $J_{ij}$.
+\end{document}

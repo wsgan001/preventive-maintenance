@@ -1,0 +1,213 @@
+\input{../Sections/Imports.tex}
+
+\begin{document}
+\chapter{Martingale Approach}
+In this section, the results of the martingale approach are summarized.
+To quickly summarize: The first approach resulted in the correct optimal policy but the chosen random variable was never a martingale.
+The analysis just seemed to involve minizing the expected total discounted cost just like earlier.
+The approach similar to the notes from Glynn gave a martingale but the resulting conclusion was $\mu=\mu^*$, which isn't very useful.
+
+\section{Definitions and notation}
+We denote the time step by $\delta>0$.
+We consider the martingale on time stages $x_i=i\delta$ ($i=0,1,...$).
+Time is then divided into intervals $\Delta_i=(x_{i-1},x_i]$ ($i=1,2,...$).
+The $n$'th lifetime is a positive random variable $Q_n$.
+These $Q_n$'s are i.i.d. random variables.
+When the machine is repaired preventively, a cost $c$ is paid.
+When the machine breaks and is repaired correctively, a cost $c+a$ is paid.
+Costs that occur at a time $t$ in the future, are discounted by a discount factor $e^{-\beta t}$ for some $\beta>0$.
+Let $v^*$ be the expected total discounted cost for the optimal control limit.
+When a machine breaks in an interval $\Delta_i$, it is repaired at the end of the interval (i.e., at $x_i$).
+When a machine happens to break exactly at the time that preventive maintenance is scheduled, the cost for corrective maintenance is paid.
+
+\section{Approach from the last meeting}
+We consider the cost of one run using control limit $\mu$, with terminal cost $v^*$.
+This cost is represented by the following random variable
+$$
+V_\mu=(c+\mathds{1}\{Q_0\geq\mu\}a+v^*)e^{-\beta Q_0\wedge\mu}.
+$$
+We consider the following sequence of random variables
+\begin{equation}
+M_n^\mu=\mathds{1}\{Q_0\wedge\mu>x_n\}e^{\beta x_n}\mathbb{E}[V_\mu|Q_0\wedge\mu>x_n].
+\end{equation}
+We are now going to minimize
+\begin{equation}
+\begin{split}
+g_n(\mu)&=\mathbb{E}[M_{n+1}^\mu-M_n^\mu|M_n^\mu]\\
+&=\mathbb{E}[M_{n+1}^\mu|M_n^\mu]-\mathbb{E}[M_n^\mu|M_n^\mu]\\
+&=\mathbb{E}[M_{n+1}^\mu|M_n^\mu]-M_n^\mu
+\end{split}
+\end{equation}
+Note that
+\begin{equation}
+\begin{split}
+\mathbb{E}[M_{n+1}^\mu]&=\mathbb{E}[\mathds{1}\{Q_0\wedge\mu>x_{n+1}\}e^{\beta x_{n+1}}\mathbb{E}[V_\mu|Q_0\wedge\mu>x_{n+1}]]\\
+&=\mathbb{P}(Q_0\wedge\mu>x_{n+1})e^{\beta x_{n+1}}\mathbb{E}[V_\mu|Q_0\wedge\mu>x_{n+1}]\\
+&=\mathbb{P}(Q_0\wedge\mu>x_{n+1})e^{\beta x_{n+1}}\mathbb{E}[V_\mu|Q_0\wedge\mu>x_{n+1}]\\
+&=\mathbb{P}(Q_0\wedge\mu>x_{n})e^{\beta x_{n+1}}\left(
+\begin{split}
+&\mathbb{E}[V_\mu|Q_0\wedge\mu>x_{n}]\\
+&-\mathbb{P}(Q_0\in\Delta_{n+1}|Q_0>x_n)\mathbb{E}[V_\mu|Q_0\in\Delta_{n+1}]
+\end{split}\right)\\
+&=\mathbb{P}(Q_0>x_{n+1}|Q_0>x_n)e^{\beta(x_{n+1}-x_n)}(\mathbb{E}[M_n^\mu]-e^{\beta x_n}\mathbb{P}(Q_0\in\Delta_{n+1}|Q_0>x_n)\mathbb{E}[V_\mu|Q_0\in\Delta_{n+1}])\\
+&=\begin{split}
+&\mathbb{P}(Q_0>x_{n+1}|Q_0>x_n)e^{\beta(x_{n+1}-x_n)}\mathbb{E}[M_n^\mu]\\
+&-e^{\beta x_{n+1}}\mathbb{P}(Q_0>x_{n+1}|Q_0>x_n)\mathbb{P}(Q_0\in\Delta_{n+1}|Q_0>x_n)\mathbb{E}[V_\mu|Q_0\in\Delta_{n+1}]
+\end{split}
+\end{split}
+\end{equation}
+So that for $g_n(\mu)$, we get
+\begin{equation}
+\begin{split}
+g_n(\mu)&=\mathbb{E}[M_{n+1}^\mu|M_n^\mu]-M_n^\mu\\
+&=\begin{split}
+&\mathbb{P}(Q_0>x_{n+1}|Q_0>x_n)e^{\beta(x_{n+1}-x_n)}\mathbb{E}[M_n^\mu|M_n^\mu]\\
+&-e^{\beta x_{n+1}}\mathbb{P}(Q_0>x_{n+1}|Q_0>x_n)\mathbb{P}(Q_0\in\Delta_{n+1}|Q_0>x_n)\mathbb{E}[V_\mu|Q_0\in\Delta_{n+1}]\\
+&-M_n^\mu
+\end{split}\\
+&=\begin{split}
+&(\mathbb{P}(Q_0>x_{n+1}|Q_0>x_n)e^{\beta(x_{n+1}-x_n)}-1)M_n^\mu\\
+&-e^{\beta x_{n+1}}\mathbb{P}(Q_0>x_{n+1}|Q_0>x_n)\mathbb{P}(Q_0\in\Delta_{n+1}|Q_0>x_n)\mathbb{E}[V_\mu|Q_0\in\Delta_{n+1}].
+\end{split}\\
+\end{split}
+\end{equation}
+If we now take the derivative of $g_n(\mu)$ to $\mu$, the second term disappears as it does not depend on $\mu$.
+The factor $(\mathbb{P}(Q_0>x_{n+1}|Q_0>x_n)e^{\beta(x_{n+1}-x_n)}-1)$ also does not depend on $\mu$.
+So only the derivative of $M_n^\mu$ is of interest.
+\begin{equation}
+\begin{split}
+\frac{d}{d\mu}M_n^\mu&=\frac{d}{d\mu}\mathds{1}\{Q_0\wedge\mu>x_n\}e^{\beta x_n}\mathbb{E}[V_\mu|Q_0\wedge\mu>x_n]\\
+&=\mathds{1}\{Q_0\wedge\mu>x_n\}e^{\beta x_n}\frac{d}{d\mu}\mathbb{E}[V_\mu|Q_0\wedge\mu>x_n].
+\end{split}
+\end{equation}
+We rewrite this expectation to make it easier to derive
+\begin{equation}
+\begin{split}
+\frac{d}{d\mu}\mathbb{E}[V_\mu|Q_0>x_n]&=\frac{d}{d\mu}\mathbb{E}[(c+\mathds{1}\{Q_0\geq\mu\}a+v^*)e^{-\beta Q_0\wedge\mu}|Q_0>x_n]\\
+&=\frac{d}{d\mu}((c+v^*)\mathbb{E}[e^{-\beta Q_0\wedge\mu}|Q_0>x_n]+a\mathbb{P}(Q_0leq\mu|Q_0>x_n)\mathbb{E}[e^{-\beta Q}|Q\in(x_n,\mu]])\\
+&=-\beta\frac{\mathbb{P}(Q_0>\mu)}{\mathbb{P}(Q_0>x_n)}(c+v^*)e^{-\beta\mu}+a \frac{f(\mu)}{\mathbb{P}(Q_0>x_n)}e^{-\beta\mu}\\
+&=0\\
+&\Rightarrow f(\mu)=\beta\frac{(c+v^*)\mathbb{P}(Q_0>\mu)}{a}.
+\end{split}
+\end{equation}
+As you can see, this solution is exactly the same as in the earlier approaches.
+We also need to assure that $\frac{d^2}{d\mu^2}g_n(\mu)>0$.
+Again, we only need to derive $\mathbb{E}[V_\mu|Q_0>x_n]$.
+\begin{equation}
+\begin{split}
+\frac{d^2}{d\mu^2}\mathbb{E}[V_\mu|Q_0>x_n]&=\frac{d}{d\mu}(-\beta\frac{\mathbb{P}(Q_0>\mu)}{\mathbb{P}(Q_0>x_n)}(c+v^*)e^{-\beta\mu}+a \frac{f(\mu)}{\mathbb{P}(Q_0>x_n)}e^{-\beta\mu})\\
+&=\frac{\beta^2\mathbb{P}(Q>\mu)+\beta f(\mu)}{\mathbb{P}(Q_0>x_n)}(c+v^*)e^{-\beta\mu}+\frac{-\beta f(\mu)+f'(\mu)}{\mathbb{P}(Q_0>x_n)}ae^{-\beta\mu}.
+\end{split}
+\end{equation}
+We now multiply by $\frac{1}{a}\mathbb{P}(Q_0>x_n)e^{\beta\mu}$ to get
+$$
+(\beta^2\mathbb{P}(Q>\mu)+\beta f(\mu))\frac{c+v^*}{a}+(-\beta f(\mu)+f'(\mu))=\beta^2\mathbb{P}(Q>\mu)\frac{c+v^*}{a}+\beta f(\mu)(\frac{c+v^*}{a}-1)+f'(\mu).
+$$
+Now we substitute $f(\mu)=\beta\frac{(c+v^*)\mathbb{P}(Q_0>\mu)}{a}$ and get
+\begin{equation}
+\begin{split}
+&\beta^2\mathbb{P}(Q>\mu)\frac{c+v^*}{a}+\beta^2\mathbb{P}(Q_0>\mu)\frac{(c+v^*)}{a}(\frac{c+v^*}{a}-1)+f'(\mu)\\
+&=\beta^2\mathbb{P}(Q_0>\mu)(\frac{c+v^*}{a})^2+f'(\mu)
+\end{split}
+\end{equation}
+For the final steps, we need the following simple lemma:
+\begin{lemma}
+Let $Q$ be a random variable with increasing failure rate.
+Then 
+$$f'(x)>\frac{f(x)^2}{\mathbb{P}(Q_0>\mu)}$$
+\end{lemma}
+\begin{proof}
+The failure rate is increasing, so its derivative is positive.
+Hence
+\begin{equation}
+\begin{split}
+\frac{d}{dx}\frac{f(x)}{\mathbb{P}(Q>x)}&=\frac{f'(x)\mathbb{P}(Q>x)+f(x)^2}{\mathbb{P}(Q>x)^2}>0\\
+&\Rightarrow f'(x)>-\frac{f(x)^2}{\mathbb{P}(Q>x)}
+\end{split}
+\end{equation}
+\end{proof}
+We now apply this lemma
+$$
+\beta^2\mathbb{P}(Q_0>\mu)(\frac{c+v^*}{a})^2+f'(\mu)>\beta^2\mathbb{P}(Q_0>\mu)(\frac{c+v^*}{a})^2-\frac{f(\mu)^2}{\mathbb{P}(Q>\mu)}.
+$$
+We multiply by $\mathbb{P}(Q>\mu)$ and substitute $f(\mu)=\beta\frac{(c+v^*)\mathbb{P}(Q_0>\mu)}{a}$ again
+\begin{equation}
+\left(\beta\mathbb{P}(Q_0>\mu)\frac{c+v^*}{a}\right)^2-f(\mu)^2=\left(\beta\mathbb{P}(Q_0>\mu)\frac{c+v^*}{a}\right)^2-\left(\beta\mathbb{P}(Q_0>\mu)\frac{c+v^*}{a}\right)^2=0.
+\end{equation}
+Since we only multiplied by positive values, we conclude that $\frac{d^2}{d\mu^2}g_n(\mu)>0$ and the found solution is indeed optimal.
+
+However, the sequence of random variables is not a martingale for any policy.
+This can easily be seen by the fact that $\mathbb{E}[M_0^\mu]>0$ while for any $n$ such that $x_n>\mu$, we have $\mathbb{E}[M_n^\mu]=0$.
+Hence we proceed with a definition of a martingale similar to the notes of Glynn.
+\section{Approach similar to Glynn chapter 11}
+In the notes from Glynn, the martingale is taken to be
+\begin{equation}
+\sum\limits_{j=0}^{T\wedge n-1} r(X_j,A_j) +\mathds{1}\{T>n-1\}V^*(X_n),
+\end{equation}
+i.e. the cost of using controls $(A_j: j\geq 0)$ up until stage $n-1$ and using the expected value of the rest of the cost using the optimal policy.
+Which is of course a supermartingale for every policy and a martingale for every optimal policy.
+
+In our approach, we define the martingale $M_n^\mu$ to be the total discounted cost of having used control limit $\mu$ up until time $x_n$ and taking the expected discounted cost of using optimal control limit $\mu^*$ for the rest of time.
+Let $R_0=0$ and $R_{n+1}=R_n+Q_n\wedge \mu$ be the time of the $n$'th repair.
+For convenience, we define the following random variables
+\begin{itemize}
+\item $R^-(x)=\max\{R_i|R_i\leq x\}$ to be the time of the last repair at time $x$.
+\item $R^+(x)=\min\{R_i|R_i> x\}$ to be the time of the next repair at time $x$.
+\item $K(x)=\max\{i|R_i\leq x\}$ to be the number of repairs that have occurred before time $x$.
+\item $Q(x)=Q_{K(x)}$ to be the (total) lifetime of the current machine.
+\end{itemize}
+We denote expectations and probabilities conditioned to the observations up to time $x$ by a subscript $x$.
+For example
+$$
+\mathbb{E}_x[X]=\mathbb{E}[X|R_0,...,R_{K(x)}].
+$$
+Furthermore, let 
+$$V^*(x)=\mathbb{E}_x[(c+a\mathds{1}\{Q(x)\geq \mu^*a+v^*)e^{-\beta(R^-(x)+Q(x)\wedge\mu^*}\})]$$
+be the expected discounted cost of all costs after $x$, using the optimal control limit.
+We then arrive at the following definition of the supermartingale
+\begin{equation}\label{eq:martingaleDef}
+M_n^\mu=\sum\limits_{k=0}^{K(x_n)-1}(c+a\mathds{1}\{Q_k\geq\mu\})e^{-\beta R_{k+1}} + V^*(x_n).
+\end{equation}
+This is a martingale for $\mu=\mu^*$.
+
+When we try to minimize
+\begin{equation}\label{eq:gDef}
+\begin{split}
+g_n(\mu)&=e^{\beta x_{n+1}}\mathbb{E}_{x_n}[M_{n+1}^\mu-M_n^\mu]\\
+&=\mathbb{E}_{x_n}[\sum\limits_{k=K(x_n)}^{K(x_{n+1})-1}(c+a\mathds{1}\{Q_k\geq\mu\})e^{-\beta R_{k+1}}-(V^*(x_n)-V^*(x_{n+1})].
+\end{split}
+\end{equation}
+We neglect the possibility of two repairs within an interval of time $\delta$, i.e. we assume that
+\begin{equation}
+\mathbb{P}(K(x_{n+1})-K(x_n)>1)=o(\delta^*).
+\end{equation}
+Note that $V^*(x_n)-V^*(x_{n+1})$ equals the expected discounted cost in the interval $(x_n,x_{n+1}]$ so that
+\begin{equation}
+\begin{split}
+e^{\beta x_{n+1}}(V^*(x_n)-V^*(x_{n+1}))&=\mathbb{E}_{x_n}[\mathds{1}\{R^-(x_n)+Q(x)\wedge\mu^*\in\Delta_{n+1}\}c\\
+&+\mathds{1}\{R^-(x_n)+Q(x)\in\Delta_{n+1}\}a]+o(\delta^2)\\
+&=\mathbb{P}_{x_n}(Q(x)> x_{n+1}-R^-(x_n))\mathds{1}\{\mu^*=x_{n+1}-R^-(x_n)\}c \\
+&+ \mathbb{P}_{x_n}(Q(x)\leq x_{n+1}-R^-(x_n))(c+a)+o(\delta^2).
+\end{split}
+\end{equation}
+Similarly, we can rewrite the other part of \eqref{eq:gDef} to
+\begin{equation}
+\begin{split}
+&e^{\beta x_{n+1}}\mathbb{E}_{x_n}[\sum\limits_{k=K(x_n)}^{K(x_{n+1})-1}(c+a\mathds{1}\{Q_k\geq\mu\})e^{-\beta R_{k+1}}]\\
+&=\mathbb{P}_{x_n}(Q(x)> x_{n+1}-R^-(x_n))\mathds{1}\{\mu=x_{n+1}-R^-(x_n)\}c\\
+&+\mathbb{P}_{x_n}(Q(x)\leq x_{n+1}-R^-(x_n))(c+a)+o(\delta^2).
+\end{split}
+\end{equation}
+Combining these, results in
+\begin{equation}
+\begin{split}
+g_n(\mu)&=\mathbb{P}_{x_n}(Q(x)> x_{n+1}-R^-(x_n))\mathds{1}\{\mu=x_{n+1}-R^-(x_n)\}c\\
+&+\mathbb{P}_{x_n}(Q(x)\leq x_{n+1}-R^-(x_n))(c+a)\\
+&-\mathbb{P}_{x_n}(Q(x)> x_{n+1}-R^-(x_n))\mathds{1}\{\mu^*=x_{n+1}-R^-(x_n)\}c \\
+&- \mathbb{P}_{x_n}(Q(x)\leq x_{n+1}-R^-(x_n))(c+a)\\
+&=\mathbb{P}_{x_n}(Q(x)> x_{n+1}-R^-(x_n))(\mathds{1}\{\mu=x_{n+1}-R^-(x_n)\}-\mathds{1}\{\mu^*=x_{n+1}-R^-(x_n)\})c.
+\end{split}
+\end{equation}
+$M_n^\mu$ is a martingale if $g_n(\mu)=0$ for all $n$.
+Hence, we conclude that $\mu=\mu^*$, which isn't very helpful.
+\end{document}

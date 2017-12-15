@@ -1,0 +1,35 @@
+\input{../Sections/Imports.tex}
+
+\begin{document}
+\chapter{Martingale Approach}
+In this section, we will attempt to find a solution to the simple discounted problem using a martingale approach.
+We consider a policy of repairing after a control limit $\mu$, and denote the optimal control limit by $\mu^*$.
+The fluid levels at the beginning of the $n$'th run are given by $Q_n$.
+
+Let $T_n$ denote the time at which the $n$'th run starts.
+Let $T_0=0$ and $T_{n+1}=T_n+\mu\wedge Q_n$.
+By $V_n^\mu$ we denote the random variable of the discounted cost of the $n$'th run when using control limit $\mu$.
+We construct the following submartingale
+$$
+M_N=\sum\limits_{n=0}^{N-1}V_n^\mu+\mathbb{E}\sum\limits_{n=N}^\infty V_n^{\mu^*}
+$$
+This is a submartingale since
+$$
+\mathbb{E}[M_{N+1}|M_N]=M_N+\mathbb{E}[V_N^\mu-V_N^{\mu^*}]\geq M_N,
+$$
+because $\mathbb{E}V_N^\mu\geq \mathbb{E}V_N^{\mu^*}$ with equality iff $\mu$ is an optimal control limit.
+Hence $M_N$ is a martingale when $\mu$ is an optimal control limit.
+To find an optimal control limit, we solve the equality $\mathbb{E}[M_{1}|M_0]=M_0$ for $\mu$:
+
+\begin{equation}\begin{split}
+\mathbb{E}[V_0^\mu+\mathbb{E}\sum\limits_{n=1}^\infty V_n^{\mu^*}]
+&=\mathbb{E}[V_0^\mu+e^{-\beta(\mu\wedge Q_0)}\mathbb{E}\sum\limits_{n=0}^\infty V_n^{\mu^*}]\\
+&=\mathbb{E}V_0^\mu+\mathbb{E}[e^{-\beta(\mu\wedge Q_0)}]\mathbb{E}\sum\limits_{n=0}^\infty V_n^{\mu^*}\\
+&=\mathbb{E}\sum\limits_{n=0}^\infty V_n^{\mu^*}=M_0\\
+\Rightarrow \mathbb{E}V_0^\mu&=(1-\mathbb{E}e^{-\beta(\mu\wedge Q_0)})\mathbb{E}\sum\limits_{n=0}^\infty V_n^{\mu^*}\\
+\Rightarrow \mathbb{E}\sum\limits_{n=0}^\infty V_n^{\mu^*}&=\frac{\mathbb{E}V_0^\mu}{1-\mathbb{E}e^{-\beta(\mu\wedge Q_0)}}
+\end{split}
+\end{equation}
+
+
+\end{document}

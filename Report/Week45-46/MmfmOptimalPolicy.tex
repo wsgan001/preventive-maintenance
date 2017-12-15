@@ -1,0 +1,127 @@
+\input{../Sections/Imports.tex}
+
+\begin{document}
+\chapter{MMFM Optimal Policy}
+In this section, the structure of the optimal policy for a machine which deteriorates according to the Markov Modulated Fluid Model will be determined.
+We will start with the simple model from earlier and will incrementally add complexity.
+
+\section{One CTMC-state, no jumps}
+The initial fluid level is given by $Q_0\sim F(q)$ and the fluid rate in this single state equals $r$.
+The hazard rate then equals
+\begin{equation}
+\begin{split}
+\lim\limits_{\delta\rightarrow0}\frac{1}{\delta}\mathbb{P}(rx<Q_0<r(x+\delta)|rx<Q_0)&=\lim\limits_{\delta\rightarrow0}\frac{\mathbb{P}(rx<Q_0<r(x+\delta))}{\delta\mathbb{P}(rx<Q_0)}\\
+&=rh(rx).
+\end{split}
+\end{equation}
+The rest of the problem can be solved in the same way as the simple problem.
+Hence, the optimal control limit $\mu^*$ is the first $\mu$ such that
+\begin{equation}
+rh(r\mu)=\beta\frac{c+V_\mu}{a}
+\end{equation}
+(where $V_\mu$ is the expected total discounted cost when using control limit $\mu$), or $\mu^*=\infty$ else.
+\section{Two CTMC-states with equal rate, constant jumps at exponentially distributed time intervals}
+We extend the previous model by adding constant fluid jumps to the model at exponentially distributed intervals.
+The time intervals between jumps have rate $\lambda$ and fluid quantity $J$.
+As earlier, we denote the state of the machine at time $t$ by
+$$
+X(t)=(S(t),L_0(t),L_c(t)),
+$$
+but in this simple one-state problem $S(t)$ isn't relevant since they have equal fluid rate and outward jump size.
+The current state is completely observable, so at time $t$, $L_0(t)$ and $L_c(t)$ are known.
+The hazard rate at time $t$ is given by
+\begin{equation}
+h(t)=\begin{cases}
+0&\text{if }L_c(t)>0\\
+rh(rL_0(t))&\text{else.}
+\end{cases}
+\end{equation} 
+This suggests that preventive maintenance should be chosen at time $t$ when $L_c(t)=0$ and
+\begin{equation}
+rh(rL_0(t))=\beta\frac{c+V_{L_0(t)}}{a},
+\end{equation}
+where $V_{l}$ equals the expected total discounted cost when the machine is repaired whenever $L_0(t)$, the observed lower bound of $Q_0$, equals $l$.
+Note that when there are no jumps ($J=0$), this corresponds to the optimal policy (and cost) of the previous problem.
+Hence, we will refer to this limit for the lower bound as the control limit $\mu$ and use the notation $V_\mu$ for the corresponding cost.
+
+In the simple problem, we could easily calculate at each time $t$, how long it takes until preventive repair should take place ($\mu-t$, assuming $\mu<Q_0$).
+But in this case, the presence of fluid jumps complicates this.
+A lower bound for the time at which preventive maintenance should be scheduled is given by $L_c(t)+\mu-L_0(t)$ and this is also the optimal time to do preventive maintenance if no jumps occur in the meantime.
+
+\subsection{Calculation of the expected total discounted cost}
+For a given $\mu$, $V_\mu$ is still difficult to compute.
+The presence of jumps complicates the calculation of the time between repairs.
+Let $T_t(q)$ be the random variable denoting the time until the fluid level is $q$ lower than it was at time $t$, i.e.
+$$
+T_t(q)=\min\{\tau\geq0|Q(t+\tau)\leq Q(t)-q\}.
+$$
+Note that, using this definition, $T_0(\mu)$ equals the time until the control limit is reached ($L_0(t)=\mu$) and $T(Q_0)$ equals the time until the machine fails.
+\begin{lemma}
+$Q_0\leq\mu\Leftrightarrow T_t(Q_0)\leq T_t(\mu)$
+\end{lemma}
+\begin{proof}
+$\Rightarrow$: 
+\begin{equation}
+\begin{split}
+Q_0\leq\mu&\Rightarrow Q(t)-\mu\leq Q(t)-Q_0\\
+&\Rightarrow (Q(t+\tau)\leq Q(t)-\mu\Rightarrow Q(t+\tau)\leq Q(t)-Q_0)\\
+&\Rightarrow T_t(Q_0)\leq T_t(\mu)\\
+\end{split}
+\end{equation}
+$\Leftarrow$: We will prove that $Q_0>\mu\Rightarrow T_t(Q_0)> T_t(\mu)$:\\
+We know that
+$$
+Q_0>\mu\Rightarrow Q(t)-\mu > Q(t)-Q_0.
+$$
+Since $Q(t)$ is piecewise continuous and does not decrease at the discontinuities, we know that 
+$$
+Q(t+T_t(\mu))=Q(t)-\mu>Q(t)-Q_0\Rightarrow T_t(Q_0)> T_t(\mu).
+$$
+\end{proof}
+Also, let $N_t(q)$ be the random variable denoting the number of jumps that occur in the interval $(t,t+T_t(q)]$.
+We will now compute its distribution.
+For simplicity, we will assume that $r=1$.
+The probability that zero jumps occur equals the probability that the exponentially distributed time interval is larger than $q$:
+$$
+\mathbb{P}(N_t(q)=0)=e^{-\lambda q}.
+$$
+The probability that exactly one jump occurs equals the probability that exactly one Poisson event happens in the interval $(t,t+q]$ while none happen in $(t+q,t+q+J]$. Resulting in
+$$
+\mathbb{P}(N_t(q)=1)=\lambda q e^{-\lambda q} e^{-\lambda J}=\lambda q e^{-\lambda (q+J)}.
+$$
+
+For each $k\geq0$, by conditioning on the time until the first jump, we get the following recursion
+\begin{equation}\label{eq:recursionFormula}
+\begin{split}
+\mathbb{P}(N_t(q)=k+1)&=\int\limits_0^{q}\lambda e^{-\lambda x}\mathbb{P}(N_t(q-x+J)=k)dx\\
+&=\int\limits_0^{q}\lambda e^{-\lambda (q-y)}\mathbb{P}(N_t(y+J)=k)dy,
+\end{split}
+\end{equation}
+since after this first jump, the fluid level equals $q-x+J$ and $k$ jumps should occur. The second equality follows after the substition $y=q-x$.
+The solution of this recursion, is given by
+$$
+\mathbb{P}(N_t(q)=k)=\lambda q\frac{(\lambda (q+kJ))^{k-1}}{k!}e^{-\lambda(q+kJ)}.
+$$
+Which can be seen by substituting it into \eqref{eq:recursionFormula} and setting $k=1$ to see that it also satisfies the calculated expression for $\mathbb{P}(N_t(q)=1)$.
+
+Now we know the distribution of the amount of jumps that occur in a run where the initial fluid level equals $q$, we can derive the distribution of the time length of a run with initial fluid level $Q_0$ random with density function $f_{Q_0}(q)$.
+This distribution $f(x)$, is given by
+\begin{equation}
+\begin{split}
+f(x)&=\lim\limits_{\delta\rightarrow 0}\frac{1}{\delta}\mathbb{P}(x<T_0(Q_0)<x+\delta)\\
+&=\sum\limits_{k=0}^{\lfloor\frac{x}{J}\rfloor}\mathbb{P}(N_0(q-kJ)=k)\lim\limits_{\delta\rightarrow 0}\frac{1}{\delta}\mathbb{P}(x-kJ<Q_0<x-kJ+\delta)\\
+&=\sum\limits_{k=0}^{\lfloor\frac{x}{J}\rfloor}\mathbb{P}(N_0(q-kJ)=k)f_{Q_0}(x-kJ)\\
+\end{split}
+\end{equation}
+
+The total discounted cost $V_\mu$ when using control limit $\mu$ can, similarly as with the simple problem, be calculated in the following way
+\begin{equation}
+V_\mu=\frac{(c+a)\mathbb{P}(Q_0<\mu)\mathbb{E}[e^{-\beta Q_0}|Q_0<\mu]+c\mathbb{P}(Q_0\geq \mu)e^{-\beta\mu}}{1-\mathbb{E}e^{-\beta T(\mu\wedge Q_0)}}.
+\end{equation}
+The same iteration approaches can also be applied.
+
+\section{Multiple CTMC-states with equal fluid rates}
+TODO
+\section{Multiple CTMC-states with different fluid rates}
+TODO
+\end{document}
