@@ -4,25 +4,140 @@
 \author{Martijn G\"{o}sgens}
 \maketitle
 
-\input{Sections/Abstract.tex}
+\chapter*{Abstract}
+In this thesis, we model the breakdown of a machine as a Markov modulated fluid model (MMFM) and find a replacement policy minimizing the total discounted cost.
+At each transition of the MMFM's underlying Markov chain, the fluid level can instantaneously increase by a constant amount, where the amount depends on the origin and destination state of the Markov chain.
+Numeric methods to compute the total discounted cost for a given stationary replacement policy and iteration methods to find the optimal replacement policy are presented.
+
+
+
+\chapter*{Executive summary?}
+[Describe characteristics of a machine whose deterioration that can be modeled by a MMFM with jumps: different activities that in different degrees wear out the machine, the machine has no schedule (actions as CTMC), partial repairs between activities and an initial fitness of the machine.]
+
+[List assumptions]
+
+[The type of observations for which the policy is useful: trace data where at each time the current activity is known and failures are observed.]
+
+[Mention the kind of historical data needed for the parameter estimation.]
+
+[The type of (online) policy that is presented and how it would be implemented.]
+
+[Explain possibilities of forecasting time until preventive repair.]
 
 \tableofcontents
 
-\input{Sections/Introduction.tex}
 
-\input{Sections/LiteratureOverview.tex}
+\chapter{Introduction}
+\section{Preventive maintenance}
+[Mention reasons to do preventive maintenance (corrective maintenance is expensive)]
+\section{Philips machine}
 
-%\input{Sections/ProblemFormalisation.tex}
+\chapter{Literature overview}
+\section{Dynamic programming}
+\subsubsection{Discounted vs. long run average cost}
+[Explain relation and pros and cons of both]
+\section{Survival analysis}
+\subsection{Classification of lifetime distributions}
+[increasing and decreasing hazard rate. No preventive maintenance for decreasing hazard rates.]
 
-\input{Sections/SimplifiedModel.tex}
+\chapter{Data analysis}
+\section{Data description}
+\subsection{Data format}
+[trace data]
+\subsection{Cleaning}
+[negative transition times because of the transition from summer to winter time]
+\subsection{Visualization}
+[plot CDF, PDF and hazard rate of lifetime distribution. Also some plots for the memorylessness of the state transitions.]
+\section{Fitting lifetime distributions}
+[Weibull, Erlang etc]
+\subsection{Phase-type}
+[mention that phase-type can fit any positive distribution but that the required number of parameters is huge.]
 
-\input{Sections/PreliminaryDataAnalysis.tex}
+\chapter{Problem formulation and definitions}
+\section{Age-based maintenance}
+\section{Simple fluid model with jumps}
+[First order MMFM with constant jumps]
+\section{Markov Modulated Fluid Model}
+[Different fluid rates and jump quantities]
 
-\input{Sections/FluidModels.tex}
+%\chapter{Analysis of problems}
+\chapter{Age-based maintenance}
+[Mention that we only consider lifetimes with increasing hazard rates]
+\section{Structure of optimal policy}
+[Control limit and stationary]
+\section{Computation of total discounted cost}
+\section{Structural properties}
+[influence of changing the parameters]
+\section{Computing the optimal policy}
+[introduction of successive approximation method, comparison with value iteration and policy iteration. Show results.]
 
-\input{Sections/TechnicalReport.tex}
+\chapter{Simple fluid model with jumps}
+[Mention that the distribution of the initial fluid level has an increasing hazard rate]
+\section{Structure of optimal policy}
+[stationary control limit on L0]
+\section{Computation of total discounted cost}
+[Explain equivalence to simple problem with adjusted discount, compare with tdc of simple problem]
+\section{Structural properties}
+[The size and frequency of the jumps decreases the tdc and increases the control limit. Mention that although the initial distribution must have an increasing hazard rate, the lifetime distribution (with jumps) need not have an increasing hazard rate.]
+\section{Heuristic policies}
+[Assume no jump until the next failure and use the same iteration policy (but with different calculation of the tdc)]
+\section{Computing the optimal policy}
+[Explain equivalence to simple problem with adjusted discount and show that the same iteration methods can be used.]
 
-\input{Sections/Literature.tex}
+\chapter{Markov Modulated Fluid Model with jumps}
+[Mention that the distribution of the initial fluid level has an increasing hazard rate]
+\section{Structure of optimal policy}
+[Prove Markov property for process with states (s,L0,Lc) (Dynamically adapted lifetime distribution). Conclude with stationary (CTMC-)state-dependent control limit on L0 for each state.]
+\section{Computation of total discounted cost}
+[Derive matrix exponents for discount and write out the total discounted cost.]
+\section{Structural properties}
+[Same as in previous problem, but neighors now also influence the control limit.]
+\section{Heuristic policies}
+[Mention that jumps with the same fluid rate would have the same control limit, regardless of the outgoing jump sizes or transition rates. Mention that this control limit would be lower than the exact optimum. Explain iteration methods and show results.]
+\section{Computing the optimal policy}
+[Introduce iteration method and comment on its computation time, compare results with previous problems and methods.]
+
+\chapter{Parameter estimation}
+\section{CTMC Estimation}
+[Mention the standard way to determine the parameters in a CTMC.]
+\section{Estimating fluid rates and jump quantities}
+\subsection{Maximum Likelihood?}
+[Derive likelihood of parameters and comment on the difficulty to maximize this and that it requires knowledge about the distribution of the initial fluid level.]
+\subsection{Justification of minimizing variance}
+[Explain that the machines are likely made by the same manufacturer and that this manufacturer probably strives for constant quality (continuity), such that the different machines likely had the same quality initially.]
+\subsection{Implementation}
+\subsection{Results}
+[Mention that this depends on the variance of the distribution of the initial fluid level. If this variance is too large, the parameter estimation has likely minimized the variance too much.]
+
+\chapter{Conclusion}
+[Summarize results]
+\section{Further research}
+[Random jump sizes, better parameter estimation methods, zero or negative fluid rates, nonincreasing hazard rates, ordering the CTMC states depending only on the MMFM]
+
+\chapter{Discussion}
+\section{Assumptions}
+[List assumptions, their consequences and alternatives]
+\section{Robustness}
+[Explain what happens to the resulting policy and total discounted cost when one of the problem parameters or MMFM parameters changes a little.]
+
 
 \bibliography{Sections/bibliography}
+
+\begin{appendices}
+\chapter{List of symbols}
+[List containing all the various symbols and notations with their meanings]
+\chapter{CTMC analysis}
+\section{Value iteration}
+[Derive Bellman equations, mention implementation]
+\section{State clustering}
+[Explain the state clustering that was employed, mention that repair states tend to be clustered and explain]
+\chapter{Martingale approach}
+[Explain martingales, explain how they can be used for finding the optimal policy and show the unfruitful derivation]
+\chapter{Total discounted costs for various problem parameters and policies?}
+[Tables containing the total discounted cost and control limit that resulted from various heuristic policies and parameters.]
+\chapter{Matlab scripts?}
+[Should I include all used Matlab scripts? That might be quite a lot]
+\chapter{ProM plugins?}
+[Should I also add the code of the ProM plugins?]
+\end{appendices}
 \end{document}

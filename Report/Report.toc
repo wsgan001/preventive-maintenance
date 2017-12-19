@@ -1,26 +1,58 @@
 \select@language {english}
-\contentsline {section}{\numberline {1}Abstract}{1}{section.1}
-\contentsline {section}{\numberline {2}Introduction}{2}{section.2}
-\contentsline {section}{\numberline {3}LiteratureOverview}{2}{section.3}
-\contentsline {section}{\numberline {4}Simplified models}{2}{section.4}
-\contentsline {subsection}{\numberline {4.1}First model}{2}{subsection.4.1}
-\contentsline {subsection}{\numberline {4.2}Discounted model}{3}{subsection.4.2}
-\contentsline {subsection}{\numberline {4.3}Discretized time}{4}{subsection.4.3}
-\contentsline {subsection}{\numberline {4.4}Continuous Time Markov Chain Model}{5}{subsection.4.4}
-\contentsline {subsection}{\numberline {4.5}Fluid models}{6}{subsection.4.5}
-\contentsline {section}{\numberline {5}Preliminary Data Analysis}{8}{section.5}
-\contentsline {subsection}{\numberline {5.1}Hazard Rate}{8}{subsection.5.1}
-\contentsline {subsection}{\numberline {5.2}Time Until Failure}{9}{subsection.5.2}
-\contentsline {subsubsection}{\numberline {5.2.1}Cullen and Frey graph}{9}{subsubsection.5.2.1}
-\contentsline {subsubsection}{\numberline {5.2.2}Phase-Type distribution}{10}{subsubsection.5.2.2}
-\contentsline {subsubsection}{\numberline {5.2.3}Transition Times}{10}{subsubsection.5.2.3}
-\contentsline {section}{\numberline {6}Fluid models}{11}{section.6}
-\contentsline {subsection}{\numberline {6.1}Rate estimation}{11}{subsection.6.1}
-\contentsline {subsection}{\numberline {6.2}Finding jump states}{11}{subsection.6.2}
-\contentsline {section}{\numberline {7}Technical report}{12}{section.7}
-\contentsline {subsection}{\numberline {7.1}ProM}{12}{subsection.7.1}
-\contentsline {subsubsection}{\numberline {7.1.1}Plug-in development}{12}{subsubsection.7.1.1}
-\contentsline {subsubsection}{\numberline {7.1.2}Plug-ins created}{13}{subsubsection.7.1.2}
-\contentsline {subsection}{\numberline {7.2}Event log}{13}{subsection.7.2}
-\contentsline {subsection}{\numberline {7.3}R}{14}{subsection.7.3}
-\contentsline {section}{\numberline {8}Literature}{14}{section.8}
+\contentsline {chapter}{\numberline {1.}Introduction}{6}{chapter.1}
+\contentsline {section}{\numberline {1.1}Preventive maintenance}{6}{section.1.1}
+\contentsline {section}{\numberline {1.2}Philips machine}{6}{section.1.2}
+\contentsline {chapter}{\numberline {2.}Literature overview}{7}{chapter.2}
+\contentsline {section}{\numberline {2.1}Dynamic programming}{7}{section.2.1}
+\contentsline {subsubsection}{Discounted vs. long run average cost}{7}{section*.4}
+\contentsline {section}{\numberline {2.2}Survival analysis}{7}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}Classification of lifetime distributions}{7}{subsection.2.2.1}
+\contentsline {chapter}{\numberline {3.}Data analysis}{8}{chapter.3}
+\contentsline {section}{\numberline {3.1}Data description}{8}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}Data format}{8}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}Cleaning}{8}{subsection.3.1.2}
+\contentsline {subsection}{\numberline {3.1.3}Visualization}{8}{subsection.3.1.3}
+\contentsline {section}{\numberline {3.2}Fitting lifetime distributions}{8}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Phase-type}{8}{subsection.3.2.1}
+\contentsline {chapter}{\numberline {4.}Problem formulation and definitions}{9}{chapter.4}
+\contentsline {section}{\numberline {4.1}Age-based maintenance}{9}{section.4.1}
+\contentsline {section}{\numberline {4.2}Simple fluid model with jumps}{9}{section.4.2}
+\contentsline {section}{\numberline {4.3}Markov Modulated Fluid Model}{9}{section.4.3}
+\contentsline {chapter}{\numberline {5.}Age-based maintenance}{10}{chapter.5}
+\contentsline {section}{\numberline {5.1}Structure of optimal policy}{10}{section.5.1}
+\contentsline {section}{\numberline {5.2}Computation of total discounted cost}{10}{section.5.2}
+\contentsline {section}{\numberline {5.3}Structural properties}{10}{section.5.3}
+\contentsline {section}{\numberline {5.4}Computing the optimal policy}{10}{section.5.4}
+\contentsline {chapter}{\numberline {6.}Simple fluid model with jumps}{11}{chapter.6}
+\contentsline {section}{\numberline {6.1}Structure of optimal policy}{11}{section.6.1}
+\contentsline {section}{\numberline {6.2}Computation of total discounted cost}{11}{section.6.2}
+\contentsline {section}{\numberline {6.3}Structural properties}{11}{section.6.3}
+\contentsline {section}{\numberline {6.4}Heuristic policies}{11}{section.6.4}
+\contentsline {section}{\numberline {6.5}Computing the optimal policy}{11}{section.6.5}
+\contentsline {chapter}{\numberline {7.}Markov Modulated Fluid Model with jumps}{12}{chapter.7}
+\contentsline {section}{\numberline {7.1}Structure of optimal policy}{12}{section.7.1}
+\contentsline {section}{\numberline {7.2}Computation of total discounted cost}{12}{section.7.2}
+\contentsline {section}{\numberline {7.3}Structural properties}{12}{section.7.3}
+\contentsline {section}{\numberline {7.4}Heuristic policies}{12}{section.7.4}
+\contentsline {section}{\numberline {7.5}Computing the optimal policy}{12}{section.7.5}
+\contentsline {chapter}{\numberline {8.}Parameter estimation}{13}{chapter.8}
+\contentsline {section}{\numberline {8.1}CTMC Estimation}{13}{section.8.1}
+\contentsline {section}{\numberline {8.2}Estimating fluid rates and jump quantities}{13}{section.8.2}
+\contentsline {subsection}{\numberline {8.2.1}Maximum Likelihood?}{13}{subsection.8.2.1}
+\contentsline {subsection}{\numberline {8.2.2}Justification of minimizing variance}{13}{subsection.8.2.2}
+\contentsline {subsection}{\numberline {8.2.3}Implementation}{13}{subsection.8.2.3}
+\contentsline {subsection}{\numberline {8.2.4}Results}{13}{subsection.8.2.4}
+\contentsline {chapter}{\numberline {9.}Conclusion}{14}{chapter.9}
+\contentsline {section}{\numberline {9.1}Further research}{14}{section.9.1}
+\contentsline {chapter}{\numberline {10.}Discussion}{15}{chapter.10}
+\contentsline {section}{\numberline {10.1}Assumptions}{15}{section.10.1}
+\contentsline {section}{\numberline {10.2}Robustness}{15}{section.10.2}
+\contentsline {chapter}{Appendices}{18}{section*.6}
+\contentsline {chapter}{\numberline {A.}List of symbols}{19}{Appendix.a.A}
+\contentsline {chapter}{\numberline {B.}CTMC analysis}{20}{Appendix.a.B}
+\contentsline {section}{\numberline {B.1}Value iteration}{20}{section.a.B.1}
+\contentsline {section}{\numberline {B.2}State clustering}{20}{section.a.B.2}
+\contentsline {chapter}{\numberline {C.}Martingale approach}{21}{Appendix.a.C}
+\contentsline {chapter}{\numberline {D.}Total discounted costs for various problem parameters and policies?}{22}{Appendix.a.D}
+\contentsline {chapter}{\numberline {E.}Matlab scripts?}{23}{Appendix.a.E}
+\contentsline {chapter}{\numberline {F.}ProM plugins?}{24}{Appendix.a.F}

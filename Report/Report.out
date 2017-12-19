@@ -1,25 +1,56 @@
-\BOOKMARK [1][-]{section.1}{Abstract}{}% 1
-\BOOKMARK [1][-]{section.2}{Introduction}{}% 2
-\BOOKMARK [1][-]{section.3}{LiteratureOverview}{}% 3
-\BOOKMARK [1][-]{section.4}{Simplified models}{}% 4
-\BOOKMARK [2][-]{subsection.4.1}{First model}{section.4}% 5
-\BOOKMARK [2][-]{subsection.4.2}{Discounted model}{section.4}% 6
-\BOOKMARK [2][-]{subsection.4.3}{Discretized time}{section.4}% 7
-\BOOKMARK [2][-]{subsection.4.4}{Continuous Time Markov Chain Model}{section.4}% 8
-\BOOKMARK [2][-]{subsection.4.5}{Fluid models}{section.4}% 9
-\BOOKMARK [1][-]{section.5}{Preliminary Data Analysis}{}% 10
-\BOOKMARK [2][-]{subsection.5.1}{Hazard Rate}{section.5}% 11
-\BOOKMARK [2][-]{subsection.5.2}{Time Until Failure}{section.5}% 12
-\BOOKMARK [3][-]{subsubsection.5.2.1}{Cullen and Frey graph}{subsection.5.2}% 13
-\BOOKMARK [3][-]{subsubsection.5.2.2}{Phase-Type distribution}{subsection.5.2}% 14
-\BOOKMARK [3][-]{subsubsection.5.2.3}{Transition Times}{subsection.5.2}% 15
-\BOOKMARK [1][-]{section.6}{Fluid models}{}% 16
-\BOOKMARK [2][-]{subsection.6.1}{Rate estimation}{section.6}% 17
-\BOOKMARK [2][-]{subsection.6.2}{Finding jump states}{section.6}% 18
-\BOOKMARK [1][-]{section.7}{Technical report}{}% 19
-\BOOKMARK [2][-]{subsection.7.1}{ProM}{section.7}% 20
-\BOOKMARK [3][-]{subsubsection.7.1.1}{Plug-in development}{subsection.7.1}% 21
-\BOOKMARK [3][-]{subsubsection.7.1.2}{Plug-ins created}{subsection.7.1}% 22
-\BOOKMARK [2][-]{subsection.7.2}{Event log}{section.7}% 23
-\BOOKMARK [2][-]{subsection.7.3}{R}{section.7}% 24
-\BOOKMARK [1][-]{section.8}{Literature}{}% 25
+\BOOKMARK [0][-]{chapter.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.1.1}{Preventive maintenance}{chapter.1}% 2
+\BOOKMARK [1][-]{section.1.2}{Philips machine}{chapter.1}% 3
+\BOOKMARK [0][-]{chapter.2}{Literature overview}{}% 4
+\BOOKMARK [1][-]{section.2.1}{Dynamic programming}{chapter.2}% 5
+\BOOKMARK [1][-]{section.2.2}{Survival analysis}{chapter.2}% 6
+\BOOKMARK [2][-]{subsection.2.2.1}{Classification of lifetime distributions}{section.2.2}% 7
+\BOOKMARK [0][-]{chapter.3}{Data analysis}{}% 8
+\BOOKMARK [1][-]{section.3.1}{Data description}{chapter.3}% 9
+\BOOKMARK [2][-]{subsection.3.1.1}{Data format}{section.3.1}% 10
+\BOOKMARK [2][-]{subsection.3.1.2}{Cleaning}{section.3.1}% 11
+\BOOKMARK [2][-]{subsection.3.1.3}{Visualization}{section.3.1}% 12
+\BOOKMARK [1][-]{section.3.2}{Fitting lifetime distributions}{chapter.3}% 13
+\BOOKMARK [2][-]{subsection.3.2.1}{Phase-type}{section.3.2}% 14
+\BOOKMARK [0][-]{chapter.4}{Problem formulation and definitions}{}% 15
+\BOOKMARK [1][-]{section.4.1}{Age-based maintenance}{chapter.4}% 16
+\BOOKMARK [1][-]{section.4.2}{Simple fluid model with jumps}{chapter.4}% 17
+\BOOKMARK [1][-]{section.4.3}{Markov Modulated Fluid Model}{chapter.4}% 18
+\BOOKMARK [0][-]{chapter.5}{Age-based maintenance}{}% 19
+\BOOKMARK [1][-]{section.5.1}{Structure of optimal policy}{chapter.5}% 20
+\BOOKMARK [1][-]{section.5.2}{Computation of total discounted cost}{chapter.5}% 21
+\BOOKMARK [1][-]{section.5.3}{Structural properties}{chapter.5}% 22
+\BOOKMARK [1][-]{section.5.4}{Computing the optimal policy}{chapter.5}% 23
+\BOOKMARK [0][-]{chapter.6}{Simple fluid model with jumps}{}% 24
+\BOOKMARK [1][-]{section.6.1}{Structure of optimal policy}{chapter.6}% 25
+\BOOKMARK [1][-]{section.6.2}{Computation of total discounted cost}{chapter.6}% 26
+\BOOKMARK [1][-]{section.6.3}{Structural properties}{chapter.6}% 27
+\BOOKMARK [1][-]{section.6.4}{Heuristic policies}{chapter.6}% 28
+\BOOKMARK [1][-]{section.6.5}{Computing the optimal policy}{chapter.6}% 29
+\BOOKMARK [0][-]{chapter.7}{Markov Modulated Fluid Model with jumps}{}% 30
+\BOOKMARK [1][-]{section.7.1}{Structure of optimal policy}{chapter.7}% 31
+\BOOKMARK [1][-]{section.7.2}{Computation of total discounted cost}{chapter.7}% 32
+\BOOKMARK [1][-]{section.7.3}{Structural properties}{chapter.7}% 33
+\BOOKMARK [1][-]{section.7.4}{Heuristic policies}{chapter.7}% 34
+\BOOKMARK [1][-]{section.7.5}{Computing the optimal policy}{chapter.7}% 35
+\BOOKMARK [0][-]{chapter.8}{Parameter estimation}{}% 36
+\BOOKMARK [1][-]{section.8.1}{CTMC Estimation}{chapter.8}% 37
+\BOOKMARK [1][-]{section.8.2}{Estimating fluid rates and jump quantities}{chapter.8}% 38
+\BOOKMARK [2][-]{subsection.8.2.1}{Maximum Likelihood?}{section.8.2}% 39
+\BOOKMARK [2][-]{subsection.8.2.2}{Justification of minimizing variance}{section.8.2}% 40
+\BOOKMARK [2][-]{subsection.8.2.3}{Implementation}{section.8.2}% 41
+\BOOKMARK [2][-]{subsection.8.2.4}{Results}{section.8.2}% 42
+\BOOKMARK [0][-]{chapter.9}{Conclusion}{}% 43
+\BOOKMARK [1][-]{section.9.1}{Further research}{chapter.9}% 44
+\BOOKMARK [0][-]{chapter.10}{Discussion}{}% 45
+\BOOKMARK [1][-]{section.10.1}{Assumptions}{chapter.10}% 46
+\BOOKMARK [1][-]{section.10.2}{Robustness}{chapter.10}% 47
+\BOOKMARK [0][-]{section*.6}{Appendices}{}% 48
+\BOOKMARK [0][-]{Appendix.a.A}{List of symbols}{}% 49
+\BOOKMARK [0][-]{Appendix.a.B}{CTMC analysis}{}% 50
+\BOOKMARK [1][-]{section.a.B.1}{Value iteration}{Appendix.a.B}% 51
+\BOOKMARK [1][-]{section.a.B.2}{State clustering}{Appendix.a.B}% 52
+\BOOKMARK [0][-]{Appendix.a.C}{Martingale approach}{}% 53
+\BOOKMARK [0][-]{Appendix.a.D}{Total discounted costs for various problem parameters and policies?}{}% 54
+\BOOKMARK [0][-]{Appendix.a.E}{Matlab scripts?}{}% 55
+\BOOKMARK [0][-]{Appendix.a.F}{ProM plugins?}{}% 56
