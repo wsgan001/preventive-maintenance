@@ -1,0 +1,25 @@
+\section{Structural properties}
+In this section, the effect of changing the parameters to the expected total discounted cost and the control limit are investigated.
+By the equivalence explained in the previous chapter, the same structural properties as in section \ref{section:AgeBasedStructuralProperties} for the parameters $c,a$ and $h$ apply.
+Remarks \ref{remark:AgeBasedControlLimitDiscountIncrease}, \ref{remark:AgeBasedControlLimitDiscountAndHazardIncrease} and \ref{remark:AgeBasedTDCDiscountIncrease} also apply for the adjusted discount $\beta^*$.
+Hence, we discuss the effect changing $\lambda,J$ and $\beta$ has to the adjusted discount $\beta^*$.
+\[
+\beta^*=\beta+\lambda(1-D(J))
+\]
+\begin{remark}
+	Obviously, increasing $\beta$ will result in an increase in $\beta^*$.
+\end{remark}
+\begin{remark}
+Similarly, increasing $\lambda$ will result in an increase in $\beta^*$ if $J>0$ ($J=0$ implies $D(J)=1$).
+This means that frequent jumps increase the control limit and decrease the total discounted cost, which seems natural.
+\end{remark}
+\begin{remark}
+	Increasing $J$ results in a decrease in $D(J)$, which results in an increase in $\beta^*$.
+	This means that greater jumps, again, increase the control limit and decrease the total discount cost, which also seems natural.
+\end{remark}
+Then there is also another important subtlety: For the age-based maintenance problem we needed to assume that the distribution of the age of the machine has an increasing hazard rate.
+Similarly, we need the assumption that the distribution of the initial fluid level has an increasing hazard rate.
+This does, however, not mean that the lifetime distribution of this machine with fluid jumps has an increasing hazard rate.
+For instance if the system is unstable ($\lambda J>1$), the probability of ever reaching an empty fluid level decreases as the fluid level increases and the expected fluid level increases over its age so that the hazard will be decreasing.
+
+Appendix \ref{AppendixComputationsTable} contains computed values of the optimal control limit and the corresponding expected total discounted cost.

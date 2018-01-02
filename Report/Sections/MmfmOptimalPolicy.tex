@@ -1,0 +1,73 @@
+\section{The optimal policy}
+In this section, we will analytically derive the control limits for the MMFM preventive maintenance policy.
+This will be done using the Bellman equations.
+
+If the optimal control limit in state $s_i$ is given by $\mu_i^*$, then in the state $x=(s_i,\mu_i^*,0)$ where repair is chosen, it holds that the expected cost of waiting one more time step of size $\delta$ is at least as large as the expected cost of repairing.
+The repair cost equals $c+V(x_{NEW},\pi^*)$ and by \eqref{eq:MmfmNextState}, the cost of waiting equals
+\[
+\begin{split}
+&(1-\lambda_i \delta-\delta r_ih(\mu_i^*))V_\delta(i,\mu_i^*+r_i\delta,0,\pi^*)\\
+&+ \delta r_ih(\mu_i^*)V_\delta(x_{BREAK},\pi^*)\\
+&+\sum\limits_{j\neq i}\lambda_{ij} \delta V_\delta(j,\mu_i^*,J_{ij}-r_j\delta,\pi^*)+o(\delta^2).
+\end{split}
+\]
+So we know that
+\[
+\begin{split}
+c+V(x_{NEW},\pi^*)\leq 
+&(1-\lambda_i \delta-\delta r_ih(\mu_i^*))V_\delta(i,\mu_i^*+r_i\delta,0,\pi^*)\\
+&+ \delta r_ih(\mu_i^*)V_\delta(x_{BREAK},\pi^*)\\
+&+\sum\limits_{j\neq i}\lambda_{ij} \delta V_\delta(j,\mu_i^*,J_{ij}-r_j\delta,\pi^*)+o(\delta^2).
+\end{split}
+\]
+Also, $V_\delta(x_{BREAK},\pi^*)=c+a+V_\delta(x_{NEW},\pi^*)$ and $V_\delta(i,\mu_i^*+r_i\delta,0,\pi^*)=c+V_\delta(x_{NEW},\pi^*)$ as repair is chosen next.
+Substituting this, we get
+\[\begin{split}
+c+V(x_{NEW},\pi^*)\leq
+&(1-\lambda_i \delta-\delta r_ih(\mu_i^*))(c+V(x_{NEW},\pi^*))\\
+&+ \delta r_ih(\mu_i^*)(c+a+V(x_{NEW},\pi^*))\\
+&+\sum\limits_{j\neq i}\lambda_{ij} \delta V_\delta(j,\mu_i^*,J_{ij}-r_j\delta,\pi^*)+o(\delta^2).
+\end{split}
+\]
+Subtracting $c+V(x_{NEW},\pi^*)$ from both sides, dividing by $\delta$ and rewriting yields
+\[
+r_ih(\mu_i^*)a+\sum\limits_{j\neq i}\lambda_{ij} V_\delta(j,\mu_i^*,J_{ij}-r_j\delta,\pi^*)\geq
+(\beta+\lambda_i)(c+V(x_{NEW},\pi^*))+o(\delta^2).
+\]
+If we were to do the same but starting at a state $x'=(s_i,\mu_i^*-r_i\delta,0)$ (i.e. just before the control limit is reached) so we know that the cost of waiting is smaller than the cost of preventive maintenance, we would get
+\[
+r_ih(\mu_i^*)a+\sum\limits_{j\neq i}\lambda_{ij} V_\delta(j,\mu_i^*,J_{ij}-r_j\delta,\pi^*)<
+(\beta+\lambda_i)(c+V(x_{NEW},\pi^*))+o(\delta^2).
+\]
+Which together proves the following theorem:
+\begin{theorem}
+	If for the optimal control limit policy $\pi^*=[\mu_1^*,...,\mu_N^*]$ the control limit in CTMC-state $s_i$ is finite (i.e. $\mu_i^*<\infty$), then the following equation holds 
+	
+	\begin{equation}\label{eq:MmfmHazardBounds}
+	r_ih(\mu_i^*)a+\sum\limits_{j\neq i}\lambda_{ij} V(j,\mu_i^*,J_{ij},\pi^*)=
+	(\beta+\lambda_i)(c+V(x_{NEW},\pi^*)).
+	\end{equation}
+\end{theorem}
+\begin{remark}
+	We can rewrite the expected costs $V(j,\mu_i^*,J_{ij},\pi^*)$ in \eqref{eq:MmfmHazardBounds} to
+	\[
+	V(j,\mu_i^*,J_{ij},\pi^*)=\sum\limits_k D_{jk}(J_{ij},\pi,\mu_i^*)V(j,\mu_i^*,0,\pi^*),
+	\]
+	using the discounted probability $D_{jk}(J_{ij},\pi,\mu_i^*)$ that the process will be in CTMC-state $s_k$ when the buffer $L_c$ is emptied.
+\end{remark}
+
+\begin{remark}
+	It is difficult to compute the control limits $\mu_i^*$ analytically since the total discounted costs depend on the control limit and the control limit depends on the total discounted costs.
+\end{remark}
+
+\begin{remark}
+Note that using the generator matrix $\Lambda^D$ defined by \eqref{eq:MmfmDiscountGenerator}, equation for the optimal policy \eqref{eq:MmfmHazardBounds} could also be written as
+
+\begin{equation}\label{eq:MmfmHazardBoundsShort}
+h(\mu_i^*)a+\sum\limits_j\Lambda^D_{ij}V(j,\mu_i^*,0,\pi^*)=0.
+\end{equation}
+\end{remark}
+
+\begin{remark}
+Note that equation \eqref{eq:MmfmHazardBounds} is similar to the equation for the optimal control limit of the previous problems in the sense that it has a constant right-hand side and an increasing left hand side.
+\end{remark}

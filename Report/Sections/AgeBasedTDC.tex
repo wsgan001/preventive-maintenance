@@ -1,0 +1,139 @@
+\section{Computation of total discounted cost}
+In this section, the Bellman equations will be used to find the expected total discounted cost of the optimal cost.
+The following Bellman equations will be considered
+\[V_\delta(x)=\begin{cases}
+\min\{c+\alpha_\delta V_\delta(1),\alpha_\delta \mathbb{E}[V_\delta(S(x))]\},&\text{if}\ x>0 \\
+c+a+\alpha_\delta V_\delta(1),&\text{else.}
+\end{cases}\]
+Where $\mathbb{P}(S(x)=0)=\mathbb{P}(Q_0\leq x+\delta|Q_0\geq x)=\delta h(x)+o(\delta^2)$ (for lifetime $Q_0\sim F(x)$ and corresponding $\bar F(x)=1-F(x)$, $\bar F(x;y)=\bar F(x)/\bar F(y)$, probability density $f$, hazard rate $h(x)$) and $\mathbb{P}(S(x)=x+1)=1-\delta h(x)+o(\delta^2)$ and $\alpha_\delta=e^{-\beta \delta}=1-\beta \delta + o(\delta^2)$ for $\beta>0$.
+We define $V_\delta(n\delta):=V_\delta(n)$ and for convenience, we define $V_\delta(0^+):=V_\delta(\delta)$.
+We assume that for $x$
+$$
+c+\alpha_\delta V_\delta(0^+)>\alpha_\delta \mathbb{E}[V_\delta(S(x)\delta)],
+$$
+i.e. the optimal control limit $\mu^*>\delta x$.
+Now, we can write $V_\delta(x)$ in the following way
+\[V_\delta(x)=\alpha_\delta \bar F(x+\delta;x) (c+a+\alpha_\delta V_\delta(0^+))
++\alpha_\delta \bar F(x+\delta;x)V_\delta(x+\delta)
+\]
+We are now going to let $\delta$ approach zero.
+\begin{equation}
+\begin{split}
+\lim\limits_{\delta\rightarrow 0} V_\delta(x) &=
+\lim\limits_{\delta\rightarrow 0}(1-\beta\delta+o(\delta^2)) (\delta h(x)+o(\delta^2))(c+a+(1-\beta\delta+o(\delta^2)) V'(0^+))\\
+&+(1-\beta\delta+o(\delta^2)) (1-\delta h(x)+o(\delta^2))V_\delta(x+\delta).
+\end{split}
+\end{equation}
+Gathering the terms of $o(\delta^2)$, we get
+\begin{equation}\label{eq:gatheredDelta}
+\begin{split}
+\lim\limits_{\delta\rightarrow 0} V_\delta(x) =
+\lim\limits_{\delta\rightarrow 0}\delta h(x)(c+a+ V_\delta(0^+))+(1-\delta\beta-\delta h(x)) V_\delta(x+\delta)+o(\delta^2).
+\end{split}
+\end{equation}
+By moving one $V_\delta(x+\delta)$ to the left and dividing by $-\delta$, we get
+\begin{equation}\label{eq:AgeBasedBellmanODE}
+\begin{split}
+\frac{d}{dx}V(x)&=\lim\limits_{\delta\rightarrow 0} \frac{V_\delta(x+\delta)-V_\delta(x)}{\delta} \\
+&=\lim\limits_{\delta\rightarrow 0} -h(x)(c+a+ V_\delta(0^+))+(\beta+ h(x)) V_\delta(x+\delta)+o(\delta)\\
+&=-h(x)(c+a+ V(0^+))+(\beta+ h(x)) V(x).
+\end{split}
+\end{equation}
+Where
+$$
+V(x):=\lim\limits_{\delta\rightarrow 0} V_\delta(x).
+$$
+(Note that we needed to define $V(0^+)$ in this way since $V(0^+)=V(0)-c-a$).
+\begin{remark}\label{remark:AgeBasedWeirdODE}
+	The differential equation \eqref{eq:AgeBasedBellmanODE} seems counterintuitive as for high hazards, the expected total discounted cost would be decreasing for increasing age of the machine.
+	We will return to this later on.
+\end{remark}
+We will now try to solve this O.D.E.
+We use the method of the integrating factor.
+Our integrating factor will be
+$$
+e^{\int\limits_0^x (-\beta - h(q))dq}=e^{-\beta x -H(x)}.
+$$
+Where $H(x)$ is the cumulative hazard function.
+We get
+$$
+V(x)=e^{\beta x +H(x)} [C + \int\limits_0^x e^{-\beta q -H(q)}(-h(q)(c+a+V(0^+)))dq]
+$$
+$$
+=\frac{e^{\beta x}}{\bar F(x)} [C - (c+a+V(0^+))\int\limits_0^x e^{-\beta q}f(q)dq].
+$$
+Using the identities 
+\[e^{H(x)}=(e^{-H(x)})^{-1}=\frac{1}{\bar F(x)},\]
+and
+\[h(x)e^{-H(x)}=f(x).\]
+The $C$ is an integrating constant and since $\lim\limits_{x\rightarrow 0}V(x)=V(0^+)$ should hold, we find $C=V(0^+)$.
+We can rewrite the expression to
+$$
+V(x)=\frac{e^{\beta x}}{\bar F(x)} [V(0^+)  - (c+a+V(0^+))F(x)\mathbb{E}[e^{-\beta Q_0}|Q_0<x]].
+$$
+Which results in the following theorem:
+\begin{theorem}
+	When the machine has age $x$, the expected remaining total discounted cost equals
+	\begin{equation}\label{eq:AgeBasedSolvedBellman}
+	\begin{split}
+	V(x)=\min\{&c+V(0^+),\\
+	&\frac{ e^{\beta x}}{\bar F(x)} [V(0^+) - (c+a+V(0^+))F(x)\mathbb{E}[e^{-\beta Q_0}|Q_0<x]]
+	\}
+	\end{split}
+	\end{equation}
+	and preventive maintenance is chosen if and only if $V(x)\geq c+V(0^+)$.
+\end{theorem}
+Unfortunately, the value of $V(0^+)$ depends on the policy that is chosen and it seems difficult to solve $V(x)=c+V(0^+)$ analytically for $x$.
+Control limit $\mu^*$ is then chosen as the smallest positive $x$ that satisfies $V(x)=c+V(0^+)$ if such $x$ exist and $\mu^*=\infty$ else.
+The policy that we just derived, schedules preventive maintenance at time $\mu^*$ if the machine has not already failed by then.
+We denote the total discounted cost of this policy by $V(0^+,\mu^*)$.
+
+For any (possibly sub-optimal) control limit $\mu$, we can derive the expected remaining total discounted cost.
+The length of one run of the machine is the minimum of its lifetime $Q_0$ and the chosen control limit $\mu$.
+At the end of each run, at least $c$ is paid.
+If the run ends because the machine broke (i.e. $Q_0<\mu$), an additional cost of $a$ is paid.
+Hence, we get the following expression for $V(0^+,\mu)$
+\begin{equation}\label{eq:AgeBasedPolicyTDC}
+V(0^+,\mu)=aF(\mu)\mathbb{E}[e^{-\beta Q_0}|Q_0\leq \mu]+(c+V(0^+,\mu))\mathbb{E}[e^{-\beta(Q_0\wedge\mu)}].
+\end{equation}
+We get a similar expression for $V(x,\mu)$:
+
+\begin{theorem}
+	Given control limit $\mu$ and a machine of age $x$, the expected remaining total cost equals 
+	\begin{equation}\label{eq:AgeBasedPolicyRemainingTDC}
+	V(x,\mu)=aF(\mu;x)\mathbb{E}[e^{-\beta Q_0}|x<Q_0\leq \mu]+(c+V(0^+,\mu))\mathbb{E}[e^{-\beta(Q_0\wedge\mu)}|Q_0>x].
+	\end{equation}
+\end{theorem}
+
+\begin{remark}
+	By taking the derivative of \eqref{eq:AgeBasedPolicyRemainingTDC}, one can see that this also adheres to the differential equation \eqref{eq:AgeBasedBellmanODE} that resulted from the Bellman equations.
+\end{remark}
+
+\begin{remark}
+	\eqref{eq:AgeBasedPolicyTDC} can also be rewritten to get an explicit expression for $V(0^+,\mu)$:
+	\begin{equation}\label{eq:AgeBasedOptimalTDC}
+	V(0^+,\mu)=\frac{aF(\mu)\mathbb{E}[e^{-\beta Q_0}|Q_0\leq \mu]+c\mathbb{E}[e^{-\beta(Q_0\wedge\mu)}]}{1-\mathbb{E}[e^{-\beta (Q_0\wedge\mu)}]}.
+	\end{equation}
+\end{remark}
+
+\begin{remark}
+	If $\mu^*=\infty$, then the expected total discounted cost equals
+	\[V(0^+,\infty)=\mathbb{E}[e^{-\beta Q_0}](c+a+V(0^+,\infty)).\]
+	Which can be rewritten to
+	\[V(0^+,\infty)=\frac{\tilde{F}(-\beta)}{1-\tilde{F}(-\beta)}(c+a),\]
+	where $\tilde{F}$ is the moment generating function of $Q_0$.
+\end{remark}
+
+\begin{example}
+	Let $Q\sim\text{Exp}(\lambda)$.
+	Because of the memoryless property, we would expect $V(x,\mu^*)$ to be constant.
+	Filling this in into \eqref{eq:AgeBasedBellmanODE}, we get
+	$$
+	\frac{d}{dx}V(x,\mu^*)=0=-\lambda(c+a+ V(0^+,\mu^*))+(\beta+ \lambda) V(x,\mu^*)=-\lambda(c+a+ V(0^+,\mu^*))+(\beta+ \lambda) V(0^+,\mu^*).
+	$$
+	Which results in
+	$$
+	V(0^+,\mu^*)=\frac{\lambda}{\beta}(c+a)
+	$$
+	which equals exactly the total discounted cost for control limit $\mu^*\infty$.
+\end{example}

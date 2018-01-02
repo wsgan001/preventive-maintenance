@@ -1,0 +1,35 @@
+\section{Heuristic policies}
+As it is difficult to find an optimal policy that satisfies \eqref{eq:MmfmHazardBoundsShort}, it might be useful to find heuristic policies that minimize the expected total discounted cost reasonably well.
+
+\subsection{The same control limit in each CTMC-state}
+If the CTMC-states are similar to each other (i.e. similar fluid rates, transition rates and jump sizes), then we could also just use the same control limit $\mu$ for all the CTMC-states.
+This would simplify the expressions 
+Finding the policy that minimizes the cost within this class of control limit policies would be relatively easy.
+The expected total discounted cost would be
+\[
+V(x_{NEW},\mu)=\int\limits_0^\mu f(x)D_0(x)dx (c+a+V(x_{NEW},\mu))+\bar{F}(\mu)D_0(\mu)(c+V(x_{NEW},\mu)),
+\]
+which is easier to minimize numerically than \eqref{eq:MmfmTDC}.
+This heuristic would be a crude estimation of the optimal policy if the  CTMC-states are not very similar. 
+The heuristic was implemented in Matlab and the resulting policies and total discounted costs were compared with the exact solutions.
+The results can be found in appendix \ref{AppendixComputationsTable}.
+
+\subsection{Assuming no jumps before the next failure}
+When we compare the equation for the optimal policy of age-based maintenance \eqref{eq:AgeBasedHazardBound} with that of the MMFM problem \eqref{eq:MmfmHazardBounds},
+we see that these two differ mostly by the term 
+\[
+\sum\limits_j\Lambda^D_{ij}V(j,\mu_i^*,0,\pi^*).
+\]
+This term is caused by the possibility that a jump would occur.
+If we would simply assume that no jump would occur, we could omit this term and the problem would be easier to solve.
+This heuristic results in an adjusted equation for the optimal control limits:
+\[
+r_ih(\mu_i^*)a=\beta(c+V(x_{NEW},\pi^*)).
+\]
+\begin{remark}
+	Note that using this heuristic, all states with the fluid rate limit would have the same control limit, regardless of their outgoing edges.
+\end{remark}
+This heuristic was implemented in Matlab and the resulting policies and total discounted costs were compared with the exact solutions.
+The results can be found in appendix \ref{AppendixComputationsTable}.
+It turns out that the performance of this heuristic depends a lot on the size and frequencies that jumps would otherwise occur at.
+For instance, if transitions would occur frequently and the jump sizes are large, then this heuristic is would be crude and the difference in control limit and cost would be significant.

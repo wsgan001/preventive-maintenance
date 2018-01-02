@@ -1,0 +1,152 @@
+\section{Computation of discounted probabilities}
+In this section, we will show how to compute the discounted probabilities $D_{ij}(q,\pi,l)$ and $D_{i}(q,\pi,l)$ and the discounted density $\Gamma_i(q,\pi,l)$.
+We will do this, by first deriving $D_{ij}(q)$.
+
+\subsection{Disregarding failures and policies}
+We repeat the definition of $D_{ij}(q)$:
+\[
+D_{ij}^t(q):=\mathbb{E}[e^{-\beta T_t(q)}\mathds{1}\{S(t+T_t(q)=j)\}|S(t)=i].
+\]
+We will now prove a few properties regarding $D_{ij}(q)$:
+\begin{lemma}\label{lemma:MmfmDiscountsExponentLinear}
+	\[
+	D_{ij}(A+B)=\sum\limits_k D_{ik}(A)D_{kj}(B)
+	\]
+	\begin{proof}
+		TODO
+	\end{proof}
+\end{lemma}
+\begin{lemma}
+	For small $\delta$, $D_{ij}(r_i\delta)$ is given by
+	\[
+	D_{ij}(r_i\delta)=(1-\delta\lambda_i)\mathds{q}\{i=j\}+\sum\limits_k\delta\lambda_{ij}D_{kj}(J_{ik})+o(\delta^2).
+	\]
+	\begin{proof}
+		TODO
+	\end{proof}
+\end{lemma}
+\begin{lemma}
+	$D_{ij}$ adheres to the following differential equation:
+	\begin{equation}\label{eq:MmfmDiscountDifferential}
+	r_i\frac{d}{dq}D_{ij}(q)=\sum\limits_m\left[\sum\limits_{k\neq i}\lambda_{ik}D_{km}(J_{ik})\right] D_{mj}(q)-(\lambda_i+\beta\delta)D_{ij}(q)
+	\end{equation}
+	\begin{proof}
+		TODO
+	\end{proof}
+\end{lemma}
+\eqref{eq:MmfmDiscountDifferential} suggests defining the following matrix:
+\begin{equation}\label{eq:MmfmDiscountGenerator}
+\begin{split}
+\Lambda^D_{im}:=\begin{cases}
+\sum\limits_{k\neq i}\frac{\lambda_{ik}}{r_i}D_{km}(J_{ik})-\frac{(\lambda_i+\beta)}{r_i}&\text{ if }i=m\\
+\sum\limits_{k\neq i}\frac{\lambda_{ik}}{r_i}D_{km}(J_{ik})&\text{ else.}
+\end{cases}
+\end{split}
+\end{equation}
+Furthermore, if we let $D(q)$ be the matrix with entries $D_{ij}(q)$, we can solve the differential equation \eqref{eq:MmfmDiscountDifferential} in the following way:
+\begin{theorem}
+	For $\Lambda^D$ as defined above, the solution to differential equation \eqref{eq:MmfmDiscountDifferential} is given by
+	\begin{equation}\label{eq:MmfmDiscountMatrixSolution}
+	D(q)=e^{\Lambda^D q}.
+	\end{equation}
+	So that the discounted probability from going to state $i$ to $j$ while $Q(t)$ decreases by $q$, is given by
+	\begin{equation}
+	D_{ij}(q)=\left(e^{\Lambda^D q}\right)_{ij}.
+	\end{equation}
+	\begin{proof}
+		The differential equation \eqref{eq:MmfmDiscountDifferential} can be rewritten to
+		\[
+			\frac{d}{dq}D_{ij}(q)=\sum\limits_m\Lambda^D_{im}D_{mj}(q).
+		\]
+		So that for the matrix $D(q)$, we have the following matrix differential equation
+		\[
+		\frac{d}{dq}D(q)=\Lambda^D D(q),
+		\]
+		of which \eqref{eq:MmfmDiscountMatrixSolution} is a solution.
+	\end{proof}
+\end{theorem}
+
+\begin{remark}
+	To compute \eqref{eq:MmfmDiscountMatrixSolution}, we still need the constants $D_{km}(J_{ik})$.
+	These $N^3$ values can be estimated using a method of successive approximation where iteratively these values $D_{km}(J_{ik})$ are calculated using \eqref{eq:MmfmDiscountMatrixSolution}.
+	For the problem parameters that we used, ten iterations were enough to make these values converge for up to five decimals.
+\end{remark}
+
+\begin{remark}\label{remark:MmfmStochasticShortestPath}
+	As $L_0(t)$ increases continuously when $L_c(t)=0$ and is constant when $L_c(t)>0$, we know that in each run of the machine for each value $l_0\geq0$, there exists a $t$ so that $L_0(t)=l_0$.
+	If we omit all time intervals where $L_c(t)>0$, we can view the machine as a CTMC over $L_0$.
+	That is, using $L_0$ as time parameter.
+	This adjusted CTMC would have generator $\Lambda^D$ so that the probability that the process is in CTMC-state $s_j$ at the time when $L_0(t)=l_0+q$, given that the process is in CTMC-state $s_i$ when $L_0(t)=l_0$, is given by
+	\[
+	\left(e^{\Lambda^Dq}\right)_{ij}.
+	\]
+	Viewing the process as this adjusted CTMC can simplify the problem.
+\end{remark}
+
+\subsection{Taking policies into account}
+When we take policies into account, the following complication arises in computing $D_{ij}(q, \pi,l)$:
+In the path from $s_i$ to $s_j$, no state $s_k$ must be visited when $L_0(t)>\mu_k$.
+This is summarized by the following lemma.
+\begin{lemma}
+	Similar to lemma \ref{lemma:MmfmDiscountsExponentLinear}, we have
+	\[
+	D_{ij}(A+B,\pi,l)=\sum\limits_{\mu_k>l+A} D_{ik}(A,\pi,l)D_{kj}(B,\pi,l+A)
+	\]
+	\begin{proof}
+		TODO
+	\end{proof}
+\end{lemma}
+
+\begin{lemma}
+	For small $\delta$, we have
+	\[
+	D_{ij}(r_i\delta,\pi,l)=(1-\delta\lambda_i)\mathds{q}\{i=j\}+\sum\limits_{\mu_k>l+r_i\delta}\delta\lambda_{ij}D_{kj}(J_{ik})+o(\delta^2).
+	\]
+	\begin{proof}
+		TODO
+	\end{proof}
+\end{lemma}
+Which suggests that we should replace the generator $\Lambda^D$ by a $\Lambda^D(l_0)$ dependent of the amount of used fluid $l_0$:
+\begin{equation}
+\begin{split}
+\Lambda^D_{im}(l_0,\pi):=\begin{cases}
+0&\text{ if }\mu_i<l_0\\
+\Lambda^D_{im}&\text{ else.}
+\end{cases}
+\end{split}
+\end{equation}
+$D_{ij}(q, \pi,l)$ can now be calculated in the following straightforward way:
+\begin{theorem}
+	The discounted probabilities $D_{ij}(q, \pi,l)$ are given by
+	\[
+	D_{ij}(q, \pi,l)=\left(e^{\int_l^{l+q}\Lambda^D(x,\pi)dx}\right)_{ij}.
+	\]
+	\begin{proof}
+		TODO
+	\end{proof}
+\end{theorem}
+Now we will calculate the discounted density $\Gamma_i(q,\pi,l)$:
+
+$\Gamma_i^t(q,\pi,l)$ corresponds to repairing when the fluid level $Q(t)$ reaches $Q(t)-q$.
+The discounted probability of reaching fluid level $Q(t)-q$ in state $s_j$ equals $D_{ij}(q, \pi,l)$.
+When the process reaches this state, the machine can be repaired by transitioning to a CTMC-state $s_k$ where the control limit has already been exceeded.
+However, the presence of jumps complicates this:
+If the transition from $s_j$ to $s_k$ has a fluid jump, then repair won't be chosen immediately.
+This problem is solved by using transition rates $\Lambda^D_kj$ instead of $\lambda_{kj}$ since, referring back to remark \ref{remark:MmfmStochasticShortestPath}, are not interested in time intervals where the buffer $L_c$ is nonempty.
+Concluding:
+
+\begin{theorem}
+	The discounted density corresponding to repairing when $L_0(t)=l+q$ given that initially the process is in CTMC-state $s_i$ with used initial fluid $l$ is given by
+	\[
+	\Gamma_i(q,\pi,l)=\sum\limits_{\mu_j>l+q}D_{ij}(q,\pi,l)\sum\limits_{\mu_k<l+q}\Lambda_{jk}^D.
+	\]
+\end{theorem}
+
+
+\begin{remark}
+	Referring back to remark \ref{remark:MmfmStochasticShortestPath}, if we view the process as this adjusted CTMC, the problem simplifies to a stochastic shortest path problem where in each state $s_i$, there is a transition to a terminating state with rate
+	\[
+	-\sum\limits_j \Lambda^D_{ij},
+	\]
+	and a terminating cost of 0.
+\end{remark}

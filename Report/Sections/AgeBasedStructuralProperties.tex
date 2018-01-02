@@ -1,0 +1,57 @@
+\section{Structural properties}\label{section:AgeBasedStructuralProperties}
+In this section, the effect of changing problem parameters is investigated.
+
+\subsection{Effect on control limit}
+From \eqref{eq:AgeBasedHazardBound}, we can see what effects changing $h,\beta,c$ and $a$ has on the control limit:
+\[h(\hat{\mu})=\beta\frac{c+V(0^+,\mu^*)}{a}.\]
+\begin{remark}
+	Decreasing  $a$ would result in an increase of the right hand side (the hazard bound) of this equation, increasing the control limit.
+	This is expected, as this would decrease the incentive to prevent the machine from failing.
+\end{remark}
+\begin{remark}
+	Decreasing $c$ would result in a decrease of the hazard bound, decreasing the control limit.
+	This is also expected as this would make $a$ relatively larger.
+\end{remark}
+\begin{remark}
+	If we would multiply $c$ and $a$ by a constant, then the control limit would not change as the sizes of these costs relative to each other remains the same.
+	This can be proven using remark \ref{remark:AgeBasedCostRatio}.
+\end{remark}
+\begin{remark}\label{remark:AgeBasedControlLimitDiscountIncrease}
+	Increasing $\beta$ will result in an increase in hazard bound, resulting in an increase in the control limit.
+	This can be explained by the fact that with a higher discount, costs further in the future weigh less such that you would want to move costs as far into the future as possible.
+\end{remark}
+\begin{remark}
+	A higher hazard (or a faster increasing hazard) results in a lower control limit as expected.
+\end{remark}
+\begin{remark}\label{remark:AgeBasedControlLimitDiscountAndHazardIncrease}
+	If the hazard rate and the control limit are both multiplied by a constant, then the hazard rate remains the same as this constant can just be divided out of this equation.
+\end{remark}
+
+\subsection{Effect on expected total discounted cost}
+From \eqref{eq:AgeBasedOptimalTDC}, we can see what effects changing $h,\beta,c$ and $a$ has on the expected total discounted cost:
+\[V(0^+,\mu)=\frac{aF(\mu)\mathbb{E}[e^{-\beta Q_0}|Q_0\leq \mu]+c\mathbb{E}[e^{-\beta(Q_0\wedge\mu)}]}{1-\mathbb{E}[e^{-\beta (Q_0\wedge\mu)}]}.\]
+\begin{remark}
+	Decreasing $c$ or $a$ results in a decrease of this total cost as expected.
+\end{remark}
+\begin{remark}\label{remark:AgeBasedCostRatio}
+	If we multiply both $c$ and $a$ by a constant, the cost will also be multiplied by this constant.
+	This is natural as expressing the valuta the costs are expressed in should not be relevant.
+\end{remark}
+\begin{remark}
+	A higher hazard would result in a higher expected value for the discount, decreasing the denominator and increasing the total discounted cost.
+	This is natural as a machine that fails quicker is more expensive to maintain.
+\end{remark}
+\begin{remark}\label{remark:AgeBasedTDCDiscountIncrease}
+	Increasing the discount increases the denominator and the numerator so that the discounted cost decreases, as expected.
+\end{remark}
+\begin{remark}
+	Recall the discussion of remark \ref{remark:AgeBasedValueNonDecreasing}.
+	If $\frac{d}{dx}V(x,\mu^*)\geq0$ for all $x\leq\mu^*$, then by rewriting \eqref{eq:AgeBasedBellmanODE}, we get
+	\[
+	V(x,\mu^*)\geq \frac{h(x)}{\beta+h(x)}(c+a+V(0^+,\mu^*))>\frac{h(x)}{\beta}(c+a).
+	\]
+	Note that the right hand side of this inequality corresponds to the expected total discounted cost of never preventively repairing a machine with lifetime distributed as an exponentially variable with rate $h(x)$.
+	This cost is optimal for this exponentially distributed lifetime as for the exponential distribution the hazard is constant and repair is never chosen.
+	Concluding, we know that $V(x,\mu^*)$ is greater than the optimal cost of maintaining a machine with lifetime exponentially distributed with rate $h(x)$.
+\end{remark}
+For various parameters, the optimal control limit and total discounted cost are summarized in appendix \ref{AppendixComputationsTable}.

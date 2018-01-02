@@ -1,0 +1,151 @@
+\section{Computation of total discounted cost}
+In this section the expected total discounted cost is calculated corresponding to following a control limit policy with control limit $\mu$.
+As in the age-based maintenance problem, we could use the Bellman equations to find differential equations to which the total discounted cost adheres.
+But for this problem, we will opt for the simpler approach of directly calculating the total discounted costs corresponding to the policies.
+
+%When in a run of the machine $Q_0\leq\mu$, we know that we will have to correctively repair after this run.
+%Else, we will have to preventively repair.
+The challenge lies in calculating the discount over these costs.
+In the age-based problem, this was simple as there were no jumps and the discount after $q$ fluid (age) was depleted was simply $e^{-\beta q}$.
+In this problem, we need the distribution of the time it takes until $q$ initial fluid is depleted.
+
+\subsection{Time until control limit}
+Let $T_t(q)$ be the random variable denoting the time until the fluid level is $q$ lower than it was at time $t$, i.e.
+$$
+T_t(q)=\min\{\tau\geq0|Q(t+\tau)\leq Q(t)-q\}.
+$$
+Note that, using this definition, $T_0(\mu)$ equals the time until the control limit is reached ($L_0(t)=\mu$) and $T(Q_0)$ equals the time until the machine fails.
+\begin{lemma}\label{lemma:TimeUntilFluidLemma}
+	For any $A,B>0$:
+	$A\leq\mu\Leftrightarrow T_t(A)\leq T_t(B)$
+	\begin{proof}
+		$\Rightarrow$: 
+		\[\begin{split}
+		A\leq\mu&\Rightarrow Q(t)-B\leq Q(t)-A\\
+		&\Rightarrow (Q(t+\tau)\leq Q(t)-B\Rightarrow Q(t+\tau)\leq Q(t)-A)\\
+		&\Rightarrow T_t(A)\leq T_t(B)\\
+		\end{split}\]
+		$\Leftarrow$: We will prove that $A>B\Rightarrow T_t(A)> T_t(B)$:\\
+		We know that
+		$$
+		A>B\Rightarrow Q(t)-B > Q(t)-A.
+		$$
+		Since $Q(t)$ is piecewise continuous and does not decrease at the discontinuities, we know that 
+		$$
+		Q(t+T_t(B))=Q(t)-\mu>Q(t)-A\Rightarrow T_t(A)> T_t(B).
+		$$
+	\end{proof}
+\end{lemma}
+To find the distribution of $T_t(q)$, we will condition on the number of jumps.
+Let $N_t(q)$ be the random variable denoting the number of jumps that occur in the interval $(t,t+T_t(q)]$.
+We will now compute its distribution.
+The probability that zero jumps occur equals the probability that the exponentially distributed time interval is larger than $q$:
+$$
+\mathbb{P}(N_t(q)=0)=e^{-\lambda q}.
+$$
+The probability that exactly one jump occurs equals the probability that exactly one Poisson event happens in the interval $(t,t+q]$ while none happen in $(t+q,t+q+J]$. Resulting in
+$$
+\mathbb{P}(N_t(q)=1)=\lambda q e^{-\lambda q} e^{-\lambda J}=\lambda q e^{-\lambda (q+J)}.
+$$
+
+For each $k\geq0$, by conditioning on the time until the first jump, we get the following recursion
+\begin{equation}\label{eq:SimpleFluidJumpsRecursion}
+\begin{split}
+\mathbb{P}(N_t(q)=k+1)&=\int\limits_0^{q}\lambda e^{-\lambda x}\mathbb{P}(N_t(q-x+J)=k)dx\\
+&=\int\limits_0^{q}\lambda e^{-\lambda (q-y)}\mathbb{P}(N_t(y+J)=k)dy,
+\end{split}
+\end{equation}
+since after this first jump, the fluid level equals $q-x+J$ and $k$ jumps should occur. The second equality follows after the substition $y=q-x$.
+The solution of this recursion, is given by the following lemma.
+\begin{lemma}
+	The probability that $k$ jumps occur before the fluid is decreased by $q$ equals
+	
+	\[\mathbb{P}(N_t(q)=k)=\lambda q\frac{(\lambda (q+kJ))^{k-1}}{k!}e^{-\lambda(q+kJ)}.\]
+	
+	\begin{proof}
+		This can be seen by substituting this expression into \eqref{eq:SimpleFluidJumpsRecursion} and setting $k=1$ to see that it also satisfies the calculated expression for $\mathbb{P}(N_t(q)=1)$.
+	\end{proof}
+\end{lemma}
+
+Now we can define the quantity $D(q)$ as the expected discount over the time until $q$ initial fluid is used in the following way
+\begin{equation}\label{eq:SimpleFluidDiscountDefinition}
+D(q):=\mathbb{E}[e^{-\beta T_t(q)}]=\sum\limits_{k=0}^\infty e^{-\beta(q+kJ)}\mathbb{P}(N_t(q)=k).
+\end{equation}
+Note that this $D$ does not depend on $t$ because the time intervals in between jumps are memoryless.
+This quantity has the following properties:
+\begin{lemma}\label{lemma:SimpleFluidDiscountLogLinear}
+	\[D(A)D(B)=D(A+B).\]
+	\begin{proof}
+		\begin{equation}
+		\begin{split}
+		D(A)D(B)&=\left[\sum\limits_{k=0}^\infty e^{-\beta(A+kJ)}\mathbb{P}(N_t(A)=k)\right]\left[\sum\limits_{m=0}^\infty e^{-\beta(B+mJ)}\mathbb{P}(N_t(B)=m)\right]\\
+		&=\sum\limits_{n=0}^\infty e^{-\beta(A+B+nJ)}\sum\limits_{k=0}^n \mathbb{P}(N_t(A)=k)\mathbb{P}(N_t(B)=n-k)\\
+		&=\sum\limits_{n=0}^\infty e^{-\beta(A+B+nJ)} \mathbb{P}(N_t(A+B)=n).\\
+		\end{split}
+		\end{equation}
+		The last step holds since on the second last line, the second sum equals the probability that $n$ jumps occur before a fluid quantity $A+B$ is drained, conditioned on the number of jumps that occur before a quantity $A$ is drained.
+	\end{proof}
+\end{lemma}
+
+\begin{lemma}\label{lemma:SimpleFluidDiscountODE}
+	$$\frac{d}{dA}D(A)=-(\beta+\lambda)D(A)+\lambda D(A+J)$$
+	\begin{proof}
+		This can be seen from taking the derivative of \eqref{eq:SimpleFluidDiscountDefinition}.
+	\end{proof}
+\end{lemma}
+Using these lemmas we can find a simpler expression for $D(q)$ than \eqref{eq:SimpleFluidDiscountDefinition}:
+\begin{theorem}\label{theorem:SimpleFluidDiscountExpression}
+	The expected discount over the time until the fluid has decreased by $q$, is given by
+	\[
+	D(A)=e^{-(\beta+\lambda(1-D(J)))A}.
+	\]
+	\begin{proof}
+		Using lemma \ref{lemma:SimpleFluidDiscountLogLinear}, we can rewrite the derivative of $D(A)$ given by \ref{lemma:SimpleFluidDiscountODE} to
+		\[
+		\frac{d}{dA}D(A)=-(\beta+\lambda)D(A)+\lambda D(A)D(J)=-(\beta+\lambda(1-D(J)))D(A).
+		\]
+		Which leads to solution
+		\[
+		D(A)=Ce^{-(\beta+\lambda(1-D(J)))A}.
+		\]
+		For some integration constant $C$. Since $D(0)=1$, we know that $C=1$, which completes the proof.
+	\end{proof}
+\end{theorem}
+\begin{corollary}
+	The value $D(J)$ is now implicitly given by
+	\[
+	D(J)=e^{-(\beta+\lambda(1-D(J)))J}.
+	\]
+	This quantity can be approximated by a method of successive approximation.
+	For the parameters that were used in appendix \ref{AppendixComputationsTable}, this quantity converged within ten iterations up to five decimals.
+\end{corollary}
+\begin{remark}\label{remark:SimpleFluidDiscountEquivalence}
+	From theorem \ref{theorem:SimpleFluidDiscountExpression}, it can be seen that this expected discount factor of the simple fluid model is actually the same as the regular discount factor for the age-based model with adjusted discount factor $\beta^*=\beta+\lambda(1-D(J))$.
+	That is,
+	\[
+	D(q)=e^{-\beta^*q}.
+	\]
+\end{remark}
+
+Now we will derive the expected total discounted cost:
+If $T_0(Q_0)\leq T_0(\mu)$, the machine will break in the first run and expected value at which the corrective repair cost is discounted is $\mathbb{E}[D(Q_0)|T_0(Q_0)\leq T_0(\mu)]$.
+Note that $\mathbb{P}(T_0(Q_0)\leq T_0(\mu))=\mathbb{P}(Q_0\leq\mu)$ by lemma \ref{lemma:TimeUntilFluidLemma}.
+If $T_0(Q_0)> T_0(\mu)$, the expected value at which the preventive repair cost is discounted is $D(\mu)$.
+This results in the following expression for the expected total discounted cost:
+\begin{theorem}
+	The expected total discounted cost of a machine with control limit $\mu$, is given by
+	\begin{equation}\label{eq:SimpleFluidImplicitTDC}
+	V(x_{NEW},\mu)=F(\mu)\mathbb{E}[D(Q_0)|Q_0\leq \mu]a+\mathbb{E}[D(Q_0\wedge\mu)](c+V(x_{NEW},\mu)).
+	\end{equation}
+\end{theorem}
+
+\begin{corollary}
+	Alternatively \eqref{eq:SimpleFluidImplicitTDC} can be written as
+	\begin{equation}\label{eq:SimpleFluidExplicitTDC}
+	V(x_{NEW},\mu)=\frac{F(\mu)\mathbb{E}[D(Q_0)|Q_0\leq \mu]a+\mathbb{E}[D(Q_0\wedge\mu)]c}{1-\mathbb{E}[D(Q_0\wedge\mu)]}.
+	\end{equation}
+\end{corollary}
+
+\begin{remark}label{remark:SimpleFluidTDCEquivalence}
+	Using remark \ref{remark:SimpleFluidDiscountEquivalence}, we can see that \eqref{eq:SimpleFluidImplicitTDC} is exactly the same as for the age-based maintenance problem \eqref{eq:AgeBasedHatTDC} for the adjusted discount factor $\beta^*=\beta+\lambda(1-D(J))$.
+\end{remark}

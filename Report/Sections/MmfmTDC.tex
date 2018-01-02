@@ -1,0 +1,109 @@
+\section{Computation of total discounted cost}
+In this section, the expected total discounted cost when using a control limit policy $\pi=[\mu_1,...,\mu_N]$ is calculated.
+
+Similar to \eqref{eq:SimpleFluidDiscountDefinition}, but keeping in mind that there are multiple CTMC-states, we define
+\[
+D_{i}^t(q):=\mathbb{E}[e^{-\beta T_t(q)}|S(t)=i],
+\]
+as the expected discount over the time until the fluid level $Q(t)$ is decreased by $q$, given that it starts in $s_i$.
+In this definition, we disregard failures and policies (i.e. we briefly assume that $Q_0=\infty$ and all control limits $\mu_i=\infty$).
+Furthermore, we define
+\[
+D_{ij}^t(q):=\mathbb{E}[e^{-\beta T_t(q)}\mathds{1}\{S(t+T_t(q)=j)\}|S(t)=i].
+\]
+Note that these expectations do not depend on calendar time but only on the CTMC-state the process is in when it is at level $Q(t)$.
+Hence, we will omit $t$ in these notations.
+Note that
+\[
+D_{i}(q)=\sum\limits_{j}D_{ij}(q).
+\]
+When we take the policy $\pi=[\mu_1,...,\mu_N]$ into account, states cannot be reached via paths that go over a control limit.
+We define similar quantities:
+\[
+\begin{split}
+&D_{ij}^t(q,\pi,l)\\
+&:=\mathbb{E}\left[e^{-\beta T_t(q)}\mathds{1}\left\{\begin{split}
+&S(t+T_t(q)=j),\\
+&\forall \tau\in[t,t+T_t(q)):
+\begin{split}
+&L_c(\tau)>0\\&\vee L_0(\tau)<\mu_{S(\tau)}
+\end{split}
+\end{split}\right\}\middle| S(t)=i,L_0(t)=l\right],
+\end{split}
+\]
+and
+\[
+D_{i}^t(q,\pi,l):=\sum\limits_{\mu_j\leq l+q}D_{ij}^t(q,\pi,l).
+\]
+Where these are similar to the earlier defined $D_{ij}$ but without the machine being repaired before fluid level $Q(t)-q$ is reached.
+These expectations also do not depend on $t$.
+Hence, $t$ will again be omitted in the notation.
+If preventive repair is chosen, then it is chosen when $L_0$ equals some random variable $R$.
+We define the following quantity
+\[
+\begin{split}
+\Gamma_i^t(q,\pi,l):=\lim\limits_{\delta\rightarrow 0}\frac1\delta&\mathbb{P}(q\leq R<q+\delta|S(t)=i,L_0(t)=l)\\
+&\times\mathbb{E}[e^{-\beta T_t(R)}|q\leq R<q+\delta,S(t)=i,L_0(t)=l].
+\end{split}
+\]
+The interpretation of this quantity can be difficult, it could be seen as the density of $R$ multiplied by the expected discount factor given that repair is chosen at this level of $L_0$.
+Note that $\Gamma_i^t(q,\pi)$ also does not depend on $t$ so that $t$ will again be omitted in the notation.
+\begin{remark}
+	These defined quantities should not be interpreted as either probabilities or discount factors but more as a combination of these two: The expected discount factor given some event, multiplied by the probability (or density) of this event.
+	Will refer to $D_{ij},D_{i}(q,\pi)$ and $D_{i}(q,\pi,l)$ as 'discounted probabilities' and $\Gamma_i(q,\pi,l)$ as a 'discounted density'.
+\end{remark}
+We will now derive the expected total discounted cost of a policy $\pi$.
+Each run of the machine can end in two ways:
+\begin{enumerate}
+	\item The machine breaks,
+	\item or preventive maintenance is chosen.
+\end{enumerate}
+We will split the total discounted cost in terms corresponding to these two scenarios.
+
+\subsubsection{The machine breaks}
+When the machine breaks, it means that $L_0(t)$ has reached $Q_0$ without encountering a control limit.
+Hence, the repair costs are discounted at $D_0(Q_0,\pi,0)$.
+The expected value of this, is given by
+\[
+\mathbb{E}[D_{i}(Q_0,\pi,0)]=\int\limits_0^\infty f(q)D_{i}(q,\pi,0)dq.
+\]
+We get the following term in the expression of the total discounted cost
+\[
+\mathbb{E}[D_{i}(Q_0,\pi,0)](c+a+V(x_{NEW},\pi)).
+\]
+
+\subsection{Preventive maintenance is chosen}
+When preventive maintenance is chosen, it can either be chosen in a state $x=(i,l_0,0)\in X$ where
+\begin{enumerate}
+	\item $l_0=\mu_i$, preventive maintenance is chosen 'at the control limit';
+	\item or $l_0>\mu_i$, preventive maintenance is chosen 'after the control limit'.
+\end{enumerate}
+We will again split the total discounted cost in terms corresponding to these two scenarios.
+
+\subsubsection{Preventive maintenance is chosen at the control limit}
+In this case, repair is chosen in a state $s_i$ with $l_0=\mu_i$.
+For this to happen, it must be the case that $Q_0>\mu_i$, with probability $\bar{F}(\mu_i)$.
+This has a cost $c$, discounted at $D_{i}(\mu_i,\pi,0)$.
+Hence, we get the following term:
+\[
+\sum\limits_i\bar{F}(\mu_i)D_{i}(\mu_i,\pi,0)(c+V(x_{NEW},\pi)).
+\]
+
+\subsubsection{Preventive maintenance is chosen after the control limit}
+In this case, repair is at in some CTMC-state $s_i$ and $l_0>\mu_i$.
+For this to be able to happen, $Q_0>l_0$ must hold with probability $\bar{F}(l_0)$.
+This event would have cost $c$ and discounted density $\Gamma_0(l_0,\pi,0)$.
+Hence, this results in the following term:
+\[
+\left[\int\limits_0^\infty \bar{F}(q)\Gamma_0(q,\pi,0)dq\right](c+V(x_{NEW},\pi)).
+\]
+Concluding:
+\begin{theorem}
+	The expected total discounted cost of a policy $\pi$ is given by
+	\begin{equation}\label{eq:MmfmTDC}
+	\begin{split}
+	V(x_{NEW},\pi)=&\mathbb{E}[D_{i}(Q_0,\pi,0)](c+a+V(x_{NEW},\pi))\\
+	&+\left[\int\limits_0^\infty \bar{F}(q)\Gamma_0(q,\pi,0)dq+\sum\limits_i\bar{F}(\mu_i)D_{i}(\mu_i,\pi,0)\right](c+V(x_{NEW},\pi)).
+	\end{split}
+	\end{equation}
+\end{theorem}

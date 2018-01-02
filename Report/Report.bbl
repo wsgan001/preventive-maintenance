@@ -1,59 +1,9 @@
-\begin{thebibliography}{20}
+\begin{thebibliography}{1}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
-
-\bibitem[Asmussen et~al.(1996)Asmussen, Nerman, and Olsson]{Asmussen1996}
-S{\o}ren Asmussen, Olle Nerman, and Marita Olsson.
-\newblock Fitting phase-type distributions via the em algorithm.
-\newblock \emph{Scandinavian Journal of Statistics}, pages 419--441, 1996.
-
-\bibitem[Bertsekas and Yu(2012)]{Bertsekas2012}
-Dimitri~P Bertsekas and Huizhen Yu.
-\newblock Q-learning and enhanced policy iteration in discounted dynamic
-  programming.
-\newblock \emph{Mathematics of Operations Research}, 37\penalty0 (1):\penalty0
-  66--94, 2012.
-
-\bibitem[Bertsekas et~al.(1995)Bertsekas, Bertsekas, Bertsekas, and
-  Bertsekas]{Bertsekas1995}
-Dimitri~P Bertsekas, Dimitri~P Bertsekas, Dimitri~P Bertsekas, and Dimitri~P
-  Bertsekas.
-\newblock \emph{Dynamic programming and optimal control}, volume~1.
-\newblock Athena Scientific Belmont, MA, 1995.
-
-\bibitem[Birge and Louveaux(2011)]{Birge2011}
-John~R Birge and Francois Louveaux.
-\newblock \emph{Introduction to stochastic programming}.
-\newblock Springer Science \& Business Media, 2011.
-
-\bibitem[Buchholz et~al.(2014)Buchholz, Kriege, and Felko]{Buchholz2014}
-Peter Buchholz, Jan Kriege, and Iryna Felko.
-\newblock \emph{Input modeling with phase-type distributions and Markov models:
-  theory and applications}.
-\newblock Springer, 2014.
-
-\bibitem[Chen and Kumar(2014)]{Chen2014}
-Jun Chen and Ratnesh Kumar.
-\newblock Pattern mining for predicting critical events from sequential event
-  data log.
-\newblock \emph{IFAC Proceedings Volumes}, 47\penalty0 (2):\penalty0 1--6,
-  2014.
-
-\bibitem[Dongen(2000)]{Dongen2000}
-S~VAN Dongen.
-\newblock \emph{Graph clustering by flow simulation}.
-\newblock PhD thesis, Standardization and Knowledge Transfer, 2000.
-
-\bibitem[Fournier-Viger et~al.(2017)Fournier-Viger, Lin, Kiran, Koh, and
-  Thomas]{Fournier-Viger2017}
-Philippe Fournier-Viger, Jerry Chun-Wei Lin, Rage~Uday Kiran, Yun~Sing Koh, and
-  R~Thomas.
-\newblock A survey of sequential pattern mining.
-\newblock \emph{Data Science and Pattern Recognition}, 1\penalty0 (1):\penalty0
-  54--77, 2017.
 
 \bibitem[Gribaudo and Telek(2007)]{Gribaudo2007}
 Marco Gribaudo and Mikl{\'o}s Telek.
@@ -61,72 +11,5 @@ Marco Gribaudo and Mikl{\'o}s Telek.
 \newblock In \emph{International School on Formal Methods for the Design of
   Computer, Communication and Software Systems}, pages 271--317. Springer,
   2007.
-
-\bibitem[Hajiaghayi et~al.(2014)Hajiaghayi, Kirkpatrick, Wang, and
-  Bouchard-C{\^o}t{\'e}]{Hajiaghayi2014}
-Monir Hajiaghayi, Bonnie Kirkpatrick, Liangliang Wang, and Alexandre
-  Bouchard-C{\^o}t{\'e}.
-\newblock Efficient continuous-time markov chain estimation.
-\newblock In \emph{ICML}, pages 638--646, 2014.
-
-\bibitem[Horton et~al.(1998)Horton, Kulkarni, Nicol, and Trivedi]{Horton1998}
-Graham Horton, Vidyadhar~G Kulkarni, David~M Nicol, and Kishor~S Trivedi.
-\newblock Fluid stochastic petri nets: Theory, applications, and solution
-  techniques.
-\newblock \emph{European Journal of Operational Research}, 105\penalty0
-  (1):\penalty0 184--201, 1998.
-
-\bibitem[Inamura et~al.(2006)]{Inamura2006}
-Yasunari Inamura et~al.
-\newblock Estimating continuous time transition matrices from discretely
-  observed data.
-\newblock Technical report, Bank of Japan, 2006.
-
-\bibitem[Kalosi et~al.(2016)Kalosi, Kapodistria, and Resing]{Kalosi2016}
-Szilard Kalosi, Stella Kapodistria, and Jacques~AC Resing.
-\newblock Condition-based maintenance at both scheduled and unscheduled
-  opportunities.
-\newblock \emph{arXiv preprint arXiv:1607.02299}, 2016.
-
-\bibitem[Lee and Lin(2010)]{Lee2010}
-Simon~CK Lee and X~Sheldon Lin.
-\newblock Modeling and evaluating insurance losses via mixtures of erlang
-  distributions.
-\newblock \emph{North American Actuarial Journal}, 14\penalty0 (1):\penalty0
-  107--130, 2010.
-
-\bibitem[Liu and Stewart(2011)]{Liu2011}
-Ning Liu and William~J Stewart.
-\newblock Markov chains and spectral clustering.
-\newblock In \emph{Performance Evaluation of Computer and Communication
-  Systems. Milestones and Future Challenges}, pages 87--98. Springer, 2011.
-
-\bibitem[Okamura and Dohi(2006)]{Okamura2006}
-Hiroyuki Okamura and Tadashi Dohi.
-\newblock Building phase-type software reliability models.
-\newblock In \emph{Software Reliability Engineering, 2006. ISSRE'06. 17th
-  International Symposium on}, pages 289--298. IEEE, 2006.
-
-\bibitem[Ross(2014)]{Ross2014}
-Sheldon~M Ross.
-\newblock \emph{Introduction to probability models}.
-\newblock Academic press, 2014.
-
-\bibitem[Serfozo(1979)]{Serfozo1979}
-Richard~F Serfozo.
-\newblock Technical note—an equivalence between continuous and discrete time
-  markov decision processes.
-\newblock \emph{Operations Research}, 27\penalty0 (3):\penalty0 616--620, 1979.
-
-\bibitem[Tzenova et~al.(2005)Tzenova, Adan, and Kulkarni]{Tzenova2005}
-Elena~I Tzenova, Ivo~JBF Adan, and Vidyadhar~G Kulkarni.
-\newblock Fluid models with jumps.
-\newblock \emph{Stochastic models}, 21\penalty0 (1):\penalty0 37--55, 2005.
-
-\bibitem[Wang and Han(2004)]{Wang2004}
-Jianyong Wang and Jiawei Han.
-\newblock Bide: Efficient mining of frequent closed sequences.
-\newblock In \emph{Data Engineering, 2004. Proceedings. 20th International
-  Conference on}, pages 79--90. IEEE, 2004.
 
 \end{thebibliography}

@@ -1,0 +1,17 @@
+\section{Structural properties}
+In this section, the effect of changing the parameters to the expected total discounted cost and the control limits are investigated.
+These structural properties are mostly similar to the simple fluid problem.
+The main difference is that there are multiple control limits for the various CTMC-states and that the control limit in a certain state is also influenced by the costs in other states.
+
+\begin{remark}
+	Referring back to the equation for the optimal control limit $\mu_i^*$ for a CTMS-state $s_i$ \eqref{eq:MmfmHazardBoundsShort}: if some change of the parameters would cause an increase in the expected remaining cost for some state $s_j$ that neighbors $s_i$ in the CTMC defined by the generator $\Lambda^D$ (i.e. if $\Lambda^D_{ij}>0$), then $\Lambda^D_{ij}V(j,\mu_i^*,0,\pi^*)$ would increase so that the hazard at which repair is chosen must decrease.
+	This results in a lower control limit.
+\end{remark}
+
+Furthermore, there are also different fluid rates for different CTMC-states:
+\begin{remark}
+	An increase in the fluid rate $r_i$ for some state $s_i$ increases the hazard in that state.
+	This results in a lower control limit, as one would expect as a higher fluid rate corresponds to the machine deteriorating quicker in that state.
+\end{remark}
+
+Again, appendix \ref{AppendixComputationsTable} contains computed values of the optimal control limit and the corresponding expected total discounted cost.

@@ -1,0 +1,45 @@
+\chapter{Proof of properties of optimal age-based control limits}\label{AppendixAgeBasedControlLimit}
+Without the assumption of increasing hazard rates, it can also be proven that if an optimal control limit $\mu^*$ exists, $\mu^*$ must satisfy \eqref{eq:AgeBasedHazardBound} and the hazard rate must be increasing at $\mu^*$.
+This can be proven using the Bellman equations.
+For this, we will briefly return to discretized time:
+If the control limit equals $\mu^*$, then one time interval earlier, $c+V_\delta(\delta,\mu^*)\geq V_\delta(\mu^*-\delta,\mu^*)$ holds since else the control limit would be smaller than $\mu^*$.
+Using \eqref{eq:gatheredDelta}, we get
+
+\[\begin{split}
+&c+V_\delta(0^+,\mu^*)\\
+\geq& V_\delta(\mu^*-\delta,\mu^*)\\
+=&\delta h(\mu^*)(c+a+ V_\delta(0^+,\mu^*))+(1-\delta\beta-\delta h(\mu^*)) V_\delta(\mu^*,\mu^*)+o(\delta^2).
+\end{split}
+\]
+Since we repair at age $\mu^*$, $V_\delta(\mu^*,\mu^*)=V_\delta(0^+,\mu^*)+c$ and we can write
+$$
+c+V_\delta(0^+,\mu^*)\geq \delta h(\mu^*)(c+a+ V_\delta(0^+))+(1-\delta\beta-\delta h(\mu^*)) (c+V_\delta(0^+))+o(\delta^2).
+$$
+Which simplifies to
+$$
+0\geq ah(\mu^*)-\beta (c+V_\delta(0^+,\mu^*))+o(\delta^2)
+$$
+and can be rewritten as
+$$
+h(\mu^*)\leq \beta\frac{c+V_\delta(0^+,\mu^*)}{a} +o(\delta^2)\rightarrow\beta\frac{c+V_\delta(0^+,\mu^*)}{a}.
+$$
+If instead of looking a decision stage before the control limit, we now look at the decision stage where the control limit $\mu^*$ is reached, the Bellman equations yield
+$$
+c+V_\delta(0^+,\mu^*)\leq V_\delta(\mu^*-\delta,\mu^*)=\delta h(\mu^*)(c+a+ V_\delta(0^+,\mu^*))+(1-\delta\beta-\delta h(\mu^*)) V_\delta(\mu^*+\delta)+o(\delta^2)
+$$
+And using the same steps, we get
+$$
+h(\mu^*)\geq \beta\frac{c+V_\delta(0^+,\mu^*)}{a} +o(\delta^2)\rightarrow\beta\frac{c+V_\delta(0^+,\mu^*)}{a}
+$$
+such that the result is proven when $\delta$ approaches zero.
+From the above, it also follows that the hazard rate is increasing at the control limit.
+This can be summarized in the following theorem:
+
+\begin{theorem}
+	Whenever the optimal policy is to repair when the age reaches control limit $\mu^*<\infty$, it holds that the hazard rate is increasing at $\mu^*$ and
+	\[h(\mu^*)=\beta\frac{c+V(0^+,\mu^*)}{a}.\]
+\end{theorem}
+
+\begin{corollary}
+	If the hazard rate of the lifetime $Q$ of the machine is monotonously decreasing, preventive repair will never be the optimal choice.
+\end{corollary}

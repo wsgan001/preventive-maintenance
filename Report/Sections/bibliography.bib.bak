@@ -248,18 +248,6 @@
   year    = {2013},
 }
 
-@Article{Jiang2013,
-  author        = {Jiang, Zhong-Ping and Jiang, Yu},
-  title         = {Robust adaptive dynamic programming for linear and nonlinear systems: An overview},
-  journal       = {European Journal of Control},
-  year          = {2013},
-  volume        = {19},
-  number        = {5},
-  pages         = {417--425},
-  __markedentry = {[s147569:]},
-  publisher     = {Elsevier},
-}
-
 @Article{Lai2006,
   author        = {Lai, Chin-Diew and Xie, Min},
   title         = {Concepts and Applications of Stochastic Ageing},

@@ -8,8 +8,9 @@ global traceData numExperiments numStates averageInitialLevel varInitialLevel;
 generator = [-1.001,1,0.001;1,-2,1;0.001,1,-1.001];
 fluidJumps=[0,0,0;1,0,0;0,1,0];
 fluidRates = [2;5;1];
-lambda = 10;
-k=100;
+lambda = 100;
+k=3;
+PDF = @(x)wblpdf(x,lambda,k);
 numExperiments = 10000;
 
 averageInitialLevel = lambda*gamma(1+1/k);
@@ -42,8 +43,9 @@ b=[];
 Aeq=[];
 beq=[];
 lb=zeros(numStates);
-ub=[];
-[mmfm,initialVariance]=fmincon(@(X) EmpiricalVariance(X),zeros(numStates),A,b,Aeq,beq,lb,ub);
+ub=10*ones(numStates);
+[mmfm,initialVariance]=fmincon(@(X) EmpiricalVariance(X),eye(numStates),A,b,Aeq,beq,lb,ub);
+%[mmfmL,ll]=fminunc(@(X) -EmpericalLikelihood(X,PDF),eye(numStates));
 
 % Extract resulted jump quantities and rates
 rates = Diagonal(mmfm);

@@ -1,15 +1,20 @@
 \input{Sections/imports.tex}
 \begin{document}
 \title{Preventive Maintenance}
-\author{Martijn G\"{o}sgens}
-\maketitle
+\author{Martijn G\"{o}sgens\\
+\and
+S\'{a}ndor Kolumb\'{a}n\\
+\and
+Stella Kapodistria
+}
+\input{Sections/TitlePage.tex}
 
-\chapter*{Abstract}
-In this thesis, we model the breakdown of a machine as a Markov modulated fluid model (MMFM) and find a replacement policy minimizing the total discounted cost.
-At each transition of the MMFM's underlying Markov chain, the fluid level can instantaneously increase by a constant amount, where the amount depends on the origin and destination state of the Markov chain.
-Numeric methods to compute the total discounted cost for a given stationary replacement policy and iteration methods to find the optimal replacement policy are presented.
 
-
+\begin{abstract}
+	In this thesis, we model the breakdown of a machine as a Markov modulated fluid model (MMFM) and find a replacement policy minimizing the total discounted cost.
+	At each transition of the MMFM's underlying Markov chain, the fluid level can instantaneously increase by a constant amount, where the amount depends on the origin and destination state of the Markov chain.
+	Numeric methods to compute the total discounted cost for a given stationary replacement policy and iteration methods to find the optimal replacement policy are presented.
+\end{abstract}
 
 \chapter*{Executive summary?}
 [Describe characteristics of a machine whose deterioration that can be modeled by a MMFM with jumps: different activities that in different degrees wear out the machine, the machine has no schedule (actions as CTMC), partial repairs between activities and an initial fitness of the machine.]
@@ -28,6 +33,7 @@ Numeric methods to compute the total discounted cost for a given stationary repl
 
 
 \chapter{Introduction}
+[Mention the structure of the report: Age based maintenance, simple fluid model with jumps, MMFM]
 \section{Preventive maintenance}
 [Mention reasons to do preventive maintenance (corrective maintenance is expensive)]
 \section{Philips machine}
@@ -36,9 +42,87 @@ Numeric methods to compute the total discounted cost for a given stationary repl
 \section{Dynamic programming}
 \subsubsection{Discounted vs. long run average cost}
 [Explain relation and pros and cons of both]
+\subsubsection{Stationary policies}
 \section{Survival analysis}
 \subsection{Classification of lifetime distributions}
 [increasing and decreasing hazard rate. No preventive maintenance for decreasing hazard rates.]
+
+
+%\chapter{Analysis of problems}
+\chapter{Age-based maintenance}\label{chapter:AgeBased}
+A machine is considered that is subject to deterioration over time.
+If no further observations are made while the machine is active, any choice to repair the machine can only be based on its age.
+In this chapter we will investigate methods to find an optimal preventive maintenance policy in terms of total discounted cost.
+% Problem formulation and definitions
+\input{Sections/AgeBasedProblemDefinition.tex}
+% Structure of optimal policy
+\input{Sections/AgeBasedPolicyStructure.tex}
+% Computation of total discounted cost
+\input{Sections/AgeBasedTDC.tex}
+% Analysis of the optimal policy
+\input{Sections/AgeBasedOptimalPolicy}
+% Computing the optimal policy
+\input{Sections/AgeBasedPolicyComputation}
+% Structural properties
+\input{Sections/AgeBasedStructuralProperties.tex}
+
+\chapter{Simple fluid model with jumps}\label{chapter:SimpleFluid}
+The problem of the previous chapter can be seen as a very simple Markov modulated fluid model:
+Initially, the bucket has an amount of fluid $Q\sim F$.
+The fluid decreases constantantly with rate $1$ and no fluid jumps occur.
+In this chapter, we extend this model by allowing jumps to occur according to a Poisson process with rate $\lambda$.
+The jumps all have the same constant (and known size) $J$.
+In the real world, these fluid jumps could correspond to a partial repair of the machine.
+The presence of jumps introduces the following complications:
+\begin{itemize}
+	\item The hazard of the machine failing at some time $t$ cannot be directly from the age only but also depends on the number of jumps that occurred before $t$.
+	\item Furthermore, the times at which these jumps occurred also matter.
+	When a jump occurs at time $t$, it is certain that the fluid quantity is at least $J$ so that you know for certain that in the interval $[t,t+J)$ the machine cannot fail.
+\end{itemize}
+In this chapter, the expected total discounted cost is calculated and methods are introduced to find the optimal replacement policy.
+% Problem formulation and definition
+\input{Sections/SimpleFluidProblemDefinition.tex}
+% Structure of optimal policy
+\input{Sections/SimpleFluidPolicyStructure}
+% Computation of total discounted cost
+\input{Sections/SimpleFluidTDC}
+% Heuristic policies
+\input{Sections/SimpleFluidHeuristics}
+% The optimal policy
+\input{Sections/SimpleFluidOptimalPolicy}
+% Structural properties
+\input{Sections/SimpleFluidStructuralProperties}
+
+\chapter{Markov Modulated Fluid Model with jumps}
+In this chapter, we extend the model of the simple fluid model with jumps from the previous chapter to a Markov modulated fluid model (MMFM) with various states, fluid rates, various fluid jump sizes and rates.
+The fluid jumps occur when a transition occurs in the underlying Markov chain.
+The MMFM that is used is similar to the first-order fluid model considered in \cite{Gribaudo2007}, with the addition of constant jumps.
+The size of the jumps are constant.
+The various fluid rates, transition rates and jump sizes introduce the following complications with regard to computing the total discounted cost and the optimal policy:
+\begin{enumerate}
+	\item The computation of the expected discount factors $D(q)$ is more difficult as we need to take multiple
+	paths with different probabilities and jump sizes into account.
+	Moreover, it is also relevant from which state you start and where you end.
+	\item There are different control limits $\mu_i$ for different states $s_i$, all depending on each other.
+	\item A jump can cause the machine to be repaired when the amount of used fluid has exceeded the control limit.
+\end{enumerate}
+These complications will be explained and tackled in the following sections.
+% Problem formulation and definition
+\input{Sections/MmfmProblemDefinition.tex}
+% Structure of optimal policy
+\input{Sections/MmfmPolicyStructure}
+% Computation of total discounted cost
+\input{Sections/MmfmTDC}
+% Computation of discounted probabilities
+\input{Sections/MmfmDiscounts}
+% The optimal policy
+\input{Sections/MmfmOptimalPolicy}
+% Structural properties
+\input{Sections/MmfmStructuralProperties}
+% Heuristic policies
+\input{Sections/MmfmHeuristicPolicies}
+% Computing the optimal control limits
+\input{Sections/MmfmPolicyComputation}
 
 \chapter{Data analysis}
 \section{Data description}
@@ -52,50 +136,6 @@ Numeric methods to compute the total discounted cost for a given stationary repl
 [Weibull, Erlang etc]
 \subsection{Phase-type}
 [mention that phase-type can fit any positive distribution but that the required number of parameters is huge.]
-
-\chapter{Problem formulation and definitions}
-\section{Age-based maintenance}
-\section{Simple fluid model with jumps}
-[First order MMFM with constant jumps]
-\section{Markov Modulated Fluid Model}
-[Different fluid rates and jump quantities]
-
-%\chapter{Analysis of problems}
-\chapter{Age-based maintenance}
-[Mention that we only consider lifetimes with increasing hazard rates]
-\section{Structure of optimal policy}
-[Control limit and stationary]
-\section{Computation of total discounted cost}
-\section{Structural properties}
-[influence of changing the parameters]
-\section{Computing the optimal policy}
-[introduction of successive approximation method, comparison with value iteration and policy iteration. Show results.]
-
-\chapter{Simple fluid model with jumps}
-[Mention that the distribution of the initial fluid level has an increasing hazard rate]
-\section{Structure of optimal policy}
-[stationary control limit on L0]
-\section{Computation of total discounted cost}
-[Explain equivalence to simple problem with adjusted discount, compare with tdc of simple problem]
-\section{Structural properties}
-[The size and frequency of the jumps decreases the tdc and increases the control limit. Mention that although the initial distribution must have an increasing hazard rate, the lifetime distribution (with jumps) need not have an increasing hazard rate.]
-\section{Heuristic policies}
-[Assume no jump until the next failure and use the same iteration policy (but with different calculation of the tdc)]
-\section{Computing the optimal policy}
-[Explain equivalence to simple problem with adjusted discount and show that the same iteration methods can be used.]
-
-\chapter{Markov Modulated Fluid Model with jumps}
-[Mention that the distribution of the initial fluid level has an increasing hazard rate]
-\section{Structure of optimal policy}
-[Prove Markov property for process with states (s,L0,Lc) (Dynamically adapted lifetime distribution). Conclude with stationary (CTMC-)state-dependent control limit on L0 for each state.]
-\section{Computation of total discounted cost}
-[Derive matrix exponents for discount and write out the total discounted cost.]
-\section{Structural properties}
-[Same as in previous problem, but neighors now also influence the control limit.]
-\section{Heuristic policies}
-[Mention that jumps with the same fluid rate would have the same control limit, regardless of the outgoing jump sizes or transition rates. Mention that this control limit would be lower than the exact optimum. Explain iteration methods and show results.]
-\section{Computing the optimal policy}
-[Introduce iteration method and comment on its computation time, compare results with previous problems and methods.]
 
 \chapter{Parameter estimation}
 \section{CTMC Estimation}
@@ -124,20 +164,16 @@ Numeric methods to compute the total discounted cost for a given stationary repl
 \bibliography{Sections/bibliography}
 
 \begin{appendices}
-\chapter{List of symbols}
-[List containing all the various symbols and notations with their meanings]
+	\input{Sections/ListOfSymbols.tex}
+	\input{Sections/AgeBasedHazardBoundProof.tex}
 \chapter{CTMC analysis}
 \section{Value iteration}
 [Derive Bellman equations, mention implementation]
 \section{State clustering}
 [Explain the state clustering that was employed, mention that repair states tend to be clustered and explain]
-\chapter{Martingale approach}
-[Explain martingales, explain how they can be used for finding the optimal policy and show the unfruitful derivation]
-\chapter{Total discounted costs for various problem parameters and policies?}
+\chapter{Total discounted costs for various problem parameters and policies?}\label{AppendixComputationsTable}
 [Tables containing the total discounted cost and control limit that resulted from various heuristic policies and parameters.]
-\chapter{Matlab scripts?}
-[Should I include all used Matlab scripts? That might be quite a lot]
-\chapter{ProM plugins?}
-[Should I also add the code of the ProM plugins?]
+\chapter{Matlab scripts and ProM plugins}
+[references to the code]
 \end{appendices}
 \end{document}

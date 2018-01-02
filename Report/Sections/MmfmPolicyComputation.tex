@@ -1,0 +1,25 @@
+\section{Computing the optimal control limits}
+In this section, a numeric method will be introduced to compute control limits that satisfy \eqref{eq:MmfmHazardBounds}.
+The expected total discounted cost will also be computed.
+The method is similar to the successive approximation method that has been presented in section \ref{section:AgeBasedOptimalPolicyComputation} for the problem of age-based maintenance.
+
+From \eqref{eq:MmfmHazardBoundsShort}, we know that if a policy $\hat\pi=[\hat\mu_1,...,\hat\mu_N]$ $\hat{\mu}$ satisfies
+\[
+h(\hat\mu_i)a+\sum\limits_j\Lambda^D_{ij}V(j,\mu_i^*,0,\pi^*)=0,\]
+then $\hat{\pi}=\pi^*$.
+The total discounted cost would then be given by \eqref{eq:MmfmTDC}.
+This suggests the following iteration method:
+At the $k+1$'th iteration, we will update the estimates of the optimal control limits $\mu_i^*$ by finding the $\hat{\pi}_i^{(k+1)}=[\hat{\mu}_i^{(k+1)},...,\hat{\mu}_i^{(k+1)}]$ that minimizes
+\[
+\begin{split}
+\hat{V}^{(k+1)}=&\mathbb{E}[D_{i}(Q_0,\hat\pi^{(k+1)},0)](c+a+\hat{V}^{(k)})\\
+&+\left[\int\limits_0^\infty \bar{F}(q)\Gamma_0(q,\hat\pi^{(k+1)},0)dq+\sum\limits_i\bar{F}(\hat\mu_i^{(k+1)})D_{i}(\hat\mu_i,\hat\pi^{(k+1)},0)\right](c+\hat{V}^{(k)}),
+\end{split}
+\]
+where $\hat{V}^{(k)}$ is the current estimate of $V(0^+,\pi^*)$.
+This could be found by looking for the control limits that satisfy
+\begin{equation}
+h(\hat\mu_i)a+\sum\limits_j\Lambda^D_{ij}\hat V(j,\mu_i^{(k)},0,\pi^{(k)})=0.
+\end{equation}
+For this iteration, we also need an initial value of the expected total discounted cost $\hat{V}^{(0)}$.
+Although we do not have a proof for the convergence of this iteration method, for the problem parameters that were used, it did converge to solutions similar to those attained via value iteration.

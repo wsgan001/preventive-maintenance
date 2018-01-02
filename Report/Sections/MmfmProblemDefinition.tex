@@ -1,0 +1,169 @@
+\section{Problem formulation and definition}
+In this section, we extend the problem definition of preventive maintenance on a machine modeled as the simple fluid model from the previous chapter.
+First we extend the stochastic process from the last chapter to a MMFM, then we define a Markov decision process.
+
+\subsection{Stochastic machine breakdown}
+First, we define a Continuous Time Markov Chain (CTMC) with states $s_1,...,s_N$, initial state $s_1$ and transition rates $\lambda_{ij}$ from state $s_i$ to $s_j$, with $\lambda_{ii}=-\sum_{j\neq i}\lambda_{ij}$.
+We define $S(t)$ as the (index of the) state of the CTMC is in at time $t$.
+Again, we represent the fluid level at time $t$ by $Q(t)$ with $Q(0)=Q_0\sim F$.
+When the CTMC is in state $s_i$, the fluid level $Q(t)$ decreases with rate $r_i>0$:
+\[
+\frac{d}{dt}Q(t)=-r_{S(t)}.
+\]
+When a transition from $s_i$ to $s_j$ occurs, the fluid rate instantaneously increases by $J_{ij}\geq 0$.
+Again, the machine breaks when $Q(t)=0$.
+And when it is repaired, the process is restarted.
+
+Similar to the simple fluid model, the state information can be condensed with a few variables.
+These are the amount of used initial fluid $L_0(t)$, the buffer level $L_c(t)$ and the current CTMC-state $S(t)$.
+The definitions of $L_0$ and $L_c$ are exactly the same as in the previous chapter:
+\begin{enumerate}
+	\item $L_0(t)$ is the lower bound of the initial fluid level $Q_0$ known at time $t$.
+	\item $L_c(t)$ is the lower bound of the current fluid level $Q(t)$ known at time $t$.
+\end{enumerate}
+Hence,
+\[
+X(t)=(S(t),L_0(t),L_c(t)),
+\]
+with initially $X(0)=x_{NEW}=(1,0,0)$.
+
+The values $L_0$ and $L_c$ evolve in a similar way as in the previous chapter:
+\begin{itemize}
+	\item When $X(t)=(i,l_0,l_c)$ and a transition occurs to $j$, $L_c$ increases by $J_{ij}$.
+	Hence, the state changes in the following way
+	\begin{equation}\label{eq:MmfmJumpEvolution}
+	(i,l_0,l_c)\stackrel{J_{ij}}{\mapsto} (j,l_0,l_c+J_{ij}).
+	\end{equation}
+	\item When $X(t)=(s_i,l_0,l_c)$ and a time period of length $\tau$ passes without a jump occurring, the fluid level decreases by $r_i\tau$.
+	If $l_c>0$, $L_c$ decreases but it cannot get lower than $0$ so it decreases by $\min\{l_c,r_i\tau\}$.
+	When $l_c=0$, $L_0$ increases by $r_i\tau$.
+	If $0<l_0<r_i\tau$ then first a time of $l_0/r_i$ passes so that $L_c(t+l_0/r_i)=0$ and then the remaining time passes so that $l_0$ increases by $r_i\tau-l_0$.
+	This can be summarized in the following way
+	\begin{equation}\label{eq:MmfmAgeEvolution}
+	(i,l_0,l_c)\stackrel\tau\mapsto (i,l_0+r_i\tau-\min\{l_c,r_i\tau\},l_c-\min\{l_c,r_i\tau\}).
+	\end{equation}
+\end{itemize}
+Then $Q(t)$, is again given by \eqref{eq:SimpleCurrentLevel} and it has distribution $F_{X(t)}(q)$,  again given by \eqref{eq:SimpleCurrentDistribution}.
+
+Now, for $x_k=X(t_k)$, we describe the random disturbances $\omega_k=\omega_k(x_k)$ of the Markov decision process as the (index of the) state of the continuous Markov chain at the next decision stage or $\Omega_{BREAK}$ if the machine will break before then:
+\[
+\omega_k(x_k):=\begin{cases}
+\Omega_{BREAK},&\ \text{if the machine breaks,}\\
+S(t_{k+1}),&\ \text{else.}
+\end{cases}
+\]
+A jump then occurs when $S(t_k)\neq\omega_k(x_k)\neq\Omega_{BREAK}$.
+Assuming only one jump can occur in a time interval, $\omega_k$ has the following probabilities:
+\[
+\begin{split}
+\mathbb{P}(\omega_k(i,l_0,l_c)=\Omega_{BREAK})&=\begin{cases}
+	0&\text{ if }l_c>0,\\
+	\begin{split}
+	e^{-\lambda_{i}\delta}F_{x_k}(l_0+r_i\delta)&\\
+	=\delta r_ih(l_0)+o(\delta^2)&
+	\end{split}&\text{ if }l_c=0.\\
+\end{cases}\\
+\mathbb{P}(\omega_k(i,l_0,l_c)=i)&=\begin{cases}
+	e^{-\lambda_i \delta}=1-\delta\lambda_i+o(\delta^2)&\text{ if }l_c>0,\\
+	\begin{split}
+	&e^{-\lambda_i \delta} \bar{F}_{x_k}(l_0+r_i\delta)\\
+	&=1-\delta r_ih(l_0)-\delta\lambda_i+o(\delta^2)
+	\end{split}&\text{ if }l_c=0.\\
+\end{cases}\\
+\mathbb{P}(\omega_k(i,l_0,l_c)=j)&=\begin{cases}
+	\frac{\lambda_{ij}}{\lambda_i}(1-e^{-\lambda_i \delta})=\delta\lambda_{ij}+o(\delta^2) & \text{ if }l_c>0,\\
+	\begin{split}
+	\frac{\lambda_{ij}}{\lambda_i}(1-e^{-\lambda_i \delta})\bar{F}_{x_k}(l_0+r_i\delta)&\\
+	=\delta\lambda_{ij}+o(\delta^2)&
+	\end{split}&\text{ if }l_c=0.\\
+\end{cases}
+\end{split}
+\]
+Where $i\neq j$.
+
+\subsection{Control actions}
+Similar to the previous chapter, we have a repair action $a_R$ and a wait action $a_W$ and $a_W$ may only be chosen whenever $x_k\neq x_{BREAK}$.
+The definitions of these actions remain the same as in the definition of the age-based maintenance problem.
+
+\subsection{State evolution}
+Initially, $x_{NEW}=(s_1,0,0)$.
+For $x_k=(i,l_0,l_c)$, the state of the Markov decision process now evolves in the following way:
+\[
+x_{k+1}=f(x_k, u_k, \omega_k):=\begin{cases}
+x_{NEW}&\ \text{if }u_k=a_R,\\
+\begin{split}(i,l_0+r_i\delta-\min\{l_c,r_i\delta\}&,\\l_c-\min\{l_c,r_i\delta\}&)\end{split}&\ \text{if }u_k=a_W\text{ and }\omega_k=i,\\
+(j,l_0,l_c+J_{ij}-r_j\delta)&\ \text{if }u_k=a_W\text{ and }\omega_k=j\neq i,\\
+x_{BREAK}&\ \text{if }u_k=a_W\text{ and }\omega_k=\Omega_{BREAK}.\\
+\end{cases}
+\]
+In this definition, we assumed that jumps occur at the start of time intervals.
+Again, we use the definition of the random variable $S(x_k):=f(x_k,a_W,\omega_k(x_k))$ as the state after $x_k$.
+
+\subsection{Costs and discounting}
+The costs and discounting remain the same as in the age-based maintenance problem.
+
+\subsection{Optimal policy and Bellman equations}
+We want to find a stationary policy $\mu:X\rightarrow \{a_W,a_R\}$ that chooses the action $u_k=\mu(x_k)$ that minimizes the expected total discounted cost $V_\delta(x_k,\mu)$ for each state $x_k$.
+Similarly as in the definition of age-based maintenance, $V_\delta(x_k,\mu)$ is given by
+\[V_\delta(x_k,\mu)=g(x_k,\mu(x_k))+\alpha_\delta \mathbb{E}[V_\delta(S(x_k),\mu)].\]
+The Bellman equations for the optimal cost $V_\delta(x_k,\mu^*)$ read
+\begin{equation}\label{eq:MmfmBellman}
+V_\delta(x_k,\mu^*)=\begin{cases}
+c+a+\alpha_\delta V_\delta(x_{NEW},\mu^*),&\text{ if }x_k=x_{BREAK},\\
+\min\left\{\begin{split}&c+\alpha_\delta V_\delta(x_{NEW},\mu^*),\\&\alpha_\delta \mathbb{E}[V_\delta(S(x_k),\mu^*)]\end{split}\right\},&\text{else.}\\
+\end{cases}
+\end{equation}
+$\mu$ is optimal if $V_\delta(x,\mu)=V_\delta(x,\mu^*)$ for all $x$.
+$\mathbb{E}[V_\delta(S(x_k),\mu^*)]$ when $x_k\neq x_{BREAK}$ is given by 
+\begin{equation}\label{eq:MmfmNextState}
+\begin{split}
+&\mathbb{E}[V_\delta(S(i,l_0,l_c),\mu^*)]\\
+&=\begin{cases}
+\begin{split}
+&\sum\limits_{j\neq i}(1-e^{-\lambda_i \delta})V_\delta(j,l_0,l_c+J_{ij}-r_j\delta,\mu^*)\\
+&+e^{-\lambda_i \delta}V_\delta(i,l_0,l_c-r_i\delta,\mu^*),
+\end{split}&\ \text{If $l_c>0$,}\\
+\begin{split}
+&e^{-\lambda_i \delta} \bar{F}_{t_k}(l_0+r_i\delta)V_\delta(i,l_0+r_i\delta,0,\mu^*)\\
+&+ e^{-\lambda_i \delta}F_{t_k}(l_0+r_i\delta)V_\delta(x_{BREAK},\mu^*)\\
+&+\sum\limits_{j\neq i}(1-e^{-\lambda_i \delta})V_\delta(j,l_0,J_{ij}-r_j\delta,\mu^*),
+\end{split}&\ \text{If $l_c=0$.}\\
+\end{cases}\\
+&=\begin{cases}
+\begin{split}
+&\sum\limits_{j\neq i}\lambda_{ij}\delta V_\delta(j,l_0,l_c+J_{ij}-r_j\delta,\mu^*)\\
+&+(1-\lambda_i \delta)V_\delta(i,l_0,l_c-r_i\delta,\mu^*)+o(\delta^2),
+\end{split}
+&\ \text{If $l_c>0$,}\\
+\begin{split}
+&(1-\lambda_i \delta-\delta r_ih(l_0))V_\delta(i,l_0+r_i\delta,0,\mu^*)\\
+&+ \delta r_ih(l_0)V_\delta(x_{BREAK},\mu^*)\\
+&+\sum\limits_{j\neq i}\lambda_{ij} \delta V_\delta(j,l_0,J_{ij}-r_j\delta,\mu^*)+o(\delta^2),
+\end{split}&\ \text{If $l_c=0$.}\\
+\end{cases}
+\end{split}
+\end{equation}
+
+\begin{remark}
+	Note that the simple fluid model corresponds to a MMFM model with two states, both with fluid rate $1$, transition rate $\lambda$ and jump size $J$.
+\end{remark}
+
+\subsection{Alternative models}
+Again, there are various alternatives to the design choices that were made in the definition of the MMFM above.
+We will briefly mention some alternatives with their characteristics.
+
+\subsubsection{Decisions as jumps only}
+Again, we could model the problem so that the choice to repair the machine can only be made at the instant that a transition occurs.
+This might be more realistic for similar reasons as for the simple fluid model: The jump could be caused by some mechanic performing some partial maintenance and a mechanic might be needed to completely repair the machine so that CTMC-transitions are the only opportunities to repair the machine.
+
+\subsubsection{Transitions to the same state}
+We could also allow transitions from certain CTMC-states to themselves (again at exponentially distributed time intervals).
+This could simply be modeled by adding a copy $s'$ for each of these states $s$ to the CTMC (with the same outgoing transitions) and transitions between $s$ and $s'$ with the desired transition rate and jump size.
+
+\subsection{Transitions in a semi-Markov process}
+Instead of exponentially distributed time intervals between transitions we could also consider a semi-Markov model where the distributions of the transition times are not exponential.
+This complicates the model as we lose the memorylessness property, so that we must keep track of the time from the last transition.
+
+\subsubsection{Second-order fluid model}
+Similarly to the second-order fluid model of \cite{Gribaudo2007}, we could model the depletion of fluid (in between jumps) as Brownian motion.
+This would make the model more complicated but might also make it more realistic.

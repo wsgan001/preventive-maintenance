@@ -1,0 +1,13 @@
+\section{Heuristic policies}
+Instead of directly trying to find the optimal policy for the proposed simple fluid model, we will first try a heuristic policy.
+If we compare the current problem with the age-based maintenance problem and look at the differences concerning the control limit that the jumps introduce, we see the following two differences:
+\begin{enumerate}
+	\item The presence of jumps increases the time until the control limit is reached, which decreases the discount factors, which decreases the expected total discounted cost.
+	\item The presence of jumps changes the structure of the control limit slightly.
+	The fact that a jump can occur between now and the breakdown of the machine, increases the control limit slightly.
+\end{enumerate}
+The first difference can be anticipated using the new formula for the expected total discounted cost \eqref{eq:SimpleFluidExplicitTDC}.
+In this section we will heuristically base the control limit on the assumption that no jump will occur between now and the first failure.
+In this way, the control limit will be given by the same equation as for the simple discounted problem \eqref{eq:AgeBasedHazardBound}, but with the new total discounted cost $V(x_{NEW},\mu^*)$ on the right hand side.
+The same iteration methods can now be used with the same convergence properties.
+Appendix \ref{AppendixComputationsTable} contains total discounted costs and control limits using this heuristic policy for various problem parameters.

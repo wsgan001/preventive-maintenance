@@ -1,0 +1,111 @@
+\section{Analysis of the optimal policy}\label{section:AgeBasedOptimalPolicy}
+Instead of finding the optimal control limit $\mu^*$ by solving the Bellman equations, we can also minimize $V(0^+,\mu)$ by looking for extreme values of the expected total discounted cost.
+Although we could use \eqref{eq:AgeBasedPolicyTDC} for the total discounted cost, we will use a slightly different formula to simplify the analysis.
+Instead of using $V(0^+,\mu)$ on the right hand side of \eqref{eq:AgeBasedPolicyTDC}, we will use $V(0^+,\mu^*)$.
+This corresponds to minimizing the expected total discounted cost for a machine using control limit $\mu$ in the first run and optimal control limit $\mu^*$ afterwards.
+Obviously, this would be minimized by $\mu=\mu^*$.
+We will look at extreme values of
+\begin{equation}\label{eq:AgeBasedHatTDC}
+\hat{V}(0^+,\mu)=aF(\mu)\mathbb{E}[e^{-\beta Q_0}|Q_0\leq \mu]+(c+V(0^+,\mu^*))\mathbb{E}[e^{-\beta(Q_0\wedge\mu)}].
+\end{equation}
+Note that 
+\[
+\begin{split}
+&F(\mu)\mathbb{E}[e^{-\beta Q_0}|Q_0\leq \mu]=\int\limits_0^\mu f(x)e^{-\beta x}dx\\
+&\Rightarrow \frac{d}{d\mu}\left[F(\mu)\mathbb{E}[e^{-\beta Q_0}|Q_0\leq \mu]\right]=f(\mu)e^{-\beta \mu}.
+\end{split}
+\]
+Furthermore,
+\[
+\begin{split}
+&\mathbb{E}[e^{-\beta(Q_0\wedge\mu)}]=\int\limits_0^\mu f(x)e^{-\beta x}dx+\bar{F}(\mu)e^{-\beta\mu}\\
+&\Rightarrow \frac{d}{d\mu}\mathbb{E}[e^{-\beta(Q_0\wedge\mu)}]=-\beta\bar{F}(\mu)e^{-\beta\mu}.
+\end{split}
+\]
+So that taking the derivative of \eqref{eq:AgeBasedHatTDC} yields
+\[\frac{d}{d\mu}\hat{V}(0^+,\mu)=af(\mu)e^{-\beta\mu}-(c+V(0^+,\mu^*))\beta\bar{F}(\mu)e^{-\beta\mu}.\]
+We are interested in the zeroes of this derivative:
+\[
+\begin{split}
+&af(\mu)e^{-\beta\mu}-(c+V(0^+,\mu^*))\beta\bar{F}(\mu)e^{-\beta\mu}=0\\
+&\Rightarrow h(\mu)=\frac{f(\mu)}{\bar{F}(\mu)}=\beta\frac{c+V(0^+,\mu^*)}{a}
+\end{split}
+.\]
+Note that the right hand side of this equation is a constant and the left hand side is increasing by assumption.
+Hence, there is at most one $\mu$ that satisfies the above equation.
+From the above bounds it can also be seen that $\hat{V}(0^+,\mu)$ is decreasing when $h(\mu)$ is smaller than this constant and increasing when it is larger.
+We will now establish that if there is one $\mu$ that satisfies the equation above, it is also the global minimum of $\hat{V}(0^+,\mu)$:
+\begin{lemma}
+	If there is a $\hat{\mu}$ that satisfies
+	\begin{equation}\label{eq:AgeBasedHazardBound}
+	h(\hat{\mu})=\beta\frac{c+V(0^+,\mu^*)}{a},
+	\end{equation}
+	then this $\hat{\mu}$ is the optimal control limit.
+	\begin{proof}
+		From the previous derivation, it follows that this $\hat{\mu}$ is a stationary point of $\hat{V}(0^+,\mu)$.
+		Since $h$ is increasing by assumption, we know that
+		\begin{itemize}
+			\item $\mu<\hat{\mu}\Rightarrow h(\mu)<h(\hat{\mu})$ so that $\frac{d}{d\mu}\hat{V}(0^+,\mu)<0$.
+			\item $\mu>\hat{\mu}\Rightarrow h(\mu)>h(\hat{\mu})$ so that $\frac{d}{d\mu}\hat{V}(0^+,\mu)>0$.
+		\end{itemize}
+		Which establishes that $\hat{\mu}$ is the global minimum of $\hat{V}(0^+,\mu)$.
+		Concluding the control limit $\hat{\mu}$ that satisfies \eqref{eq:AgeBasedHazardBound} equals the optimal control limit $\mu^*$.
+	\end{proof}
+\end{lemma}
+\begin{corollary}
+	From \eqref{eq:AgeBasedHazardBound} and the fact that $\hat{V}(0^+,\mu)$ is decreasing at $\mu=0$, it follows that
+	\[
+	h(0)<\beta\frac{c+V(0^+,\mu^*)}{a}.
+	\]
+\end{corollary}
+\begin{corollary}
+If for all $\mu>0$
+\[
+h(\mu)<\beta\frac{c+V(0^+,\mu^*)}{a},
+\]
+then $\hat{V}(0^+,\mu)$ is strictly decreasing and has an asymptotic minimum, concluding $\mu^*=\infty$.
+Note that this also implies that for decreasing hazard rates $\mu^*=\infty$.
+\end{corollary}
+
+\begin{remark}
+	Using the Bellman equations, it can also be proven without the assumption of an increasing hazard rate that if there is an optimal control limit $\mu^*$, $\mu^*$ must satisfy \eqref{eq:AgeBasedHazardBound} and the hazard rate must be increasing at $\mu^*$.
+	For a proof of this, we refer to appendix \ref{AppendixAgeBasedControlLimit}.
+\end{remark}
+
+\begin{remark}\label{remark:AgeBasedValueNonDecreasing}
+	Returning to remark \ref{remark:AgeBasedWeirdODE}:
+	The differential equation \eqref{eq:AgeBasedBellmanODE} seemed counterintuitive as the total discounted cost would be decreasing for high hazards.
+	
+	Consider the cost of one run of the machine, we replace the repair cost by $c^*=c+V(0^+,\mu^*)$ so that the cost of the expected discounted cost of the first repair equals the expected total discounted cost of the original problem.
+	$V(x,\mu^*)$ now corresponds to the cost of this altered problem, but starting with a machine of age $x$.
+	If $V(x,\mu^*)$ were to be decreasing in the neighborhood of some $x$, this would mean that for that $x$, the problem would have a lower expected optimal cost if we started with a slightly older machine.
+	This seems to conflict with the assumption that $h$ is increasing so that the machine deteriorates over time.
+	
+	It is difficult to prove that this is not the case in general but results from value iteration seem to suggest $V(x,\mu^*)$ is nondecreasing in $x$.
+	We can, however, prove that if $\frac{d}{dx}V(x,\mu^*)<0$ for some $x$, then no control limit exists:
+	
+	Let $x'<\mu^*$, it holds that
+	\[
+	V(x',\mu^*)\leq V(\mu^*,\mu^*)=c+V(0^+,\mu^*).
+		\]
+	Now we will prove that if $\frac{d}{dx}V(x',\mu^*)<0$, this implies that $\frac{d^2}{dx^2}V(x',\mu^*)<0$.
+	We take the derivative of \eqref{eq:AgeBasedBellmanODE}:
+	\[
+	\frac{d^2}{dx^2}V(x,\mu^*)=-h'(x)[c+a+V(0^+,\mu^*)-V(x,\mu^*)]+(\beta+h(x))\frac{d}{dx}V(x,\mu^*).
+	\]
+	We know that for our $x'$, $\frac{d}{dx}V(x,\mu^*)<0$ and $V(x,\mu^*)\leq c+V(0^+,\mu^*)$.
+	Furthermore, by assumption $h'(x')>0$.
+	Concluding
+	\[
+	\frac{d^2}{dx^2}V(x',\mu^*)<0.
+	\]
+	This implies that if $\frac{d}{dx}V(x',\mu^*)<0$ for some $x'$, $V(x,\mu^*)$ is strictly decreasing after $x'$ so that for all $x>x'$
+	\[
+	V(x,\mu^*)< c+V(0^+,\mu^*),
+	\]
+	which implies that $\mu^*=\infty$.
+	
+	Hence, by contraposition, if an optimal control limit $\mu^*<\infty$ exists, $\frac{d}{dx}V(x,\mu^*)\geq0$ for all $x\in[0,\mu^*]$.
+	This allows us to make the following lower bound on $V(x,\mu^*)$:
+\end{remark}
+

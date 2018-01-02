@@ -1,0 +1,125 @@
+\section{Computing the optimal policy}\label{section:AgeBasedOptimalPolicyComputation}
+We know that for the optimal policy $\mu^*$, \eqref{eq:AgeBasedHazardBound} holds.
+This allows us to choose a control limit based on the total discounted cost.
+Unfortunately, the total discounted cost also depends on the control limit.
+Multiple numerical methods could be used to find the optimal control limit.
+In this section we propose a method of successive approximation of the control limit and the total discounted cost.
+Alternatively, value iteration could be used to solve the Bellman equations or the expected total discounted cost \eqref{eq:AgeBasedPolicyTDC} could simply be minimized numerically for $\mu$.
+
+\subsection{Description of iteration method}\label{section:AgeBasedIterationDescription}
+We know that if a control limit $\hat{\mu}$ satisfies
+\[h(\hat{\mu})=\beta\frac{c+V(0^+,\mu^*)}{a},\]
+then $\hat{\mu}=\mu^*$.
+At the $k+1$'th iteration, we will update the estimate of the optimal control limit $\mu^*$ by finding the $\hat{\mu}^{(k+1)}$ that minimizes
+\[
+aF(\hat{\mu}^{(k+1)})\mathbb{E}[e^{-\beta Q_0}|Q_0\leq \hat{\mu}^{(k+1)}]+(c+\hat{V}^{(k)})\mathbb{E}[e^{-\beta(Q_0\wedge\hat{\mu}^{(k+1)})}],
+\]
+where $\hat{V}^{(k)}$ is the current estimate of $V(0^+,\mu^*)$.
+This could be found by looking for the control limit that satisfies
+\begin{equation}\label{eq:AgeBasedIterationBound}
+h(\hat{\mu}^{(k+1)})=\beta\frac{c+\hat{V}^{(k)}}{a}.\end{equation}
+For convenience, we define the function $\mu(\hat{V}^{(k)}):=\hat{\mu}^{(k+1)}$.
+Note that 
+\begin{equation}\label{eq:AgeBasedIterationControlConvergence}
+\mu(V(0^+,\mu^*))=\mu^*.
+\end{equation}
+The estimation of the expected total discounted cost will be updated in the following way:
+\[\hat{V}^{(k+1)}=aF(\hat{\mu}^{(k+1)})\mathbb{E}[e^{-\beta Q_0}|Q_0\leq \hat{\mu}^{(k+1)}]+(c+\hat{V}^{(k)})\mathbb{E}[e^{-\beta(Q_0\wedge\hat{\mu}^{(k+1)})}].\]
+We will use the operator $T$ to denote one iteration for the estimate of the expected total discounted cost:
+\[T(\hat{V}^{(k)}):=\hat{V}^{(k+1)}.\]
+Similarly:
+\[T^m(\hat{V}^{(k)})=\hat{V}^{(k+m)}.\]
+Note that $T^m(V(0^+,\mu^*))=V(0^+,\mu^*)$.
+For this iteration, we need an initial value of the expected total discounted cost $\hat{V}^{(0)}$.
+This iteration can be interpreted in the following way:
+If the machine were to run just once and at the end of the run (so either after paying $c$ or $c+a$ for preventive or corrective repair respectively), a cost $\hat{V}^{(k)}$ will be paid, then $\hat{\mu}^{(k+1)}$ will be the control limit that minimizes the expected total discounted cost for this scenario.
+In this way, we can interpret $\hat{V}^{(k)}$ as the expected total discounted cost when in the first run $\hat{\mu}^{(k)}$ will be used as the control limit, $\hat{\mu}^{(k-1)}$ will be used as control limit in the second run, etcetera, $\hat{\mu}^{(1)}$ in the last run and afterwards the terminal cost $\hat{V}^{(0)}$ will be paid.
+%We can view these chosen control limits as actions in a deterministic decision process.
+
+\subsection{Proof of convergence}
+The convergence of the proposed iteration method will now be proven.
+Let $\alpha_\mu=\mathbb{E}[e^{-\beta (Q_0\wedge\mu)}]$ denote the expected discount over one run of the machine using control limit $\mu$.
+The expected cost that is incurred in one  run when control limit $\mu$ is used equals
+$$
+g(\mu):=aF(\mu)\mathbb{E}[e^{-\beta Q_0}|Q_0\leq \mu]+c\mathbb{E}[e^{-\beta(Q_0\wedge\mu)}].
+$$
+We can now write
+$$
+V(0^+,\mu^*)=\sum\limits_{n=0}^\infty \alpha_{\mu^*}^kg(\mu^*).
+$$
+And we can rewrite $T$ in the following way
+\[
+T(V)=g(\mu(V))+\alpha_{\mu(V)}V.
+\]
+Note that $\alpha_\mu$ is decreasing in $\mu$ since $\frac{d}{d\mu}\alpha_\mu=-\beta\bar F(\mu)e^{-\beta \mu}<0$.
+For technical reasons, we have to assume that for all $\hat{V}^{k}$, $\mu(\hat{V}^{k})\geq\varepsilon>0$.
+In practice, this is not a big problem since we know that $\mu^*>0$ as $\lim\limits_{\mu\rightarrow 0}V(0^+,\mu)=\infty$.
+Hence we can pick a $\varepsilon$ sufficiently small so that we are convinced that $\varepsilon<\mu^*$ and just adjust the definition of $\mu(\hat{V}^{(k)})$ to the maximum of $\varepsilon$ and $\mu(\hat{V}^{(k)})$.
+For $T$, we will prove the following properties:
+\begin{lemma}\label{lemma:Tproperties}
+	For $A_1,A_2$ such that $A_1\geq A_2\geq 0$: 
+	\begin{enumerate}
+		\item $T(A_1+A_2)\leq TA_1+\alpha_\varepsilon A_2$,
+		\item $T(A_1)\geq T(A_2)$,
+		\item $T(A_1-A_2)\geq TA_1-\alpha_\varepsilon A_2$.
+	\end{enumerate}
+	\begin{proof}
+		\begin{enumerate}
+			\item 
+			\begin{equation}
+			\begin{split}
+			T(A_1+A_2)&=g(\mu(A_1+A_2))+\alpha_{\mu(A_1+A_2)}(A_1+A_2)\\
+			&\leq g(\mu(A_1))+\alpha_{\mu(A_1)}(A_1+A_2)\\
+			&\leq g(\mu(A_1))+\alpha_{\mu(A_1)}A_1+\alpha_\varepsilon A_2\\
+			&=TA_1+\alpha_\varepsilon A_2
+			\end{split}
+			\end{equation} 
+			where the first inequality follows from the fact that $\mu(A_1+A_2)$ minimizes $g(\mu)+\alpha_\mu (A_1+A_2)$ and the second from the fact that $a_\varepsilon>a_{\mu(A_1+A_2)}$.
+			\item 
+			\begin{equation}
+			\begin{split}
+			T(A_2)&=g(\mu(A_2))+\alpha_{\mu(A_2)}A_2\\
+			&\leq g(\mu(A_1))+\alpha_{\mu(A_1)}A_2\\
+			&\leq g(\mu(A_1))+\alpha_{\mu(A_1)}A_1\\
+			&=T(A_1)
+			\end{split}
+			\end{equation}
+			where the first inequality follows from the fact that $\mu(A_2)$ minimizes $g(\mu)+\alpha_\mu A_2$ and the second from $A_1\geq A_2$.
+			\item 
+			\begin{equation}
+			\begin{split}
+			T(A_1-A_2)&=g(\mu(A_1-A_2))+\alpha_{\mu(A_1-A_2)}(A_1-A_2)\\
+			&\geq g(\mu(A_1-A_2))+\alpha_{\mu(A_1-A_2)}A_1 - \alpha_\varepsilon A_2\\
+			&\geq g(\mu(A_1))+\alpha_{\mu(A_1)}A_1-\alpha_\varepsilon A_2\\
+			&=TA_1-\alpha_\varepsilon A_2
+			\end{split}
+			\end{equation}
+			where the first inequality follows from $a_\varepsilon>a_{\mu(A_1-A_2)}$ and the second from the fact that $\mu(A_1)$ minimizes $g(\mu)+\alpha_\mu A_1$.
+		\end{enumerate}
+	\end{proof}
+\end{lemma}
+Note that $g(\mu)<c+a$ for all $\mu$ so that 
+$$
+V(0^+,\mu^*)=\sum\limits_{n=0}^\infty \alpha_{\mu^*}^kg(\mu^*)\leq \sum\limits_{n=0}^\infty \alpha_\varepsilon^k(c+a)=\frac{c+a}{1-\alpha_\varepsilon}.
+$$
+If our initial $0\leq \hat{V}^{(0)}<B$, then the following inequality now holds
+$$
+V(0^+,\mu^*)-\frac{c+a}{1-\alpha_\varepsilon}\leq 0\leq \hat{V}^{(0)}\leq B\leq V(0^+,\mu^*)+B.
+$$
+If we now apply $T$ $k$ times on this inequality, we get
+\[\begin{split}
+V(0^+,\mu^*)-\alpha_\varepsilon^k\frac{c+a}{1-\alpha_\varepsilon} &\leq T^k(V(0^+,\mu^*)-\frac{c+a}{1-\alpha_\varepsilon})\\
+&\leq  T^k\hat{V}^{(0)}=V_k\\
+&\leq T^k(V(0^+,\mu^*)+B) \\
+&\leq V(0^+,\mu^*)+\alpha_\varepsilon^kB.
+\end{split}\]
+Where the first and last inequalities follow from Lemma \ref{lemma:Tproperties}.
+This proves that $\hat{V}^{(k)}$ converges.
+Convergence in $\hat\mu^{(k)}$ follows from \eqref{eq:AgeBasedIterationControlConvergence}.
+Concluding:
+\begin{theorem}
+	The iteration method as described in \ref*{section:AgeBasedIterationDescription} converges, i.e.
+	\[\lim\limits_{k\rightarrow\infty}\hat{V}^{(k)}=V(0^+,\mu^*),\]
+	and
+	\[\lim\limits_{k\rightarrow\infty}\hat{\mu}^{(k)}=\mu^*.\]
+\end{theorem}
