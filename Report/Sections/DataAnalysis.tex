@@ -1,0 +1,92 @@
+\chapter{Data analysis}\label{chapter:DataAnalysis}
+In this chapter, the data from the Philips machine will be investigated.
+First, the data will be described and visualized, then we will attempt to fit the lifetimes of the machine to various lifetime distributions.
+\section{Data description}
+The data from the Philips machine contains information about which operation the machine was performing at each time.
+The data is anonimized so that for each operation, no name or description is given, but only an identifier.
+\subsection{Data format}
+Each run of the machine is represented by a trace.
+A trace is a sequence of events.
+These events are either the start or the end of an operation.
+Each event has a timestamp and an integer representing the identifier of the operation.
+The breakdown of the machine is represented by the end of a trace.
+The lifetime of the machine is then the length of the time interval between the start of the first event and the end of the last event.
+
+\subsection{Cleaning}
+Before the data could be used, it first needed to be cleaned.
+Because of the transitions between summer and winter time, a few events ended before they started.
+We resolved this by simply ignoring the traces for which there was such an event.
+Furthermore, there were also some other events with a time length of $-1$ seconds, these traces were also ignored.
+
+\subsection{Visualization}
+We will now visualize the distribution of the lengths of the runs of the machine.
+In figure \ref{figure:distribution}, the empirical cumulative distribution function and the probability density function are plotted.
+In these plots it is visible that the distribution has its mode around five days and has a part with a less steep downward slope around 6.5 days.
+This part on the right hand side of the mode could be caused by intermediate repairs.
+\begin{figure}[H]\label{figure:distribution} 
+	\setlength\fwidth{0.4\textwidth}
+	\input{Plots/lifetimesECDF.tex}
+	\setlength\fwidth{0.4\textwidth}
+	\input{Plots/lifetimesPDF.tex}
+	\caption{The empirical cumulative distribution function and the probability density function of the lifetime of the machine.}
+\end{figure}
+
+For survival analysis, the hazard rate of the lifetime is important.
+The observed hazard rate over time is plotted in figure \ref{figure:hazard}.
+As you can see, the hazard rate is increasing for lifetimes shorter than 6.5 days.
+For lifetimes larger than 6.5 days, the hazard rate seems to jump up and down a lot.
+This is likely because these large lifetimes did not occur frequently enough in the dataset to smoothen out the hazard rate.
+Hence, we can safely assume that the lifetime has an increasing hazard rate.
+\begin{figure}[H]\label{figure:hazard}
+	\centering
+	\setlength\fwidth{0.5\textwidth}
+\input{Plots/lifetimesHazard.tex}
+\caption{The hazard rate of the lifetime of the machine.}
+\end{figure}
+
+\section{Fitting lifetime distributions}
+To be able to predict the remaining time until a failure, it is helpful to know how the lifetime of the machine is distributed.
+In this section we will attempt to fit the lifetime to a distribution.
+
+\cite{Lai2006} mentions a few common lifetime distributions.
+We tried to fit these distributions over the observed lifetimes of the machine (using maximum likelihood estimation).
+The Gamma distribution and the log-normal distribution fitted the data best, although still not very well.
+The probability densities of these distributions are plotted over the density of the observed lifetimes in figure \ref{figure:fits}.
+As you can see, these estimations are still not very accurate as they do not include the blob on the right side of the mode.
+
+\begin{figure}[H]\label{figure:fits}
+	\centering
+	\setlength\fwidth{0.7\textwidth}
+	\input{Plots/lifetimesFits.tex}
+	\caption{The probability densities over the density of the observed lifetimes.}
+\end{figure}
+\subsection{Phase-type}
+As the class of Phase-Type distributions is dense in the space of positive continuous distributions \cite{Ocinneide1999}, a Phase-Type distribution could also be used to model the lifetimes.
+However, Phase-Type distributions have a few disadvantages:
+The number of parameters grows quadratically with the amount of states and most of these parameters are redundant.
+Furthermore, convergence of the EM-algorithm (to estimate the parameters) is slow and can get stuck in saddle points and local maxima \cite{Asmussen1996}.
+Because of this, we will not use a Phase-type distribution to model the lifetime of the machine.
+
+\section{Transition times}
+In order to model the transitions between the events as a Markov chain, we need to find out whether the transition times (i.e. the length of the time intervals between the start and end of an event) are exponentially distributed.
+When we visualized the distribution of the transition times for each of the states, we noticed two things:
+\begin{enumerate}
+	\item The distribution is not exponentially distributed.
+	In figure \ref{figure:transitionFit}, it is visible that the exponential distribution fits the data poorly.
+	\item For some events, the distribution of the time length seems to be multimodal.
+	In figure \ref{figure:transitionBimodal}, an example of an event whose time length seems to have multimodal distribution.
+\end{enumerate}
+\begin{figure}[H]\label{figure:transitionFit}
+\centering
+\setlength\fwidth{0.5\textwidth}
+\input{Plots/transitionTimesFit.tex}
+\caption{An exponential distribution fitted over the distribution of the time length of a certain event.}
+\end{figure}
+\begin{figure}[H]\label{figure:transitionBimodal}
+\centering
+\setlength\fwidth{0.5\textwidth}
+\input{Plots/transitionTimesBimodal.tex}
+\caption{The estimated probability density function for the time length of a certain event.}
+\end{figure}
+From this, we can safely conclude that the transition times are not exponential and that a CTMC is not appropriate to accurately model the trace data.
+But since using a semi-Markov model would complicate the analysis significantly, we will approximate the data by a CTMC anyway. 

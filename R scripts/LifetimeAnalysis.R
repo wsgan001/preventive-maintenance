@@ -6,7 +6,7 @@ library(PhaseType)
 library(actuar)
 
 # Load data
-setwd('C:/Users/s147569/Dropbox/School/BEP/SVN/Trunk/R scripts')
+setwd('C:/Users/s147569/Dropbox/School/BEP/preventive-maintenance/R scripts')
 CsvData <-read.csv("TraceLifetimes.csv", header=TRUE)
 lifetimes <- CsvData$Lifetime / (3600*1000) # In hours
 

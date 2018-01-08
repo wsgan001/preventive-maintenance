@@ -1,6 +1,6 @@
 \input{Sections/imports.tex}
 \begin{document}
-\title{Preventive Maintenance}
+\title{Dynamically adaptive age-based maintenance policies}
 \author{Martijn G\"{o}sgens\\
 \and
 S\'{a}ndor Kolumb\'{a}n\\
@@ -11,12 +11,13 @@ Stella Kapodistria
 
 
 \begin{abstract}
-	In this thesis, we model the breakdown of a machine as a Markov modulated fluid model (MMFM) and find a replacement policy minimizing the total discounted cost.
-	At each transition of the MMFM's underlying Markov chain, the fluid level can instantaneously increase by a constant amount, where the amount depends on the origin and destination state of the Markov chain.
+	In this thesis, we model the lifetime of an asset as a Markov modulated fluid model (MMFM) and find a replacement policy minimizing the total discounted cost.
+	We assume the cost of correctively repairing the machine is larger than the cost of preventively repairing it.
+	At each transition of the Markovian environment, the fluid level instantaneously increases by a constant amount, where the amount depends on the origin and destination state of the Markovian environment.
 	Numeric methods to compute the total discounted cost for a given stationary replacement policy and iteration methods to find the optimal replacement policy are presented.
 \end{abstract}
 
-\chapter*{Executive summary?}
+\chapter*{Executive summary}
 [Describe characteristics of a machine whose deterioration that can be modeled by a MMFM with jumps: different activities that in different degrees wear out the machine, the machine has no schedule (actions as CTMC), partial repairs between activities and an initial fitness of the machine.]
 
 [List assumptions]
@@ -31,15 +32,22 @@ Stella Kapodistria
 
 \tableofcontents
 
+% Introduction
+\input{Sections/introduction}
 
-\chapter{Introduction}
-[Mention the structure of the report: Age based maintenance, simple fluid model with jumps, MMFM]
-\section{Preventive maintenance}
-[Mention reasons to do preventive maintenance (corrective maintenance is expensive)]
-\section{Philips machine}
+\chapter{Literature overview}\label{chapter:literatureOverview}
+In this chapter, some preliminaries will be summarized.
+We will first explain some useful results and concepts from Markov decision theory.
+After that, we will do the same for survival analysis.
 
-\chapter{Literature overview}
-\section{Dynamic programming}
+\section{Markov decision theory}
+Markov Decision Theory provides the mathematical framework to make decisions based on a Markov model.
+There are various types of Markov Decision Problems (MDPs).
+A distinction can be made based on the time horizon of the problem; whether it is finite or infinite.
+For infinite horizon problems, the total cost might be infinite.
+Two approaches are common to resolve this issue of infinity: The first is to discount costs further in the future; The second is to consider the average cost per time unit in the long run.
+We will first compare these two approaches.
+After that we will explain the structure of solutions to MDPs and discuss methods to find them.
 \subsubsection{Discounted vs. long run average cost}
 [Explain relation and pros and cons of both]
 \subsubsection{Stationary policies}
@@ -68,14 +76,14 @@ In this chapter we will investigate methods to find an optimal preventive mainte
 
 \chapter{Simple fluid model with jumps}\label{chapter:SimpleFluid}
 The problem of the previous chapter can be seen as a very simple Markov modulated fluid model:
-Initially, the bucket has an amount of fluid $Q\sim F$.
+Initially, the bucket has a random amount of fluid $Q\sim F$.
 The fluid decreases constantantly with rate $1$ and no fluid jumps occur.
 In this chapter, we extend this model by allowing jumps to occur according to a Poisson process with rate $\lambda$.
 The jumps all have the same constant (and known size) $J$.
 In the real world, these fluid jumps could correspond to a partial repair of the machine.
 The presence of jumps introduces the following complications:
 \begin{itemize}
-	\item The hazard of the machine failing at some time $t$ cannot be directly from the age only but also depends on the number of jumps that occurred before $t$.
+	\item The hazard of the machine failing at some time $t$ cannot be derived directly from the age only but also depends on the number of jumps that occurred before $t$.
 	\item Furthermore, the times at which these jumps occurred also matter.
 	When a jump occurs at time $t$, it is certain that the fluid quantity is at least $J$ so that you know for certain that in the interval $[t,t+J)$ the machine cannot fail.
 \end{itemize}
@@ -93,7 +101,7 @@ In this chapter, the expected total discounted cost is calculated and methods ar
 % Structural properties
 \input{Sections/SimpleFluidStructuralProperties}
 
-\chapter{Markov Modulated Fluid Model with jumps}
+\chapter{Markov Modulated Fluid Model with jumps}\label{chapter:Mmfm}
 In this chapter, we extend the model of the simple fluid model with jumps from the previous chapter to a Markov modulated fluid model (MMFM) with various states, fluid rates, various fluid jump sizes and rates.
 The fluid jumps occur when a transition occurs in the underlying Markov chain.
 The MMFM that is used is similar to the first-order fluid model considered in \cite{Gribaudo2007}, with the addition of constant jumps.
@@ -124,37 +132,37 @@ These complications will be explained and tackled in the following sections.
 % Computing the optimal control limits
 \input{Sections/MmfmPolicyComputation}
 
-\chapter{Data analysis}
-\section{Data description}
-\subsection{Data format}
-[trace data]
-\subsection{Cleaning}
-[negative transition times because of the transition from summer to winter time]
-\subsection{Visualization}
-[plot CDF, PDF and hazard rate of lifetime distribution. Also some plots for the memorylessness of the state transitions.]
-\section{Fitting lifetime distributions}
-[Weibull, Erlang etc]
-\subsection{Phase-type}
-[mention that phase-type can fit any positive distribution but that the required number of parameters is huge.]
+% Chapter Data analysis
+\input{Sections/DataAnalysis}
 
-\chapter{Parameter estimation}
+\chapter{Parameter estimation}\label{chapter:ParameterEstimation}
+In this chapter, we will discuss methods for estimating the parameters of the Markov modulated fluid model.
+These parameters are the following:
+\begin{itemize}
+	\item First of all, we need the parameters of the CTMC.
+	These are the transition rates $\lambda_{ij}$ between the states $s_i$ and $s_j$.
+	\item For the fluid model, we also need a rate $r_i>0$ for each state $s_i$ and we need the size of the fluid increases $J_{ij}$ for transitions from $s_i$ to $s_j$. 
+\end{itemize}
+This results in $N^2+N+N^2=2N^2+N$ parameters.
+Furthermore, we need a distribution for the initial fluid level.
 \section{CTMC Estimation}
-[Mention the standard way to determine the parameters in a CTMC.]
-\section{Estimating fluid rates and jump quantities}
-\subsection{Maximum Likelihood?}
-[Derive likelihood of parameters and comment on the difficulty to maximize this and that it requires knowledge about the distribution of the initial fluid level.]
-\subsection{Justification of minimizing variance}
-[Explain that the machines are likely made by the same manufacturer and that this manufacturer probably strives for constant quality (continuity), such that the different machines likely had the same quality initially.]
-\subsection{Implementation}
-\subsection{Results}
-[Mention that this depends on the variance of the distribution of the initial fluid level. If this variance is too large, the parameter estimation has likely minimized the variance too much.]
+When we have the trace data, it is not difficult to estimate the transition rates.
+We have continuous observations over the Markov chain as for each time, we know exactly in which CTMC-state the process was.
+Let $T_i$ be the total time the process was observed to be in CTMC-state $s_i$ and let $N_{ij}$ be the total number of transitions that occurred from $s_i$ to $s_j$.
+The maximum likelihood estimator of the rates $\lambda_{ij}$ is simply given by \cite{Inamura2006}
+\[
+\hat\lambda_{ij}=\frac{N_{ij}}{T_i}.
+\]
 
-\chapter{Conclusion}
+% Estimating fluid rates and jump quantities
+\input{Sections/ParametersMmfmEstimation}
+
+\chapter{Conclusion}\label{chapter:Conclusion}
 [Summarize results]
 \section{Further research}
 [Random jump sizes, better parameter estimation methods, zero or negative fluid rates, nonincreasing hazard rates, ordering the CTMC states depending only on the MMFM]
 
-\chapter{Discussion}
+\chapter{Discussion}\label{chapter:discussion}
 \section{Assumptions}
 [List assumptions, their consequences and alternatives]
 \section{Robustness}

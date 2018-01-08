@@ -3,21 +3,27 @@ In this section, the problem of choosing when to repair the machine is defined a
 We consider a machine that is subject to deterioration over time.
 Calendar time is discretized in steps of size $\delta$, i.e. the $k$'th decision stage is at time $t_k=k\delta$.
 We refer to the interval $(k\delta,(k+1)\delta]$ as the $k$'th time interval.
-At stage $k\in\mathbb{N}\cup\{0\}$, we denote the state of the machine by $x_k\in X=\mathbb{N}\cup\{0\}$ and initially $x_0=1$.
+At stage $k\in\mathbb{N}\cup\{0\}$, we denote the state of the machine by $x_k\in X=\mathbb{N}_0$ and initially $x_0=1$.
 When $x_k=x$, this means that after the $k$'th time interval, the machine has age $x\delta$.
 
+The lifetime of the machine has a distribution function $F$.
+We denote the reliability function by $\bar F(x):=1-F(x)$, the probability density function by $f$ and the hazard rate by 
+\[
+h(x)=\frac{f(x)}{\bar F(x)}.
+\] 
+
 \subsection{Stochastic machine breakdown}
-To model the breaking of the machine, we introduce random disturbances $\omega_k:=\omega_k(x_k)$ at decision stage $k$ which only depend on $x_k$.
+To model the breaking of the machine, we introduce random variables $\omega_k:=\omega_k(x_k)$ at decision epoch $k$ which only depend on $x_k$.
 $$
 \omega_k(x_k):=\begin{cases}
-1,&\text{if the machine will reach age }\ x_{k}\text{ given}\\
-&\text{that had reached age}\ x_k-1\ \text{ at time } t_k \\
-0,&\text{else}.
+1,&\text{if the machine will reach age }\ \delta x_{k}\text{ given}\\
+&\text{that had reached age}\ \delta(x_k-1)\ \text{ at time } t_k \\
+0,&\text{otherwise}.
 \end{cases}
 $$
 If the lifetimes of the machine are i.i.d. random variables with distribution $F$ then for $x>0$
 $$
-\mathbb{P}(\omega_k(x)=1)=\frac{1-F(\delta x)}{1-F(\delta (x-1))}.
+\mathbb{P}(\omega_k(x_k)=1)=\frac{1-F(\delta x_k)}{1-F(\delta (x_k-1))}.
 $$
 In the rest of the thesis we assume that the lifetime of the machine has an increasing hazard rate so that $\mathbb{P}(\omega_k(x)=1)$ is decreasing in $x$.
 
@@ -35,15 +41,15 @@ These actions are
 	\item $a_R$:
 	Repair (or replace) the machine.
 	\item $a_W$:
-	Wait and do not repair the machine.
+	Do nothing.
 \end{itemize}
 
 \subsection{State evolution}
 During a time interval, a few things can happen:
 \begin{itemize}
-	\item If the machine is repaired, its age will be $1$ at the next stage.
+	\item If the machine is repaired, its age will be $\delta$ at the next stage.
 	\item If the machine fails, its age will be $0$ at the next stage.
-	\item If the machine does not fail and no repair is done, the age of the machine will increase by $1$.
+	\item If the machine does not fail and no repair is done, the age of the machine will increase by $\delta$.
 \end{itemize}
 Hence, the state evolves in the following way
 $$
@@ -57,7 +63,7 @@ For convenience, we define the random variable $S(x_k):=f(x_k,a_W,\omega_k(x_k))
 Note that in the above definition, repairing the machine takes exactly one time interval.
 
 \subsection{Costs and discounting}
-Repairing the machine has a cost $c>0$.
+Preventively repairing the machine has a cost $c>0$.
 When the machine needs to be repaired correctively, an additional cost $a>0$ also needs to be paid.
 Hence, when the machine is in state $x_k$ and the action $u_k$ is chosen, the following cost is incurred
 $$
@@ -73,29 +79,34 @@ $$
 a_\delta=e^{-\beta\delta}
 $$
 for some discount rate $\beta>0$.
-We consider the total discounted cost
+We consider the expected total discounted cost from decision epoch $k$ on
 $$
-V(x_k)=\sum\limits_{m=k}^\infty \alpha_\delta^mg(x_m,u_k)
+V_\delta(x_k;k)=\sum\limits_{m=k}^\infty \alpha_\delta^{m-k}g(x_m,u_m).
 $$
 
+
 \subsection{Optimal stationary policy and the Bellman equations}
-We want to find a stationary policy $\mu:X\rightarrow \{a_W,a_R\}$ that chooses the action $u_k=\mu(x_k)$ that minimizes the expected total discounted cost $V_\mu(x_k)$ for each state.
-$V_\mu(x_k)$ is given by
+As will be proven in section \ref{section:AgeBasedStationaryPolicy}, the optimal policy is a stationary policy.
+Hence, we want to find a stationary policy $\mu:X\rightarrow \{a_W,a_R\}$ that chooses the action $u_k=\mu(x_k)$ that minimizes the expected total discounted cost $V_\delta(x_0,\mu;0)$.
+For a policy $\mu$, $V_\delta(x_k,\mu;k)$ is given by
 $$
-V_\mu(x_k)=g(x_k,\mu(x_k))+\alpha_\delta \mathbb{E}[V_\mu(f(x_k,\mu(x_k),\omega_k))]
+V_\delta(x_k,\mu;k)=g(x_k,\mu(x_k))+\alpha_\delta \mathbb{E}[V_\delta(f(x_k,\mu(x_k),\omega_k(x_k)),\mu;k+1)].
 $$
-The Bellman equations for the optimal cost $V^*$ read
+The Bellman equations for the optimal cost $V^*_\delta$ read
 \begin{equation}\label{eq:AgeBasedBellman}
-V^*(x_k)=\begin{cases}
-\min\{c+\alpha_\delta V^*(1),\alpha_\delta \mathbb{E}[V^*(S(x_k))]\},&\text{if}\ x_k>0 \\
-c+a+\alpha_\delta V^*(1),&\text{else.}
+V^*_\delta(x_k;k)=\begin{cases}
+\min\{c+\alpha_\delta V^*_\delta(1;k+1),\alpha_\delta \mathbb{E}[V^*_\delta(S(x_k));k+1]\},&\text{if}\ x_k>0 \\
+c+a+\alpha_\delta V^*_\delta(1;k+1),&\text{else.}
 \end{cases}
 \end{equation}
-$\mu$ is optimal if $V_\mu(x)=V^*(x)$ for all $x$.
+For an infinite horizon, the Bellman equations only depend on the state $x_k$ and not on the decision epoch $k$.
+This means that the optimal cost also does not depend on the decision epoch.
+Hence, it will be suppressed in the notation.
+Under the optimal policy, the total discounted cost $V_\delta(x_k,\mu)=V^*_\delta(x_k)$ for all $x_k,k$.
 
 \subsection{Alternative models}
 The problem can be formalized in many different ways.
-We will briefly show some alternatives to the design choices that were made in the above problem definition.
+We will briefly show some alternatives to the modeling choices that were made in the above problem definition.
 \subsubsection{Instantaneous repairs}
 If we would want to make repairs take zero time, we would have to change the definition of $x_{k+1}$ to 
 $$
@@ -109,8 +120,8 @@ This would however, introduce the possibility of having to correctively repair t
 Furthermore, when we let $\delta\rightarrow 0$, this would not make any difference.
 
 \subsubsection{Stochastic inter-decision times}
-Another possibility would be to have positive stochastic i.i.d. inter-decision times $\Delta_k$ and to use a continuous discount such that costs at time $t$ are discounted by $e^{-\beta t}$ for $\beta>0$.
-The state space could then be modeled as $X=\mathbb{R}^+\cup\{0,x_f\}$ where $x_f$ denotes that the machine is broken.
+Another possibility would be to have positive random i.i.d. inter-decision times $\Delta_k$ and to use a continuous discount such that costs at time $t$ are discounted by $e^{-\beta t}$ for $\beta>0$.
+The state space could then be modeled as $X=\mathbb{R}_0^+\cup\{x_f\}$ where $x_f$ is the state where the asset is broken.
 The state evolution would be as follows
 
 $$
@@ -129,49 +140,49 @@ c+a+\mathbb{E}[e^{-\beta \Delta} V^*(\Delta)],&\text{else.}
 $$
 Where repair would again take one inter-decision time. Where $\Delta$ is of the same family of i.i.d. random variables as the $\Delta_i$'s.
 
-\subsubsection{Time to live in state information}
-The time-to-live could also be included in the state information.
-We would then denote the cost when the machine still has a time $q$ to live by $V(q)$ and in each time step, this time-to-live would decrease by $\delta$ until the time-to-live is negative, when the machine must be repaired.
-If the initial time to live would be given by the random variable $Q\sim F$, the total discounted cost would then be $\mathbb{E}[V(Q)]$ and the Bellman equations would be:
-$$
-V(q)=\min\{
-c+\alpha_{\delta} \mathbb{E}[V(Q)],
-\alpha_{\delta} V(q-\delta)
-\}
-$$
-for $q>0$ and
-$$
-V(q)=c + a + \alpha_{\delta} \mathbb{E}[V(Q)],
-$$
-else.
-These equations are easy to solve although the resulting policy is not very useful in a realistic setting:
-If $0<q\leq\delta$, then 
-\[
-\begin{split}
-V(q)&=\min\{
-c+\alpha_{\delta} \mathbb{E}[V(Q)],\alpha_{\delta} V(q-\delta)\}\\
-&=\min\{
-c+\alpha_{\delta} \mathbb{E}[V(Q)],\alpha_{\delta}(c+a+\alpha_{\delta} \mathbb{E}[V(Q)])\}\\
-&=c+\alpha_{\delta} \mathbb{E}[V(Q)]
-\end{split}
-\]
-(Assuming $a>\frac{1-\alpha_\delta}{\alpha_\delta}(c+\alpha_\delta\mathbb{E}[V(Q)])$, note that for sufficiently small discount factor $\alpha_\delta$, this does not hold.).
-And by induction, we can prove that for $(k-1)\delta<q\leq k\delta$ ($k>0$)
-\[\begin{split}
-V(q)&=\min\{
-c+\alpha_{\delta} \mathbb{E}[V(Q)],\alpha_{\delta} V(q-\delta)\}\\
-&=\min\{
-c+\alpha_{\delta} \mathbb{E}[V(Q)],\alpha_{\delta} \alpha_{\delta}^{k-2}(c+\alpha_\delta\mathbb{E}[V(Q)])\}\\
-&=\alpha_{\delta}^{k-1}(c+\alpha_\delta\mathbb{E}[V(Q)]).
-\end{split}\]
-
-As can be seen, the cost does not depend on $a$ as correctively repairing never occurs. This is because in this formulation, the time-to-live is known when making the decision (when choosing the minimum). Such that we will repair at the last opportunity before the machine breaks down.
-If, for instance, we choose $\alpha_\delta=e^{-\beta \delta}$ for $\beta>0$, we have for $(k-1)\delta<q\leq k\delta$
-$$
-V(q)=e^{-\beta(k-1)\delta}(c+\alpha_\delta\mathbb{E}[V(Q)]).
-$$
-If we let $\delta$ approach zero, the cost approaches 
-$$
-V(q)=e^{-\beta q}(c+\alpha_\delta\mathbb{E}[V(Q)]).
-$$
-As can be seen, this is the cost of repairing the machine preventively at exactly the instant that it will break, which is indeed optimal but can unfortunately not be realized as the time-to-live cannot be directly observed.
+%\subsubsection{Remaining lifetime in state information}
+%The remaining lifetime could also be included in the state information.
+%We would then denote the cost when the machine still has a time $q$ to live by $V(q)$ and in each time step, this remaining lifetime would decrease by $\delta$ until the remaining lifetime is negative, when the machine must be repaired.
+%If the initial remaining lifetime would be given by the random variable $Q\sim F$, the total discounted cost would then be $\mathbb{E}[V(Q)]$ and the Bellman equations would be:
+%$$
+%V(q)=\min\{
+%c+\alpha_{\delta} \mathbb{E}[V(Q)],
+%\alpha_{\delta} V(q-\delta)
+%\}
+%$$
+%for $q>0$ and
+%$$
+%V(q)=c + a + \alpha_{\delta} \mathbb{E}[V(Q)],
+%$$
+%else.
+%These equations are easy to solve although the resulting policy is not very useful in a realistic setting:
+%If $0<q\leq\delta$, then 
+%\[
+%\begin{split}
+%V(q)&=\min\{
+%c+\alpha_{\delta} \mathbb{E}[V(Q)],\alpha_{\delta} V(q-\delta)\}\\
+%&=\min\{
+%c+\alpha_{\delta} \mathbb{E}[V(Q)],\alpha_{\delta}(c+a+\alpha_{\delta} \mathbb{E}[V(Q)])\}\\
+%&=c+\alpha_{\delta} \mathbb{E}[V(Q)]
+%\end{split}
+%\]
+%(Assuming $a>\frac{1-\alpha_\delta}{\alpha_\delta}(c+\alpha_\delta\mathbb{E}[V(Q)])$, note that for sufficiently small discount factor $\alpha_\delta$, this does not hold.).
+%And by induction, we can prove that for $(k-1)\delta<q\leq k\delta$ ($k>0$)
+%\[\begin{split}
+%V(q)&=\min\{
+%c+\alpha_{\delta} \mathbb{E}[V(Q)],\alpha_{\delta} V(q-\delta)\}\\
+%&=\min\{
+%c+\alpha_{\delta} \mathbb{E}[V(Q)],\alpha_{\delta} \alpha_{\delta}^{k-2}(c+\alpha_\delta\mathbb{E}[V(Q)])\}\\
+%&=\alpha_{\delta}^{k-1}(c+\alpha_\delta\mathbb{E}[V(Q)]).
+%\end{split}\]
+%
+%As can be seen, the cost does not depend on $a$ as correctively repairing never occurs. This is because in this formulation, the time-to-live is known when making the decision (when choosing the minimum). Such that we will repair at the last opportunity before the machine breaks down.
+%If, for instance, we choose $\alpha_\delta=e^{-\beta \delta}$ for $\beta>0$, we have for $(k-1)\delta<q\leq k\delta$
+%$$
+%V(q)=e^{-\beta(k-1)\delta}(c+\alpha_\delta\mathbb{E}[V(Q)]).
+%$$
+%If we let $\delta$ approach zero, the cost approaches 
+%$$
+%V(q)=e^{-\beta q}(c+\alpha_\delta\mathbb{E}[V(Q)]).
+%$$
+%As can be seen, this is the cost of repairing the machine preventively at exactly the instant that it will break, which is indeed optimal but can unfortunately not be realized as the time-to-live cannot be directly observed.

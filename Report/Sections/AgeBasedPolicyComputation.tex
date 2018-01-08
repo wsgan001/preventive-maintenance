@@ -25,7 +25,7 @@ Note that
 \end{equation}
 The estimation of the expected total discounted cost will be updated in the following way:
 \[\hat{V}^{(k+1)}=aF(\hat{\mu}^{(k+1)})\mathbb{E}[e^{-\beta Q_0}|Q_0\leq \hat{\mu}^{(k+1)}]+(c+\hat{V}^{(k)})\mathbb{E}[e^{-\beta(Q_0\wedge\hat{\mu}^{(k+1)})}].\]
-We will use the operator $T$ to denote one iteration for the estimate of the expected total discounted cost:
+We define an operator $T$ to denote one iteration for the estimate of the expected total discounted cost:
 \[T(\hat{V}^{(k)}):=\hat{V}^{(k+1)}.\]
 Similarly:
 \[T^m(\hat{V}^{(k)})=\hat{V}^{(k+m)}.\]

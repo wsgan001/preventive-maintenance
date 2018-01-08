@@ -1,10 +1,10 @@
 \section{Analysis of the optimal policy}\label{section:AgeBasedOptimalPolicy}
-Instead of finding the optimal control limit $\mu^*$ by solving the Bellman equations, we can also minimize $V(0^+,\mu)$ by looking for extreme values of the expected total discounted cost.
+Instead of finding the optimal control limit $\mu^*$ by solving the Bellman equations, we can also minimize $V(0^+,\mu)$ by looking for critical points of the expected total discounted cost.
 Although we could use \eqref{eq:AgeBasedPolicyTDC} for the total discounted cost, we will use a slightly different formula to simplify the analysis.
 Instead of using $V(0^+,\mu)$ on the right hand side of \eqref{eq:AgeBasedPolicyTDC}, we will use $V(0^+,\mu^*)$.
 This corresponds to minimizing the expected total discounted cost for a machine using control limit $\mu$ in the first run and optimal control limit $\mu^*$ afterwards.
 Obviously, this would be minimized by $\mu=\mu^*$.
-We will look at extreme values of
+We will look at critical points of
 \begin{equation}\label{eq:AgeBasedHatTDC}
 \hat{V}(0^+,\mu)=aF(\mu)\mathbb{E}[e^{-\beta Q_0}|Q_0\leq \mu]+(c+V(0^+,\mu^*))\mathbb{E}[e^{-\beta(Q_0\wedge\mu)}].
 \end{equation}
@@ -72,40 +72,54 @@ Note that this also implies that for decreasing hazard rates $\mu^*=\infty$.
 	For a proof of this, we refer to appendix \ref{AppendixAgeBasedControlLimit}.
 \end{remark}
 
-\begin{remark}\label{remark:AgeBasedValueNonDecreasing}
 	Returning to remark \ref{remark:AgeBasedWeirdODE}:
 	The differential equation \eqref{eq:AgeBasedBellmanODE} seemed counterintuitive as the total discounted cost would be decreasing for high hazards.
 	
-	Consider the cost of one run of the machine, we replace the repair cost by $c^*=c+V(0^+,\mu^*)$ so that the cost of the expected discounted cost of the first repair equals the expected total discounted cost of the original problem.
+	Consider the cost of one run of the machine, we replace the repair cost by $c^*=c+V(0^+,\mu^*)$ so that the expected discounted cost of the first repair equals the expected total discounted cost of the original problem.
 	$V(x,\mu^*)$ now corresponds to the cost of this altered problem, but starting with a machine of age $x$.
 	If $V(x,\mu^*)$ were to be decreasing in the neighborhood of some $x$, this would mean that for that $x$, the problem would have a lower expected optimal cost if we started with a slightly older machine.
 	This seems to conflict with the assumption that $h$ is increasing so that the machine deteriorates over time.
-	
-	It is difficult to prove that this is not the case in general but results from value iteration seem to suggest $V(x,\mu^*)$ is nondecreasing in $x$.
-	We can, however, prove that if $\frac{d}{dx}V(x,\mu^*)<0$ for some $x$, then no control limit exists:
-	
-	Let $x'<\mu^*$, it holds that
-	\[
-	V(x',\mu^*)\leq V(\mu^*,\mu^*)=c+V(0^+,\mu^*).
-		\]
-	Now we will prove that if $\frac{d}{dx}V(x',\mu^*)<0$, this implies that $\frac{d^2}{dx^2}V(x',\mu^*)<0$.
-	We take the derivative of \eqref{eq:AgeBasedBellmanODE}:
-	\[
-	\frac{d^2}{dx^2}V(x,\mu^*)=-h'(x)[c+a+V(0^+,\mu^*)-V(x,\mu^*)]+(\beta+h(x))\frac{d}{dx}V(x,\mu^*).
-	\]
-	We know that for our $x'$, $\frac{d}{dx}V(x,\mu^*)<0$ and $V(x,\mu^*)\leq c+V(0^+,\mu^*)$.
-	Furthermore, by assumption $h'(x')>0$.
-	Concluding
-	\[
-	\frac{d^2}{dx^2}V(x',\mu^*)<0.
-	\]
-	This implies that if $\frac{d}{dx}V(x',\mu^*)<0$ for some $x'$, $V(x,\mu^*)$ is strictly decreasing after $x'$ so that for all $x>x'$
-	\[
-	V(x,\mu^*)< c+V(0^+,\mu^*),
-	\]
-	which implies that $\mu^*=\infty$.
-	
-	Hence, by contraposition, if an optimal control limit $\mu^*<\infty$ exists, $\frac{d}{dx}V(x,\mu^*)\geq0$ for all $x\in[0,\mu^*]$.
-	This allows us to make the following lower bound on $V(x,\mu^*)$:
-\end{remark}
+	However, we can prove that $V(x,\mu^*)$ is increasing for $x<\mu^*$:
 
+\begin{theorem}\label{theorem:TdcNonDecreasing}
+	The expected total discounted cost \eqref{eq:AgeBasedPolicyRemainingTDC} is increasing for $x< \mu^*$, i.e.
+	\[
+	\frac{d}{dx}V(x,\mu^*)> 0.
+	\]
+	\begin{proof}
+		We will prove that $\frac{d}{dx}V(x,\mu^*)\leq0$ for some $x$ implies $\frac{d^2}{dx^2}V(x,\mu^*)<0$ so that $V(x,\mu^*)$ remains decreasing and will eventually be negative, contradicting the fact that all costs are positive.
+		
+		Let $x'<\mu^*$, it holds that
+		\[
+		V(x',\mu^*)\leq V(\mu^*,\mu^*)=c+V(0^+,\mu^*).
+		\]
+		Now we will prove that if $\frac{d}{dx}V(x',\mu^*)\leq 0$, this implies that $\frac{d^2}{dx^2}V(x',\mu^*)<0$.
+		We take the derivative of \eqref{eq:AgeBasedBellmanODE}:
+		\[
+		\frac{d^2}{dx^2}V(x,\mu^*)=-h'(x)[c+a+V(0^+,\mu^*)-V(x,\mu^*)]+(\beta+h(x))\frac{d}{dx}V(x,\mu^*).
+		\]
+		We know that for our $x'$, $\frac{d}{dx}V(x,\mu^*)\leq 0$ and $V(x,\mu^*)\leq c+V(0^+,\mu^*)$.
+		Furthermore, by assumption $h'(x')>0$.
+		Concluding
+		\[
+		\frac{d^2}{dx^2}V(x',\mu^*)<0.
+		\]
+		This implies that if $\frac{d}{dx}V(x',\mu^*)=\leq0$ for some $x'$, $V(x,\mu^*)$ is strictly concave down after $x'$ so that for all $x>x'$
+		\[
+		V(x,\mu^*)< c+V(0^+,\mu^*).
+		\]
+		Hence no control limit will ever be and $V(x,\mu^*)$ will eventually become negative.
+		This contradicts the fact that all costs are positive so that it is proven that for increasing hazard rates, $V(x,\mu^*)$ is nondecreasing for $x\leq\mu^*$.
+	\end{proof}
+\end{theorem}
+
+\begin{corollary}
+	The remaining discounted cost $V(x,\mu^*)$ has the following lower bound:
+	\[
+	V(x,\mu^*)\geq\frac{h(x)}{\beta+ h(x)}(c+a+ V(0^+,\mu^*)).
+	\]
+	\begin{proof}
+		By theorem \ref{theorem:TdcNonDecreasing}, $\frac{d}{dx}V(x,\mu^*)\geq 0$ holds.
+		The lower bound then follows from the differential equation of $V(x,\mu^*)$ \ref{eq:AgeBasedBellmanODE}.
+	\end{proof}
+\end{corollary}

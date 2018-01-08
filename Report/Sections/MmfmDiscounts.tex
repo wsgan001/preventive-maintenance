@@ -5,7 +5,7 @@ We will do this, by first deriving $D_{ij}(q)$.
 \subsection{Disregarding failures and policies}
 We repeat the definition of $D_{ij}(q)$:
 \[
-D_{ij}^t(q):=\mathbb{E}[e^{-\beta T_t(q)}\mathds{1}\{S(t+T_t(q)=j)\}|S(t)=i].
+D_{ij}^t(q):=\mathbb{E}[e^{-\beta T_t(q)}\mathds{1}\{S(t+T_t(q))=j\}|S(t)=i].
 \]
 We will now prove a few properties regarding $D_{ij}(q)$:
 \begin{lemma}\label{lemma:MmfmDiscountsExponentLinear}
@@ -13,28 +13,56 @@ We will now prove a few properties regarding $D_{ij}(q)$:
 	D_{ij}(A+B)=\sum\limits_k D_{ik}(A)D_{kj}(B)
 	\]
 	\begin{proof}
-		TODO
+		At the time when the fluid level has decreased by $A$, the process must be in some CTMC-state $s_k$.
+		Furthermore, the time until the fluid is decreased by $A$ is independent of the time until the fluid is decreased by $A$ because of the Markov property.
 	\end{proof}
 \end{lemma}
-\begin{lemma}
-	For small $\delta$, $D_{ij}(r_i\delta)$ is given by
+\begin{lemma}\label{lemma:MmfmDiscountsInfinitisimal}
+	For small $\delta$, $D_{ij}(\delta r_i)$ is given by
 	\[
-	D_{ij}(r_i\delta)=(1-\delta\lambda_i)\mathds{q}\{i=j\}+\sum\limits_k\delta\lambda_{ij}D_{kj}(J_{ik})+o(\delta^2).
+	D_{ij}(\delta r_i)=(1-\delta\lambda_i-\delta\beta)\mathds{1}\{i=j\}+\sum\limits_{k\neq i}\delta\lambda_{ij}D_{kj}(J_{ik})+o(\delta^2).
 	\]
 	\begin{proof}
-		TODO
+		In a time period of length $\delta$, either a transition occurs to some state $s_k$ ($k\neq i$) or no transition occurs.
+		These have probabilities $\delta\lambda_{ik}+o(\delta^2)$ and $1-\delta\lambda_i+o(\delta^2)$ respectively.
+		When a transition from $s_i$ to $s_k$ occurs, the fluid level increases by $J_{ik}$.
+		Over this time interval, the discount factor is $1-\delta\beta$.
+		Furthermore, $D_{ij}(0)=\mathds{1}\{i=j\}$.
+		Putting these together results in
+		\[
+		\begin{split}
+		D_{ij}(\delta r_i)&=(1-\delta\lambda_i)(1-\delta\beta)\mathds{1}\{i=j\}+\sum\limits_{k\neq i}\delta(1-\delta\beta)\lambda_{ik}D_{kj}(J_{ik})+o(\delta^2)\\
+		&(1-\delta\lambda_i-\delta\beta)\mathds{1}\{i=j\}+\sum\limits_{k\neq i}\delta\lambda_{ik}D_{kj}(J_{ik})+o(\delta^2).
+		\end{split}
+		\]
 	\end{proof}
 \end{lemma}
 \begin{lemma}
 	$D_{ij}$ adheres to the following differential equation:
 	\begin{equation}\label{eq:MmfmDiscountDifferential}
-	r_i\frac{d}{dq}D_{ij}(q)=\sum\limits_m\left[\sum\limits_{k\neq i}\lambda_{ik}D_{km}(J_{ik})\right] D_{mj}(q)-(\lambda_i+\beta\delta)D_{ij}(q)
+	r_i\frac{d}{dq}D_{ij}(q)=\sum\limits_m\left[\sum\limits_{k\neq i}\lambda_{ik}D_{km}(J_{ik})\right] D_{mj}(q)-(\lambda_i+\beta)D_{ij}(q)
 	\end{equation}
 	\begin{proof}
-		TODO
+		First we write
+		\[
+		\begin{split}
+		D_{ij}(q+\delta r_i)&=\sum_mD_{im}(\delta r_i)D_{mj}(q)\\
+		&=\sum\limits_m\left[(1-\delta\lambda_i-\delta\beta)\mathds{1}\{i=j\}+\sum\limits_{k\neq i}\delta\lambda_{ik}D_{kj}(J_{ik})+o(\delta^2)\right]D_{mj}(q)\\
+		&=(1-\delta\lambda_i-\delta\beta)D_{ij}(q)+\sum\limits_m\left[\sum\limits_{k\neq i}\delta\lambda_{ij}D_{kj}(J_{ik})\right]D_{mj}(q)+o(\delta^2)\\
+		&=D_{ij}(q)+\delta\left( \sum\limits_m\left[\sum\limits_{k\neq i}\lambda_{ik}D_{km}(J_{ik})\right] D_{mj}(q)-(\lambda_i+\beta)D_{ij}(q) \right).\\
+		\end{split}
+		\]
+		If we then subtract $D_{ij}(q)$ from both sides, divide by $\delta$ and let $\delta\rightarrow 0$, we get
+		\[
+		\begin{split}
+		\lim\limits_{\delta\rightarrow 0}\frac{D_{ij}(q+\delta r_i)-D_{ij}(q)}{\delta}&=r_i\frac{d}{dq}D_{ij}(q)\\
+		&=\sum\limits_m\left[\sum\limits_{k\neq i}\lambda_{ik}D_{km}(J_{ik})\right] D_{mj}(q)-(\lambda_i+\beta)D_{ij}(q).
+		\end{split}
+		\]
 	\end{proof}
 \end{lemma}
-\eqref{eq:MmfmDiscountDifferential} suggests defining the following matrix:
+Hence, the derivative of $D_{ij}$ is a linear combination of $D_{kj}$.
+This suggests defining the following matrix:
 \begin{equation}\label{eq:MmfmDiscountGenerator}
 \begin{split}
 \Lambda^D_{im}:=\begin{cases}
@@ -93,7 +121,7 @@ This is summarized by the following lemma.
 	D_{ij}(A+B,\pi,l)=\sum\limits_{\mu_k>l+A} D_{ik}(A,\pi,l)D_{kj}(B,\pi,l+A)
 	\]
 	\begin{proof}
-		TODO
+		The reasoning is the same as for lemma \ref{lemma:MmfmDiscountsExponentLinear}, but with the addition that we also need to keep into account that $L_0$ has been increased by $A$, this explains the $l+A$ on the right hand side.
 	\end{proof}
 \end{lemma}
 
@@ -103,7 +131,7 @@ This is summarized by the following lemma.
 	D_{ij}(r_i\delta,\pi,l)=(1-\delta\lambda_i)\mathds{q}\{i=j\}+\sum\limits_{\mu_k>l+r_i\delta}\delta\lambda_{ij}D_{kj}(J_{ik})+o(\delta^2).
 	\]
 	\begin{proof}
-		TODO
+		The reasoning is the same as in lemma \ref{lemma:MmfmDiscountsInfinitisimal}, but now we know that for $\mu_k\leq l+\delta r_i$, we have that $D_{kj}(J_{ik},\pi,l+\delta r_i)=0$.
 	\end{proof}
 \end{lemma}
 Which suggests that we should replace the generator $\Lambda^D$ by a $\Lambda^D(l_0)$ dependent of the amount of used fluid $l_0$:
@@ -121,9 +149,6 @@ $D_{ij}(q, \pi,l)$ can now be calculated in the following straightforward way:
 	\[
 	D_{ij}(q, \pi,l)=\left(e^{\int_l^{l+q}\Lambda^D(x,\pi)dx}\right)_{ij}.
 	\]
-	\begin{proof}
-		TODO
-	\end{proof}
 \end{theorem}
 Now we will calculate the discounted density $\Gamma_i(q,\pi,l)$:
 

@@ -8,19 +8,23 @@ We define the random process $Q(t)$ as the fluid level at age $t$.
 Initially, the fluid level is given by $Q(0)=Q_0\sim F$.
 Then over time this level decreases at a constant rate of $1$.
 The jumps occur according to a Poisson process with rate $\lambda$, i.e. the time interval between two consecutive jumps is exponentially distributed with rate $\lambda$.
-Hence, let $P_\lambda(t)$ be a Poisson distributed random variable with rate $\lambda t$.
+Hence, let $P_\lambda(t_1,t_2)$ be a Poisson distributed random variable with rate $\lambda (t_2-t_1)$.
+The fluid process is absorbing at $Q(t)=0$.
 Then the fluid level at time $t$ is given by 
 \[
-Q(t)\stackrel d=Q_0+P_\lambda(t)J-t.
+Q(t)\stackrel d=(Q_0+P_\lambda(0,t)J-t)\vee 0.
 \]
-Where $\stackrel d=$ denotes that the random variables on the left and right have the same distribution.
-This process has the property that
+Where $\stackrel d=$ denotes that the random variables on the left and right have the same distribution and $A\vee B$ denotes the maximum of $A$ and $B$.
+$Q(t)$ has the property that
 \[
-Q(t_1+t_2)\stackrel d= Q_0+P_\lambda(t_1)J+P_\lambda(t_2)J-t_1-t_2\stackrel d= Q(t_1)+P_\lambda(t_2)J-t_2.
+\begin{split}
+Q(t_1+t_2)&\stackrel d=( Q_0+P_\lambda(0,t_1)J+P_\lambda(t_1,t_1+t_2)J-t_1-t_2)\vee0\\
+&\stackrel d= (Q(t_1)+P_\lambda(0,t_2)J-t_2)\vee0.
+\end{split}
 \]
-The machine breaks when the fluid level reaches $0$, i.e. at the time $t^*$ given by
+The machine breaks when the fluid level reaches $0$, i.e. at the time $T^*$ given by
 \[
-t^*=\inf\{t|Q(t)=0\}.
+T^*=\inf\{t|Q(t)=0\}.
 \]
 When the machine is repaired, it starts with an age of zero again.
 
@@ -29,7 +33,7 @@ This would be a very inconvenient format of the state of the machine.
 Luckily, this information can be condensed into a simpler state description.
 First, we will illustrate this with the following example:
 \begin{example}
-	If the first jump of the process would have occur at some time $t$, we know that:
+	If the first jump of the process would have occur at some time $t$, then:
 	\begin{enumerate}
 		\item At time $t$, $Q(t)\geq J$.
 		Hence, we have a lower bound on the current fluid level.
@@ -45,17 +49,17 @@ First, we will illustrate this with the following example:
 	\end{enumerate}
 \end{example}
 This suggests that the only two parameters we need to keep track of, are the lower bound of the current fluid level $L_c(t)$ and the lower bound of the initial fluid level $L_0(t)$.
-We will refer to this $L_0$ as the used initial fluid.
+We will refer to this $L_0$ as the drained initial fluid.
 The machine cannot break if 
 \[L_c(t)>0,\]
-since we know for certain that the there is still remaining fluid.
+since we know with certainty that there is still remaining fluid.
 We will refer to this quantity $L_c(t)$ as the fluid buffer.
 The machine breaks whenever
 \[L_0(t)=Q_0,\]
 i.e. when the initial fluid level is drained.
 Hence, we maintain the two quantities $L_c(t)$ and $L_0(t)$ as the description of the state the machine is in.
 \[
-X(t)=(L_0(t),L_c(t))
+X(t)=(L_0(t),L_c(t)).
 \]
 Initially
 \[
@@ -68,14 +72,15 @@ These two quantities evolve in the following way:
 	\begin{equation}\label{eq:SimpleJumpEvolution}
 	(l_0,l_c)\stackrel{J}{\mapsto} (l_0,l_c+J).
 	\end{equation}
-	\item When $X(t)=(l_0,l_c)$ and a time period of length $\tau$ passes without a jump occurring, the fluid level decreases by $\tau$.
-	If $l_c>0$, $L_c$ decreases but it cannot get lower than $0$ so it decreases by $\min\{l_c,\tau\}$.
-	When $l_c=0$, $L_0$ increases by $\tau$.
-	If $0<l_0<\tau$ then first a time of $l_0$ passes so that $L_c(t+l_0)=0$ and then the remaining time passes so that $l_0$ increases by $\tau-l_0$.
+	\item When the state of the asset at some time $t$ is given by $X(t)=(l_0,l_c)$ and a time period of length $\tau$ passes without a jump occurring or the machine failing, the fluid level decreases by $\tau$.
+	If our buffer contains at least $\tau$ fluid (i.e. $l_c>\tau$), then the buffer will decrease by $\tau$.
+	If our buffer is empty, the drained initial fluid will increase by $\tau$ as we now know with certainty that $Q(t)>\tau$ since the machine didn't fail.
+	If $0<l_c<\tau$. Then first the buffer will drain and the remaining fluid $\tau-l_c$ will be drained from the initial fluid.
 	This can be summarized in the following way
 	\begin{equation}\label{eq:SimpleAgeEvolution}
 	(l_0,l_c)\stackrel\tau\mapsto (l_0+\tau-\min\{l_c,\tau\},l_c-\min\{l_c,\tau\}).
 	\end{equation}
+	\item When the fluid $Q(t)$ reaches zero, it remains zero until it is being repaired.
 \end{itemize}
 \begin{theorem}\label{theorem:SimpleCurrentLevel}
 	Using the $L_c(t)$ and the $L_0(t)$ as defined above.
@@ -93,11 +98,23 @@ These two quantities evolve in the following way:
 		When a time $\tau$ passes without a jump occurring, $Q(t)$ decreases by $\tau$.
 		From \eqref{eq:SimpleAgeEvolution}, we see that $L_c-L_0$ also decreases by $\tau$.
 		This completes the proof.
-		
 	\end{proof}
 \end{theorem}
-\begin{corollary}
-	Theorem \ref{theorem:SimpleCurrentLevel} implies that for $X(t)=x=(L_0(t),L_c(t))$, the distribution of $Q(t)$ is given by
+
+\begin{example}\label{example:SimpleFluidState}
+	For example, if we have the jump quantity $J=3$ and the initial fluid level for a run of the machine equals $5$.
+	If after 1.5 time units and after 2.5 time units a jump occurred, $Q,L_0$ and $L_c$ would evolve as in figure \ref{figure:SimpleFluidExampleQuantities}.
+	As you can see, when $Q(t)=0$, it holds that $L_0(t)=Q(0)$.
+\end{example}
+\begin{figure}[H]\label{figure:SimpleFluidExampleQuantities}
+\centering
+\setlength\fwidth{0.7\textwidth}
+\input{Plots/SimpleFluidExample.tex}
+\caption{$Q(t),L_0(t),L_c(t)$ for example \ref{example:SimpleFluidState}.}
+\end{figure}
+
+\begin{corollary}\label{corollary:SimpleFluidDistribution}
+	Theorem \ref{theorem:SimpleCurrentLevel} implies that for $X(t)=x=(L_0(t),L_c(t))$, $Q(t)\sim F_x$ where
 	\begin{equation}\label{eq:SimpleCurrentDistribution}
 	\begin{split}
 	F_x(q)&:=\mathbb{P}(Q(t)<q)\\
@@ -125,7 +142,8 @@ These two quantities evolve in the following way:
 	\]
 \end{corollary}
 
-Now, for $x_k=X(t_k)$, we describe the random disturbances $\omega_k=\omega_k(x_k)$ of the Markov decision process in the following way
+We use the same discretization $t_k=\delta k$ as in the previous chapter.
+For $x_k=X(t_k)$, we describe the random variables $\omega_k=\omega_k(x_k)$ of the Markov decision process in the following way
 \[
 \omega_k(x_k):=\begin{cases}
 \Omega_{SURVIVE}&\ \begin{split}&\text{if the machine does not break and no jump occurs}\\
@@ -135,6 +153,7 @@ Now, for $x_k=X(t_k)$, we describe the random disturbances $\omega_k=\omega_k(x_
 &\text{in the $k$'th time interval.}\end{split}\\
 \end{cases}
 \]
+Note that the machine can only break whenever $L_c(t)=0$.
 Assuming only one jump can occur in a time interval and letting $x_k=X(t_k)=(l_0,l_c)$, we get the following probabilities:
 \[
 \begin{split}
@@ -161,6 +180,7 @@ e^{-\lambda \delta}F_{x_k}&(l_0+\delta)\\
 \end{cases}
 \end{split}
 \]
+Where $F_x$ is given by corollary \ref{corollary:SimpleFluidDistribution}.
 
 \subsection{Control actions}
 We introduce a state $x_{BREAK}$ for when the machine is broken.
@@ -180,13 +200,15 @@ x_{BREAK}&\ \text{if }u_k=a_W\text{ and }\omega_k=\Omega_{BREAK}.\\
 \end{cases}
 \]
 Here we assumed that jumps occur at the start of time intervals.
+For small $\delta$, this approximates the fluid model defined above.
 Again, we use the definition of the random variable $S(x_k):=f(x_k,a_W,\omega_k(x_k))$ as the state after $x_k$.
 
 \subsection{Costs and discounting}
 The costs and discounting remain the same as in the age-based maintenance problem.
 
 \subsection{Optimal policy and Bellman equations}
-We want to find a stationary policy $\mu:X\rightarrow \{a_W,a_R\}$ that chooses the action $u_k=\mu(x_k)$ that minimizes the expected total discounted cost $V_\delta(x_k,\mu)$ for each state.
+In the next section, we will prove that the optimal policy is a stationary policy.
+Hence, we want to find a stationary policy $\mu:X\rightarrow \{a_W,a_R\}$ that chooses the action $u_k=\mu(x_k)$ that minimizes the expected total discounted cost $V_\delta(x_k,\mu)$ for each state.
 Similarly as in the definition of age-based maintenance, $V_\delta(x_k,\mu)$ is given by
 \[V_\delta(x_k,\mu)=g(x_k,\mu(x_k))+\alpha_\delta \mathbb{E}[V_\delta(S(x_k),\mu)].\]
 The Bellman equations for the optimal cost $V_\delta(x_k,\mu^*)$ read

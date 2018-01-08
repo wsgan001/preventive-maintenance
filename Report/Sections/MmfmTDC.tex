@@ -9,7 +9,7 @@ as the expected discount over the time until the fluid level $Q(t)$ is decreased
 In this definition, we disregard failures and policies (i.e. we briefly assume that $Q_0=\infty$ and all control limits $\mu_i=\infty$).
 Furthermore, we define
 \[
-D_{ij}^t(q):=\mathbb{E}[e^{-\beta T_t(q)}\mathds{1}\{S(t+T_t(q)=j)\}|S(t)=i].
+D_{ij}^t(q):=\mathbb{E}[e^{-\beta T_t(q)}\mathds{1}\{S(t+T_t(q))=j\}|S(t)=i].
 \]
 Note that these expectations do not depend on calendar time but only on the CTMC-state the process is in when it is at level $Q(t)$.
 Hence, we will omit $t$ in these notations.
@@ -49,9 +49,10 @@ We define the following quantity
 The interpretation of this quantity can be difficult, it could be seen as the density of $R$ multiplied by the expected discount factor given that repair is chosen at this level of $L_0$.
 Note that $\Gamma_i^t(q,\pi)$ also does not depend on $t$ so that $t$ will again be omitted in the notation.
 \begin{remark}
-	These defined quantities should not be interpreted as either probabilities or discount factors but more as a combination of these two: The expected discount factor given some event, multiplied by the probability (or density) of this event.
+	These defined quantities should not be interpreted as neither probabilities or discount factors but more as a combination of these two: The expected discount factor given some event, multiplied by the probability (or density) of this event.
 	Will refer to $D_{ij},D_{i}(q,\pi)$ and $D_{i}(q,\pi,l)$ as 'discounted probabilities' and $\Gamma_i(q,\pi,l)$ as a 'discounted density'.
 \end{remark}
+These discount quantities will be computed in the next section.
 We will now derive the expected total discounted cost of a policy $\pi$.
 Each run of the machine can end in two ways:
 \begin{enumerate}

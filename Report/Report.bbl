@@ -1,9 +1,19 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{9}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Asmussen et~al.(1996)Asmussen, Nerman, and Olsson]{Asmussen1996}
+S{\o}ren Asmussen, Olle Nerman, and Marita Olsson.
+\newblock Fitting phase-type distributions via the em algorithm.
+\newblock \emph{Scandinavian Journal of Statistics}, pages 419--441, 1996.
+
+\bibitem[Derman(1963)]{Derman1963}
+Cyrus Derman.
+\newblock On optimal replacement rules when changes of state are markovian.
+\newblock \emph{Mathematical optimization techniques}, 396, 1963.
 
 \bibitem[Gribaudo and Telek(2007)]{Gribaudo2007}
 Marco Gribaudo and Mikl{\'o}s Telek.
@@ -11,5 +21,40 @@ Marco Gribaudo and Mikl{\'o}s Telek.
 \newblock In \emph{International School on Formal Methods for the Design of
   Computer, Communication and Software Systems}, pages 271--317. Springer,
   2007.
+
+\bibitem[Inamura et~al.(2006)]{Inamura2006}
+Yasunari Inamura et~al.
+\newblock Estimating continuous time transition matrices from discretely
+  observed data.
+\newblock Technical report, Bank of Japan, 2006.
+
+\bibitem[Kalosi et~al.(2016)Kalosi, Kapodistria, and Resing]{Kalosi2016}
+Szilard Kalosi, Stella Kapodistria, and Jacques~AC Resing.
+\newblock Condition-based maintenance at both scheduled and unscheduled
+  opportunities.
+\newblock \emph{arXiv preprint arXiv:1607.02299}, 2016.
+
+\bibitem[Lai and Xie(2006)]{Lai2006}
+Chin-Diew Lai and Min Xie.
+\newblock Concepts and applications of stochastic ageing.
+\newblock \emph{Stochastic Ageing and Dependence for Reliability}, pages 7--70,
+  2006.
+
+\bibitem[O'cinneide(1999)]{Ocinneide1999}
+Colm~Art O'cinneide.
+\newblock Phase-type distributions: open problems and a few properties.
+\newblock \emph{Stochastic Models}, 15\penalty0 (4):\penalty0 731--757, 1999.
+
+\bibitem[Pham and Wang(1996)]{Pham1996}
+Hoang Pham and Hongzhou Wang.
+\newblock Imperfect maintenance.
+\newblock \emph{European journal of operational research}, 94\penalty0
+  (3):\penalty0 425--438, 1996.
+
+\bibitem[Zacks(2012)]{Zacks2012}
+Shelemyahu Zacks.
+\newblock \emph{Introduction to reliability analysis: probability models and
+  statistical methods}.
+\newblock Springer Science \& Business Media, 2012.
 
 \end{thebibliography}
