@@ -3,27 +3,31 @@ In this section, we will establish that for the simple fluid model with jumps, t
 By this, we mean that there exists some optimal control limit $\mu^*>0$ and repair should be chosen whenever the buffer $L_c(t)=0$ and $L_0(t)\geq\mu^*$.
 
 \subsection{Stationary policy}
-From the Bellman equations \eqref{eq:SimpleFluidBellman}, it can be seen that when $x_k\neq x_{BREAK}$, repair is chosen when
-\[ c+\alpha_\delta V_\delta(x_{NEW},\mu^*) <\alpha_\delta \mathbb{E}[V_\delta(S(x_k),\mu^*)]. \]
-Where the left hand side is a constant and the right hand side only depends on $S(x_k)$, which only depends on $L_0$ and $L_c$ and not on $k$ by theorem \ref{theorem:SimpleCurrentLevel}.
-Hence, we have established that the optimal policy must again be a stationary policy.
+%From the Bellman equations \eqref{eq:SimpleFluidBellman}, it can be seen that when $x_k\neq x_{BREAK}$, repair is chosen when
+%\[ c+\alpha_\delta V_\delta(x_{NEW},\mu^*) <\alpha_\delta \mathbb{E}[V_\delta(S(x_k),\mu^*)]. \]
+%Where the left hand side is a constant and the right hand side only depends on $S(x_k)$, which only depends on $L_0$ and $L_c$ and not on $k$ by theorem \ref{theorem:SimpleCurrentLevel}.
+%Hence, we have established that the optimal policy must again be a stationary policy.
+Any discretization of $L_0$ and $L_c$ results in a countable state space and the cost function is again independent of the decision epoch.
+Hence, by section 6.2.4 of \cite{Puterman2008}, any discrete approximation of the continuous-time MDP has a stationary optimal policy.
 
 \subsection{Empty buffer}
 Repairing when $L_c>0$ cannot be optimal since it is certain that the machine will not break in the next $L_0$ time units and waiting more would decrease the cost.
 This proves that in the optimal policy $L_c$ must be zero whenever repair is chosen.
 
 \subsection{Control limit}
-For states $x\neq x_{BREAK}$, repair is chosen whenever
-\begin{equation}\label{eq:SimpleFluidRepairCondition}
-c+\alpha_\delta V_\delta(x_{NEW},\mu^*) <\alpha_\delta \mathbb{E}[V_\delta(S(x_k),\mu^*)].
-\end{equation}
+The optimal policy is a control limit policy by the same argument as for the age-based problem (see section \ref{section:AgeBasedControlLimit}). 
+%For states $x\neq x_{BREAK}$, repair is chosen whenever
+%\begin{equation}\label{eq:SimpleFluidRepairCondition}
+%c+\alpha_\delta V_\delta(x_{NEW},\mu^*) <\alpha_\delta \mathbb{E}[V_\delta(S(x_k),\mu^*)].
+%\end{equation}
+%
+%Now we can distinguish two cases:
+%\begin{enumerate}
+%	\item There is no value $l_0$ so that $x=(l_0,0)$ satisfies \eqref{eq:AgeBasedRepairCondition} and preventive repair is never the optimal choice.
+%	In this case we set control limit $\mu^*=\infty$.
+%	\item There are values $\mu$ so that $x=(\mu,0)$ satisfy \eqref{eq:AgeBasedRepairCondition}.
+%	We can now simply set the control limit $\mu^*$ to the smallest such values.
+%	What happens for larger values than this $\mu^*$ is not relevant as these will never be reached.
+%\end{enumerate}
 
-Now we can distinguish two cases:
-\begin{enumerate}
-	\item There is no value $l_0$ so that $x=(l_0,0)$ satisfies \eqref{eq:AgeBasedRepairCondition} and preventive repair is never the optimal choice.
-	In this case we set control limit $\mu^*=\infty$.
-	\item There are values $\mu$ so that $x=(\mu,0)$ satisfy \eqref{eq:AgeBasedRepairCondition}.
-	We can now simply set the control limit $\mu^*$ to the smallest such values.
-	What happens for larger values than this $\mu^*$ is not relevant as these will never be reached.
-\end{enumerate}
 Hence, we have established that the optimal policy is a control limit on the used initial fluid $L_0$.

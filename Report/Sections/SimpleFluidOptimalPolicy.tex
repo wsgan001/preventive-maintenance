@@ -2,7 +2,7 @@
 In this section, we will look for the optimal control limit $\mu^*$.
 From remark \ref{remark:SimpleFluidDiscountEquivalence}, it follows that if we use the adjusted discount $\beta^*=\beta+\lambda(1-D(J))$, this problem completely reduces to the age-based maintenance problem.
 Hence, we can use \eqref{eq:AgeBasedHazardBound} with this adjusted discount as condition for the optimal control limit.
-The same properties proven in chapter \ref{chapter:AgeBased} also apply for this problem and the same iteration methods can also be applied to compute the optimal control limit and corresponding expected total discounted cost.
+The same properties proven in chapter \ref{chapter:AgeBased} also apply for this problem and the same policy iteration can also be applied to compute the optimal control limit and corresponding expected total discounted cost.
 There is one important conceptual difference between the control limit of the age-based problem and this simple fluid problem:
-If $\lambda J>1$, the system is instable and the fluid level can diverge to infinity.
-This means that there is a positive probability that the control limit will never be reached (i.e. $T_t(Q_0\wedge\mu)=\infty$) and that the machine will never fail.
+if $\lambda J>1$, the system is instable and the fluid level can diverge to infinity.
+This means that there is a positive probability that the control limit will never be reached (i.e. $T_t(Q_0\wedge\mu)=\infty$) and that the asset will never fail.

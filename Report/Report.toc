@@ -1,106 +1,100 @@
 \select@language {english}
-\contentsline {chapter}{\numberline {1.}Introduction}{7}{chapter.1}
-\contentsline {chapter}{\numberline {2.}Literature overview}{9}{chapter.2}
-\contentsline {section}{\numberline {2.1}Markov decision theory}{9}{section.2.1}
-\contentsline {subsubsection}{Discounted vs. long run average cost}{9}{section*.4}
-\contentsline {subsubsection}{Stationary policies}{9}{section*.5}
-\contentsline {section}{\numberline {2.2}Survival analysis}{9}{section.2.2}
-\contentsline {subsection}{\numberline {2.2.1}Classification of lifetime distributions}{9}{subsection.2.2.1}
-\contentsline {chapter}{\numberline {3.}Age-based maintenance}{10}{chapter.3}
-\contentsline {section}{\numberline {3.1}Problem formulation and definition}{10}{section.3.1}
-\contentsline {subsection}{\numberline {3.1.1}Stochastic machine breakdown}{10}{subsection.3.1.1}
-\contentsline {subsection}{\numberline {3.1.2}Control actions}{11}{subsection.3.1.2}
-\contentsline {subsection}{\numberline {3.1.3}State evolution}{11}{subsection.3.1.3}
-\contentsline {subsection}{\numberline {3.1.4}Costs and discounting}{11}{subsection.3.1.4}
-\contentsline {subsection}{\numberline {3.1.5}Optimal stationary policy and the Bellman equations}{12}{subsection.3.1.5}
-\contentsline {subsection}{\numberline {3.1.6}Alternative models}{12}{subsection.3.1.6}
-\contentsline {subsubsection}{Instantaneous repairs}{12}{section*.6}
-\contentsline {subsubsection}{Stochastic inter-decision times}{12}{section*.7}
-\contentsline {section}{\numberline {3.2}Structure of optimal policy}{13}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}Stationary policy}{13}{subsection.3.2.1}
-\contentsline {subsection}{\numberline {3.2.2}Control limit}{13}{subsection.3.2.2}
-\contentsline {section}{\numberline {3.3}Computation of total discounted cost}{13}{section.3.3}
-\contentsline {section}{\numberline {3.4}Analysis of the optimal policy}{16}{section.3.4}
-\contentsline {section}{\numberline {3.5}Computing the optimal policy}{19}{section.3.5}
-\contentsline {subsection}{\numberline {3.5.1}Description of iteration method}{19}{subsection.3.5.1}
-\contentsline {subsection}{\numberline {3.5.2}Proof of convergence}{20}{subsection.3.5.2}
-\contentsline {section}{\numberline {3.6}Structural properties}{21}{section.3.6}
-\contentsline {subsection}{\numberline {3.6.1}Effect on control limit}{21}{subsection.3.6.1}
-\contentsline {subsection}{\numberline {3.6.2}Effect on expected total discounted cost}{22}{subsection.3.6.2}
-\contentsline {chapter}{\numberline {4.}Simple fluid model with jumps}{23}{chapter.4}
-\contentsline {section}{\numberline {4.1}Problem formulation and definition}{23}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}Stochastic machine breakdown}{23}{subsection.4.1.1}
-\contentsline {subsection}{\numberline {4.1.2}Control actions}{27}{subsection.4.1.2}
-\contentsline {subsection}{\numberline {4.1.3}State evolution}{27}{subsection.4.1.3}
-\contentsline {subsection}{\numberline {4.1.4}Costs and discounting}{27}{subsection.4.1.4}
-\contentsline {subsection}{\numberline {4.1.5}Optimal policy and Bellman equations}{27}{subsection.4.1.5}
-\contentsline {subsection}{\numberline {4.1.6}Alternative models}{28}{subsection.4.1.6}
-\contentsline {subsubsection}{Decisions at jumps only}{28}{section*.8}
-\contentsline {subsubsection}{Jumps not according to a Poisson process}{28}{section*.9}
-\contentsline {section}{\numberline {4.2}Structure of optimal policy}{28}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Stationary policy}{29}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}Empty buffer}{29}{subsection.4.2.2}
-\contentsline {subsection}{\numberline {4.2.3}Control limit}{29}{subsection.4.2.3}
-\contentsline {section}{\numberline {4.3}Computation of total discounted cost}{29}{section.4.3}
-\contentsline {subsection}{\numberline {4.3.1}Time until control limit}{30}{subsection.4.3.1}
-\contentsline {section}{\numberline {4.4}Heuristic policies}{32}{section.4.4}
-\contentsline {section}{\numberline {4.5}Optimal policy}{33}{section.4.5}
-\contentsline {section}{\numberline {4.6}Structural properties}{33}{section.4.6}
-\contentsline {chapter}{\numberline {5.}Markov Modulated Fluid Model with jumps}{35}{chapter.5}
-\contentsline {section}{\numberline {5.1}Problem formulation and definition}{35}{section.5.1}
-\contentsline {subsection}{\numberline {5.1.1}Stochastic machine breakdown}{35}{subsection.5.1.1}
-\contentsline {subsection}{\numberline {5.1.2}Control actions}{38}{subsection.5.1.2}
-\contentsline {subsection}{\numberline {5.1.3}State evolution}{38}{subsection.5.1.3}
-\contentsline {subsection}{\numberline {5.1.4}Costs and discounting}{38}{subsection.5.1.4}
-\contentsline {subsection}{\numberline {5.1.5}Optimal policy and Bellman equations}{38}{subsection.5.1.5}
-\contentsline {subsection}{\numberline {5.1.6}Alternative models}{39}{subsection.5.1.6}
-\contentsline {subsubsection}{Decisions as jumps only}{39}{section*.10}
-\contentsline {subsubsection}{Transitions to the same state}{40}{section*.11}
-\contentsline {subsection}{\numberline {5.1.7}Transitions in a semi-Markov process}{40}{subsection.5.1.7}
-\contentsline {subsubsection}{Second-order fluid model}{40}{section*.12}
-\contentsline {section}{\numberline {5.2}Structure of optimal policy}{40}{section.5.2}
-\contentsline {subsection}{\numberline {5.2.1}Stationary policy}{40}{subsection.5.2.1}
-\contentsline {subsection}{\numberline {5.2.2}Empty buffer}{40}{subsection.5.2.2}
-\contentsline {subsection}{\numberline {5.2.3}Control limit}{40}{subsection.5.2.3}
-\contentsline {section}{\numberline {5.3}Computation of total discounted cost}{41}{section.5.3}
-\contentsline {subsubsection}{The machine breaks}{42}{section*.13}
-\contentsline {subsection}{\numberline {5.3.1}Preventive maintenance is chosen}{42}{subsection.5.3.1}
-\contentsline {subsubsection}{Preventive maintenance is chosen at the control limit}{43}{section*.14}
-\contentsline {subsubsection}{Preventive maintenance is chosen after the control limit}{43}{section*.15}
-\contentsline {section}{\numberline {5.4}Computation of discounted probabilities}{43}{section.5.4}
-\contentsline {subsection}{\numberline {5.4.1}Disregarding failures and policies}{43}{subsection.5.4.1}
-\contentsline {subsection}{\numberline {5.4.2}Taking policies into account}{45}{subsection.5.4.2}
-\contentsline {section}{\numberline {5.5}The optimal policy}{47}{section.5.5}
-\contentsline {section}{\numberline {5.6}Structural properties}{48}{section.5.6}
-\contentsline {section}{\numberline {5.7}Heuristic policies}{48}{section.5.7}
-\contentsline {subsection}{\numberline {5.7.1}The same control limit in each CTMC-state}{49}{subsection.5.7.1}
-\contentsline {subsection}{\numberline {5.7.2}Assuming no jumps before the next failure}{49}{subsection.5.7.2}
-\contentsline {section}{\numberline {5.8}Computing the optimal control limits}{49}{section.5.8}
-\contentsline {chapter}{\numberline {6.}Data analysis}{51}{chapter.6}
-\contentsline {section}{\numberline {6.1}Data description}{51}{section.6.1}
-\contentsline {subsection}{\numberline {6.1.1}Data format}{51}{subsection.6.1.1}
-\contentsline {subsection}{\numberline {6.1.2}Cleaning}{51}{subsection.6.1.2}
-\contentsline {subsection}{\numberline {6.1.3}Visualization}{51}{subsection.6.1.3}
-\contentsline {section}{\numberline {6.2}Fitting lifetime distributions}{52}{section.6.2}
-\contentsline {subsection}{\numberline {6.2.1}Phase-type}{53}{subsection.6.2.1}
-\contentsline {section}{\numberline {6.3}Transition times}{53}{section.6.3}
-\contentsline {chapter}{\numberline {7.}Parameter estimation}{55}{chapter.7}
-\contentsline {section}{\numberline {7.1}CTMC Estimation}{55}{section.7.1}
-\contentsline {section}{\numberline {7.2}Estimating fluid rates and jump quantities}{55}{section.7.2}
-\contentsline {subsection}{\numberline {7.2.1}Likelihood}{55}{subsection.7.2.1}
-\contentsline {subsection}{\numberline {7.2.2}Maximizing likelihood}{56}{subsection.7.2.2}
-\contentsline {subsection}{\numberline {7.2.3}Minimizing variance}{57}{subsection.7.2.3}
-\contentsline {subsection}{\numberline {7.2.4}Results}{58}{subsection.7.2.4}
-\contentsline {chapter}{\numberline {8.}Conclusion}{59}{chapter.8}
-\contentsline {section}{\numberline {8.1}Further research}{59}{section.8.1}
-\contentsline {chapter}{\numberline {9.}Discussion}{60}{chapter.9}
-\contentsline {section}{\numberline {9.1}Assumptions}{60}{section.9.1}
-\contentsline {section}{\numberline {9.2}Robustness}{60}{section.9.2}
-\contentsline {chapter}{Appendices}{62}{section*.17}
-\contentsline {chapter}{\numberline {A.}List of symbols and notation}{63}{Appendix.a.A}
-\contentsline {chapter}{\numberline {B.}Proof of properties of optimal age-based control limits}{64}{Appendix.a.B}
-\contentsline {chapter}{\numberline {C.}CTMC analysis}{66}{Appendix.a.C}
-\contentsline {section}{\numberline {C.1}Value iteration}{66}{section.a.C.1}
-\contentsline {section}{\numberline {C.2}State clustering}{66}{section.a.C.2}
-\contentsline {chapter}{\numberline {D.}Total discounted costs for various problem parameters and policies?}{67}{Appendix.a.D}
-\contentsline {chapter}{\numberline {E.}Matlab scripts and ProM plugins}{68}{Appendix.a.E}
+\contentsline {chapter}{\numberline {1.}Introduction}{1}{chapter.1}
+\contentsline {chapter}{\numberline {2.}Literature overview}{3}{chapter.2}
+\contentsline {section}{\numberline {2.1}Markov decision theory}{3}{section.2.1}
+\contentsline {chapter}{\numberline {3.}Age-based maintenance}{5}{chapter.3}
+\contentsline {section}{\numberline {3.1}Problem formulation and definition}{5}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}Degradation model}{5}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}Control actions}{5}{subsection.3.1.2}
+\contentsline {subsection}{\numberline {3.1.3}State evolution}{6}{subsection.3.1.3}
+\contentsline {subsection}{\numberline {3.1.4}Costs and discounting}{6}{subsection.3.1.4}
+\contentsline {subsection}{\numberline {3.1.5}Optimal stationary policy and the Bellman equations}{7}{subsection.3.1.5}
+\contentsline {subsection}{\numberline {3.1.6}Continuous-time MDP}{7}{subsection.3.1.6}
+\contentsline {subsection}{\numberline {3.1.7}Alternative models}{7}{subsection.3.1.7}
+\contentsline {subsubsection}{Instantaneous repairs}{7}{section*.4}
+\contentsline {subsubsection}{Stochastic inter-decision times}{8}{section*.5}
+\contentsline {section}{\numberline {3.2}Structure of optimal policy}{8}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Stationary policy}{8}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Control limit}{8}{subsection.3.2.2}
+\contentsline {section}{\numberline {3.3}Computation of total discounted cost}{9}{section.3.3}
+\contentsline {section}{\numberline {3.4}Analysis of the optimal policy}{11}{section.3.4}
+\contentsline {section}{\numberline {3.5}Policy iteration}{14}{section.3.5}
+\contentsline {subsection}{\numberline {3.5.1}Description of iteration method}{14}{subsection.3.5.1}
+\contentsline {subsection}{\numberline {3.5.2}Proof of convergence}{15}{subsection.3.5.2}
+\contentsline {section}{\numberline {3.6}Structural properties}{17}{section.3.6}
+\contentsline {subsection}{\numberline {3.6.1}Effect on control limit}{17}{subsection.3.6.1}
+\contentsline {subsection}{\numberline {3.6.2}Effect on expected total discounted cost}{17}{subsection.3.6.2}
+\contentsline {chapter}{\numberline {4.}Simple fluid model with jumps}{18}{chapter.4}
+\contentsline {section}{\numberline {4.1}Problem formulation and definition}{18}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Stochastic asset degradation}{18}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}Control actions}{22}{subsection.4.1.2}
+\contentsline {subsection}{\numberline {4.1.3}State evolution}{22}{subsection.4.1.3}
+\contentsline {subsection}{\numberline {4.1.4}Costs and discounting}{22}{subsection.4.1.4}
+\contentsline {subsection}{\numberline {4.1.5}Optimal policy and Bellman equations}{22}{subsection.4.1.5}
+\contentsline {subsection}{\numberline {4.1.6}Alternative models}{23}{subsection.4.1.6}
+\contentsline {subsubsection}{Decisions at jumps only}{23}{section*.6}
+\contentsline {subsubsection}{Jumps not according to a Poisson process}{23}{section*.7}
+\contentsline {section}{\numberline {4.2}Structure of optimal policy}{23}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Stationary policy}{24}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Empty buffer}{24}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.3}Control limit}{24}{subsection.4.2.3}
+\contentsline {section}{\numberline {4.3}Computation of total discounted cost}{24}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}Time until control limit}{24}{subsection.4.3.1}
+\contentsline {section}{\numberline {4.4}Optimal policy}{27}{section.4.4}
+\contentsline {section}{\numberline {4.5}Structural properties}{27}{section.4.5}
+\contentsline {chapter}{\numberline {5.}Markov Modulated Fluid Model with jumps}{29}{chapter.5}
+\contentsline {section}{\numberline {5.1}Problem formulation and definition}{29}{section.5.1}
+\contentsline {subsection}{\numberline {5.1.1}Stochastic asset degradation}{29}{subsection.5.1.1}
+\contentsline {subsection}{\numberline {5.1.2}Control actions}{32}{subsection.5.1.2}
+\contentsline {subsection}{\numberline {5.1.3}State evolution}{32}{subsection.5.1.3}
+\contentsline {subsection}{\numberline {5.1.4}Costs and discounting}{32}{subsection.5.1.4}
+\contentsline {subsection}{\numberline {5.1.5}Optimal policy and Bellman equations}{33}{subsection.5.1.5}
+\contentsline {subsection}{\numberline {5.1.6}Continuous-time MDP}{33}{subsection.5.1.6}
+\contentsline {subsection}{\numberline {5.1.7}Alternative models}{34}{subsection.5.1.7}
+\contentsline {subsubsection}{Decisions as jumps only}{34}{section*.8}
+\contentsline {subsubsection}{Transitions to the same state}{34}{section*.9}
+\contentsline {subsection}{\numberline {5.1.8}Transitions in a semi-Markov process}{34}{subsection.5.1.8}
+\contentsline {subsubsection}{Second-order fluid model}{34}{section*.10}
+\contentsline {section}{\numberline {5.2}Structure of optimal policy}{34}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}Stationary policy}{34}{subsection.5.2.1}
+\contentsline {subsection}{\numberline {5.2.2}Empty buffer}{35}{subsection.5.2.2}
+\contentsline {subsection}{\numberline {5.2.3}Control limit}{35}{subsection.5.2.3}
+\contentsline {section}{\numberline {5.3}Computation of total discounted cost}{35}{section.5.3}
+\contentsline {subsubsection}{The asset breaks}{36}{section*.11}
+\contentsline {subsection}{\numberline {5.3.1}Preventive maintenance is chosen}{37}{subsection.5.3.1}
+\contentsline {subsubsection}{Preventive maintenance is chosen at the control limit}{37}{section*.12}
+\contentsline {subsubsection}{Preventive maintenance is chosen after the control limit}{37}{section*.13}
+\contentsline {section}{\numberline {5.4}Computation of discounted probabilities}{37}{section.5.4}
+\contentsline {subsection}{\numberline {5.4.1}Disregarding failures and policies}{38}{subsection.5.4.1}
+\contentsline {subsection}{\numberline {5.4.2}Taking policies into account}{40}{subsection.5.4.2}
+\contentsline {section}{\numberline {5.5}The optimal policy}{41}{section.5.5}
+\contentsline {section}{\numberline {5.6}Structural properties}{42}{section.5.6}
+\contentsline {section}{\numberline {5.7}Heuristic policies}{42}{section.5.7}
+\contentsline {subsection}{\numberline {5.7.1}The same control limit in each CTMC-state}{43}{subsection.5.7.1}
+\contentsline {subsection}{\numberline {5.7.2}Assuming no jumps before the next failure}{43}{subsection.5.7.2}
+\contentsline {section}{\numberline {5.8}Computing the optimal control limits}{43}{section.5.8}
+\contentsline {chapter}{\numberline {6.}Data analysis}{45}{chapter.6}
+\contentsline {section}{\numberline {6.1}Data description}{45}{section.6.1}
+\contentsline {subsection}{\numberline {6.1.1}Data format}{45}{subsection.6.1.1}
+\contentsline {subsection}{\numberline {6.1.2}Cleaning}{45}{subsection.6.1.2}
+\contentsline {subsection}{\numberline {6.1.3}Visualization}{45}{subsection.6.1.3}
+\contentsline {section}{\numberline {6.2}Fitting lifetime distributions}{46}{section.6.2}
+\contentsline {subsection}{\numberline {6.2.1}Phase-type}{47}{subsection.6.2.1}
+\contentsline {section}{\numberline {6.3}Transition times}{47}{section.6.3}
+\contentsline {chapter}{\numberline {7.}Parameter estimation}{49}{chapter.7}
+\contentsline {section}{\numberline {7.1}CTMC Estimation}{49}{section.7.1}
+\contentsline {section}{\numberline {7.2}Estimating fluid rates and jump quantities}{49}{section.7.2}
+\contentsline {subsection}{\numberline {7.2.1}Likelihood}{49}{subsection.7.2.1}
+\contentsline {subsection}{\numberline {7.2.2}Maximizing likelihood}{50}{subsection.7.2.2}
+\contentsline {subsection}{\numberline {7.2.3}Minimizing variance}{51}{subsection.7.2.3}
+\contentsline {subsection}{\numberline {7.2.4}Results}{52}{subsection.7.2.4}
+\contentsline {chapter}{\numberline {8.}Conclusion}{53}{chapter.8}
+\contentsline {section}{\numberline {8.1}Further research}{53}{section.8.1}
+\contentsline {chapter}{\numberline {9.}Discussion}{55}{chapter.9}
+\contentsline {section}{\numberline {9.1}Assumptions}{55}{section.9.1}
+\contentsline {section}{\numberline {9.2}Robustness}{55}{section.9.2}
+\contentsline {chapter}{Appendices}{57}{section*.15}
+\contentsline {chapter}{\numberline {A.}List of symbols and notation}{58}{Appendix.a.A}
+\contentsline {chapter}{\numberline {B.}Proof of properties of optimal age-based control limits}{60}{Appendix.a.B}
+\contentsline {chapter}{\numberline {C.}Total discounted costs for various problem parameters and policies?}{62}{Appendix.a.C}
+\contentsline {chapter}{\numberline {D.}Matlab routines}{63}{Appendix.a.D}

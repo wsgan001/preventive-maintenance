@@ -1,25 +1,28 @@
 \section{Structure of optimal policy}
 In this section, we will establish that for the age-based maintenance problem, the optimal policy is a stationary control limit policy.
-This means that repair is chosen if and only if the age has exceeded a certain threshold $\mu$ (the control limit).
-If no repair is chosen, then we set $\mu=\infty$.
+This means that repair is chosen if and only if the age has exceeded a certain threshold $\mu^*$ (the control limit).
+If no repair is chosen, then we set $\mu^*=\infty$.
 
 \subsection{Stationary policy}\label{section:AgeBasedStationaryPolicy}
-Referring back to the Bellman equations of the age-based problem \eqref{eq:AgeBasedBellman}, you can see that when $x_k>0$, repair is chosen whenever
-\[ c+\alpha_\delta V^*_\delta(1) <\alpha_\delta \mathbb{E}[V^*_\delta(S(x_k))]. \]
-Where the left hand side is a constant and the right hand side only depends on $S(x_k)$, which only depends on the age of the machine by assumption.
-Hence, we have established that the optimal policy only depends on the age $x_k$ so that it must be a stationary policy.
+%Referring back to the Bellman equations of the age-based problem \eqref{eq:AgeBasedBellman}, you can see that when $x_k>0$, repair is chosen whenever
+%\[ c+\alpha_\delta V^*_\delta(1) <\alpha_\delta \mathbb{E}[V^*_\delta(S(x_k))]. \]
+%Where the left hand side is a constant and the right hand side only depends on $S(x_k)$, which only depends on the age of the asset by assumption.
+%Hence, we have established that the optimal policy only depends on the age $x_k$ so that it must be a stationary policy.
+\cite{Puterman2008} proves that for a discounted infinite-horizon countable-state MDP where the cost function does not depend on the decision stage, there exists a stationary policy that is optimal.
+This proves that there exists an optimal stationary policy to this age-based preventive maintenance policy.
 
-\subsection{Control limit}
-Using similar reasoning, for states $x>0$, repair is chosen whenever
+\subsection{Control limit}\label{section:AgeBasedControlLimit}
+From the Bellman equations \eqref{eq:AgeBasedBellman} we can see that, by letting $\delta\rightarrow 0$, repair is for chosen $x>0$ whenever
 \begin{equation}\label{eq:AgeBasedRepairCondition}
- c+\alpha_\delta V^*_\delta(1) <\alpha_\delta \mathbb{E}[V^*_\delta(S(x))]. 
+ c+\alpha V^*(0^+) \leq V^*(x). 
  \end{equation}
 Now we can distinguish two cases:
 \begin{enumerate}
 	\item There is no age $x$ that satisfies \eqref{eq:AgeBasedRepairCondition} and preventive repair is never the optimal choice.
-	In this case we set control limit $\mu=\infty$.
+	In this case we set control limit $\mu^*=\infty$.
 	\item There are ages $x_1,x_2,...$ that satisfy \eqref{eq:AgeBasedRepairCondition}.
 	The control limit will now simply be the smallest such age.
-	What happens for ages greater than this $\mu$ is not relevant as these will never be reached.
+	What happens for ages greater than this $\mu^*$ is not relevant as these will never be reached.
 \end{enumerate}
-Hence, we have established that the optimal policy must be of control limit type where the machine is repaired whenever its age exceeds some threshold $\mu$.
+Later in this chapter, we will prove that the right hand side of \eqref{eq:AgeBasedRepairCondition} is increasing for $x<\mu^*$.
+Hence, we have established that the optimal policy must be of control limit type where the asset is repaired whenever its age exceeds some threshold $\mu^*$.

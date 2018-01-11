@@ -1,5 +1,6 @@
 \input{Sections/imports.tex}
 \begin{document}
+\frontmatter
 \title{Dynamically adaptive age-based maintenance policies}
 \author{Martijn G\"{o}sgens\\
 \and
@@ -12,54 +13,81 @@ Stella Kapodistria
 
 \begin{abstract}
 	In this thesis, we model the lifetime of an asset as a Markov modulated fluid model (MMFM) and find a replacement policy minimizing the total discounted cost.
-	We assume the cost of correctively repairing the machine is larger than the cost of preventively repairing it.
+	We assume the cost of correctively repairing the asset is larger than the cost of preventively repairing it.
 	At each transition of the Markovian environment, the fluid level instantaneously increases by a constant amount, where the amount depends on the origin and destination state of the Markovian environment.
 	Numeric methods to compute the total discounted cost for a given stationary replacement policy and iteration methods to find the optimal replacement policy are presented.
+	A method to estimate parameters of the MMFM from usage data of the asset is also presented.
 \end{abstract}
 
 \chapter*{Executive summary}
-[Describe characteristics of a machine whose deterioration that can be modeled by a MMFM with jumps: different activities that in different degrees wear out the machine, the machine has no schedule (actions as CTMC), partial repairs between activities and an initial fitness of the machine.]
+Often, the defect of an asset comes with additional costs.
+This could be because the process halts, e.g. in the case of manufacturing machines, or because additional damage or loss occurs when the asset breaks, e.g. data loss when a computer breaks.
+In these cases, performing preventive maintenance might save costs.
 
-[List assumptions]
+In this thesis, a method is derived that finds the optimal times to perform preventive maintenance.
+The degradation of the asset was modeled by a Markov modulated fluid model.
+This corresponds to an asset with the following characteristics:
+\begin{itemize}
+	\item There is a distinct set of activities that the asset is used for.
+	\item The usage of the asset is recorded; at each time (in the past) it is known for what activity it is used.
+	\item No schedule is known; it is not certain for which activity the asset will be used in the future.
+	\item Maintenance restores the asset to a condition as good as new.
+	\item When the asset is not maintained, the condition deteriorates over time (Negative aging).
+	This is in contrary to assets that get more reliable over time.
+	\item Optionally, the speed at which the asset wears out, depends on the activity it is being used for.
+	\item Optionally, between certain (fixed) activities, the condition of the asset improves.
+	For instance, when each time before a certain activity, the asset is inspected and partial maintenance is performed.
+\end{itemize}
 
-[The type of observations for which the policy is useful: trace data where at each time the current activity is known and failures are observed.]
+In order to use the presented method, certain parameters of the degradation model are needed.
+With sufficient usage data and records of the time at which the asset broke, these parameters could be estimated using methods presented in this thesis.
 
-[Mention the kind of historical data needed for the parameter estimation.]
+We present the following approach to determine the times at which preventive maintenance should be performed:
+%The presented approach to decide at which times preventive maintenance should be chosen can be implemented as follows:
+\begin{itemize}
+	\item First, control limits for the various activities must be calculated.
+	These control limits could be interpreted in the following way:
+	when the level of wear of the asset exceeds the control limit corresponding to a certain activity, the asset must be repaired before being used for that activity.
+	\item When using the asset, data from its usage since the last repair are used to determine whether the asset should be repaired at each moment.
+\end{itemize}
 
-[The type of (online) policy that is presented and how it would be implemented.]
+%[Describe characteristics of a machine whose deterioration that can be modeled by a MMFM with jumps: different activities that in different degrees wear out the machine, the machine has no schedule (actions as CTMC), partial repairs between activities and an initial fitness of the machine.]
 
-[Explain possibilities of forecasting time until preventive repair.]
+%[List assumptions]
+
+%[The type of observations for which the policy is useful: trace data where at each time the current activity is known and failures are observed.]
+
+%[Mention the kind of historical data needed for the parameter estimation.]
+
+%[The type of (online) policy that is presented and how it would be implemented.]
+
+%[Explain possibilities of forecasting time until preventive repair.]
 
 \tableofcontents
+
+\mainmatter
 
 % Introduction
 \input{Sections/introduction}
 
 \chapter{Literature overview}\label{chapter:literatureOverview}
 In this chapter, some preliminaries will be summarized.
-We will first explain some useful results and concepts from Markov decision theory.
-After that, we will do the same for survival analysis.
+We will explain some useful results and concepts from the fields of Markov decision theory and survival analysis.
 
-\section{Markov decision theory}
-Markov Decision Theory provides the mathematical framework to make decisions based on a Markov model.
-There are various types of Markov Decision Problems (MDPs).
-A distinction can be made based on the time horizon of the problem; whether it is finite or infinite.
-For infinite horizon problems, the total cost might be infinite.
-Two approaches are common to resolve this issue of infinity: The first is to discount costs further in the future; The second is to consider the average cost per time unit in the long run.
-We will first compare these two approaches.
-After that we will explain the structure of solutions to MDPs and discuss methods to find them.
-\subsubsection{Discounted vs. long run average cost}
-[Explain relation and pros and cons of both]
-\subsubsection{Stationary policies}
-\section{Survival analysis}
-\subsection{Classification of lifetime distributions}
-[increasing and decreasing hazard rate. No preventive maintenance for decreasing hazard rates.]
+% Markov Decision Theory
+\input{Sections/MarkovDecisionTheory}
+
+%\section{Survival analysis}
+%
+%
+%\subsection{Classification of lifetime distributions}
+%[increasing and decreasing hazard rate. No preventive maintenance for decreasing hazard rates.]
 
 
 %\chapter{Analysis of problems}
 \chapter{Age-based maintenance}\label{chapter:AgeBased}
-A machine is considered that is subject to deterioration over time.
-If no further observations are made while the machine is active, any choice to repair the machine can only be based on its age.
+An asset is considered that is subject to deterioration over time.
+If no further observations are made, any choice to repair the asset can only be based on its age.
 In this chapter we will investigate methods to find an optimal preventive maintenance policy in terms of total discounted cost.
 % Problem formulation and definitions
 \input{Sections/AgeBasedProblemDefinition.tex}
@@ -76,16 +104,16 @@ In this chapter we will investigate methods to find an optimal preventive mainte
 
 \chapter{Simple fluid model with jumps}\label{chapter:SimpleFluid}
 The problem of the previous chapter can be seen as a very simple Markov modulated fluid model:
-Initially, the bucket has a random amount of fluid $Q\sim F$.
-The fluid decreases constantantly with rate $1$ and no fluid jumps occur.
+Initially, the bucket has a random amount of fluid $Q_0\sim F$.
+The fluid decreases constantly with rate $1$ and no fluid jumps occur.
 In this chapter, we extend this model by allowing jumps to occur according to a Poisson process with rate $\lambda$.
 The jumps all have the same constant (and known size) $J$.
-In the real world, these fluid jumps could correspond to a partial repair of the machine.
+In the real world, these fluid jumps could correspond to a partial repair of the asset.
 The presence of jumps introduces the following complications:
 \begin{itemize}
-	\item The hazard of the machine failing at some time $t$ cannot be derived directly from the age only but also depends on the number of jumps that occurred before $t$.
+	\item The hazard of the asset failing at some time $t$ cannot be derived directly from the age only but also depends on the number of jumps that occurred before $t$.
 	\item Furthermore, the times at which these jumps occurred also matter.
-	When a jump occurs at time $t$, it is certain that the fluid quantity is at least $J$ so that you know for certain that in the interval $[t,t+J)$ the machine cannot fail.
+	When a jump occurs at time $t$, it is certain that the fluid quantity is at least $J$ so that you know for certain that in the interval $[t,t+J)$ the asset cannot fail.
 \end{itemize}
 In this chapter, the expected total discounted cost is calculated and methods are introduced to find the optimal replacement policy.
 % Problem formulation and definition
@@ -95,14 +123,14 @@ In this chapter, the expected total discounted cost is calculated and methods ar
 % Computation of total discounted cost
 \input{Sections/SimpleFluidTDC}
 % Heuristic policies
-\input{Sections/SimpleFluidHeuristics}
+%\input{Sections/SimpleFluidHeuristics}
 % The optimal policy
 \input{Sections/SimpleFluidOptimalPolicy}
 % Structural properties
 \input{Sections/SimpleFluidStructuralProperties}
 
 \chapter{Markov Modulated Fluid Model with jumps}\label{chapter:Mmfm}
-In this chapter, we extend the model of the simple fluid model with jumps from the previous chapter to a Markov modulated fluid model (MMFM) with various states, fluid rates, various fluid jump sizes and rates.
+In this chapter, we extend the model of the simple fluid model with jumps from the previous chapter to a Markov modulated fluid model (MMFM) with various states, various fluid jump sizes and fluid rates.
 The fluid jumps occur when a transition occurs in the underlying Markov chain.
 The MMFM that is used is similar to the first-order fluid model considered in \cite{Gribaudo2007}, with the addition of constant jumps.
 The size of the jumps are constant.
@@ -112,7 +140,7 @@ The various fluid rates, transition rates and jump sizes introduce the following
 	paths with different probabilities and jump sizes into account.
 	Moreover, it is also relevant from which state you start and where you end.
 	\item There are different control limits $\mu_i$ for different states $s_i$, all depending on each other.
-	\item A jump can cause the machine to be repaired when the amount of used fluid has exceeded the control limit.
+	\item A jump can cause the asset to be repaired when the amount of used fluid has exceeded the control limit.
 \end{enumerate}
 These complications will be explained and tackled in the following sections.
 % Problem formulation and definition
@@ -158,15 +186,89 @@ The maximum likelihood estimator of the rates $\lambda_{ij}$ is simply given by 
 \input{Sections/ParametersMmfmEstimation}
 
 \chapter{Conclusion}\label{chapter:Conclusion}
-[Summarize results]
-\section{Further research}
-[Random jump sizes, better parameter estimation methods, zero or negative fluid rates, nonincreasing hazard rates, ordering the CTMC states depending only on the MMFM]
+%In this chapter, we will briefly summarize the results that are presented throughout the thesis.
 
+In this thesis, discounted preventive maintenance problems were considered.
+We used the following parameters:
+a cost $c$ is paid for maintenance.
+For corrective maintenance an additional cost $a$ must be paid.
+Costs at time $t$ in the future are discounted by the discount factor $e^{-\beta t}$.
+We assumed that the distribution of the initial fitness of the asset (its lifetime or initial fluid level) has an increasing hazard rate $h$.
+
+We showed that for the age-based preventive maintenance problem, the optimal policy is a stationary control limit policy where maintenance is chosen whenever the age reaches the optimal control limit $\mu^*$.
+If $\mu^*<\infty$, then this $\mu^*$ is the solution to the equation
+\begin{equation}\label{eq:SummaryAgeControlLimit}
+h(\mu^*)=\beta\frac{c+V(0^+,\mu^*)}{a},
+\end{equation}
+where $V(0^+,\mu^*)$ denotes the expected total discounted cost.
+A policy iteration method was introduced and its convergence was proven.
+
+For the simple fluid problem, we proved that the optimal policy is a stationary control limit policy where maintenance is chosen when the amount of used initial fluid exceeds a certain threshold $\mu^*$.
+We showed that this problem can be reduced to the age-based maintenance problem by changing the discount factor.
+For fluid jumps happening at rate $\lambda$ with size $J$, this adjusted discount is given by
+\[
+\beta^*=\beta+\lambda(1-D(J)),
+\]
+where $D(J)$ denotes the expected value of the discount factor over the period in which the fluid level decreases by $J$.
+$D(J)$ can be computed using a method of successive approximation.
+Because of the equivalence between this problem and the age-based maintenance problem, the same equation for the control limit holds and the same policy iteration method can be used.
+
+We extended this simple fluid problem to a problem where the degradation of the asset is modeled by a MMFM with jumps.
+Results from value iteration suggest that the solution is a stationary policy with control limits $\mu_i^*$ for CTMC-state $s_i$.
+Ways to calculate the expected total discounted cost were presented and an equation was derived to which the optimal control limit adheres.
+A policy iteration method similar to the one for age-based maintenance was presented.
+
+Also, a method to estimate the fluid rates and the jump quantities was presented that assumes the distribution of the initial fluid level has a small variance.
+
+\section{Further research}
+We expect that the obtained results can be extended to models allowing states with zero fluid rates or fluid rates of opposite sign.
+The results might also be extended to initial distributions without monotonously increasing hazard rates.
+
+The model that was considered in this thesis was simplified in order to make the analysis feasible.
+It could be made more realistic in one of the following ways:
+the model could be extended to allow non-exponential transition times, i.e. by replacing the Markov chain by a semi-Markov process.
+The jump sizes could also be modeled as random variables.
+With the extra randomness in the jump sizes, the distribution of the current fluid level can no longer be described using the two state variables $L_0$ and $L_c$, as it would not be certain how much fluid is in the buffer at each time.
+Also, similar to the second order fluid model as considered in \cite{Gribaudo2007}, the fluid decrease could be modeled as Brownian motion.
+Again, with this extra randomness, we would lose certainty of the amount of fluid that is inside the buffer $L_c$ at each time.
+
+Better methods for estimating the fluid parameters (fluid rates and jump sizes) from trace data could also be researched.
+
+%[Random jump sizes, better parameter estimation methods, zero or negative fluid rates, nonincreasing hazard rates, ordering the CTMC states depending only on the MMFM]
 \chapter{Discussion}\label{chapter:discussion}
+We briefly discuss the assumptions on which this thesis relies and what happens when these assumptions fail.
+The effect of small changes in problem parameters is also discussed.
+%In this chapter the assumptions on which this thesis relies are discussed we also discuss what happens when these assumptions fail.
+%Also, the effect of varying the parameters slightly is discussed.
 \section{Assumptions}
-[List assumptions, their consequences and alternatives]
+We assumed perfect repairs.
+This means that after preventive or corrective maintenance, the fitness of the asset has the same distribution as a new asset.
+If this assumption were to be violated, the optimal policy would no longer be stationary as it would depend on the number of repairs that have occurred.
+
+We also assumed the cumulative distribution function of the initial fitness of the asset to be continuously differentiable.
+If this were to fail, the hazard rate (and the derivative of the value function) might be undefined or infinite at points where the distribution would not be continuous or differentiable.
+
+The hazard rate was also assumed to be increasing and continuous.
+Discontinuities in the hazard rate could result in the equations for the control limits (\eqref{eq:AgeBasedHazardBound} and \eqref{eq:MmfmHazardBoundsShort}) not having solutions.
+%If the hazard rate would be discontinuous, it would be possible that the equations for the control limit  would not have a solution. 
+However, as long as the hazard rate is increasing, the optimal control limit would simply be the infimum of control limits that exceed the hazard bound.
+If the hazard rate would not be monotonously increasing, then the equations for the control limit might have multiple solutions and the policy iteration might get stuck in a local optimum.
+
+It was also assumed that the transitions in the Markovian environment occur independent of the condition (age or fluid level) of the asset.
+In practice, this assumption might fail as the degradation of the asset might be visible in its behavior.
+\cite{Scheinhardt1998} discusses models where the transitions in the Markovian environment do depend on the fluid level.
+
+The assumption of constant known fluid jump sizes might also be unrealistic.
+This assumption was mainly made to simplify the problem.
+The same holds for the assumption of exponential transition times.
+
 \section{Robustness}
-[Explain what happens to the resulting policy and total discounted cost when one of the problem parameters or MMFM parameters changes a little.]
+Small errors in the problem parameters could be caused by changes in the environment.
+For example, if the cost of maintenance would turn out to be larger than the cost $c$ that was used during the computation of the policy, this would result in the real total discounted cost being larger than calculated.
+Furthermore, the chosen control limit would be too high. 
+
+Most of the effects varying parameters are covered in sections \ref{section:AgeBasedStructuralProperties}, \ref{section:SimpleStructuralProperties} and \ref{section:MmfmStructuralProperties} for the age-based problem, the simple fluid problem and the MMFM problem respectively.
+%[Explain what happens to the resulting policy and total discounted cost when one of the problem parameters or MMFM parameters changes a little.]
 
 
 \bibliography{Sections/bibliography}
@@ -174,14 +276,14 @@ The maximum likelihood estimator of the rates $\lambda_{ij}$ is simply given by 
 \begin{appendices}
 	\input{Sections/ListOfSymbols.tex}
 	\input{Sections/AgeBasedHazardBoundProof.tex}
-\chapter{CTMC analysis}
-\section{Value iteration}
-[Derive Bellman equations, mention implementation]
-\section{State clustering}
-[Explain the state clustering that was employed, mention that repair states tend to be clustered and explain]
+%\chapter{CTMC analysis}
+%\section{Value iteration}
+%[Derive Bellman equations, mention implementation]
+%\section{State clustering}
+%[Explain the state clustering that was employed, mention that repair states tend to be clustered and explain]
 \chapter{Total discounted costs for various problem parameters and policies?}\label{AppendixComputationsTable}
 [Tables containing the total discounted cost and control limit that resulted from various heuristic policies and parameters.]
-\chapter{Matlab scripts and ProM plugins}
+\chapter{Matlab routines}
 [references to the code]
 \end{appendices}
 \end{document}

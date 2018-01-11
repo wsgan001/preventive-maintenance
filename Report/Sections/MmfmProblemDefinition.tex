@@ -1,13 +1,13 @@
 \section{Problem formulation and definition}
-In this section, we extend the problem definition of preventive maintenance on a machine modeled as the simple fluid model from the previous chapter.
+In this section, we extend the problem definition of preventive maintenance on an asset modeled as the simple fluid model from the previous chapter.
 First we extend the stochastic process from the last chapter to a MMFM, then we define a Markov decision process.
 
-\subsection{Stochastic machine breakdown}
-First, we define a Continuous Time Markov Chain (CTMC) with states $s_1,...,s_N$, initial state $s_1$ and transition rates $\lambda_{ij}$ from state $s_i$ to $s_j$, with $\lambda_{ii}=-\sum_{j\neq i}\lambda_{ij}$.
+\subsection{Stochastic asset degradation}
+First, we define a left-continuous Continuous Time Markov Chain (CTMC) $S(t)$ with state space $S=\{s_1,...,s_N\}$, initial state $s_1$ and transition rates $\lambda_{ij}$ from state $s_i$ to $s_j$, with $\lambda_{ii}=-\sum_{j\neq i}\lambda_{ij}$.
 Furthermore, we define $\lambda_i=-\lambda_{ii}$ for convenience.
 In figure \ref{figure:MmfmNotation}, a MMFM with states $s_i,s_j$ is drawn.
 We draw MMFMs with multiple states in a similar way.
-\begin{figure}\label{figure:MmfmNotation}
+\begin{figure}
 	\centering
 	\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
 	thick,main node/.style={circle,draw,font=\sffamily\Large\bfseries}]
@@ -22,17 +22,17 @@ We draw MMFMs with multiple states in a similar way.
 	\caption{A drawing of a MMFM with two states $s_i$ and $s_j$ with fluid rates $r_i$ and $r_j$ respectively.
 		The transition from $s_i$ to $s_j$ has rate $\lambda_{ij}$ and jump quantity $J_{ij}$.
 		Similarly, the transition from $s_j$ to $s_i$ has rate $\lambda_{ji}$ and jump quantity $J_{ji}$}
+	\label{figure:MmfmNotation}
 \end{figure}
-
-We define $S(t)$ as the (index of the) state of the CTMC is in at time $t$.
-Again, we represent the fluid level at time $t$ by $Q(t)$ with $Q(0)=Q_0\sim F$.
+We let $S(t)$ denote the (index of the) state the CTMC is in at time $t$.
+Similar to the previous chapter, we represent the fluid level at time $t$ by $Q(t)$ with $Q(0)=Q_0\sim F$.
 When the CTMC is in state $s_i$, the fluid level $Q(t)$ decreases with rate $r_i>0$:
 \[
 \frac{d}{dt}Q(t)=-r_{S(t)}.
 \]
 When a transition from $s_i$ to $s_j$ occurs, the fluid rate instantaneously increases by $J_{ij}\geq 0$.
-Again, the machine breaks when the fluid reaches zero so that the process is absorbing at $Q(t)=0$.
-And when it is repaired, the process is restarted.
+Again, the asset breaks when the fluid reaches zero so that the process is absorbing at $Q(t)=0$.
+When the asset is repaired, the process is restarted with an initial fluid level with distribution $F$.
 
 Similar to the simple fluid model, the state information can be condensed with a few variables.
 These are the amount of used initial fluid $L_0(t)$, the buffer level $L_c(t)$ and the current CTMC-state $S(t)$.
@@ -45,40 +45,54 @@ Hence,
 \[
 X(t)=(S(t),L_0(t),L_c(t)),
 \]
-with initially $X(0)=x_{NEW}=(1,0,0)$.
+when the asset is not broken (i.e. the fluid level is positive) and initially $X(0)=x_{NEW}=(1,0,0)$.
+Again, we define a special state $x_{BREAK}$ for when the asset is broken.
+When $X(t)=x_{BREAK}$, the quantities $L_0(t)$ and $L_c(t)$ are undefined.
 
 The values $L_0$ and $L_c$ evolve in a similar way as in the previous chapter:
 \begin{itemize}
-	\item When $X(t)=(i,l_0,l_c)$ and a transition occurs to $j$, $L_c$ increases by $J_{ij}$.
-	Hence, the state changes in the following way
+	\item When a transition from $s_i$ to $s_j$ occurs at time $t$, the buffer $L_c$ increases by $J_{ij}$:
 	\begin{equation}\label{eq:MmfmJumpEvolution}
-	(i,l_0,l_c)\stackrel{J_{ij}}{\mapsto} (j,l_0,l_c+J_{ij}).
+	X(t^+)=(j,L_0(t),L_c(t)+J_{ij}).
 	\end{equation}
-	\item When $X(t)=(s_i,l_0,l_c)$ and a time period of length $\tau$ passes without a jump occurring, the fluid level decreases by $r_i\tau$.
-	If $l_c>0$, $L_c$ decreases but it cannot get lower than $0$ so it decreases by $\min\{l_c,r_i\tau\}$.
-	When $l_c=0$, $L_0$ increases by $r_i\tau$.
-	If $0<l_0<r_i\tau$ then first a time of $l_0/r_i$ passes so that $L_c(t+l_0/r_i)=0$ and then the remaining time passes so that $l_0$ increases by $r_i\tau-l_0$.
-	This can be summarized in the following way
+	\item When no jump occurs in a neighborhood of $t$, $S(t)$ remains constant and $L_0$ and $L_c$ evolve according to
 	\begin{equation}\label{eq:MmfmAgeEvolution}
-	(i,l_0,l_c)\stackrel\tau\mapsto (i,l_0+r_i\tau-\min\{l_c,r_i\tau\},l_c-\min\{l_c,r_i\tau\}).
+	\begin{split}
+	\frac{d}{dt}L_c(t)&=\begin{cases}
+	0&\ \text{if }L_c(t)=0,\\
+	-r_{S(t)}&\ \text{else.}
+	\end{cases}\\
+	\frac{d}{dt}L_0(t)&=\begin{cases}
+	0&\ \text{if }L_c(t)>0,\\
+	r_{S(t)}&\ \text{else.}
+	\end{cases}
+	\end{split}
 	\end{equation}
+	Note that we then always have
+	\[
+	\frac{d}{dt}\left[L_c(t)-L_0(t)\right]=\frac{d}{dt}Q(t)=-r_{S(t)}.
+	\]
+	\item When the asset breaks (i.e. whenever $Q(t)=0$ or equivalently $L_0(t^-)=Q_0$) the process moves to $x_{BREAK}$:
+	\[
+	X(t)=x_{BREAK}.
+	\]
 \end{itemize}
-Then $Q(t)$, is again given by \eqref{eq:SimpleCurrentLevel} and it has distribution $F_{X(t)}(q)$,  again given by \eqref{eq:SimpleCurrentDistribution}.
+With these definitions, $Q(t)$ is again given by \eqref{eq:SimpleCurrentLevel} and it has distribution $F_{X(t)}(q)$,  again given by \eqref{eq:SimpleCurrentDistribution}.
 
 \begin{example}\label{example:MmfmState}
 	Consider the MMFM depicted by figure \ref{figure:MmfmExample}.
-	Now consider the following run of the machine:
+	Now consider the following run of the asset:
 	\begin{itemize}
-		\item The machine starts in $s_1$ with initial fluid level $5$
+		\item The asset starts in $s_1$ with initial fluid level $5$
 		\item After 1 time unit, a transition to $s_2$ occurs
-		\item The machine stays in $s_1$ for half a time unit, then it transitions to $s_3$
+		\item The asset stays in $s_1$ for half a time unit, then it transitions to $s_3$
 		\item It stays in this state for $1.5$ time units before transitioning to $s_1$ again.
 		\item Here it breaks after $2$ time units.
 	\end{itemize}
 	Figure \ref{figure:MmfmExampleQuantities} shows the evolution of the quantities $Q(t),L_(t)$ and $L_c(t)$ over this time period.
-	As you can see, $L_0(t)$ is nondecreasing and the machine breaks when $L_0(t)=Q(0)$.
+	As you can see, $L_0(t)$ is nondecreasing and the asset breaks when $L_0(t)=Q(0)$.
 \end{example}
-\begin{figure}\label{figure:MmfmExample}
+\begin{figure}
 \centering
 \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
 thick,main node/.style={circle,draw,font=\sffamily\Large\bfseries}]
@@ -93,18 +107,21 @@ thick,main node/.style={circle,draw,font=\sffamily\Large\bfseries}]
 (3) edge node {$2:0$} (1);
 \end{tikzpicture}
 \caption{Depiction of the MMFM for example \ref{example:MmfmState}.}
+\label{figure:MmfmExample}
 \end{figure}
-\begin{figure}[H]\label{figure:MmfmExampleQuantities}
+\begin{figure}[H]
 \centering
 \setlength\fwidth{0.7\textwidth}
 \input{Plots/MmfmExample.tex}
 \caption{$Q(t),L_0(t),L_c(t)$ for example \ref{example:MmfmState}.}
+\label{figure:MmfmExampleQuantities}
 \end{figure}
 
-Now, for $x_k=X(t_k)$, we describe the random disturbances $\omega_k=\omega_k(x_k)$ of the Markov decision process as the (index of the) state of the continuous Markov chain at the next decision stage or $\Omega_{BREAK}$ if the machine will break before then:
+Now, for defining the MDP, we will briefly return to discretized time.
+For $x_k=X(t_k)$, we describe the random variables $\omega_k=\omega_k(x_k)$ of the Markov decision process as the (index of the) state of the continuous Markov chain at the next decision stage or $\Omega_{BREAK}$ if the asset will break before then:
 \[
 \omega_k(x_k):=\begin{cases}
-\Omega_{BREAK},&\ \text{if the machine breaks,}\\
+\Omega_{BREAK},&\ \text{if the asset breaks,}\\
 S(t_{k+1}),&\ \text{else.}
 \end{cases}
 \]
@@ -159,49 +176,52 @@ Again, we use the definition of the random variable $S(x_k):=f(x_k,a_W,\omega_k(
 The costs and discounting remain the same as in the age-based maintenance problem.
 
 \subsection{Optimal policy and Bellman equations}
-We want to find a stationary policy $\mu:X\rightarrow \{a_W,a_R\}$ that chooses the action $u_k=\mu(x_k)$ that minimizes the expected total discounted cost $V_\delta(x_k,\mu)$ for each state $x_k$.
-Similarly as in the definition of age-based maintenance, $V_\delta(x_k,\mu)$ is given by
-\[V_\delta(x_k,\mu)=g(x_k,\mu(x_k))+\alpha_\delta \mathbb{E}[V_\delta(S(x_k),\mu)].\]
-The Bellman equations for the optimal cost $V_\delta(x_k,\mu^*)$ read
+We want to find a stationary policy $\pi= \{\mu_1,...,\mu^N\}$ that chooses the action $u_k=\pi(x_k)=\mu_i(i,l_0,l_c)$ that minimizes the expected total discounted cost $V_\delta(x_k,\pi)$ for each state $x_k=(i,l_0,l_c)$.
+Similarly as in the definition of age-based maintenance, $V_\delta(x_k,\pi)$ is given by
+\[V_\delta(x_k,\pi)=g(x_k,\pi(x_k))+\alpha_\delta \mathbb{E}[V_\delta(S(x_k),\pi)].\]
+The Bellman equations for the optimal cost $V_\delta(x_k,\pi^*)$ read
 \begin{equation}\label{eq:MmfmBellman}
-V_\delta(x_k,\mu^*)=\begin{cases}
-c+a+\alpha_\delta V_\delta(x_{NEW},\mu^*),&\text{ if }x_k=x_{BREAK},\\
-\min\left\{\begin{split}&c+\alpha_\delta V_\delta(x_{NEW},\mu^*),\\&\alpha_\delta \mathbb{E}[V_\delta(S(x_k),\mu^*)]\end{split}\right\},&\text{else.}\\
+V_\delta(x_k,\pi^*)=\begin{cases}
+c+a+\alpha_\delta V_\delta(x_{NEW},\pi^*),&\text{ if }x_k=x_{BREAK},\\
+\min\left\{\begin{split}&c+\alpha_\delta V_\delta(x_{NEW},\pi^*),\\&\alpha_\delta \mathbb{E}[V_\delta(S(x_k),\pi^*)]\end{split}\right\},&\text{else.}\\
 \end{cases}
 \end{equation}
-$\mu$ is optimal if $V_\delta(x,\mu)=V_\delta(x,\mu^*)$ for all $x$.
-$\mathbb{E}[V_\delta(S(x_k),\mu^*)]$ when $x_k\neq x_{BREAK}$ is given by 
+$\pi$ is optimal if $V_\delta(x,\pi)=V_\delta(x,\pi^*)$ for all $x\in X$.
+$\mathbb{E}[V_\delta(S(x_k),\pi^*)]$ when $x_k\neq x_{BREAK}$ is given by 
 \begin{equation}\label{eq:MmfmNextState}
 \begin{split}
-&\mathbb{E}[V_\delta(S(i,l_0,l_c),\mu^*)]\\
+&\mathbb{E}[V_\delta(S(i,l_0,l_c),\pi^*)]\\
 &=\begin{cases}
 \begin{split}
-&\sum\limits_{j\neq i}(1-e^{-\lambda_i \delta})V_\delta(j,l_0,l_c+J_{ij}-r_j\delta,\mu^*)\\
-&+e^{-\lambda_i \delta}V_\delta(i,l_0,l_c-r_i\delta,\mu^*),
+&\sum\limits_{j\neq i}(1-e^{-\lambda_i \delta})V_\delta(j,l_0,l_c+J_{ij}-r_j\delta,\pi^*)\\
+&+e^{-\lambda_i \delta}V_\delta(i,l_0,l_c-r_i\delta,\pi^*),
 \end{split}&\ \text{If $l_c>0$,}\\
 \begin{split}
-&e^{-\lambda_i \delta} \bar{F}_{t_k}(l_0+r_i\delta)V_\delta(i,l_0+r_i\delta,0,\mu^*)\\
-&+ e^{-\lambda_i \delta}F_{t_k}(l_0+r_i\delta)V_\delta(x_{BREAK},\mu^*)\\
-&+\sum\limits_{j\neq i}(1-e^{-\lambda_i \delta})V_\delta(j,l_0,J_{ij}-r_j\delta,\mu^*),
+&e^{-\lambda_i \delta} \bar{F}_{t_k}(l_0+r_i\delta)V_\delta(i,l_0+r_i\delta,0,\pi^*)\\
+&+ e^{-\lambda_i \delta}F_{t_k}(l_0+r_i\delta)V_\delta(x_{BREAK},\pi^*)\\
+&+\sum\limits_{j\neq i}(1-e^{-\lambda_i \delta})V_\delta(j,l_0,J_{ij}-r_j\delta,\pi^*),
 \end{split}&\ \text{If $l_c=0$.}\\
 \end{cases}\\
 &=\begin{cases}
 \begin{split}
-&\sum\limits_{j\neq i}\lambda_{ij}\delta V_\delta(j,l_0,l_c+J_{ij}-r_j\delta,\mu^*)\\
-&+(1-\lambda_i \delta)V_\delta(i,l_0,l_c-r_i\delta,\mu^*)+o(\delta^2),
+&\sum\limits_{j\neq i}\lambda_{ij}\delta V_\delta(j,l_0,l_c+J_{ij}-r_j\delta,\pi^*)\\
+&+(1-\lambda_i \delta)V_\delta(i,l_0,l_c-r_i\delta,\pi^*)+o(\delta^2),
 \end{split}
 &\ \text{If $l_c>0$,}\\
 \begin{split}
-&(1-\lambda_i \delta-\delta r_ih(l_0))V_\delta(i,l_0+r_i\delta,0,\mu^*)\\
-&+ \delta r_ih(l_0)V_\delta(x_{BREAK},\mu^*)\\
-&+\sum\limits_{j\neq i}\lambda_{ij} \delta V_\delta(j,l_0,J_{ij}-r_j\delta,\mu^*)+o(\delta^2),
+&(1-\lambda_i \delta-\delta r_ih(l_0))V_\delta(i,l_0+r_i\delta,0,\pi^*)\\
+&+ \delta r_ih(l_0)V_\delta(x_{BREAK},\pi^*)\\
+&+\sum\limits_{j\neq i}\lambda_{ij} \delta V_\delta(j,l_0,J_{ij}-r_j\delta,\pi^*)+o(\delta^2),
 \end{split}&\ \text{If $l_c=0$.}\\
 \end{cases}
 \end{split}
 \end{equation}
 
+\subsection{Continuous-time MDP}
+Again, we will consider a continuous-time MDP by letting $\delta\rightarrow0$.
+
 \begin{remark}
-	Note that the simple fluid model corresponds to a MMFM model with two states, both with fluid rate $1$, transition rate $\lambda$ and jump size $J$.
+	Note that the simple fluid model of the previous chapter corresponds to a MMFM model with two states, both with fluid rate $1$, transition rate $\lambda$ and jump size $J$.
 	This MMFM is drawn in figure \ref{figure:SimpleFluidAsMmfm}.
 	\begin{figure}[H]\label{figure:SimpleFluidAsMmfm}
 		\centering
@@ -248,8 +268,8 @@ Again, there are various alternatives to the design choices that were made in th
 We will briefly mention some alternatives with their characteristics.
 
 \subsubsection{Decisions as jumps only}
-Again, we could model the problem so that the choice to repair the machine can only be made at the instant that a transition occurs.
-This might be more realistic for similar reasons as for the simple fluid model: The jump could be caused by some mechanic performing some partial maintenance and a mechanic might be needed to completely repair the machine so that CTMC-transitions are the only opportunities to repair the machine.
+Again, we could model the problem so that the choice to repair the asset can only be made at the instant that a transition occurs.
+This might be more realistic for similar reasons as for the simple fluid model: The jump could be caused by some mechanic performing some partial maintenance and a mechanic might be needed to completely repair the asset so that CTMC-transitions are the only opportunities to repair the asset.
 
 \subsubsection{Transitions to the same state}
 We could also allow transitions from certain CTMC-states to themselves (again at exponentially distributed time intervals).

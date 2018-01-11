@@ -1,0 +1,28 @@
+\section{Markov decision theory}
+Markov Decision Theory provides the mathematical framework to make decisions based on a Markov model.
+In a Markov Decision Process (MDP), the evolution of the process depends on the chosen control action.
+The objective of an MDP is usually to minimize costs (or, equivalently, maximize profit) in some sense.
+
+For a discrete MDP with state space $X$, when at the $k$'th decision epoch the process is in state $x_k\in X$, an action must be chosen out of a set $U(x_k)$ of allowed actions.
+When the number of decision epochs that are considered is finite, the MDP is said to be a finite-horizon probem.
+When the number of decision epochs is infinite, it is an infinite-horizon problem.
+At every decision epoch, there is also some random variable $\omega_k$ which introduces the randomness in the process.
+The process then evolves based on the current state $x_k$, the chosen action $u_k\in U(x_k)$ and this random parameter $\omega_k$ according to some function $f$, so that the next state of the process is determined by $x_{k+1}=f(x_k,u_k,\omega_k)$.
+When an action $u_k\in U(u_k)$ in a state $x_k\in X$ is chosen, a cost $g(x_k,u_k)$ will be paid.
+For infinite-horizon problems, the sum of the costs incurred over all decision epochs could be infinite.
+This is often resolved by choosing a different aggregate of the costs as a goal function.
+Often, this is done by either considering the long-run average cost per decision epoch, or by multiplying costs in decision epoch $k$ by $\alpha^k$, where $0<\alpha<1$ is a discount factor.
+The latter cost is called the discounted cost.
+In this thesis we will consider discounted costs.
+This has the advantage over long-run average costs that the Bellman equations can be to solve the problem.
+
+Admissible solutions to MDPs are policies that choose an allowed action for each decision epoch and state, i.e. for each $k$ there is some $\mu_k$ with $\mu_k(x_k)\in U(x_k)$ for all $k,x_k$.
+A policy is said to be stationary if it does not depend on the decision epoch, i.e. there is one $\mu$ and for every $k$ $\mu_k=\mu$.
+The aim of Markov decision theory is to find policies that choose action in each decision epoch and state so that the goal function is optimized.
+Section 6.2.4 of \cite{Puterman2008} proves that for discounted infinite-horizon countable-state problems with cost-function $g$ independent of decision epoch $k$, there exists an optimal stationary policy.
+
+In this thesis, we will aim at minimizing the total discounted cost for an infinite-horizon MDP, i.e. minimizing
+\[
+\mathbb{E}\left[\sum\limits_{k=0}^\infty \alpha^k g(x_k,\mu(x_k))\right],
+\]
+for some stationary policy $\mu$.

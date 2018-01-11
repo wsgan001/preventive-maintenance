@@ -1,15 +1,15 @@
 \section{Problem formulation and definition}
 In this section, we extend the definition of age-based maintenance from section \ref{section:AgeBasedDefinition}.
-First we define the underlying stochastic process of the state of the machine deteriorating over time and instantaneously increasing at the occurrence of jumps.
+First we define the underlying stochastic process of the the asset degrading over time and instantaneously increasing at the occurrence of jumps.
 After that, we define a Markov decision process similarly to section \ref{section:AgeBasedDefinition}.
 
-\subsection{Stochastic machine breakdown}
+\subsection{Stochastic asset degradation}
 We define the random process $Q(t)$ as the fluid level at age $t$.
 Initially, the fluid level is given by $Q(0)=Q_0\sim F$.
 Then over time this level decreases at a constant rate of $1$.
 The jumps occur according to a Poisson process with rate $\lambda$, i.e. the time interval between two consecutive jumps is exponentially distributed with rate $\lambda$.
-Hence, let $P_\lambda(t_1,t_2)$ be a Poisson distributed random variable with rate $\lambda (t_2-t_1)$.
 The fluid process is absorbing at $Q(t)=0$.
+Hence, let $P_\lambda(t_1,t_2)$ be a Poisson distributed random variable with rate $\lambda (t_2-t_1)$.
 Then the fluid level at time $t$ is given by 
 \[
 Q(t)\stackrel d=(Q_0+P_\lambda(0,t)J-t)\vee 0.
@@ -22,20 +22,20 @@ Q(t_1+t_2)&\stackrel d=( Q_0+P_\lambda(0,t_1)J+P_\lambda(t_1,t_1+t_2)J-t_1-t_2)\
 &\stackrel d= (Q(t_1)+P_\lambda(0,t_2)J-t_2)\vee0.
 \end{split}
 \]
-The machine breaks when the fluid level reaches $0$, i.e. at the time $T^*$ given by
+The asset breaks when the fluid level reaches $0$, i.e. at the time $T^*$ given by
 \[
 T^*=\inf\{t|Q(t)=0\}.
 \]
-When the machine is repaired, it starts with an age of zero again.
+When the asset is repaired, it starts with an age of zero again.
 
 To derive the distribution of $Q(t)$ for a certain $t$ from the observed jumps, it seems we need to keep track of the exact times at which these jumps occurred.
-This would be a very inconvenient format of the state of the machine.
+This would be a very inconvenient format of the state of the asset.
 Luckily, this information can be condensed into a simpler state description.
 First, we will illustrate this with the following example:
 \begin{example}
-	If the first jump of the process would have occur at some time $t$, then:
+	If the first jump of the process would have occur at some time $t$, then we would know the following at this time $t$:
 	\begin{enumerate}
-		\item At time $t$, $Q(t)\geq J$.
+		\item $Q(t)\geq J$.
 		Hence, we have a lower bound on the current fluid level.
 		\item Initially, the fluid level was at least $t$, i.e. $Q_0\geq t$.
 		Hence, we have a certain lower bound on the initial fluid level.
@@ -50,14 +50,14 @@ First, we will illustrate this with the following example:
 \end{example}
 This suggests that the only two parameters we need to keep track of, are the lower bound of the current fluid level $L_c(t)$ and the lower bound of the initial fluid level $L_0(t)$.
 We will refer to this $L_0$ as the drained initial fluid.
-The machine cannot break if 
+The asset cannot break if 
 \[L_c(t)>0,\]
 since we know with certainty that there is still remaining fluid.
 We will refer to this quantity $L_c(t)$ as the fluid buffer.
-The machine breaks whenever
+The asset breaks whenever
 \[L_0(t)=Q_0,\]
 i.e. when the initial fluid level is drained.
-Hence, we maintain the two quantities $L_c(t)$ and $L_0(t)$ as the description of the state the machine is in.
+Hence, we maintain the two quantities $L_c(t)$ and $L_0(t)$ as the description of the state the asset is in.
 \[
 X(t)=(L_0(t),L_c(t)).
 \]
@@ -65,26 +65,48 @@ Initially
 \[
 X(0)=x_{NEW}:=(0,0).
 \]
+Furthermore, we also define a state $x_{BREAK}$ for when the asset is broken.
+When $X(t)=x_{BREAK}$, $L_0(t)$ and $L_c(t)$ are undefined.
 These two quantities evolve in the following way:
 \begin{itemize}
-	\item When $X(t)=(l_0,l_c)$ and a jump occurs $L_c$ increases by $J$.
-	Hence, the state changes in the following way
+	\item When a jump occurs at time $t$, $L_c$ increases by $J$, i.e.
 	\begin{equation}\label{eq:SimpleJumpEvolution}
-	(l_0,l_c)\stackrel{J}{\mapsto} (l_0,l_c+J).
+	X(t^+)=(L_0(t),L_c(t)+J).
 	\end{equation}
-	\item When the state of the asset at some time $t$ is given by $X(t)=(l_0,l_c)$ and a time period of length $\tau$ passes without a jump occurring or the machine failing, the fluid level decreases by $\tau$.
-	If our buffer contains at least $\tau$ fluid (i.e. $l_c>\tau$), then the buffer will decrease by $\tau$.
-	If our buffer is empty, the drained initial fluid will increase by $\tau$ as we now know with certainty that $Q(t)>\tau$ since the machine didn't fail.
-	If $0<l_c<\tau$. Then first the buffer will drain and the remaining fluid $\tau-l_c$ will be drained from the initial fluid.
-	This can be summarized in the following way
-	\begin{equation}\label{eq:SimpleAgeEvolution}
-	(l_0,l_c)\stackrel\tau\mapsto (l_0+\tau-\min\{l_c,\tau\},l_c-\min\{l_c,\tau\}).
-	\end{equation}
-	\item When the fluid $Q(t)$ reaches zero, it remains zero until it is being repaired.
+%	\item When a time $\tau$ passes without a jump occurring while $\tau\leq L_c(t)$, $L_c$ decreases by $\tau$, i.e.
+%	\begin{equation}\label{eq:SimpleAgeEvolution1}
+%	X(t+\tau)=(L_0(t),L_c(t)-\tau).
+%	\end{equation}
+%	\item When at time $t$ $L_c(t)=0$ and a time $\tau$ passes without a jump occurring, $L_0$ increases by $\tau$, i.e.
+%	\begin{equation}\label{eq:SimpleAgeEvolution2}
+%	X(t+\tau)=(L_0(t)+\tau,0).
+%	\end{equation}
+	\item When no jump occurs in a neighborhood of $t$, $S(t)$ remains constant and $L_0$ and $L_c$ evolve according to
+		\begin{equation}\label{eq:SimpleAgeEvolution}
+		\begin{split}
+		\frac{d}{dt}L_c(t)&=\begin{cases}
+		0&\ \text{if }L_c(t)=0,\\
+		-1&\ \text{else.}
+		\end{cases}\\
+		\frac{d}{dt}L_0(t)&=\begin{cases}
+		0&\ \text{if }L_c(t)>0,\\
+		1&\ \text{else.}
+		\end{cases}
+		\end{split}
+		\end{equation}
+		Note that we always have
+		\begin{equation}\label{eq:SimpleSameDecrease}
+		\frac{d}{dt}\left[L_c(t)-L_0(t)\right]=\frac{d}{dt}Q(t)=-1.
+		\end{equation}
+	\item When the fluid drains, i.e. $Q(t)=0$ or equivalently $L_0(t)=Q_0$, the asset breaks so that
+	\[
+	X(t)=x_{BREAK},
+	\]
+	until it is being repaired.
 \end{itemize}
 \begin{theorem}\label{theorem:SimpleCurrentLevel}
 	Using the $L_c(t)$ and the $L_0(t)$ as defined above.
-	The current fluid level is given by
+	For $x\neq x_{BREAK}$, the fluid level is given by
 	\begin{equation}\label{eq:SimpleCurrentLevel}
 	Q(t)=L_c(t)+Q_0-L_0(t).
 	\end{equation}
@@ -95,65 +117,66 @@ These two quantities evolve in the following way:
 		\]
 		When a jump occurs, we know that $Q(t)$ increases by $J$.
 		By \eqref{eq:SimpleJumpEvolution}, $L_c$ also increases by $J$ such that jumps preserve \eqref{eq:SimpleCurrentLevel}.
-		When a time $\tau$ passes without a jump occurring, $Q(t)$ decreases by $\tau$.
-		From \eqref{eq:SimpleAgeEvolution}, we see that $L_c-L_0$ also decreases by $\tau$.
+		When no jump occurs, we have by \eqref{eq:SimpleSameDecrease} that $Q(t)$ and $L_c(t)-L_0(t)$ decrease at the same speed.
 		This completes the proof.
 	\end{proof}
 \end{theorem}
 
 \begin{example}\label{example:SimpleFluidState}
-	For example, if we have the jump quantity $J=3$ and the initial fluid level for a run of the machine equals $5$.
+	For example, if we have the jump quantity $J=3$ and the initial fluid level for a run of the asset equals $5$.
 	If after 1.5 time units and after 2.5 time units a jump occurred, $Q,L_0$ and $L_c$ would evolve as in figure \ref{figure:SimpleFluidExampleQuantities}.
 	As you can see, when $Q(t)=0$, it holds that $L_0(t)=Q(0)$.
 \end{example}
-\begin{figure}[H]\label{figure:SimpleFluidExampleQuantities}
+\begin{figure}[H]
 \centering
 \setlength\fwidth{0.7\textwidth}
 \input{Plots/SimpleFluidExample.tex}
 \caption{$Q(t),L_0(t),L_c(t)$ for example \ref{example:SimpleFluidState}.}
+\label{figure:SimpleFluidExampleQuantities}
 \end{figure}
 
 \begin{corollary}\label{corollary:SimpleFluidDistribution}
-	Theorem \ref{theorem:SimpleCurrentLevel} implies that for $X(t)=x=(L_0(t),L_c(t))$, $Q(t)\sim F_x$ where
+	Theorem \ref{theorem:SimpleCurrentLevel} implies that $Q(t)\sim F_{X(t)}$, where
 	\begin{equation}\label{eq:SimpleCurrentDistribution}
 	\begin{split}
-	F_x(q)&:=\mathbb{P}(Q(t)<q)\\
+	F_{X(t)}(q)&:=\mathbb{P}(Q(t)<q)\\
 	&=\mathbb{P}(L_c(t)+Q_0-L_0(t)<q|Q_0>L_0(t))\\
 	&=\mathbb{P}(Q_0<q+L_0(t)-L_c(t)|Q_0>L_0(t))\\
 	&=\frac{F(q+L_0(t)-L_c(t))-F(L_0(t))}{\bar{F}(L_0(t))}.\\
 	\end{split}
 	\end{equation}
 \end{corollary}
-\begin{remark}
-	Note that we can write $L_0(t)$ in the following way:
-	\[
-	L_0(t)=\max\limits_{0\leq\tau\leq t} Q_0-Q(\tau).
-	\]
-	As by \eqref{eq:SimpleCurrentLevel}, 
-	\[
-	L_0(t)-L_c(t)=Q_0-Q(t),
-	\]
-	and $L_0$ cannot decrease and only increases whenever $L_c=0$.
-\end{remark}
-\begin{corollary}
-	From the previous remark, it can also be seen easily that the machine will fail when the used initial fluid equals the initial fluid level as
-	\[
-	L_0(t)=Q_0\Rightarrow Q(t)=0.
-	\]
-\end{corollary}
+%\begin{remark}
+%	Let $t^*$ denote the last time the machine was repaired.
+%	Note that we can write $L_0(t)$ in the following way:
+%	\[
+%	L_0(t)=\max\limits_{t^*\leq\tau\leq t} Q_0-Q(\tau).
+%	\]
+%	As by \eqref{eq:SimpleCurrentLevel}, 
+%	\[
+%	L_0(t)-L_c(t)=Q_0-Q(t),
+%	\]
+%	and $L_0$ cannot decrease and only increases whenever $L_c=0$.
+%\end{remark}
+%\begin{corollary}
+%	From the previous remark, it can also be seen easily that the asset will fail when the used initial fluid equals the initial fluid level as
+%	\[
+%	L_0(t)=Q_0\Rightarrow Q(t)=0.
+%	\]
+%\end{corollary}
 
 We use the same discretization $t_k=\delta k$ as in the previous chapter.
 For $x_k=X(t_k)$, we describe the random variables $\omega_k=\omega_k(x_k)$ of the Markov decision process in the following way
 \[
 \omega_k(x_k):=\begin{cases}
-\Omega_{SURVIVE}&\ \begin{split}&\text{if the machine does not break and no jump occurs}\\
+\Omega_{SURVIVE}&\ \begin{split}&\text{if the asset does not break and no jump occurs}\\
 &\text{in the $k$'th time interval.}\end{split}\\
-\Omega_{BREAK}&\ \text{if the machine breaks in the $k$'th time interval.}\\
-\Omega_{JUMP}&\ \begin{split}&\text{if the machine does not break and a jump occurs}\\
+\Omega_{BREAK}&\ \text{if the asset breaks in the $k$'th time interval.}\\
+\Omega_{JUMP}&\ \begin{split}&\text{if the asset does not break and a jump occurs}\\
 &\text{in the $k$'th time interval.}\end{split}\\
 \end{cases}
 \]
-Note that the machine can only break whenever $L_c(t)=0$.
+Note that the asset can only break whenever $L_c(t)=0$.
 Assuming only one jump can occur in a time interval and letting $x_k=X(t_k)=(l_0,l_c)$, we get the following probabilities:
 \[
 \begin{split}
@@ -183,7 +206,7 @@ e^{-\lambda \delta}F_{x_k}&(l_0+\delta)\\
 Where $F_x$ is given by corollary \ref{corollary:SimpleFluidDistribution}.
 
 \subsection{Control actions}
-We introduce a state $x_{BREAK}$ for when the machine is broken.
+We introduce a state $x_{BREAK}$ for when the asset is broken.
 and in this state the only available action is $a_R$.
 In all other states, both actions $a_W$ and $a_R$ may be chosen.
 The definitions of these actions remains the same as in the definition of the age-based maintenance problem.
@@ -248,13 +271,14 @@ $\mathbb{E}[V_\delta(S(x_k),\mu^*)]$ when $x_k\neq x_{BREAK}$ is given by
 \end{cases}
 \end{split}
 \end{equation}
+Similar to the previous chapter, we will consider a continuous MDP by letting $\delta\rightarrow0$.
 
 \subsection{Alternative models}
 The occurrence of fluid jumps can be modeled in many different ways.
 We will briefly mention some alternatives to design choices that were made in the definition above.
 \subsubsection{Decisions at jumps only}
-We could also model the problem such that the choice to repair the machine can only be made the instant after a jump occurs.
-This might be more realistic as the jump could be caused by some mechanic performing some partial maintenance and a mechanic might be needed to completely repair the machine.
+We could also model the problem such that the choice to repair the asset can only be made the instant after a jump occurs.
+This might be more realistic as the jump could be caused by some mechanic performing some partial maintenance and a mechanic might be needed to completely repair the asset.
 
 \subsubsection{Jumps not according to a Poisson process}
 The time in between the jumps could also have another distribution than the exponential distribution.

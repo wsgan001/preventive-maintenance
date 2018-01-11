@@ -1,5 +1,5 @@
 \section{The optimal policy}
-In this section, we will analytically derive the control limits for the MMFM preventive maintenance policy.
+In this section, we will analytically derive the control limits for the optimal MMFM maintenance policy.
 This will be done using the Bellman equations.
 
 If the optimal control limit in state $s_i$ is given by $\mu_i^*$, then in the state $x=(s_i,\mu_i^*,0)$ where repair is chosen, it holds that the expected cost of waiting one more time step of size $\delta$ is at least as large as the expected cost of repairing.
@@ -32,12 +32,12 @@ c+V(x_{NEW},\pi^*)\leq
 Subtracting $c+V(x_{NEW},\pi^*)$ from both sides, dividing by $\delta$ and rewriting yields
 \[
 r_ih(\mu_i^*)a+\sum\limits_{j\neq i}\lambda_{ij} V_\delta(j,\mu_i^*,J_{ij}-r_j\delta,\pi^*)\geq
-(\beta+\lambda_i)(c+V(x_{NEW},\pi^*))+o(\delta^2).
+(\beta+\lambda_i)(c+V(x_{NEW},\pi^*))+o(\delta).
 \]
 If we were to do the same but starting at a state $x'=(s_i,\mu_i^*-r_i\delta,0)$ (i.e. just before the control limit is reached) so we know that the cost of waiting is smaller than the cost of preventive maintenance, we would get
 \[
 r_ih(\mu_i^*)a+\sum\limits_{j\neq i}\lambda_{ij} V_\delta(j,\mu_i^*,J_{ij}-r_j\delta,\pi^*)<
-(\beta+\lambda_i)(c+V(x_{NEW},\pi^*))+o(\delta^2).
+(\beta+\lambda_i)(c+V(x_{NEW},\pi^*))+o(\delta).
 \]
 Which together proves the following theorem:
 \begin{theorem}

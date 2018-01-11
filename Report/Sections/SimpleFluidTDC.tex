@@ -1,9 +1,9 @@
 \section{Computation of total discounted cost}
 In this section the expected total discounted cost is calculated corresponding to following a control limit policy with control limit $\mu$.
-As in the age-based maintenance problem, we could use the Bellman equations to find differential equations to which the total discounted cost adheres.
+As in the age-based maintenance problem, we can use the Bellman equations to find differential equations to which the total discounted cost adheres.
 But for this problem, we will opt for the simpler approach of directly calculating the total discounted costs corresponding to the policies.
 
-%When in a run of the machine $Q_0\leq\mu$, we know that we will have to correctively repair after this run.
+%When in a run of the asset $Q_0\leq\mu$, we know that we will have to correctively repair after this run.
 %Else, we will have to preventively repair.
 The challenge lies in calculating the discount over these costs.
 In the age-based problem, this was simple as there were no jumps and the discount after $q$ fluid (age) was depleted was simply $e^{-\beta q}$.
@@ -14,7 +14,7 @@ Let $T_t(q)$ be the random variable denoting the time until the fluid level is $
 $$
 T_t(q)=\min\{\tau\geq0|Q(t+\tau)\leq Q(t)-q\}.
 $$
-Note that, using this definition, $T_0(\mu)$ equals the time until the control limit is reached ($L_0(t)=\mu$) and $T(Q_0)$ equals the time until the machine fails.
+Note that, using this definition, $T_0(\mu)$ equals the time until the control limit is reached ($L_0(t)=\mu$) and $T_0(Q_0)$ equals the time until the asset fails.
 \begin{lemma}\label{lemma:TimeUntilFluidLemma}
 	For any $A,B>0$:
 	$A\leq\mu\Leftrightarrow T_t(A)\leq T_t(B)$
@@ -120,7 +120,7 @@ Using these lemmas we can find a simpler expression for $D(q)$ than \eqref{eq:Si
 	For the parameters that were used in appendix \ref{AppendixComputationsTable}, this quantity converged within ten iterations up to five decimals.
 \end{corollary}
 \begin{remark}\label{remark:SimpleFluidDiscountEquivalence}
-	From theorem \ref{theorem:SimpleFluidDiscountExpression}, it can be seen that this expected discount factor of the simple fluid model is actually the same as the regular discount factor for the age-based model with adjusted discount factor $\beta^*=\beta+\lambda(1-D(J))$.
+	From theorem \ref{theorem:SimpleFluidDiscountExpression}, it can be seen that this expected discount factor of the simple fluid model is actually the same as the discount factor for the age-based model with adjusted discount exponent $\beta^*=\beta+\lambda(1-D(J))$.
 	That is,
 	\[
 	D(q)=e^{-\beta^*q}.
@@ -128,12 +128,12 @@ Using these lemmas we can find a simpler expression for $D(q)$ than \eqref{eq:Si
 \end{remark}
 
 Now we will derive the expected total discounted cost:
-If $T_0(Q_0)\leq T_0(\mu)$, the machine will break in the first run and expected value at which the corrective repair cost is discounted is $\mathbb{E}[D(Q_0)|T_0(Q_0)\leq T_0(\mu)]$.
+If $T_0(Q_0)\leq T_0(\mu)$, the asset will break in the first run and expected value at which the corrective repair cost is discounted is $\mathbb{E}[D(Q_0)|T_0(Q_0)\leq T_0(\mu)]$.
 Note that $\mathbb{P}(T_0(Q_0)\leq T_0(\mu))=\mathbb{P}(Q_0\leq\mu)$ by lemma \ref{lemma:TimeUntilFluidLemma}.
 If $T_0(Q_0)> T_0(\mu)$, the expected value at which the preventive repair cost is discounted is $D(\mu)$.
 This results in the following expression for the expected total discounted cost:
 \begin{theorem}
-	The expected total discounted cost of a machine with control limit $\mu$, is given by
+	The expected total discounted cost of an asset with control limit $\mu$, is given by
 	\begin{equation}\label{eq:SimpleFluidImplicitTDC}
 	V(x_{NEW},\mu)=F(\mu)\mathbb{E}[D(Q_0)|Q_0\leq \mu]a+\mathbb{E}[D(Q_0\wedge\mu)](c+V(x_{NEW},\mu)).
 	\end{equation}
@@ -146,6 +146,7 @@ This results in the following expression for the expected total discounted cost:
 	\end{equation}
 \end{corollary}
 
-\begin{remark}label{remark:SimpleFluidTDCEquivalence}
-	Using remark \ref{remark:SimpleFluidDiscountEquivalence}, we can see that \eqref{eq:SimpleFluidImplicitTDC} is exactly the same as for the age-based maintenance problem \eqref{eq:AgeBasedHatTDC} for the adjusted discount factor $\beta^*=\beta+\lambda(1-D(J))$.
+\begin{remark}\label{remark:SimpleFluidTDCEquivalence}
+	Using remark \ref{remark:SimpleFluidDiscountEquivalence}, we can see that \eqref{eq:SimpleFluidImplicitTDC} is again the same as for the age-based maintenance problem \eqref{eq:AgeBasedHatTDC} for the adjusted discount factor $\beta^*=\beta+\lambda(1-D(J))$.
+	%Hence, the same methods can be used to find the optimal policy and the corresponding total discounted cost.
 \end{remark}

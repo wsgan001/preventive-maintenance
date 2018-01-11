@@ -1,9 +1,9 @@
-\section{Computing the optimal policy}\label{section:AgeBasedOptimalPolicyComputation}
+\section{Policy iteration}\label{section:AgeBasedOptimalPolicyComputation}
 We know that for the optimal policy $\mu^*$, \eqref{eq:AgeBasedHazardBound} holds.
 This allows us to choose a control limit based on the total discounted cost.
 Unfortunately, the total discounted cost also depends on the control limit.
 Multiple numerical methods could be used to find the optimal control limit.
-In this section we propose a method of successive approximation of the control limit and the total discounted cost.
+In this section we propose a policy iteration method to find the optimal control limit and the total discounted cost.
 Alternatively, value iteration could be used to solve the Bellman equations or the expected total discounted cost \eqref{eq:AgeBasedPolicyTDC} could simply be minimized numerically for $\mu$.
 
 \subsection{Description of iteration method}\label{section:AgeBasedIterationDescription}
@@ -19,7 +19,7 @@ This could be found by looking for the control limit that satisfies
 \begin{equation}\label{eq:AgeBasedIterationBound}
 h(\hat{\mu}^{(k+1)})=\beta\frac{c+\hat{V}^{(k)}}{a}.\end{equation}
 For convenience, we define the function $\mu(\hat{V}^{(k)}):=\hat{\mu}^{(k+1)}$.
-Note that 
+Note that by lemma \ref{lemma:AgeBasedControlLimit}
 \begin{equation}\label{eq:AgeBasedIterationControlConvergence}
 \mu(V(0^+,\mu^*))=\mu^*.
 \end{equation}
@@ -32,13 +32,13 @@ Similarly:
 Note that $T^m(V(0^+,\mu^*))=V(0^+,\mu^*)$.
 For this iteration, we need an initial value of the expected total discounted cost $\hat{V}^{(0)}$.
 This iteration can be interpreted in the following way:
-If the machine were to run just once and at the end of the run (so either after paying $c$ or $c+a$ for preventive or corrective repair respectively), a cost $\hat{V}^{(k)}$ will be paid, then $\hat{\mu}^{(k+1)}$ will be the control limit that minimizes the expected total discounted cost for this scenario.
+If the asset were to run just once and at the end of the run (so either after paying $c$ or $c+a$ for preventive or corrective repair respectively), a cost $\hat{V}^{(k)}$ will be paid, then $\hat{\mu}^{(k+1)}$ will be the control limit that minimizes the expected total discounted cost for this scenario.
 In this way, we can interpret $\hat{V}^{(k)}$ as the expected total discounted cost when in the first run $\hat{\mu}^{(k)}$ will be used as the control limit, $\hat{\mu}^{(k-1)}$ will be used as control limit in the second run, etcetera, $\hat{\mu}^{(1)}$ in the last run and afterwards the terminal cost $\hat{V}^{(0)}$ will be paid.
 %We can view these chosen control limits as actions in a deterministic decision process.
 
 \subsection{Proof of convergence}
 The convergence of the proposed iteration method will now be proven.
-Let $\alpha_\mu=\mathbb{E}[e^{-\beta (Q_0\wedge\mu)}]$ denote the expected discount over one run of the machine using control limit $\mu$.
+Let $\alpha_\mu=\mathbb{E}[e^{-\beta (Q_0\wedge\mu)}]$ denote the expected discount over one run of the asset using control limit $\mu$.
 The expected cost that is incurred in one  run when control limit $\mu$ is used equals
 $$
 g(\mu):=aF(\mu)\mathbb{E}[e^{-\beta Q_0}|Q_0\leq \mu]+c\mathbb{E}[e^{-\beta(Q_0\wedge\mu)}].
@@ -118,7 +118,7 @@ This proves that $\hat{V}^{(k)}$ converges.
 Convergence in $\hat\mu^{(k)}$ follows from \eqref{eq:AgeBasedIterationControlConvergence}.
 Concluding:
 \begin{theorem}
-	The iteration method as described in \ref*{section:AgeBasedIterationDescription} converges, i.e.
+	The policy iteration method as described in section \ref*{section:AgeBasedIterationDescription} converges, i.e.
 	\[\lim\limits_{k\rightarrow\infty}\hat{V}^{(k)}=V(0^+,\mu^*),\]
 	and
 	\[\lim\limits_{k\rightarrow\infty}\hat{\mu}^{(k)}=\mu^*.\]

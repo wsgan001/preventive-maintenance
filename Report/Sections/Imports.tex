@@ -19,6 +19,10 @@
 \usepackage{grffile} % For recognising the png-extension
 \usepackage{float} % For floating figures
 
+\usepackage{tabularx}
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
+\usepackage{ltablex}
+
 \usepackage{changes} % For track changed extensions
 \usepackage{todonotes}
 
@@ -36,7 +40,7 @@
 \newtheorem{corollary}{Corollary}[chapter]
 
 % For theorem environment
-\newtheorem{theorem}{Theorem}[section]
+\newtheorem{theorem}{Theorem}[chapter]
 
 % For lemma environment
-\newtheorem{lemma}{Lemma}
+\newtheorem{lemma}{Lemma}[chapter]

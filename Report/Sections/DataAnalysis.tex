@@ -16,19 +16,20 @@ The lifetime of the machine is then the length of the time interval between the 
 Before the data could be used, it first needed to be cleaned.
 Because of the transitions between summer and winter time, a few events ended before they started.
 We resolved this by simply ignoring the traces for which there was such an event.
-Furthermore, there were also some other events with a time length of $-1$ seconds, these traces were also ignored.
+Furthermore, there were some other events with a time length of $-1$ seconds, these traces were also ignored.
 
 \subsection{Visualization}
 We will now visualize the distribution of the lengths of the runs of the machine.
 In figure \ref{figure:distribution}, the empirical cumulative distribution function and the probability density function are plotted.
 In these plots it is visible that the distribution has its mode around five days and has a part with a less steep downward slope around 6.5 days.
 This part on the right hand side of the mode could be caused by intermediate repairs.
-\begin{figure}[H]\label{figure:distribution} 
+\begin{figure}[H]
 	\setlength\fwidth{0.4\textwidth}
 	\input{Plots/lifetimesECDF.tex}
 	\setlength\fwidth{0.4\textwidth}
 	\input{Plots/lifetimesPDF.tex}
 	\caption{The empirical cumulative distribution function and the probability density function of the lifetime of the machine.}
+	\label{figure:distribution} 
 \end{figure}
 
 For survival analysis, the hazard rate of the lifetime is important.
@@ -37,11 +38,12 @@ As you can see, the hazard rate is increasing for lifetimes shorter than 6.5 day
 For lifetimes larger than 6.5 days, the hazard rate seems to jump up and down a lot.
 This is likely because these large lifetimes did not occur frequently enough in the dataset to smoothen out the hazard rate.
 Hence, we can safely assume that the lifetime has an increasing hazard rate.
-\begin{figure}[H]\label{figure:hazard}
+\begin{figure}[H]
 	\centering
 	\setlength\fwidth{0.5\textwidth}
 \input{Plots/lifetimesHazard.tex}
 \caption{The hazard rate of the lifetime of the machine.}
+\label{figure:hazard}
 \end{figure}
 
 \section{Fitting lifetime distributions}
@@ -63,7 +65,7 @@ As you can see, these estimations are still not very accurate as they do not inc
 \subsection{Phase-type}
 As the class of Phase-Type distributions is dense in the space of positive continuous distributions \cite{Ocinneide1999}, a Phase-Type distribution could also be used to model the lifetimes.
 However, Phase-Type distributions have a few disadvantages:
-The number of parameters grows quadratically with the amount of states and most of these parameters are redundant.
+the number of parameters grows quadratically with the amount of states and most of these parameters are redundant.
 Furthermore, convergence of the EM-algorithm (to estimate the parameters) is slow and can get stuck in saddle points and local maxima \cite{Asmussen1996}.
 Because of this, we will not use a Phase-type distribution to model the lifetime of the machine.
 

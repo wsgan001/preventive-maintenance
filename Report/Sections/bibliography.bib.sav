@@ -305,11 +305,10 @@
 }
 
 @Book{Puterman2008,
-  title         = {Markov decision processes: discrete stochastic dynamic programming},
-  publisher     = {John Wiley \& Sons},
-  year          = {2008},
-  author        = {Puterman, Martin L},
-  __markedentry = {[s147569:]},
+  title     = {Markov decision processes: discrete stochastic dynamic programming},
+  publisher = {John Wiley \& Sons},
+  year      = {2008},
+  author    = {Puterman, Martin L},
 }
 
 @Article{Asmussen1994,

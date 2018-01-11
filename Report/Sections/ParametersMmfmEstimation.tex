@@ -1,16 +1,16 @@
 \section{Estimating fluid rates and jump quantities}
-Estimating the fluid rates and jump quantities is more difficult as we do not observe the fluid level at each time, but only the time at which the fluid level reaches zero (i.e. when the machine breaks).
+Estimating the fluid rates and jump quantities is more difficult as we do not observe the fluid level at each time, but only the time at which the fluid level reaches zero (i.e. when the asset breaks).
 In this section we will first compute the log likelihood of rate and jump parameters given trace data and discuss maximizing this likelihood.
 Then we will propose an alternative method to estimate the parameters.
 
 \subsection{Likelihood}
-Suppose we have observed a run of the machine and have seen that it started in state $s_{i_1}$, stayed there for a period time of length $\tau_1$.
-Suppose also that after this time, a transition occurred to $s_{i_2}$ and the machine stayed there for a time $\tau_2$ and so forth.
+Suppose we have observed a run of the process and have seen that it started in state $s_{i_1}$, stayed there for a period time of length $\tau_1$.
+Suppose also that after this time, a transition occurred to $s_{i_2}$ and the process stayed there for a time $\tau_2$ and so forth.
 Hence we have observations in the following form
 $$
 \sigma=\left[(i_1,\tau_1),...,(i_L,\tau_L)\right].
 $$
-We assume that no preventive maintenance had been done so that after the last observation in the trace, the machine failed.
+We assume that no preventive maintenance had been done so that after the last observation in the trace, the asset failed.
 We also assume that the initial distribution is known and has probability density function $f$.
 
 For a given MMFM model $M$ with rates $r_i$ and jump quantities $J_{ij}$, this would mean that initially the fluid level was
@@ -99,8 +99,8 @@ for all $i,j\in\{1,...,N\}$.
 
 \subsection{Minimizing variance}
 We will now propose an alternative method to estimate the fluid rates and jump quantities.
-The machine is likely produced by a manufacturer that strives for a constant quality of the produced goods (i.e. wants to maintain continuity).
-Hence, we could expect that the initial fluid level (which corresponds to the initial fitness of the machine), has a low variance.
+The asset is likely produced by a manufacturer that strives for a constant quality of the produced goods (i.e. wants to maintain continuity).
+Hence, we could expect the initial fluid level, which corresponds to the initial fitness of the asset, to have a low variance.
 %Therefore, we will assume that the initial fluid level has a low variance.
 Given trace data, we will therefore try to find MMFM parameters that minimize the variance of the initial fluid level.
 From \eqref{eq:initialLevelDefinition} we can find the initial fluid levels for given parameters.

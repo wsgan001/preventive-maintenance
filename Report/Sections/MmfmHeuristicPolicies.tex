@@ -18,10 +18,10 @@ The results can be found in appendix \ref{AppendixComputationsTable}.
 When we compare the equation for the optimal policy of age-based maintenance \eqref{eq:AgeBasedHazardBound} with that of the MMFM problem \eqref{eq:MmfmHazardBounds},
 we see that these two differ mostly by the term 
 \[
-\sum\limits_j\Lambda^D_{ij}V(j,\mu_i^*,0,\pi^*).
+\sum\limits_{j\neq i}\lambda_{ij}V(j,\mu_i^*,J_{ij},\pi^*).
 \]
-This term is caused by the possibility that a jump would occur.
-If we would simply assume that no jump would occur, we could omit this term and the problem would be easier to solve.
+This term is caused by the possibility that a jump would occur around the time the control limit is reached.
+If we would simply assume that no jump would occur before the next failure, we could omit this term and the problem would be easier to solve.
 This heuristic results in an adjusted equation for the optimal control limits:
 \[
 r_ih(\mu_i^*)a=\beta(c+V(x_{NEW},\pi^*)).

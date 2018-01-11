@@ -11,7 +11,7 @@ Furthermore, we define
 \[
 D_{ij}^t(q):=\mathbb{E}[e^{-\beta T_t(q)}\mathds{1}\{S(t+T_t(q))=j\}|S(t)=i].
 \]
-Note that these expectations do not depend on calendar time but only on the CTMC-state the process is in when it is at level $Q(t)$.
+Note that these expectations do not depend on calendar time but only on the state of the background CTMC when the fluid is at level $Q(t)$.
 Hence, we will omit $t$ in these notations.
 Note that
 \[
@@ -35,7 +35,7 @@ and
 \[
 D_{i}^t(q,\pi,l):=\sum\limits_{\mu_j\leq l+q}D_{ij}^t(q,\pi,l).
 \]
-Where these are similar to the earlier defined $D_{ij}$ but without the machine being repaired before fluid level $Q(t)-q$ is reached.
+Where these are similar to the earlier defined $D_{ij}$ but without the asset being repaired before fluid level $Q(t)-q$ is reached.
 These expectations also do not depend on $t$.
 Hence, $t$ will again be omitted in the notation.
 If preventive repair is chosen, then it is chosen when $L_0$ equals some random variable $R$.
@@ -49,20 +49,20 @@ We define the following quantity
 The interpretation of this quantity can be difficult, it could be seen as the density of $R$ multiplied by the expected discount factor given that repair is chosen at this level of $L_0$.
 Note that $\Gamma_i^t(q,\pi)$ also does not depend on $t$ so that $t$ will again be omitted in the notation.
 \begin{remark}
-	These defined quantities should not be interpreted as neither probabilities or discount factors but more as a combination of these two: The expected discount factor given some event, multiplied by the probability (or density) of this event.
-	Will refer to $D_{ij},D_{i}(q,\pi)$ and $D_{i}(q,\pi,l)$ as 'discounted probabilities' and $\Gamma_i(q,\pi,l)$ as a 'discounted density'.
+	These defined quantities should be interpreted as neither probabilities nor discount factors but more as a combination of these two: The expected discount factor given some event, multiplied by the probability (or density) of this event.
+	We will refer to $D_{ij},D_{i}(q,\pi)$ and $D_{i}(q,\pi,l)$ as 'discounted probabilities' and $\Gamma_i(q,\pi,l)$ as a 'discounted density'.
 \end{remark}
 These discount quantities will be computed in the next section.
 We will now derive the expected total discounted cost of a policy $\pi$.
-Each run of the machine can end in two ways:
+Each run of the asset can end in two ways:
 \begin{enumerate}
-	\item The machine breaks,
+	\item The asset breaks,
 	\item or preventive maintenance is chosen.
 \end{enumerate}
 We will split the total discounted cost in terms corresponding to these two scenarios.
 
-\subsubsection{The machine breaks}
-When the machine breaks, it means that $L_0(t)$ has reached $Q_0$ without encountering a control limit.
+\subsubsection{The asset breaks}
+When the asset breaks, it means that $L_0(t)$ has reached $Q_0$ without encountering a control limit.
 Hence, the repair costs are discounted at $D_0(Q_0,\pi,0)$.
 The expected value of this, is given by
 \[
@@ -84,14 +84,14 @@ We will again split the total discounted cost in terms corresponding to these tw
 \subsubsection{Preventive maintenance is chosen at the control limit}
 In this case, repair is chosen in a state $s_i$ with $l_0=\mu_i$.
 For this to happen, it must be the case that $Q_0>\mu_i$, with probability $\bar{F}(\mu_i)$.
-This has a cost $c$, discounted at $D_{i}(\mu_i,\pi,0)$.
+Preventive maintenance has a cost $c$, discounted at $D_{i}(\mu_i,\pi,0)$.
 Hence, we get the following term:
 \[
 \sum\limits_i\bar{F}(\mu_i)D_{i}(\mu_i,\pi,0)(c+V(x_{NEW},\pi)).
 \]
 
 \subsubsection{Preventive maintenance is chosen after the control limit}
-In this case, repair is at in some CTMC-state $s_i$ and $l_0>\mu_i$.
+In this case, repair is chosen in some CTMC-state $s_i$ and $l_0>\mu_i$.
 For this to be able to happen, $Q_0>l_0$ must hold with probability $\bar{F}(l_0)$.
 This event would have cost $c$ and discounted density $\Gamma_0(l_0,\pi,0)$.
 Hence, this results in the following term:
@@ -103,8 +103,8 @@ Concluding:
 	The expected total discounted cost of a policy $\pi$ is given by
 	\begin{equation}\label{eq:MmfmTDC}
 	\begin{split}
-	V(x_{NEW},\pi)=&\mathbb{E}[D_{i}(Q_0,\pi,0)](c+a+V(x_{NEW},\pi))\\
-	&+\left[\int\limits_0^\infty \bar{F}(q)\Gamma_0(q,\pi,0)dq+\sum\limits_i\bar{F}(\mu_i)D_{i}(\mu_i,\pi,0)\right](c+V(x_{NEW},\pi)).
+	V(x_{NEW},\pi)=&\mathbb{E}[D_{i}(Q_0,\pi,0)]\left(c+a+V(x_{NEW},\pi)\right)\\
+	&+\left[\int\limits_0^\infty \bar{F}(q)\Gamma_0(q,\pi,0)dq+\sum\limits_i\bar{F}(\mu_i)D_{i}(\mu_i,\pi,0)\right]\left(c+V(x_{NEW},\pi)\right).
 	\end{split}
 	\end{equation}
 \end{theorem}

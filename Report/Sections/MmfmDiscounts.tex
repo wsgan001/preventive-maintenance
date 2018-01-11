@@ -2,6 +2,16 @@
 In this section, we will show how to compute the discounted probabilities $D_{ij}(q,\pi,l)$ and $D_{i}(q,\pi,l)$ and the discounted density $\Gamma_i(q,\pi,l)$.
 We will do this, by first deriving $D_{ij}(q)$.
 
+\begin{remark}
+Note that
+\[
+D_i^t(q)=\mathbb{E}[e^{-\beta T_t(q)}|S(t)=i]
+\]	
+equals the value of the moment generating function of $T_t(q)$ (conditioned on $S(t)=i$) evaluated at $-\beta$.
+Furthermore, when all jump quantities are 0 (i.e. $J_{ij}=0$ for all $i,j$), $T_t(q)$ corresponds to the busy period of the fluid flow process considered in \cite{Asmussen1994}. 
+\cite{Asmussen1994} derives the moment generating function of this busy period, which also corresponds to our results.
+\end{remark}
+
 \subsection{Disregarding failures and policies}
 We repeat the definition of $D_{ij}(q)$:
 \[
@@ -49,7 +59,7 @@ We will now prove a few properties regarding $D_{ij}(q)$:
 		D_{ij}(q+\delta r_i)&=\sum_mD_{im}(\delta r_i)D_{mj}(q)\\
 		&=\sum\limits_m\left[(1-\delta\lambda_i-\delta\beta)\mathds{1}\{i=j\}+\sum\limits_{k\neq i}\delta\lambda_{ik}D_{kj}(J_{ik})+o(\delta^2)\right]D_{mj}(q)\\
 		&=(1-\delta\lambda_i-\delta\beta)D_{ij}(q)+\sum\limits_m\left[\sum\limits_{k\neq i}\delta\lambda_{ij}D_{kj}(J_{ik})\right]D_{mj}(q)+o(\delta^2)\\
-		&=D_{ij}(q)+\delta\left( \sum\limits_m\left[\sum\limits_{k\neq i}\lambda_{ik}D_{km}(J_{ik})\right] D_{mj}(q)-(\lambda_i+\beta)D_{ij}(q) \right).\\
+		&=D_{ij}(q)+\delta\left( \sum\limits_m\left[\sum\limits_{k\neq i}\lambda_{ik}D_{km}(J_{ik})\right] D_{mj}(q)-(\lambda_i+\beta)D_{ij}(q) \right)+o(\delta^2).\\
 		\end{split}
 		\]
 		If we then subtract $D_{ij}(q)$ from both sides, divide by $\delta$ and let $\delta\rightarrow 0$, we get
@@ -77,8 +87,8 @@ Furthermore, if we let $D(q)$ be the matrix with entries $D_{ij}(q)$, we can sol
 	\begin{equation}\label{eq:MmfmDiscountMatrixSolution}
 	D(q)=e^{\Lambda^D q}.
 	\end{equation}
-	So that the discounted probability from going to state $i$ to $j$ while $Q(t)$ decreases by $q$, is given by
-	\begin{equation}
+	So that the discounted probability of going from state $i$ to $j$ while $Q(t)$ decreases by $q$, is given by
+	\begin{equation}\label{eq:MmfmDiscountEntrySolution}
 	D_{ij}(q)=\left(e^{\Lambda^D q}\right)_{ij}.
 	\end{equation}
 	\begin{proof}
@@ -91,6 +101,7 @@ Furthermore, if we let $D(q)$ be the matrix with entries $D_{ij}(q)$, we can sol
 		\frac{d}{dq}D(q)=\Lambda^D D(q),
 		\]
 		of which \eqref{eq:MmfmDiscountMatrixSolution} is a solution.
+		This combined with $D(0)=I$ completes the proof.
 	\end{proof}
 \end{theorem}
 
@@ -101,14 +112,15 @@ Furthermore, if we let $D(q)$ be the matrix with entries $D_{ij}(q)$, we can sol
 \end{remark}
 
 \begin{remark}\label{remark:MmfmStochasticShortestPath}
-	As $L_0(t)$ increases continuously when $L_c(t)=0$ and is constant when $L_c(t)>0$, we know that in each run of the machine for each value $l_0\geq0$, there exists a $t$ so that $L_0(t)=l_0$.
-	If we omit all time intervals where $L_c(t)>0$, we can view the machine as a CTMC over $L_0$.
-	That is, using $L_0$ as time parameter.
-	This adjusted CTMC would have generator $\Lambda^D$ so that the probability that the process is in CTMC-state $s_j$ at the time when $L_0(t)=l_0+q$, given that the process is in CTMC-state $s_i$ when $L_0(t)=l_0$, is given by
+	As $L_0(t)$ increases continuously when $L_c(t)=0$ and is constant when $L_c(t)>0$, we know that in each run of the asset for each value $l_0\geq0$, there exists a $t$ so that $L_0(t)=l_0$.
+	If we omit all time intervals where $L_c(t)>0$, we can view the asset as a CTMC over $L_0$.
+	That is, for the first run of the asset, we consider a CTMC $S^*(l_0)$ where
 	\[
-	\left(e^{\Lambda^Dq}\right)_{ij}.
+	S^*(l_0):=S(\min\{\tau|L_c(\tau)=0\wedge L_0(\tau)=l_0\}).
 	\]
-	Viewing the process as this adjusted CTMC can simplify the problem.
+	When we would start in a state $s_i$ and pay a certain cost when $X(t)=(i,l_0,0)$, the expected value at which this cost would be discounted, would correspond to \eqref{eq:MmfmDiscountEntrySolution}.
+	Transition probabilities of $S^*$ are given by generator $e^{\Lambda^D}$ for $\beta=0$.
+	Viewing the process as this adjusted CTMC helps understanding the problem.
 \end{remark}
 
 \subsection{Taking policies into account}
@@ -128,7 +140,7 @@ This is summarized by the following lemma.
 \begin{lemma}
 	For small $\delta$, we have
 	\[
-	D_{ij}(r_i\delta,\pi,l)=(1-\delta\lambda_i)\mathds{q}\{i=j\}+\sum\limits_{\mu_k>l+r_i\delta}\delta\lambda_{ij}D_{kj}(J_{ik})+o(\delta^2).
+	D_{ij}(r_i\delta,\pi,l)=(1-\delta\lambda_i)\mathds{1}\{i=j\}+\sum\limits_{\mu_k>l+r_i\delta}\delta\lambda_{ij}D_{kj}(J_{ik})+o(\delta^2).
 	\]
 	\begin{proof}
 		The reasoning is the same as in lemma \ref{lemma:MmfmDiscountsInfinitisimal}, but now we know that for $\mu_k\leq l+\delta r_i$, we have that $D_{kj}(J_{ik},\pi,l+\delta r_i)=0$.
@@ -154,7 +166,7 @@ Now we will calculate the discounted density $\Gamma_i(q,\pi,l)$:
 
 $\Gamma_i^t(q,\pi,l)$ corresponds to repairing when the fluid level $Q(t)$ reaches $Q(t)-q$.
 The discounted probability of reaching fluid level $Q(t)-q$ in state $s_j$ equals $D_{ij}(q, \pi,l)$.
-When the process reaches this state, the machine can be repaired by transitioning to a CTMC-state $s_k$ where the control limit has already been exceeded.
+When the process reaches this state, the asset can be repaired by transitioning to a CTMC-state $s_k$ where the control limit has already been exceeded.
 However, the presence of jumps complicates this:
 If the transition from $s_j$ to $s_k$ has a fluid jump, then repair won't be chosen immediately.
 This problem is solved by using transition rates $\Lambda^D_kj$ instead of $\lambda_{kj}$ since, referring back to remark \ref{remark:MmfmStochasticShortestPath}, are not interested in time intervals where the buffer $L_c$ is nonempty.
@@ -168,10 +180,10 @@ Concluding:
 \end{theorem}
 
 
-\begin{remark}
-	Referring back to remark \ref{remark:MmfmStochasticShortestPath}, if we view the process as this adjusted CTMC, the problem simplifies to a stochastic shortest path problem where in each state $s_i$, there is a transition to a terminating state with rate
-	\[
-	-\sum\limits_j \Lambda^D_{ij},
-	\]
-	and a terminating cost of 0.
-\end{remark}
+%\begin{remark}
+%	Referring back to remark \ref{remark:MmfmStochasticShortestPath}, if we view the process as this adjusted CTMC, the problem simplifies to a stochastic shortest path problem where in each state $s_i$, there is a transition to a terminating state with rate
+%	\[
+%	-\sum\limits_j \Lambda^D_{ij},
+%	\]
+%	and a terminating cost of 0.
+%\end{remark}

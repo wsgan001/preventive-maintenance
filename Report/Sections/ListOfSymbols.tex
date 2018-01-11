@@ -1,10 +1,41 @@
 \chapter{List of symbols and notation}\label{AppendixSymbolsAndNotation}
-\begin{table}[]
-	\begin{tabular}{ll}
-		Symbol        & Meaning                                                                                        \\
-		$V_\delta(x)$ & Expected remaining total discounted cost when the machine has age $x\delta$                    \\
-		$V(x,\mu)$    & Expected remaining total discounted cost when the machine ahs age $x$, following policy $\mu$. \\
-		$x\wedge y$   & The minimum of $x$ and $y$.                                                                    \\
-		$x\vee y$     & The maximum of $x$ and $y$.
-	\end{tabular}
-\end{table}
+The symbols and notation that are used in chapters \ref{chapter:AgeBased}, \ref{chapter:SimpleFluid} and \ref{chapter:Mmfm} are listed in the table below.
+%\begin{table}[H]\label{table:Symbols}
+	\begin{tabularx}{\linewidth}{l|L}\label{table:Symbols}
+		Symbol        & Meaning         \\
+		\hline                       
+		$X$			& State space of the MDP. \\
+		$X(t)$ & State of the process at time $t$ \\
+		$\omega_k$ & Random variable for the evolution of the stochastic process at time $t_k$.\\   
+		$x_{BREAK}$ & State for when the asset is broken.           \\
+		$x_{NEW}$ & State for when the asset is new.\\   
+		$U(x)$& Set of available actions in state $x$.\\
+		$a_W$& Action corresponding to doing nothing.\\
+		$a_R$& Action corresponding to repairing (performing maintenance). \\
+		$g(x,u)$    & Cost of performing action $u$ in state $x\in X$.\\
+		$c$& Cost for maintenance.\\
+		$a$& Additional cost for corrective maintenance.\\
+		$\alpha_\delta$ & Discount over a period $\delta$. In this thesis, we use $\alpha_\delta=e^{-\beta \delta}$ for discount coefficient $\beta>0$.\\       
+		$\mu$ & Control limit. $\mu^*$ denotes the optimal control limit.\\
+		$\pi$& The policy for the MMFM-problem. $\pi=\{\mu_1,...,\mu_N\}$ where $\mu_i$ denotes the control limit in CTMC-state $s_i$. $\pi^*$ denotes the optimal policy.\\
+	    $x\wedge y$   & The minimum of $x$ and $y$.          \\       
+        $x\vee y$     & The maximum of $x$ and $y$.\\
+        %\pagebreak
+        $Q_0$ & Distribution of the initial fitness (lifetime or fluid level) of the asset.\\
+        $Q(t)$& Fluid level at time $t$.\\
+        $L_0(t)$& Amount of used initial fluid at time $t$.\\
+        $L_c(t)$& Amount of fluid inside the buffer at time $t$.\\
+        $F$ & CDF of $Q_0$.\\
+        $F_{X(t)}$ & CDF of $Q(t)$\\
+        $\bar F(x)$& Reliability function corresponding to $F$. Furthermore $\bar F(x;y)=\frac{\bar F(x)}{\bar F(y)}$.\\
+        $h$& Hazard rate of $Q_0$.\\                       
+		$V_\delta(x,\mu)$ & Expected total discounted cost at state $x$ with time-step $\delta$, using control limit $\mu$. $\delta$ is omitted than for the continuous MDP. For the MMFM we write $V_\delta(x,\pi)$ with policy $\pi$.            \\
+		$\lambda_{ij}$& Transition rate from state $s_i$ to $s_j$. Also $\lambda_i=-\sum_{j\neq i}\lambda_{ij}$. $\lambda$ is used for the simple fluid model.\\
+		$J_{ij}$& Jump quantity when transitioning from $s_i$ to $s_j$. $J$ for the simple fluid model.\\
+		$N$& Number of CTMC-states for the MMFM problem.\\
+		$T_t(q)$&Random variable denoting the time until the fluid level has decreased by $q$, i.e. $\min\{\tau-t>0|Q(\tau)=Q(t)-q\}$.\\
+		$N_t(q)$&The number of jumps that occur during the time that the fluid decreases by $q$.\\
+		$D_{ij}^t(q,\pi,l)$&Expected value of the discount factor over the time period that the process reaches state $s_j$ while the fluid level decreases by $q$ without a control limit from $\pi$ being encountered, given that at time $t$ the process was in $X(t)= (i,l,0)$. For the simple fluid problem, $D(q)$ denotes the discount over the time that the fluid decreases by $q$.\\
+		$\Lambda^D$&The generator matrix for $D_{ij}$.\\
+	\end{tabularx}
+%\end{table}
