@@ -34,7 +34,7 @@ ylabel('Probability density');
 matlab2tikz('lifetimesFits.tex', 'width', '\fwidth' )
 
 % Plots for transition times
-transitionTimes=table2array(StateLifetimes(1:2000,[1,5]))+ones(2000,2)*0.01;
+transitionTimes=3600*table2array(TransitionTimes(1:2000,[1,5]))+ones(2000,2)*0.01;
 [density1,pts]=ksdensity(transitionTimes(:,1),'Support','positive');
 density2=ksdensity(transitionTimes(:,2),pts,'Support','positive');
 expFit=fitdist(transitionTimes(:,1),'Exponential');

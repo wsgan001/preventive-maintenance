@@ -1,6 +1,6 @@
 % Set distribution
 shape = 2;
-scale = 10;
+scale = 2;
 PDF = @(t) wblpdf(t,scale,shape);
 CDF = @(t) wblcdf(t,scale,shape);
 hazard = @(t)  (shape/scale) .*(t/scale).^(shape-1);
@@ -11,7 +11,7 @@ hazard = @(t)  (shape/scale) .*(t/scale).^(shape-1);
 % Set other problem parameters
 c = 1;
 a = 100;
-cDiscount= 0.2;
+cDiscount= 1;
 
 % Get the corresponding total discounted cost
 tdc = TotalDiscountedCost( c,a,cDiscount,PDF);
@@ -46,13 +46,13 @@ end
 % Plot results
 X=1:(numIterations+1);
 figure
-plot(X,customX,X,improvementX,X,valueX,TwoState);
-legend('Custom Iteration','Policy Improvement','Value Iteration')
+p1=plot(X,customX);
+set(p1(1),'linewidth',4);
 xlabel('Iterations')
 ylabel('Control Limit')
 
 figure
-plot(X,customV,X,improvementV,X,valueV);
-legend('Custom Iteration','Policy Improvement','Value Iteration')
+p2=plot(X,customV);
+set(p2(1),'linewidth',4);
 xlabel('Iterations')
 ylabel('Total Discounted Cost')

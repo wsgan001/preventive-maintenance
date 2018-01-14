@@ -6,8 +6,18 @@ hazard = @(t)  PDF(t)/(1-CDF(t));
 numStates = length(rates);
 
     function [policy_next, v_next] =  ExactIterate(policy_prev, v_prev)
-       policy_next = MmfmGetExactPolicy( CDF, PDF, hazard, v_prev, cDiscount, c, a, generator, discountGenerator,rates, policy_prev );
+       policy_next = MmfmGetExactPolicy( CDF, PDF, hazard, v_prev, cDiscount, c, a, generator, discountGenerator,rates, policy_prev, v_remain );
        v_next =  MmfmTotalDiscountedCost( discountGenerator,v_prev,c,a,CDF,PDF, policy_next );
+       % Compute other Vs
+       for k=1:numStates
+           for l=1:numStates
+               if policy_next(k)>=policy_next(l)
+                   v_remain(l,k)=c+v_next;
+               else
+                   v_remain(l,k) = MmfmRemainingTotalDiscountedCost( discountGenerator,v_next,c,a,CDF,PDF, policy_next, l, policy_next(k) );
+               end
+           end
+       end
     end
 
 if ~exist('numIterations', 'var')
@@ -19,6 +29,7 @@ policy_convergence = zeros(numStates,1+numIterations);
 v_convergence = zeros(1,1+numIterations);
 policy_convergence(:,1) = policy_init;
 v_convergence(1) = v_init;
+v_remain = zeros(numStates);
 
 % And iterate
 for i=1:numIterations

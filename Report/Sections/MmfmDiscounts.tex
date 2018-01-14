@@ -30,7 +30,7 @@ We will now prove a few properties regarding $D_{ij}(q)$:
 \begin{lemma}\label{lemma:MmfmDiscountsInfinitisimal}
 	For small $\delta$, $D_{ij}(\delta r_i)$ is given by
 	\[
-	D_{ij}(\delta r_i)=(1-\delta\lambda_i-\delta\beta)\mathds{1}\{i=j\}+\sum\limits_{k\neq i}\delta\lambda_{ij}D_{kj}(J_{ik})+o(\delta^2).
+	D_{ij}(\delta r_i)=(1-\delta\lambda_i-\delta\beta)\mathds{1}\{i=j\}+\sum\limits_{k\neq i}\delta\lambda_{ik}D_{kj}(J_{ik})+o(\delta^2).
 	\]
 	\begin{proof}
 		In a time period of length $\delta$, either a transition occurs to some state $s_k$ ($k\neq i$) or no transition occurs.
@@ -42,7 +42,7 @@ We will now prove a few properties regarding $D_{ij}(q)$:
 		\[
 		\begin{split}
 		D_{ij}(\delta r_i)&=(1-\delta\lambda_i)(1-\delta\beta)\mathds{1}\{i=j\}+\sum\limits_{k\neq i}\delta(1-\delta\beta)\lambda_{ik}D_{kj}(J_{ik})+o(\delta^2)\\
-		&(1-\delta\lambda_i-\delta\beta)\mathds{1}\{i=j\}+\sum\limits_{k\neq i}\delta\lambda_{ik}D_{kj}(J_{ik})+o(\delta^2).
+		&=(1-\delta\lambda_i-\delta\beta)\mathds{1}\{i=j\}+\sum\limits_{k\neq i}\delta\lambda_{ik}D_{kj}(J_{ik})+o(\delta^2).
 		\end{split}
 		\]
 	\end{proof}

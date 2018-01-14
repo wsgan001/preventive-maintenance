@@ -7,7 +7,8 @@ numStates = length(rates);
 
     function [policy_next, v_next] =  UniformIterate(policy_prev, v_prev)
        policy_next = MmfmGetUniformPolicy( CDF, PDF, hazard, v_prev, cDiscount, c, a, generator, discountGenerator,rates, policy_prev );
-       v_next =  MmfmTotalDiscountedCost( discountGenerator,v_prev,c,a,CDF,PDF, policy_next );
+       v_next =  (c+a+v_prev)*integral(@(x) PDF(x).*MmfmExpectedDiscount( discountGenerator, Inf(numStates,1), x, 1, 1:numStates ),0,policy_next(1)) + (c+v_prev)*(1-CDF(policy_next(1)))*MmfmExpectedDiscount( discountGenerator, Inf(numStates,1), policy_next(1), 1, 1:numStates );
+       %MmfmTotalDiscountedCost( discountGenerator,v_prev,c,a,CDF,PDF, policy_next );
     end
 
 if ~exist('numIterations', 'var')

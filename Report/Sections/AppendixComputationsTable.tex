@@ -1,0 +1,112 @@
+\section{Age-based problem}
+Below optimal control limits and corresponding total discounted costs of the age-based maintenance problem are listed for a few parameters.
+These control limits and total discounted costs were obtained using the iteration method presented in this thesis.
+The scale $20/\pi$ for the Weibull distribution was chosen so that the mean lifetime is the same for both distributions.
+
+	\begin{tabularx}{\linewidth}{llllll}\label{table:AgeComputations}
+		$c$        & $a$ & $\beta$ & Lifetime & $\mu^*$ & $V(0^+,\mu^*)$        \\
+		\hline                       
+		$1.000$ & $100.000$ & $1.000$ & Weibull$(20/\pi,2)$ & $1.388$ & $1.181$ \\ 
+		$1.000$ & $100.000$ & $1.000$ & Gamma$(2,5)$ & $2.349$ & $0.233$ \\ 
+		$1.000$ & $5.000$ & $1.000$ & Weibull$(20/\pi,2)$ & $13.897$ & $0.091$ \\ 
+		$1.000$ & $5.000$ & $1.000$ & Gamma$(2,5)$ & $10.298$ & $0.025$ \\ 
+		$1.000$ & $100.000$ & $0.500$ & Weibull$(20/\pi,2)$ & $1.246$ & $2.916$ \\ 
+		$1.000$ & $100.000$ & $0.500$ & Gamma$(2,5)$ & $2.123$ & $0.838$ \\ 
+		$1.000$ & $100.000$ & $2.000$ & Weibull$(20/\pi,2)$ & $1.760$ & $0.383$ \\ 
+		$1.000$ & $100.000$ & $2.000$ & Gamma$(2,5)$ & $2.831$ & $0.030$ \\ 
+	\end{tabularx}
+
+\section{Simple fluid problem}
+Below optimal control limits and corresponding total discounted costs of the simple fluid model maintenance problem are listed for a few parameters.
+These control limits and total discounted costs were obtained using the iteration method presented in this thesis.
+\begin{tabularx}{\linewidth}{llllllll}\label{table:SimpleFluidComputations}
+	$c$        & $a$ & $\beta$ & Initial fluid & $\lambda$ & $J$ & $\mu^*$ & $V(0^+,\mu^*)$        \\
+	\hline    
+	  $1$ & $100$ & $1$ & Weibull$(20/\pi,2)$ & $1.000$ & $0.500$ & $1.572$ & $0.608$ \\ 
+	  $1$ & $100$ & $1$ & Gamma$(2,5)$ & $1.000$ & $0.500$ & $2.607$ & $0.075$ \\ 
+	  $1$ & $5$ & $1$ & Weibull$(20/\pi,2)$ & $1.000$ & $0.500$ & $54.762$ & $0.039$ \\ 
+	  $1$ & $5$ & $1$ & Gamma$(2,5)$ & $1.000$ & $0.500$ & $\infty$ & $0.005$ \\ 
+	  $1$ & $100$ & $0.5$ & Weibull$(20/\pi,2)$ & $1.000$ & $0.500$ & $1.341$ & $1.495$ \\ 
+	  $1$ & $100$ & $0.5$ & Gamma$(2,5)$ & $1.000$ & $0.500$ & $2.276$ & $0.335$ \\ 
+	  $1$ & $100$ & $2.0$ & Weibull$(20/\pi,2)$ & $1.000$ & $0.500$ & $2.114$ & $0.209$ \\ 
+	  $1$ & $100$ & $2.0$ & Gamma$(2,5)$ & $1.000$ & $0.500$ & $3.176$ & $0.009$ \\ 
+	  $1$ & $100$ & $1.0$ & Weibull$(20/\pi,2)$ & $0.500$ & $1.000$ & $1.513$ & $0.730$ \\ 
+	  $1$ & $100$ & $1.0$ & Gamma$(2,5)$ & $0.500$ & $1.000$ & $2.528$ & $0.104$ \\ 
+	  $1$ & $5$ & $1.0$ & Weibull$(20/\pi,2)$ & $0.500$ & $1.000$ & $18.346$ & $0.049$ \\ 
+	  $1$ & $5$ & $1.0$ & Gamma$(2,5)$ & $0.500$ & $1.000$ & $\infty$ & $0.008$ \\ 
+	  $1$ & $100$ & $0.5$ & Weibull$(20/\pi,2)$ & $0.500$ & $1.000$ & $1.319$ & $1.698$ \\ 
+	  $1$ & $100$ & $0.5$ & Gamma$(2,5)$ & $0.500$ & $1.000$ & $2.241$ & $0.403$ \\ 
+	  $1$ & $100$ & $2.0$ & Weibull$(20/\pi,2)$ & $0.500$ & $1.000$ & $1.970$ & $0.259$ \\ 
+	  $1$ & $100$ & $2.0$ & Gamma$(2,5)$ & $0.500$ & $1.000$ & $3.045$ & $0.014$ \\ 
+\end{tabularx}
+\section{Markov Modulated fluid model}
+For the following two MMFMs we calculated the total discounted costs of the preventive maintenance problem.
+In addition to calculating the exact solution via the iteration method presented in the thesis, we also computed the policies for the heuristics discussed in section \ref{section:MmfmHeuristics}.
+We denote the uniform control limit by $\mu_u$ and the control limits that resulted from assuming no jumps will occur before the next failure by $\mu_i'$, with corresponding total discounted costs $V_u(\mu_u)$ and $V(0^+,\pi')$ respectively.
+
+\begin{landscape}
+	
+	\begin{figure}
+		\centering
+		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.7cm,
+		thick,main node/.style={circle,draw,font=\sffamily\Large\bfseries, scale=0.65}, edge node/.style={scale=0.65},scale=0.65]
+		
+		\node[main node] (1) {$s_1:1$};
+		\node[main node] (2) [right of=1] {$s_2:2$};
+		\node[main node] (3) [below right of=1] {$s_3:3$};
+		
+		\path[every node/.style={font=\sffamily\small}]
+		(1) edge node {$1:0$} (2)
+		(2) edge node {$1:0$} (3)
+		(3) edge node {$1:5$} (1);
+		\end{tikzpicture}
+		\caption{Depiction of the MMFM corresponding to table \ref{table:MmfmComputations1}.}
+		\label{figure:AppendixMmfm1}
+	\end{figure}
+
+	\begin{table}[H]
+		\centering
+		\begin{tabularx}{\linewidth}{llllllllllllll}
+			$c$& $a$ & $\beta$ & Initial fluid & $\mu_1^*$ & $\mu_2^*$ & $\mu_3^*$ & $V(0^+,\pi^*)$ & $\mu_u$ & $V_u(\mu_u)$ &$\mu_1'$ & $\mu_2'$ & $\mu_3'$ &$V(0^+,\pi')$  \\
+			\hline    
+			$1$ & $100$ & $1.0$ & Weibull$(20/\pi,2)$ & $1.839$ & $0.578$ & $1.144$ & $1.889$ & $1.749$ & $1.805$ & $1.657$ & $0.829$ & $0.552$ & $1.603$ \\ 
+			$1$ & $100$ & $1.0$ & Gamma$(2,5)$ & $2.920$ & $1.964$ & $2.451$ & $1.235$ & $2.514$ & $0.494$ & $2.586$ & $2.032$ & $1.780$ & $0.614$ \\ 
+			$1$ & $5$ & $1.0$ & Weibull$(20/\pi,2)$ & $19.966$ & $5.928$ & $12.424$ & $0.784$ & $15.226$ & $0.196$ & $18.585$ & $9.292$ & $6.195$ & $0.460$ \\ 
+			$1$ & $5$ & $1.0$ & Gamma$(2,5)$ & $22.894$ & $6.948$ & $10.746$ & $0.719$ & $11.069$ & $0.096$ & $14.748$ & $7.246$ & $5.570$ & $0.365$ \\ 
+			$1$ & $100$ & $0.5$ & Weibull$(20/\pi,2)$ & $1.559$ & $0.167$ & $1.207$ & $3.899$ & $1.332$ & $4.028$ & $1.485$ & $0.743$ & $0.495$ & $3.667$ \\ 
+			$1$ & $100$ & $0.5$ & Gamma$(2,5)$ & $2.616$ & $1.365$ & $2.386$ & $2.334$ & $2.284$ & $1.316$ & $2.380$ & $1.883$ & $1.654$ & $1.560$ \\ 
+			$1$ & $100$ & $2.0$ & Weibull$(20/\pi,2)$ & $2.091$ & $1.046$ & $1.036$ & $0.642$ & $2.142$ & $0.683$ & $2.061$ & $1.030$ & $0.687$ & $0.619$ \\ 
+			$1$ & $100$ & $2.0$ & Gamma$(2,5)$ & $3.010$ & $2.333$ & $2.326$ & $0.210$ & $2.929$ & $0.126$ & $3.000$ & $2.326$ & $2.026$ & $0.199$ \\ 
+			$1$ & $100$ & $1.0$ & Weibull$(20/\pi,2)$ & $2.167$ & $1.249$ & $0.467$ & $0.463$ & $2.477$ & $0.674$ & $0.962$ & $0.481$ & $0.321$ & $0.511$ \\ 
+			$1$ & $100$ & $1.0$ & Gamma$(2,5)$ & $3.198$ & $2.590$ & $1.851$ & $0.211$ & $3.147$ & $0.164$ & $2.329$ & $1.846$ & $1.622$ & $0.204$ \\ 
+			$1$ & $5$ & $1.0$ & Weibull$(20/\pi,2)$ & $0.000$ & $0.000$ & $0.000$ & $19.000$ & $31.477$ & $0.063$ & $15.266$ & $7.633$ & $5.089$ & $0.199$ \\ 
+			$1$ & $5$ & $1.0$ & Gamma$(2,5)$ & $0.000$ & $0.000$ & $0.000$ & $19.000$ & $0.000$ & $19.000$ & $11.937$ & $6.503$ & $5.105$ & $0.169$ \\ 
+			$1$ & $100$ & $0.5$ & Weibull$(20/\pi,2)$ & $1.881$ & $1.141$ & $0.362$ & $0.924$ & $2.514$ & $1.677$ & $0.688$ & $0.344$ & $0.229$ & $1.161$ \\ 
+			$1$ & $100$ & $0.5$ & Gamma$(2,5)$ & $2.929$ & $2.433$ & $1.667$ & $0.469$ & $2.936$ & $0.478$ & $1.967$ & $1.576$ & $1.392$ & $0.462$ \\ 
+			$1$ & $100$ & $2.0$ & Weibull$(20/\pi,2)$ & $2.760$ & $1.491$ & $0.665$ & $0.201$ & $2.821$ & $0.228$ & $1.527$ & $0.764$ & $0.509$ & $0.199$ \\ 
+			$1$ & $100$ & $2.0$ & Gamma$(2,5)$ & $3.654$ & $2.850$ & $2.135$ & $0.076$ & $3.589$ & $0.032$ & $2.876$ & $2.239$ & $1.953$ & $0.074$ \\ 
+		\end{tabularx}
+		\caption{Computations corresponding to the MMFM of figure \ref{figure:AppendixMmfm1}.}
+		\label{table:MmfmComputations1}
+	\end{table}
+	\subsection{MMFM 2}
+	
+	\begin{figure}
+		\centering
+		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.7cm,
+		thick,main node/.style={circle,draw,font=\sffamily\Large\bfseries, scale=0.65}, edge node/.style={scale=0.65},scale=0.65]
+		
+		\node[main node] (1) {$s_1:1$};
+		\node[main node] (2) [right of=1] {$s_2:1$};
+		\node[main node] (3) [below right of=1] {$s_3:3$};
+		
+		\path[every node/.style={font=\sffamily\small}]
+		(2) edge node {$2:1$} (1)
+		(1) edge node {$2:1$} (2)
+		(2) edge node {$1:0$} (3)
+		(3) edge node {$1:0$} (1);
+		\end{tikzpicture}
+		\caption{Depiction of the MMFM corresponding to table \ref{table:MmfmComputations2}.}
+		\label{figure:AppendixMmfm2}
+	\end{figure}
+\end{landscape}

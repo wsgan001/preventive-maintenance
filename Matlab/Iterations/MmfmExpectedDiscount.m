@@ -27,9 +27,21 @@ end
 
 sortedPolicy = sort(policy);
 
-ed=expm(discountGenerator.*min(fluid,sortedPolicy(1)));
-discountedUntil=min(fluid,sortedPolicy(1));
-i=2;
+ed=eye(numStates);
+
+% Find first positive control limit
+i=1;
+while i<=numStates && sortedPolicy(i)<0
+    i=i+1;
+end
+
+% If not all control limits were negative
+if i<= numStates
+    discountedUntil=min(fluid,sortedPolicy(i));
+    ed=expm(GetDiscountGeneratorAtTime(discountGenerator,policy,discountedUntil).*discountedUntil);
+end
+
+i=i+1;
 while i<=numStates && sortedPolicy(i) <= fluid
     ed=ed*expm(GetDiscountGeneratorAtTime(discountGenerator,policy,sortedPolicy(i-1)).*(sortedPolicy(i)-discountedUntil));
     discountedUntil = sortedPolicy(i);
@@ -53,6 +65,9 @@ end
 if exist('from','var')
    ed = ed(from,:); 
 end
+
+if ed<0
+    disp('?');
 end
 
 

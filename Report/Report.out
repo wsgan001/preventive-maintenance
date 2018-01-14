@@ -59,7 +59,7 @@
 \BOOKMARK [1][-]{section.5.5}{The optimal policy}{chapter.5}% 59
 \BOOKMARK [1][-]{section.5.6}{Structural properties}{chapter.5}% 60
 \BOOKMARK [1][-]{section.5.7}{Heuristic policies}{chapter.5}% 61
-\BOOKMARK [2][-]{subsection.5.7.1}{The same control limit in each CTMC-state}{section.5.7}% 62
+\BOOKMARK [2][-]{subsection.5.7.1}{Uniform control limit}{section.5.7}% 62
 \BOOKMARK [2][-]{subsection.5.7.2}{Assuming no jumps before the next failure}{section.5.7}% 63
 \BOOKMARK [1][-]{section.5.8}{Computing the optimal control limits}{chapter.5}% 64
 \BOOKMARK [0][-]{chapter.6}{Data analysis}{}% 65
@@ -86,4 +86,8 @@
 \BOOKMARK [0][-]{Appendix.a.A}{List of symbols and notation}{}% 86
 \BOOKMARK [0][-]{Appendix.a.B}{Proof of properties of optimal age-based control limits}{}% 87
 \BOOKMARK [0][-]{Appendix.a.C}{Total discounted costs for various problem parameters and policies?}{}% 88
-\BOOKMARK [0][-]{Appendix.a.D}{Matlab routines}{}% 89
+\BOOKMARK [1][-]{section.a.C.1}{Age-based problem}{Appendix.a.C}% 89
+\BOOKMARK [1][-]{section.a.C.2}{Simple fluid problem}{Appendix.a.C}% 90
+\BOOKMARK [1][-]{section.a.C.3}{Markov Modulated fluid model}{Appendix.a.C}% 91
+\BOOKMARK [2][-]{subsection.a.C.3.1}{MMFM 2}{section.a.C.3}% 92
+\BOOKMARK [0][-]{Appendix.a.D}{Matlab routines}{}% 93
