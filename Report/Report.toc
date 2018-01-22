@@ -1,47 +1,47 @@
 \select@language {english}
 \contentsline {chapter}{\numberline {1.}Introduction}{1}{chapter.1}
-\contentsline {chapter}{\numberline {2.}Literature overview}{3}{chapter.2}
+\contentsline {chapter}{\numberline {2.}Preliminaries}{3}{chapter.2}
 \contentsline {section}{\numberline {2.1}Markov decision theory}{3}{section.2.1}
 \contentsline {chapter}{\numberline {3.}Age-based maintenance}{5}{chapter.3}
 \contentsline {section}{\numberline {3.1}Problem formulation and definition}{5}{section.3.1}
 \contentsline {subsection}{\numberline {3.1.1}Degradation model}{5}{subsection.3.1.1}
-\contentsline {subsection}{\numberline {3.1.2}Control actions}{5}{subsection.3.1.2}
+\contentsline {subsection}{\numberline {3.1.2}Control actions}{6}{subsection.3.1.2}
 \contentsline {subsection}{\numberline {3.1.3}State evolution}{6}{subsection.3.1.3}
 \contentsline {subsection}{\numberline {3.1.4}Costs and discounting}{6}{subsection.3.1.4}
 \contentsline {subsection}{\numberline {3.1.5}Optimal stationary policy and the Bellman equations}{7}{subsection.3.1.5}
 \contentsline {subsection}{\numberline {3.1.6}Continuous-time MDP}{7}{subsection.3.1.6}
 \contentsline {subsection}{\numberline {3.1.7}Alternative models}{7}{subsection.3.1.7}
-\contentsline {subsubsection}{Instantaneous repairs}{7}{section*.4}
+\contentsline {subsubsection}{Instantaneous repairs}{8}{section*.4}
 \contentsline {subsubsection}{Stochastic inter-decision times}{8}{section*.5}
 \contentsline {section}{\numberline {3.2}Structure of optimal policy}{8}{section.3.2}
 \contentsline {subsection}{\numberline {3.2.1}Stationary policy}{8}{subsection.3.2.1}
-\contentsline {subsection}{\numberline {3.2.2}Control limit}{8}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.2}Control limit}{9}{subsection.3.2.2}
 \contentsline {section}{\numberline {3.3}Computation of total discounted cost}{9}{section.3.3}
-\contentsline {section}{\numberline {3.4}Analysis of the optimal policy}{11}{section.3.4}
+\contentsline {section}{\numberline {3.4}Analysis of the optimal policy}{12}{section.3.4}
 \contentsline {section}{\numberline {3.5}Policy iteration}{14}{section.3.5}
 \contentsline {subsection}{\numberline {3.5.1}Description of iteration method}{14}{subsection.3.5.1}
 \contentsline {subsection}{\numberline {3.5.2}Proof of convergence}{15}{subsection.3.5.2}
 \contentsline {section}{\numberline {3.6}Structural properties}{17}{section.3.6}
 \contentsline {subsection}{\numberline {3.6.1}Effect on control limit}{17}{subsection.3.6.1}
 \contentsline {subsection}{\numberline {3.6.2}Effect on expected total discounted cost}{17}{subsection.3.6.2}
-\contentsline {chapter}{\numberline {4.}Simple fluid model with jumps}{18}{chapter.4}
-\contentsline {section}{\numberline {4.1}Problem formulation and definition}{18}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}Stochastic asset degradation}{18}{subsection.4.1.1}
+\contentsline {chapter}{\numberline {4.}Simple fluid model with jumps}{19}{chapter.4}
+\contentsline {section}{\numberline {4.1}Problem formulation and definition}{19}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Stochastic asset degradation}{19}{subsection.4.1.1}
 \contentsline {subsection}{\numberline {4.1.2}Control actions}{22}{subsection.4.1.2}
 \contentsline {subsection}{\numberline {4.1.3}State evolution}{22}{subsection.4.1.3}
-\contentsline {subsection}{\numberline {4.1.4}Costs and discounting}{22}{subsection.4.1.4}
-\contentsline {subsection}{\numberline {4.1.5}Optimal policy and Bellman equations}{22}{subsection.4.1.5}
+\contentsline {subsection}{\numberline {4.1.4}Costs and discounting}{23}{subsection.4.1.4}
+\contentsline {subsection}{\numberline {4.1.5}Optimal policy and Bellman equations}{23}{subsection.4.1.5}
 \contentsline {subsection}{\numberline {4.1.6}Alternative models}{23}{subsection.4.1.6}
-\contentsline {subsubsection}{Decisions at jumps only}{23}{section*.6}
-\contentsline {subsubsection}{Jumps not according to a Poisson process}{23}{section*.7}
-\contentsline {section}{\numberline {4.2}Structure of optimal policy}{23}{section.4.2}
+\contentsline {subsubsection}{Decisions at jumps only}{24}{section*.6}
+\contentsline {subsubsection}{Jumps not according to a Poisson process}{24}{section*.7}
+\contentsline {section}{\numberline {4.2}Structure of optimal policy}{24}{section.4.2}
 \contentsline {subsection}{\numberline {4.2.1}Stationary policy}{24}{subsection.4.2.1}
 \contentsline {subsection}{\numberline {4.2.2}Empty buffer}{24}{subsection.4.2.2}
 \contentsline {subsection}{\numberline {4.2.3}Control limit}{24}{subsection.4.2.3}
 \contentsline {section}{\numberline {4.3}Computation of total discounted cost}{24}{section.4.3}
-\contentsline {subsection}{\numberline {4.3.1}Time until control limit}{24}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.3.1}Time until control limit}{25}{subsection.4.3.1}
 \contentsline {section}{\numberline {4.4}Optimal policy}{27}{section.4.4}
-\contentsline {section}{\numberline {4.5}Structural properties}{27}{section.4.5}
+\contentsline {section}{\numberline {4.5}Structural properties}{28}{section.4.5}
 \contentsline {chapter}{\numberline {5.}Markov Modulated Fluid Model with jumps}{29}{chapter.5}
 \contentsline {section}{\numberline {5.1}Problem formulation and definition}{29}{section.5.1}
 \contentsline {subsection}{\numberline {5.1.1}Stochastic asset degradation}{29}{subsection.5.1.1}
@@ -96,9 +96,10 @@
 \contentsline {chapter}{Appendices}{57}{section*.15}
 \contentsline {chapter}{\numberline {A.}List of symbols and notation}{58}{Appendix.a.A}
 \contentsline {chapter}{\numberline {B.}Proof of properties of optimal age-based control limits}{60}{Appendix.a.B}
-\contentsline {chapter}{\numberline {C.}Total discounted costs for various problem parameters and policies?}{62}{Appendix.a.C}
+\contentsline {chapter}{\numberline {C.}Total discounted costs for various problem parameters and policies}{62}{Appendix.a.C}
 \contentsline {section}{\numberline {C.1}Age-based problem}{62}{section.a.C.1}
 \contentsline {section}{\numberline {C.2}Simple fluid problem}{62}{section.a.C.2}
 \contentsline {section}{\numberline {C.3}Markov Modulated fluid model}{63}{section.a.C.3}
-\contentsline {subsection}{\numberline {C.3.1}MMFM 2}{65}{subsection.a.C.3.1}
+\contentsline {subsection}{\numberline {C.3.1}MMFM 1}{64}{subsection.a.C.3.1}
+\contentsline {subsection}{\numberline {C.3.2}MMFM 2}{65}{subsection.a.C.3.2}
 \contentsline {chapter}{\numberline {D.}Matlab routines}{66}{Appendix.a.D}

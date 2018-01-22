@@ -1,5 +1,8 @@
 function [x_convergence,v_convergence] = CustomIteration(x_init,v_init,c,a,cDiscount,pdf,cdf,hazard,numIterations)
+% CUSTOMITERATION Finds the optimal control limit and corresponding total
+% discounted cost for the age-based maintenance problem.
     function [x_next,v_next] = Iterate(x_prev,v_prev,c,a,discount,pdf,cdf,hazard)
+        % ITERATE Performs one iteration.
         x_next = fzero(@(t) hazard(t)-(c+v_prev).*discount/a,min(1000,x_prev));
         if (isnan(x_next))
             x_next = Inf(1);

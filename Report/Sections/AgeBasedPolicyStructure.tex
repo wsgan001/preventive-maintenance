@@ -8,11 +8,11 @@ If no repair is chosen, then we set $\mu^*=\infty$.
 %\[ c+\alpha_\delta V^*_\delta(1) <\alpha_\delta \mathbb{E}[V^*_\delta(S(x_k))]. \]
 %Where the left hand side is a constant and the right hand side only depends on $S(x_k)$, which only depends on the age of the asset by assumption.
 %Hence, we have established that the optimal policy only depends on the age $x_k$ so that it must be a stationary policy.
-\cite{Puterman2008} proves that for a discounted infinite-horizon countable-state MDP where the cost function does not depend on the decision stage, there exists a stationary policy that is optimal.
+In \cite{Puterman2008}, it is proven that for a discounted infinite-horizon countable-state MDP where the cost function does not depend on the decision stage, there exists a stationary policy that is optimal.
 This proves that there exists an optimal stationary policy to this age-based preventive maintenance policy.
 
 \subsection{Control limit}\label{section:AgeBasedControlLimit}
-From the Bellman equations \eqref{eq:AgeBasedBellman} we can see that, by letting $\delta\rightarrow 0$, repair is for chosen $x>0$ whenever
+By letting $\delta\rightarrow 0$, we can see from the Bellman equations \eqref{eq:AgeBasedBellman} that repair is chosen whenever
 \begin{equation}\label{eq:AgeBasedRepairCondition}
  c+\alpha V^*(0^+) \leq V^*(x). 
  \end{equation}

@@ -1,10 +1,8 @@
-
+% Finds parameters for MMFM by minimizing the variance of the initial fluid
+% distribution.
 global traceData numExperiments numStates averageInitialLevel varInitialLevel;
 
-
-%generator = [-3, 1, 2; 1, -2, 1; 0,1,-1];
-%fluidJumps = [0,0,5;0,0,0;0,0,0];
-%fluidRates = [1;2;3];
+% Set parameters for generating data
 generator = [-1.001,1,0.001;1,-2,1;0.001,1,-1.001];
 fluidJumps=[0,0,0;1,0,0;0,1,0];
 fluidRates = [2;5;1];
@@ -25,14 +23,6 @@ for i=1:numExperiments
     % Store for each trace the amount of time it has spent in each state
     % and the number of times each jump has occurred.
     [traceData{i,1},traceData{i,2}] = InspectTrace(trace,length(fluidRates));
-end
-
-% Hacky way to be able to access the row and column in arrayfun.
-Row=zeros(numStates);
-Column=zeros(numStates);
-for i=1:numStates
-    Row(i,:)=i;
-    Column(:,i)=i;
 end
 
 % Use fmincon to find a solution. Bounds could be set such that each

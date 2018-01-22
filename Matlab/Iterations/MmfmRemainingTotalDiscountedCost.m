@@ -1,43 +1,37 @@
 function [ tdc ] = MmfmRemainingTotalDiscountedCost( discountGenerator,V,c,a,CDF,PDF, policy, state, fluid )
-%MMFMREMAININGTOTALDISCOUNTEDCOST Summary of this function goes here
-%   Detailed explanation goes here
+%MMFMREMAININGTOTALDISCOUNTEDCOST Computes the expected remaining
+%discounted cost using policy if the process is in CTMC-state state with
+%L0 given by fluid.
 
 % update PDF, CDF and policy
 conditionedPDF = @(t) PDF(t+fluid)/(1-CDF(fluid));
 conditionedCDF = @(t) (CDF(t+fluid)-CDF(fluid))/(1-CDF(fluid));
-remainingPolicy = policy-fluid;
 
-% For the rest, the computation is similar, except for the fact that some
-% control limits might already have been reached, but MmfmExpectedDiscount
-% returns zero then.
+% policies may never be negative
+remainingPolicy = max(policy-fluid,0);
+
+numStates=length(remainingPolicy);
 
 % Discounts for failing runs
-failDiscounts=integral(@(x) conditionedPDF(x).*MmfmExpectedDiscountNotRepaired(discountGenerator,remainingPolicy,x,state),0,max(0,max(remainingPolicy)));
-
-if failDiscounts<0
-   disp('?'); 
-end
+failDiscounts=integral(@(x) conditionedPDF(x).*MmfmExpectedDiscountNotRepaired(discountGenerator,remainingPolicy,x,state),0,max(remainingPolicy));
 
 % Discounts from being in a state when the control limit is reached.
-repairDiscounts = sum(arrayfun(@(p,i) (1-conditionedCDF(p)).*max(0,MmfmExpectedDiscount(discountGenerator,remainingPolicy,p,state,i)),remainingPolicy,transpose([1:length(remainingPolicy)])));
-
-if repairDiscounts<0
-   disp('?'); 
+%repairDiscounts = sum(arrayfun(@(p,i) (1-conditionedCDF(p)).*MmfmExpectedDiscount(discountGenerator,remainingPolicy,p,state,i),remainingPolicy,transpose(1:length(remainingPolicy))));
+repairDiscounts = 0;
+for i=1:numStates
+    if ~isinf(remainingPolicy(i))
+        repairDiscounts = repairDiscounts+(1-conditionedCDF(remainingPolicy(i))).*MmfmExpectedDiscount(discountGenerator,remainingPolicy,remainingPolicy(i),state,i);
+    end
 end
+
 
 % Discounts from moving to a state where the control limit is already
 % passed.
-repairDiscounts = repairDiscounts + integral(@(q) (1-conditionedCDF(q)).*GetDiscountedRepairRate(discountGenerator,remainingPolicy,q,state),min(remainingPolicy),max(remainingPolicy));
-
-if repairDiscounts<0
-   disp('?'); 
+if ~isinf(min(remainingPolicy(i)))
+    repairDiscounts = repairDiscounts + integral(@(q) (1-conditionedCDF(q)).*GetDiscountedRepairRate(discountGenerator,remainingPolicy,q,state),min(remainingPolicy),max(remainingPolicy));
 end
 
 % Add them up
-if isnan(repairDiscounts)
-    tdc=(c+a+V).*failDiscounts;
-else
-    tdc = (c+a+V).*failDiscounts + (c+V).*repairDiscounts;
-end
+tdc = (c+a+V).*failDiscounts + (c+V).*repairDiscounts;
 end
 

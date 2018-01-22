@@ -116,7 +116,7 @@ Furthermore, if we let $D(q)$ be the matrix with entries $D_{ij}(q)$, we can sol
 	If we omit all time intervals where $L_c(t)>0$, we can view the asset as a CTMC over $L_0$.
 	That is, for the first run of the asset, we consider a CTMC $S^*(l_0)$ where
 	\[
-	S^*(l_0):=S(\min\{\tau|L_c(\tau)=0\wedge L_0(\tau)=l_0\}).
+	S^*(l_0):=S(\min\{\tau|L_c(\tau)=0\text{ and } L_0(\tau)=l_0\}).
 	\]
 	When we would start in a state $s_i$ and pay a certain cost when $X(t)=(i,l_0,0)$, the expected value at which this cost would be discounted, would correspond to \eqref{eq:MmfmDiscountEntrySolution}.
 	Transition probabilities of $S^*$ are given by generator $e^{\Lambda^D}$ for $\beta=0$.
@@ -163,7 +163,6 @@ $D_{ij}(q, \pi,l)$ can now be calculated in the following straightforward way:
 	\]
 \end{theorem}
 Now we will calculate the discounted density $\Gamma_i(q,\pi,l)$:
-
 $\Gamma_i^t(q,\pi,l)$ corresponds to repairing when the fluid level $Q(t)$ reaches $Q(t)-q$.
 The discounted probability of reaching fluid level $Q(t)-q$ in state $s_j$ equals $D_{ij}(q, \pi,l)$.
 When the process reaches this state, the asset can be repaired by transitioning to a CTMC-state $s_k$ where the control limit has already been exceeded.
@@ -173,7 +172,7 @@ This problem is solved by using transition rates $\Lambda^D_kj$ instead of $\lam
 Concluding:
 
 \begin{theorem}
-	The discounted density corresponding to repairing when $L_0(t)=l+q$ given that initially the process is in CTMC-state $s_i$ with used initial fluid $l$ is given by
+	The discounted density corresponding to repairing when $L_0(t)=l+q$ given that initially the process is in CTMC-state $s_i$ with drained initial fluid $l$ is given by
 	\[
 	\Gamma_i(q,\pi,l)=\sum\limits_{\mu_j>l+q}D_{ij}(q,\pi,l)\sum\limits_{\mu_k<l+q}\Lambda_{jk}^D.
 	\]

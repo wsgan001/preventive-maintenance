@@ -10,18 +10,18 @@ In the age-based problem, this was simple as there were no jumps and the discoun
 In this problem, we need the distribution of the time it takes until $q$ initial fluid is depleted.
 
 \subsection{Time until control limit}
-Let $T_t(q)$ be the random variable denoting the time until the fluid level is $q$ lower than it was at time $t$, i.e.
+Let $T_t(q)$ be the random variable denoting the time until the fluid level has decreased $q$ with respect to $Q(t)$, i.e.
 $$
 T_t(q)=\min\{\tau\geq0|Q(t+\tau)\leq Q(t)-q\}.
 $$
 Note that, using this definition, $T_0(\mu)$ equals the time until the control limit is reached ($L_0(t)=\mu$) and $T_0(Q_0)$ equals the time until the asset fails.
 \begin{lemma}\label{lemma:TimeUntilFluidLemma}
 	For any $A,B>0$:
-	$A\leq\mu\Leftrightarrow T_t(A)\leq T_t(B)$
+	$A\leq B\Leftrightarrow T_t(A)\leq T_t(B)$
 	\begin{proof}
 		$\Rightarrow$: 
 		\[\begin{split}
-		A\leq\mu&\Rightarrow Q(t)-B\leq Q(t)-A\\
+		A\leq B&\Rightarrow Q(t)-B\leq Q(t)-A\\
 		&\Rightarrow (Q(t+\tau)\leq Q(t)-B\Rightarrow Q(t+\tau)\leq Q(t)-A)\\
 		&\Rightarrow T_t(A)\leq T_t(B)\\
 		\end{split}\]
@@ -32,7 +32,7 @@ Note that, using this definition, $T_0(\mu)$ equals the time until the control l
 		$$
 		Since $Q(t)$ is piecewise continuous and does not decrease at the discontinuities, we know that 
 		$$
-		Q(t+T_t(B))=Q(t)-\mu>Q(t)-A\Rightarrow T_t(A)> T_t(B).
+		Q(t+T_t(B))=Q(t)-B>Q(t)-A\Rightarrow T_t(A)> T_t(B).
 		$$
 	\end{proof}
 \end{lemma}
@@ -44,9 +44,9 @@ $$
 \mathbb{P}(N_t(q)=0)=e^{-\lambda q}.
 $$
 The probability that exactly one jump occurs equals the probability that exactly one Poisson event happens in the interval $(t,t+q]$ while none happen in $(t+q,t+q+J]$. Resulting in
-$$
+\begin{equation}\label{eq:AgeBasedNumJumpProb1}
 \mathbb{P}(N_t(q)=1)=\lambda q e^{-\lambda q} e^{-\lambda J}=\lambda q e^{-\lambda (q+J)}.
-$$
+\end{equation}
 
 For each $k\geq0$, by conditioning on the time until the first jump, we get the following recursion
 \begin{equation}\label{eq:SimpleFluidJumpsRecursion}
@@ -63,7 +63,8 @@ The solution of this recursion, is given by the following lemma.
 	\[\mathbb{P}(N_t(q)=k)=\lambda q\frac{(\lambda (q+kJ))^{k-1}}{k!}e^{-\lambda(q+kJ)}.\]
 	
 	\begin{proof}
-		This can be seen by substituting this expression into \eqref{eq:SimpleFluidJumpsRecursion} and setting $k=1$ to see that it also satisfies the calculated expression for $\mathbb{P}(N_t(q)=1)$.
+		By using $k=1$, it can be seen that this satisfies \eqref{eq:AgeBasedNumJumpProb1}.
+		By substituting this into \eqref{eq:SimpleFluidJumpsRecursion}, we see that the recursion is also satisfied.
 	\end{proof}
 \end{lemma}
 
@@ -128,7 +129,7 @@ Using these lemmas we can find a simpler expression for $D(q)$ than \eqref{eq:Si
 \end{remark}
 
 Now we will derive the expected total discounted cost:
-If $T_0(Q_0)\leq T_0(\mu)$, the asset will break in the first run and expected value at which the corrective repair cost is discounted is $\mathbb{E}[D(Q_0)|T_0(Q_0)\leq T_0(\mu)]$.
+If $T_0(Q_0)\leq T_0(\mu)$, the asset will break in the first run and the expected value at which the corrective repair cost is discounted is $\mathbb{E}[D(Q_0)|T_0(Q_0)\leq T_0(\mu)]$.
 Note that $\mathbb{P}(T_0(Q_0)\leq T_0(\mu))=\mathbb{P}(Q_0\leq\mu)$ by lemma \ref{lemma:TimeUntilFluidLemma}.
 If $T_0(Q_0)> T_0(\mu)$, the expected value at which the preventive repair cost is discounted is $D(\mu)$.
 This results in the following expression for the expected total discounted cost:

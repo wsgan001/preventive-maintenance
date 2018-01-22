@@ -2,7 +2,8 @@
 In this section, the problem of choosing when to repair the asset is defined as a Markov decision process.
 Calendar time is discretized in steps of size $\delta$, i.e. the $k$'th decision epoch is at time $t_k=k\delta$.
 We refer to the interval $(k\delta,(k+1)\delta]$ as the $k$'th time interval.
-At epoch $k\in\mathbb{N}\cup\{0\}$, we denote the state of the asset by $x_k\in X=\mathbb{N}_0$ and initially $x_0=1$.
+We denote the set of nonnegative integers by $\mathbb{N}_0$.
+At epoch $k\in\mathbb{N}_0$, we denote the state of the asset by $x_k\in X=\mathbb{N}_0$ and initially $x_0=1$.
 When $x_k=x$, this means that after the $k$'th time interval, the asset has age $x\delta$.
 
 The lifetime of the asset has a distribution function $F$.
@@ -48,7 +49,7 @@ These actions are
 	\item $a_R$:
 	Repair (or replace) the asset.
 	\item $a_W$:
-	Do nothing.
+	Wait.
 \end{itemize}
 
 \subsection{State evolution}
@@ -66,7 +67,7 @@ x_{k+1}=f(x_k,u_k,\omega_k):=\begin{cases}
 x_k+1,&\text{if}\ u_k=a_W\ \text{and}\ \omega_k=1.
 \end{cases}
 $$
-For convenience, we define the random variable $S(x_k):=f(x_k,a_W,\omega_k(x_k))$ to denote the age of the asset one time interval after it was $x_k$.
+For convenience, we define the random variable $Z(x_k):=f(x_k,a_W,\omega_k(x_k))$ to denote the age of the asset one time interval after it was $x_k$.
 Note that in the above definition, repairing the asset takes exactly one time interval.
 
 \subsection{Costs and discounting}
@@ -74,7 +75,7 @@ Preventively repairing the asset has a cost $c>0$.
 When the asset needs to be repaired correctively, an additional cost $a>0$ needs to be paid.
 Hence, when the process is in state $x_k$ and the action $u_k$ is chosen, the following cost is incurred
 $$
-g(x_k,a_k):=\begin{cases}
+g(x_k,u_k):=\begin{cases}
 c+a,&\text{if}\ x_k=0 \\
 c,&\text{if}\ x_k>0\ \text{and}\ u_k=a_R \\
 0,&\text{else}.
@@ -83,17 +84,17 @@ $$
 Furthermore, a discount $\alpha_\delta$ is introduced such that costs $n$ decision stages in the future are discounted by $\alpha_\delta^n$.
 In the rest of the thesis, we will use a discount factor
 $$
-a_\delta=e^{-\beta\delta}
+\alpha_\delta=e^{-\beta\delta}
 $$
 for some discount rate $\beta>0$.
-We consider the expected total discounted cost from decision epoch $k$ on
+We consider the expected total discounted cost after decision epoch $k$, discounted to decision epoch $k$
 $$
 V_\delta(x_k;k)=\sum\limits_{m=k}^\infty \alpha_\delta^{m-k}g(x_m,u_m).
 $$
 
 
 \subsection{Optimal stationary policy and the Bellman equations}
-As the problem as defined above is a Markov decision process with $g$ independent of the decision epoch, there exists an optimal stationary policy \cite{Puterman2008}.
+As the problem defined above is a Markov decision process with $g$ independent of the decision epoch, there exists an optimal stationary policy \cite{Puterman2008}.
 Hence, we want to find a stationary policy $\mu:X\rightarrow \{a_W,a_R\}$ that chooses the action $u_k=\mu(x_k)$ that minimizes the expected total discounted cost $V_\delta(x_0,\mu)$.
 For a policy $\mu$, $V_\delta(x_k,\mu)$ is given by
 $$
@@ -102,12 +103,11 @@ $$
 The Bellman equations for the optimal cost $V^*_\delta$ read
 \begin{equation}\label{eq:AgeBasedBellman}
 V^*_\delta(x_k)=\begin{cases}
-\min\{c+\alpha_\delta V^*_\delta(1),\alpha_\delta \mathbb{E}[V^*_\delta(S(x_k))]\},&\text{if}\ x_k>0 \\
+\min\{c+\alpha_\delta V^*_\delta(1),\alpha_\delta \mathbb{E}[V^*_\delta(Z(x_k))]\},&\text{if}\ x_k>0 \\
 c+a+\alpha_\delta V^*_\delta(1),&\text{else.}
 \end{cases}
 \end{equation}
-Under the optimal policy, the total discounted cost $V_\delta(x_k,\mu;k)=V^*_\delta(x_k)$ for all $x_k,k$.
-Since we only consider stationary policies, the $k$ will also be suppressed in the notation of $V_\delta(x_k,\mu)$.
+Under the optimal policy, the total discounted cost $V_\delta(x_k,\mu)=V^*_\delta(x_k)$ for all $x_k,k$.
 
 \subsection{Continuous-time MDP}
 In the remainder of the chapter, we will consider a continuous-time MDP that is obtained by letting $\delta\rightarrow0$.
@@ -124,16 +124,20 @@ and
 \[
 \mathbb{P}(\omega_k(x_k)=0)=\frac{F(\delta x_k)-F(\delta (x_k-1))}{1-F(\delta (x_k-1))}=\delta h(\delta x_k)+o(\delta^2).
 \]
-This hazard rate $h$ is assumed to be increasing.
 For the value functions, we will write $V^*(x):=\lim\limits_{\delta\rightarrow0}V_\delta^*(\lfloor x/\delta\rfloor)$ and similarly $V(x,\mu):=\lim\limits_{\delta\rightarrow0}V_\delta(\lfloor x/\delta\rfloor,\mu)$.
 Moreover $V^*(0^+):=\lim\limits_{\delta\rightarrow0}V_\delta^*(1)$.
 Note that we have to write $V^*(0^+)$ instead of $V^*(0)$ for a new asset as the latter corresponds to the asset being broken.
+
+\begin{assumption}
+	We assume the hazard rate $h$ to be increasing.
+	This corresponds to an asset with a condition deteriorating over time.
+\end{assumption}
 
 \subsection{Alternative models}
 The problem can be formalized in many different ways.
 We will briefly show some alternatives to the modeling choices that were made in the above problem definition.
 \subsubsection{Instantaneous repairs}
-If we would want to make repairs take zero time, we would have to change the definition of $x_{k+1}$ to 
+If we would want repairs to take zero time, we would have to change the definition of $x_{k+1}$ to 
 $$
 x_{k+1}=f_2(x_k,u_k,\omega_k):=\begin{cases}
 0,&\text{if}\ \omega_k=0 \\
@@ -152,7 +156,7 @@ The state evolution would be as follows:
 $$
 x_{k+1}=f(x_k,u_k,\omega_k,\Delta_k):=\begin{cases}
 \Delta_k,&\text{if}\ u_k=a_R \\
-x_f,&\text{if}\ u_k=a_W\ \text{and}\ \omega_k=0 \\
+x_{BREAK},&\text{if}\ u_k=a_W\ \text{and}\ \omega_k=0 \\
 x_k+\Delta_k,&\text{if}\ u_k=a_W\ \text{and}\ \omega_k=1.
 \end{cases}
 $$

@@ -71,24 +71,20 @@ Because of this, we will not use a Phase-type distribution to model the lifetime
 
 \section{Transition times}
 In order to model the transitions between the events as a Markov chain, we need to find out whether the transition times (i.e. the length of the time intervals between the start and end of an event) are exponentially distributed.
-When we visualized the distribution of the transition times for each of the states, we noticed two things:
-\begin{enumerate}
-	\item The distribution is not exponentially distributed.
-	In figure \ref{figure:transitionFit}, it is visible that the exponential distribution fits the data poorly.
-	\item For some events, the distribution of the time length seems to be multimodal.
-	In figure \ref{figure:transitionBimodal}, an example of an event whose time length seems to have multimodal distribution.
-\end{enumerate}
-\begin{figure}[H]\label{figure:transitionFit}
+It turns out that the exponential distribution fits the transition times reasonably well.
+This justifies modeling the transition times as exponential.
+An example of an event of which the time length fits an exponential well is given by \ref{figure:transitionFitGood}.
+An example of an event of which the time length does not fit an exponential distribution is given by \ref{figure:transitionFitBad}.
+
+\begin{figure}[H]\label{figure:transitionFitGood}
 \centering
 \setlength\fwidth{0.5\textwidth}
-\input{Plots/transitionTimesFit.tex}
-\caption{An exponential distribution fitted over the distribution of the time length of a certain event.}
+\input{Plots/transitionTimesFitGood.tex}
+\caption{An exponential distribution fitted over the distribution of the time length of a certain event. The hypothesis that this distribution is exponential is not rejected with $p=0.9588$.}
 \end{figure}
-\begin{figure}[H]\label{figure:transitionBimodal}
+\begin{figure}[H]\label{figure:transitionFitBad}
 \centering
 \setlength\fwidth{0.5\textwidth}
-\input{Plots/transitionTimesBimodal.tex}
-\caption{The estimated probability density function for the time length of a certain event.}
+\input{Plots/transitionTimesFitBad.tex}
+\caption{The estimated probability density function for the time length of a certain event. The hypothesis that this distribution is exponential is rejected at $p=5\times10^{-4}$.}
 \end{figure}
-From this, we can safely conclude that the transition times are not exponential and that a CTMC is not appropriate to accurately model the trace data.
-But since using a semi-Markov model would complicate the analysis significantly, we will approximate the data by a CTMC anyway. 

@@ -1,6 +1,6 @@
 function [ initialLevels ] = InitialLevels( mmfm )
-%EMPERICALVARIANCE Summary of this function goes here
-%   Detailed explanation goes here
+% INITIALLEVELS Computes the initial fluid levels according to the
+% parameters in mmfm.
 global traceData numExperiments numStates;
 initialLevels = zeros(length(traceData),1);
 

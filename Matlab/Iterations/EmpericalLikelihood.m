@@ -1,8 +1,6 @@
 function [ el ] = EmpericalLikelihood( mmfm, PDF )
-%EMPERICALLIKELIHOOD Summary of this function goes here
-%   Detailed explanation goes here
-
+%EMPERICALLIKELIHOOD Computes the emperical likelihood of the parameters
+%given in mmfm.
 el=sum(log(PDF(InitialLevels(mmfm))));
-
 end
 

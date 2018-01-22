@@ -1,6 +1,5 @@
 function [ jumpDiscounts ] = GetJumpDiscounts( discountGenerator, jumpQuantities )
 %GETJUMPDISCOUNTS Calculates iDkm=Dkm(Jim)
-%   Detailed explanation goes here
 numStates = size(discountGenerator,1);
 jumpDiscounts = zeros(numStates,numStates,numStates);
 for i=1:numStates

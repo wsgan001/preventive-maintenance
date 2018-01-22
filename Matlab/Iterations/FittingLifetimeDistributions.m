@@ -1,3 +1,5 @@
+% For fitting a distribution over the lifetime data
+
 % needs lifetimes array
 wblFit=fitdist(lifetimes,'Weibull');
 gammaFit=fitdist(lifetimes,'Gamma');
@@ -10,9 +12,3 @@ plot(pts,PDF,pts,gammaFit.pdf(pts),pts,logNormalFit.pdf(pts));
 legend('Observed','Gamma','Log-Normal');
 xlabel('Lifetime (d)');
 ylabel('Probability density');
-
-% Try with censored data to maybe avoid the problem that the lifetimes are
-% probably from two distributions.
-%censoredLifetimes=transpose(min([transpose(lifetimes);6*ones(1,length(lifetimes))]));
-%isCensored = censoredLifetimes>=6;
-%censGammaFit=fitdist(censoredLifetimes,'Lognormal','Censoring',isCensored);

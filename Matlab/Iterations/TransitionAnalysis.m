@@ -1,4 +1,6 @@
-% Requires StateLifetimes.csv to be imported
+% Checks whether transition times are exponentially distributed.
+
+% Requires TransitionTimes.csv to be imported
 transitionTimes = zeros(2000,56);
 for i=1:35
     transitionTimes(1:2000,i)=3600*table2array(TransitionTimes(1:2000,i));

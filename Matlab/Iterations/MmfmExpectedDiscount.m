@@ -1,6 +1,7 @@
 function [ ed ] = MmfmExpectedDiscount( discountGenerator, policy, fluid, from, to )
 %MMFMEXPECTEDDISCOUNT The expected discount after L0 has increased an amount
 %specified by fluid. From and to are optional arguments. 
+% Assumes policy is nonnegative
 
 % Vectorization
 if length(fluid)>1
@@ -28,6 +29,7 @@ end
 sortedPolicy = sort(policy);
 
 ed=eye(numStates);
+discountedUntil=0;
 
 % Find first positive control limit
 i=1;
@@ -35,10 +37,11 @@ while i<=numStates && sortedPolicy(i)<0
     i=i+1;
 end
 
+
 % If not all control limits were negative
 if i<= numStates
+    ed=expm(GetDiscountGeneratorAtTime(discountGenerator,policy,discountedUntil).*min(fluid,sortedPolicy(i)));
     discountedUntil=min(fluid,sortedPolicy(i));
-    ed=expm(GetDiscountGeneratorAtTime(discountGenerator,policy,discountedUntil).*discountedUntil);
 end
 
 i=i+1;
@@ -64,10 +67,6 @@ end
 % origin.
 if exist('from','var')
    ed = ed(from,:); 
-end
-
-if ed<0
-    disp('?');
 end
 
 

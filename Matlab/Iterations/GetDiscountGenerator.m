@@ -1,6 +1,6 @@
 function [ discountGenerator ] = GetDiscountGenerator( cDiscount, rates,generator,jumpDiscounts )
-%GETDISCOUNTITERATOR Summary of this function goes here
-%   Detailed explanation goes here
+%GETDISCOUNTGENERATOR Computes the discount generator from the jump
+%discounts.
 numStates = length(rates);
 discountGenerator = zeros(numStates);
 for i=1:numStates

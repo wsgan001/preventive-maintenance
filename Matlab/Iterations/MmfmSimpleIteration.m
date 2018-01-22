@@ -1,6 +1,6 @@
 function [ policy_convergence, v_convergence ] = MmfmSimpleIteration( generator, rates, jumpQuantities, PDF, CDF, c, a, cDiscount, v_init, policy_init, numIterations )
-%MMFMSIMPLEITERATION Summary of this function goes here
-%   Detailed explanation goes here
+%MMFMSIMPLEITERATION Finds the heuristic policy by assuming no jump will
+%occur before the next failure.
 [jumpDiscounts, discountGenerator]=FindJumpDiscounts(generator, jumpQuantities, rates, cDiscount);
 hazard = @(t)  PDF(t)/(1-CDF(t));
 numStates = length(rates);

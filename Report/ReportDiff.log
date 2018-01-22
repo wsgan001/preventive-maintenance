@@ -1,0 +1,1964 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6100 64-bit) (preloaded format=pdflatex 2016.11.29)  14 JAN 2018 22:43
+entering extended mode
+**./ReportDiff.tex
+(ReportDiff.tex
+LaTeX2e <2016/03/31> patch level 3
+Babel <3.9r> and hyphenation patterns for 75 language(s) loaded.
+("C:\Program Files\MiKTeX 2.9\tex\latex\thesis\thesis.cls"
+Document Class: thesis 1996/25/01 1.0g LaTeX document class (wm).
+\hours=\count79
+\minutes=\count80
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\bk10.clo"
+File: bk10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count81
+\c@chapter=\count82
+\c@section=\count83
+\c@subsection=\count84
+\c@subsubsection=\count85
+\c@paragraph=\count86
+\c@subparagraph=\count87
+\beforechaptervspace=\skip41
+\afterchaptervspace=\skip42
+\exampleindent=\skip43
+\c@figure=\count88
+\c@table=\count89
+\abovecaptionskip=\skip44
+\belowcaptionskip=\skip45
+\bibindent=\dimen102
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\babel\babel.sty"
+Package: babel 2016/04/23 3.9r The Babel package
+
+*************************************
+* Local config file bblopts.cfg used
+*
+("C:\Program Files\MiKTeX 2.9\tex\latex\arabi\bblopts.cfg"
+File: bblopts.cfg 2005/09/08 v0.1 add Arabic and Farsi to "declared" options of
+ babel
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\babel-english\english.ldf"
+Language: english 2012/08/20 v3.3p English support from the babel system
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\babel\babel.def"
+File: babel.def 2016/04/23 3.9r Babel common definitions
+\babel@savecnt=\count90
+\U@D=\dimen103
+)
+\l@canadian = a dialect from \language\l@american 
+\l@australian = a dialect from \language\l@british 
+\l@newzealand = a dialect from \language\l@british 
+))
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\inputenc.sty"
+Package: inputenc 2015/03/17 v1.2c Input encoding file
+\inpenc@prehook=\toks14
+\inpenc@posthook=\toks15
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\ucs\utf8x.def"
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+))
+("C:\Program Files\MiKTeX 2.9\tex\latex\ucs\ucs.sty"
+Package: ucs 2013/05/11 v2.2 UCS: Unicode input support
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\ucs\uni-global.def"
+File: uni-global.def 2013/05/13 UCS: Unicode global data
+)
+\uc@secondtry=\count91
+\uc@combtoks=\toks16
+\uc@combtoksb=\toks17
+\uc@temptokena=\toks18
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\amsfonts.sty"
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\@emptytoks=\toks19
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsmath.sty"
+Package: amsmath 2016/06/28 v2.15d AMS math features
+\@mathmargin=\skip46
+
+For additional information on amsmath, use the `?' option.
+("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amstext.sty"
+Package: amstext 2000/06/29 v2.01 AMS text
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsgen.sty"
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks20
+\ex@=\dimen104
+))
+("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsbsy.sty"
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen105
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsopn.sty"
+Package: amsopn 2016/03/08 v2.02 operator names
+)
+\inf@bad=\count92
+LaTeX Info: Redefining \frac on input line 199.
+\uproot@=\count93
+\leftroot@=\count94
+LaTeX Info: Redefining \overline on input line 297.
+\classnum@=\count95
+\DOTSCASE@=\count96
+LaTeX Info: Redefining \ldots on input line 394.
+LaTeX Info: Redefining \dots on input line 397.
+LaTeX Info: Redefining \cdots on input line 518.
+\Mathstrutbox@=\box26
+\strutbox@=\box27
+\big@size=\dimen106
+LaTeX Font Info:    Redeclaring font encoding OML on input line 634.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 635.
+\macc@depth=\count97
+\c@MaxMatrixCols=\count98
+\dotsspace@=\muskip10
+\c@parentequation=\count99
+\dspbrk@lvl=\count100
+\tag@help=\toks21
+\row@=\count101
+\column@=\count102
+\maxfields@=\count103
+\andhelp@=\toks22
+\eqnshift@=\dimen107
+\alignsep@=\dimen108
+\tagshift@=\dimen109
+\tagwidth@=\dimen110
+\totwidth@=\dimen111
+\lineht@=\dimen112
+\@envbody=\toks23
+\multlinegap=\skip47
+\multlinetaggap=\skip48
+\mathdisplay@stack=\toks24
+LaTeX Info: Redefining \[ on input line 2739.
+LaTeX Info: Redefining \] on input line 2740.
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\natbib\natbib.sty"
+Package: natbib 2010/09/13 8.31b (PWD, AO)
+\bibhang=\skip49
+\bibsep=\skip50
+LaTeX Info: Redefining \cite on input line 694.
+\c@NAT@ctr=\count104
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\appendix\appendix.sty"
+Package: appendix 2009/09/02 v1.2b extra appendix facilities
+\c@@pps=\count105
+\c@@ppsavesec=\count106
+\c@@ppsaveapp=\count107
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\pgf\frontendlayer\tikz.sty"
+("C:\Program Files\MiKTeX 2.9\tex\latex\pgf\basiclayer\pgf.sty"
+("C:\Program Files\MiKTeX 2.9\tex\latex\pgf\utilities\pgfrcs.sty"
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\utilities\pgfutil-common.tex"
+\pgfutil@everybye=\toks25
+\pgfutil@tempdima=\dimen113
+\pgfutil@tempdimb=\dimen114
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\utilities\pgfutil-common-lists.te
+x")) ("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\utilities\pgfutil-latex.def"
+\pgfutil@abb=\box28
+("C:\Program Files\MiKTeX 2.9\tex\latex\ms\everyshi.sty"
+Package: everyshi 2001/05/15 v3.00 EveryShipout Package (MS)
+))
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\utilities\pgfrcs.code.tex"
+Package: pgfrcs 2015/08/07 v3.0.1a (rcs-revision 1.31)
+))
+Package: pgf 2015/08/07 v3.0.1a (rcs-revision 1.15)
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\pgf\basiclayer\pgfcore.sty"
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\graphicx.sty"
+Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\keyval.sty"
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks26
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\graphics.sty"
+Package: graphics 2016/07/10 v1.0t Standard LaTeX Graphics (DPC,SPQR)
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\trig.sty"
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics-cfg\graphics.cfg"
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 99.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics-def\pdftex.def"
+File: pdftex.def 2016/07/10 v0.06j Graphics/color for pdfTeX
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\infwarerr.sty"
+Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ltxcmds.sty"
+Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count108
+))
+\Gin@req@height=\dimen115
+\Gin@req@width=\dimen116
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\pgf\systemlayer\pgfsys.sty"
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\systemlayer\pgfsys.code.tex"
+Package: pgfsys 2014/07/09 v3.0.1a (rcs-revision 1.48)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\utilities\pgfkeys.code.tex"
+\pgfkeys@pathtoks=\toks27
+\pgfkeys@temptoks=\toks28
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\utilities\pgfkeysfiltered.code.te
+x"
+\pgfkeys@tmptoks=\toks29
+))
+\pgf@x=\dimen117
+\pgf@y=\dimen118
+\pgf@xa=\dimen119
+\pgf@ya=\dimen120
+\pgf@xb=\dimen121
+\pgf@yb=\dimen122
+\pgf@xc=\dimen123
+\pgf@yc=\dimen124
+\w@pgf@writea=\write3
+\r@pgf@reada=\read1
+\c@pgf@counta=\count109
+\c@pgf@countb=\count110
+\c@pgf@countc=\count111
+\c@pgf@countd=\count112
+\t@pgf@toka=\toks30
+\t@pgf@tokb=\toks31
+\t@pgf@tokc=\toks32
+ ("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\systemlayer\pgf.cfg"
+File: pgf.cfg 2008/05/14  (rcs-revision 1.7)
+)
+Driver file for pgf: pgfsys-pdftex.def
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\systemlayer\pgfsys-pdftex.def"
+File: pgfsys-pdftex.def 2014/10/11  (rcs-revision 1.35)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\systemlayer\pgfsys-common-pdf.def
+"
+File: pgfsys-common-pdf.def 2013/10/10  (rcs-revision 1.13)
+)))
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\systemlayer\pgfsyssoftpath.code.t
+ex"
+File: pgfsyssoftpath.code.tex 2013/09/09  (rcs-revision 1.9)
+\pgfsyssoftpath@smallbuffer@items=\count113
+\pgfsyssoftpath@bigbuffer@items=\count114
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\systemlayer\pgfsysprotocol.code.t
+ex"
+File: pgfsysprotocol.code.tex 2006/10/16  (rcs-revision 1.4)
+)) ("C:\Program Files\MiKTeX 2.9\tex\latex\xcolor\xcolor.sty"
+Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics-cfg\color.cfg"
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1348.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1352.
+Package xcolor Info: Model `RGB' extended on input line 1364.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1366.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1367.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcore.code.tex"
+Package: pgfcore 2010/04/11 v3.0.1a (rcs-revision 1.7)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmath.code.tex"
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathcalc.code.tex"
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathutil.code.tex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathparser.code.tex"
+\pgfmath@dimen=\dimen125
+\pgfmath@count=\count115
+\pgfmath@box=\box29
+\pgfmath@toks=\toks33
+\pgfmath@stack@operand=\toks34
+\pgfmath@stack@operation=\toks35
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.code.tex"
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.basic.code.
+tex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.trigonometr
+ic.code.tex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.random.code
+.tex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.comparison.
+code.tex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.base.code.t
+ex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.round.code.
+tex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.misc.code.t
+ex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.integerarit
+hmetics.code.tex")))
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfloat.code.tex"
+\c@pgfmathroundto@lastzeros=\count116
+))
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcorepoints.code.tex
+"
+File: pgfcorepoints.code.tex 2013/10/07  (rcs-revision 1.27)
+\pgf@picminx=\dimen126
+\pgf@picmaxx=\dimen127
+\pgf@picminy=\dimen128
+\pgf@picmaxy=\dimen129
+\pgf@pathminx=\dimen130
+\pgf@pathmaxx=\dimen131
+\pgf@pathminy=\dimen132
+\pgf@pathmaxy=\dimen133
+\pgf@xx=\dimen134
+\pgf@xy=\dimen135
+\pgf@yx=\dimen136
+\pgf@yy=\dimen137
+\pgf@zx=\dimen138
+\pgf@zy=\dimen139
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcorepathconstruct.c
+ode.tex"
+File: pgfcorepathconstruct.code.tex 2013/10/07  (rcs-revision 1.29)
+\pgf@path@lastx=\dimen140
+\pgf@path@lasty=\dimen141
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcorepathusage.code.
+tex"
+File: pgfcorepathusage.code.tex 2014/11/02  (rcs-revision 1.24)
+\pgf@shorten@end@additional=\dimen142
+\pgf@shorten@start@additional=\dimen143
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcorescopes.code.tex
+"
+File: pgfcorescopes.code.tex 2015/05/08  (rcs-revision 1.46)
+\pgfpic=\box30
+\pgf@hbox=\box31
+\pgf@layerbox@main=\box32
+\pgf@picture@serial@count=\count117
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcoregraphicstate.co
+de.tex"
+File: pgfcoregraphicstate.code.tex 2014/11/02  (rcs-revision 1.12)
+\pgflinewidth=\dimen144
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcoretransformations
+.code.tex"
+File: pgfcoretransformations.code.tex 2015/08/07  (rcs-revision 1.20)
+\pgf@pt@x=\dimen145
+\pgf@pt@y=\dimen146
+\pgf@pt@temp=\dimen147
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcorequick.code.tex"
+File: pgfcorequick.code.tex 2008/10/09  (rcs-revision 1.3)
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcoreobjects.code.te
+x"
+File: pgfcoreobjects.code.tex 2006/10/11  (rcs-revision 1.2)
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcorepathprocessing.
+code.tex"
+File: pgfcorepathprocessing.code.tex 2013/09/09  (rcs-revision 1.9)
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcorearrows.code.tex
+"
+File: pgfcorearrows.code.tex 2015/05/14  (rcs-revision 1.43)
+\pgfarrowsep=\dimen148
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcoreshade.code.tex"
+File: pgfcoreshade.code.tex 2013/07/15  (rcs-revision 1.15)
+\pgf@max=\dimen149
+\pgf@sys@shading@range@num=\count118
+) ("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcoreimage.code.te
+x"
+File: pgfcoreimage.code.tex 2013/07/15  (rcs-revision 1.18)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcoreexternal.code.t
+ex"
+File: pgfcoreexternal.code.tex 2014/07/09  (rcs-revision 1.21)
+\pgfexternal@startupbox=\box33
+))
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcorelayers.code.tex
+"
+File: pgfcorelayers.code.tex 2013/07/18  (rcs-revision 1.7)
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcoretransparency.co
+de.tex"
+File: pgfcoretransparency.code.tex 2013/09/30  (rcs-revision 1.5)
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcorepatterns.code.t
+ex"
+File: pgfcorepatterns.code.tex 2013/11/07  (rcs-revision 1.5)
+)))
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\modules\pgfmoduleshapes.code.tex"
+File: pgfmoduleshapes.code.tex 2014/03/21  (rcs-revision 1.35)
+\pgfnodeparttextbox=\box34
+) ("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\modules\pgfmoduleplot.code.tex"
+File: pgfmoduleplot.code.tex 2015/08/03  (rcs-revision 1.13)
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\pgf\compatibility\pgfcomp-version-0-65.
+sty"
+Package: pgfcomp-version-0-65 2007/07/03 v3.0.1a (rcs-revision 1.7)
+\pgf@nodesepstart=\dimen150
+\pgf@nodesepend=\dimen151
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\pgf\compatibility\pgfcomp-version-1-18.
+sty"
+Package: pgfcomp-version-1-18 2007/07/23 v3.0.1a (rcs-revision 1.1)
+)) ("C:\Program Files\MiKTeX 2.9\tex\latex\pgf\utilities\pgffor.sty"
+("C:\Program Files\MiKTeX 2.9\tex\latex\pgf\utilities\pgfkeys.sty"
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\utilities\pgfkeys.code.tex"))
+("C:\Program Files\MiKTeX 2.9\tex\latex\pgf\math\pgfmath.sty"
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmath.code.tex"))
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\utilities\pgffor.code.tex"
+Package: pgffor 2013/12/13 v3.0.1a (rcs-revision 1.25)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\math\pgfmath.code.tex")
+\pgffor@iter=\dimen152
+\pgffor@skip=\dimen153
+\pgffor@stack=\toks36
+\pgffor@toks=\toks37
+))
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\frontendlayer\tikz\tikz.code.tex"
+Package: tikz 2015/08/07 v3.0.1a (rcs-revision 1.151)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\libraries\pgflibraryplothandlers.
+code.tex"
+File: pgflibraryplothandlers.code.tex 2013/08/31 v3.0.1a (rcs-revision 1.20)
+\pgf@plot@mark@count=\count119
+\pgfplotmarksize=\dimen154
+)
+\tikz@lastx=\dimen155
+\tikz@lasty=\dimen156
+\tikz@lastxsaved=\dimen157
+\tikz@lastysaved=\dimen158
+\tikzleveldistance=\dimen159
+\tikzsiblingdistance=\dimen160
+\tikz@figbox=\box35
+\tikz@figbox@bg=\box36
+\tikz@tempbox=\box37
+\tikz@tempbox@bg=\box38
+\tikztreelevel=\count120
+\tikznumberofchildren=\count121
+\tikznumberofcurrentchild=\count122
+\tikz@fig@count=\count123
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\modules\pgfmodulematrix.code.tex"
+File: pgfmodulematrix.code.tex 2013/09/17  (rcs-revision 1.8)
+\pgfmatrixcurrentrow=\count124
+\pgfmatrixcurrentcolumn=\count125
+\pgf@matrix@numberofcolumns=\count126
+)
+\tikz@expandcount=\count127
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\frontendlayer\tikz\libraries\tikz
+librarytopaths.code.tex"
+File: tikzlibrarytopaths.code.tex 2008/06/17 v3.0.1a (rcs-revision 1.2)
+)))
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\frontendlayer\tikz\libraries\tikz
+libraryarrows.code.tex"
+File: tikzlibraryarrows.code.tex 2008/01/09 v3.0.1a (rcs-revision 1.1)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\libraries\pgflibraryarrows.code.t
+ex"
+File: pgflibraryarrows.code.tex 2013/09/23 v3.0.1a (rcs-revision 1.16)
+\arrowsize=\dimen161
+)) ("C:\Program Files\MiKTeX 2.9\tex\latex\pgfplots\pgfplots.sty"
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\pgfplots.revision.tex")
+Package: pgfplots 2017/06/05 v1.15 Data Visualization (1.15)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\pgfplots.code.tex"
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\pgfplotscore.code.tex"
+\t@pgfplots@toka=\toks38
+\t@pgfplots@tokb=\toks39
+\t@pgfplots@tokc=\toks40
+\pgfplots@tmpa=\dimen162
+\c@pgfplots@coordindex=\count128
+\c@pgfplots@scanlineindex=\count129
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\sys\pgfplotssysgeneric.code.
+tex"))
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\libs\pgfplotslibrary.code.te
+x")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\oldpgfcompatib\pgfplotsoldpg
+fsupp_loader.code.tex"
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\libraries\pgflibraryfpu.code.tex"
+)
+Package pgfplots: loading complementary arithmetics for your pgf version...
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\oldpgfcompatib\pgfplotsoldpg
+fsupp_pgflibraryfpu.code.tex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\oldpgfcompatib\pgfplotsoldpg
+fsupp_pgfmathfloat.code.tex"
+\c@pgfmathroundto@lastzeros=\count130
+))
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\util\pgfplotsutil.code.tex"
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\liststructure\pgfplotslistst
+ructure.code.tex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\liststructure\pgfplotslistst
+ructureext.code.tex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\liststructure\pgfplotsarray.
+code.tex"
+\c@pgfplotsarray@tmp=\count131
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\liststructure\pgfplotsmatrix
+.code.tex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\numtable\pgfplotstableshared
+.code.tex"
+\c@pgfplotstable@counta=\count132
+\t@pgfplotstable@a=\toks41
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\liststructure\pgfplotsdeque.
+code.tex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\util\pgfplotsbinary.code.tex
+"
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\util\pgfplotsbinary.data.cod
+e.tex"))
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\util\pgfplotsutil.verb.code.
+tex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\libs\pgflibrarypgfplots.surf
+shading.code.tex"
+\c@pgfplotslibrarysurf@no=\count133
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\sys\pgflibrarypgfplots.surfs
+hading.pgfsys-pdftex.def")))
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\util\pgfplotscolormap.code.t
+ex"
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\util\pgfplotscolor.code.tex"
+))
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\pgfplotsstackedplots.code.te
+x")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\pgfplotsplothandlers.code.te
+x"
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\pgfplotsmeshplothandler.code
+.tex"
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\pgfplotsmeshplotimage.code.t
+ex")))
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\pgfplots.scaling.code.tex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\pgfplotscoordprocessing.code
+.tex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\pgfplots.errorbars.code.tex"
+) ("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\pgfplots.markers.code.tex"
+) ("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\pgfplotsticks.code.tex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgfplots\pgfplots.paths.code.tex")
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\frontendlayer\tikz\libraries\tikz
+librarydecorations.code.tex"
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\modules\pgfmoduledecorations.code
+.tex"
+\pgfdecoratedcompleteddistance=\dimen163
+\pgfdecoratedremainingdistance=\dimen164
+\pgfdecoratedinputsegmentcompleteddistance=\dimen165
+\pgfdecoratedinputsegmentremainingdistance=\dimen166
+\pgf@decorate@distancetomove=\dimen167
+\pgf@decorate@repeatstate=\count134
+\pgfdecorationsegmentamplitude=\dimen168
+\pgfdecorationsegmentlength=\dimen169
+)
+\tikz@lib@dec@box=\box39
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\frontendlayer\tikz\libraries\tikz
+librarydecorations.pathmorphing.code.tex"
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\libraries\decorations\pgflibraryd
+ecorations.pathmorphing.code.tex"))
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\frontendlayer\tikz\libraries\tikz
+librarydecorations.pathreplacing.code.tex"
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\libraries\decorations\pgflibraryd
+ecorations.pathreplacing.code.tex"))
+\pgfplots@numplots=\count135
+\pgfplots@xmin@reg=\dimen170
+\pgfplots@xmax@reg=\dimen171
+\pgfplots@ymin@reg=\dimen172
+\pgfplots@ymax@reg=\dimen173
+\pgfplots@zmin@reg=\dimen174
+\pgfplots@zmax@reg=\dimen175
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\frontendlayer\tikz\libraries\tikz
+libraryplotmarks.code.tex"
+File: tikzlibraryplotmarks.code.tex 2008/01/09 v3.0.1a (rcs-revision 1.1)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\libraries\pgflibraryplotmarks.cod
+e.tex"
+File: pgflibraryplotmarks.code.tex 2015/08/03 v3.0.1a (rcs-revision 1.14)
+))) ("C:\Program Files\MiKTeX 2.9\tex\latex\pgfgantt\pgfgantt.sty"
+Package: pgfgantt 2013/06/01 v4.0 Draw Gantt diagrams with TikZ
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\frontendlayer\tikz\libraries\tikz
+librarybackgrounds.code.tex"
+File: tikzlibrarybackgrounds.code.tex 2013/07/18 v3.0.1a (rcs-revision 1.3)
+\pgf@layerbox@background=\box40
+\pgf@layerboxsaved@background=\box41
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\frontendlayer\tikz\libraries\tikz
+librarycalc.code.tex"
+File: tikzlibrarycalc.code.tex 2013/07/15 v3.0.1a (rcs-revision 1.9)
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\frontendlayer\tikz\libraries\tikz
+librarypatterns.code.tex"
+File: tikzlibrarypatterns.code.tex 2008/01/15 v3.0.1a (rcs-revision 1.2)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\libraries\pgflibrarypatterns.code
+.tex"
+File: pgflibrarypatterns.code.tex 2008/03/03 v3.0.1a (rcs-revision 1.13)
+))
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\frontendlayer\tikz\libraries\tikz
+librarypositioning.code.tex"
+File: tikzlibrarypositioning.code.tex 2008/10/06 v3.0.1a (rcs-revision 1.7)
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\frontendlayer\tikz\libraries\tikz
+libraryshapes.geometric.code.tex"
+File: tikzlibraryshapes.geometric.code.tex 2008/01/09 v3.0.1a (rcs-revision 1.1
+)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\libraries\shapes\pgflibraryshapes
+.geometric.code.tex"
+File: pgflibraryshapes.geometric.code.tex 2008/06/26 v3.0.1a (rcs-revision 1.1)
+
+))
+("C:\Program Files\MiKTeX 2.9\tex\latex\pgf\utilities\pgfcalendar.sty"
+("C:\Program Files\MiKTeX 2.9\tex\generic\pgf\utilities\pgfcalendar.code.tex"
+File: pgfcalendar.code.tex 2007/07/23 v3.0.1a (rcs-revision 1.11)
+\pgfcalendarcurrentjulian=\count136
+))
+\gtt@currentline=\count137
+\gtt@lasttitleline=\count138
+\gtt@currgrid=\count139
+\gtt@chartwidth=\count140
+\gtt@lasttitleslot=\count141
+\gtt@elementid=\count142
+\gtt@today@slot=\count143
+\gtt@startjulian=\count144
+\gtt@endjulian=\count145
+\gtt@calendar@slots=\count146
+\gtt@calendar@weeknumber=\count147
+\gtt@calendar@startofweek=\count148
+\gtt@left@slot=\count149
+\gtt@right@slot=\count150
+) ("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\pdflscape.sty"
+Package: pdflscape 2016/05/14 v0.11 Display of landscape pages in PDF (HO)
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\lscape.sty"
+Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ifpdf.sty"
+Package: ifpdf 2016/05/14 v3.1 Provides the ifpdf switch
+)
+Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\ifxetex\ifxetex.sty"
+Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
+))
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\textcomp.sty"
+Package: textcomp 2016/06/19 v1.99m Standard LaTeX package
+Package textcomp Info: Sub-encoding information:
+(textcomp)               5 = only ISO-Adobe without \textcurrency
+(textcomp)               4 = 5 + \texteuro
+(textcomp)               3 = 4 + \textohm
+(textcomp)               2 = 3 + \textestimated + \textcurrency
+(textcomp)               1 = TS1 - \textcircled - \t
+(textcomp)               0 = TS1 (full)
+(textcomp)             Font families with sub-encoding setting implement
+(textcomp)             only a restricted character set as indicated.
+(textcomp)             Family '?' is the default used for unknown fonts.
+(textcomp)             See the documentation for details.
+Package textcomp Info: Setting ? sub-encoding to TS1/1 on input line 79.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\ts1enc.def"
+File: ts1enc.def 2001/06/05 v3.0e (jk/car/fm) Standard LaTeX file
+)
+LaTeX Info: Redefining \oldstylenums on input line 334.
+Package textcomp Info: Setting cmr sub-encoding to TS1/0 on input line 349.
+Package textcomp Info: Setting cmss sub-encoding to TS1/0 on input line 350.
+Package textcomp Info: Setting cmtt sub-encoding to TS1/0 on input line 351.
+Package textcomp Info: Setting cmvtt sub-encoding to TS1/0 on input line 352.
+Package textcomp Info: Setting cmbr sub-encoding to TS1/0 on input line 353.
+Package textcomp Info: Setting cmtl sub-encoding to TS1/0 on input line 354.
+Package textcomp Info: Setting ccr sub-encoding to TS1/0 on input line 355.
+Package textcomp Info: Setting ptm sub-encoding to TS1/4 on input line 356.
+Package textcomp Info: Setting pcr sub-encoding to TS1/4 on input line 357.
+Package textcomp Info: Setting phv sub-encoding to TS1/4 on input line 358.
+Package textcomp Info: Setting ppl sub-encoding to TS1/3 on input line 359.
+Package textcomp Info: Setting pag sub-encoding to TS1/4 on input line 360.
+Package textcomp Info: Setting pbk sub-encoding to TS1/4 on input line 361.
+Package textcomp Info: Setting pnc sub-encoding to TS1/4 on input line 362.
+Package textcomp Info: Setting pzc sub-encoding to TS1/4 on input line 363.
+Package textcomp Info: Setting bch sub-encoding to TS1/4 on input line 364.
+Package textcomp Info: Setting put sub-encoding to TS1/5 on input line 365.
+Package textcomp Info: Setting uag sub-encoding to TS1/5 on input line 366.
+Package textcomp Info: Setting ugq sub-encoding to TS1/5 on input line 367.
+Package textcomp Info: Setting ul8 sub-encoding to TS1/4 on input line 368.
+Package textcomp Info: Setting ul9 sub-encoding to TS1/4 on input line 369.
+Package textcomp Info: Setting augie sub-encoding to TS1/5 on input line 370.
+Package textcomp Info: Setting dayrom sub-encoding to TS1/3 on input line 371.
+Package textcomp Info: Setting dayroms sub-encoding to TS1/3 on input line 372.
+
+Package textcomp Info: Setting pxr sub-encoding to TS1/0 on input line 373.
+Package textcomp Info: Setting pxss sub-encoding to TS1/0 on input line 374.
+Package textcomp Info: Setting pxtt sub-encoding to TS1/0 on input line 375.
+Package textcomp Info: Setting txr sub-encoding to TS1/0 on input line 376.
+Package textcomp Info: Setting txss sub-encoding to TS1/0 on input line 377.
+Package textcomp Info: Setting txtt sub-encoding to TS1/0 on input line 378.
+Package textcomp Info: Setting lmr sub-encoding to TS1/0 on input line 379.
+Package textcomp Info: Setting lmdh sub-encoding to TS1/0 on input line 380.
+Package textcomp Info: Setting lmss sub-encoding to TS1/0 on input line 381.
+Package textcomp Info: Setting lmssq sub-encoding to TS1/0 on input line 382.
+Package textcomp Info: Setting lmvtt sub-encoding to TS1/0 on input line 383.
+Package textcomp Info: Setting lmtt sub-encoding to TS1/0 on input line 384.
+Package textcomp Info: Setting qhv sub-encoding to TS1/0 on input line 385.
+Package textcomp Info: Setting qag sub-encoding to TS1/0 on input line 386.
+Package textcomp Info: Setting qbk sub-encoding to TS1/0 on input line 387.
+Package textcomp Info: Setting qcr sub-encoding to TS1/0 on input line 388.
+Package textcomp Info: Setting qcs sub-encoding to TS1/0 on input line 389.
+Package textcomp Info: Setting qpl sub-encoding to TS1/0 on input line 390.
+Package textcomp Info: Setting qtm sub-encoding to TS1/0 on input line 391.
+Package textcomp Info: Setting qzc sub-encoding to TS1/0 on input line 392.
+Package textcomp Info: Setting qhvc sub-encoding to TS1/0 on input line 393.
+Package textcomp Info: Setting futs sub-encoding to TS1/4 on input line 394.
+Package textcomp Info: Setting futx sub-encoding to TS1/4 on input line 395.
+Package textcomp Info: Setting futj sub-encoding to TS1/4 on input line 396.
+Package textcomp Info: Setting hlh sub-encoding to TS1/3 on input line 397.
+Package textcomp Info: Setting hls sub-encoding to TS1/3 on input line 398.
+Package textcomp Info: Setting hlst sub-encoding to TS1/3 on input line 399.
+Package textcomp Info: Setting hlct sub-encoding to TS1/5 on input line 400.
+Package textcomp Info: Setting hlx sub-encoding to TS1/5 on input line 401.
+Package textcomp Info: Setting hlce sub-encoding to TS1/5 on input line 402.
+Package textcomp Info: Setting hlcn sub-encoding to TS1/5 on input line 403.
+Package textcomp Info: Setting hlcw sub-encoding to TS1/5 on input line 404.
+Package textcomp Info: Setting hlcf sub-encoding to TS1/5 on input line 405.
+Package textcomp Info: Setting pplx sub-encoding to TS1/3 on input line 406.
+Package textcomp Info: Setting pplj sub-encoding to TS1/3 on input line 407.
+Package textcomp Info: Setting ptmx sub-encoding to TS1/4 on input line 408.
+Package textcomp Info: Setting ptmj sub-encoding to TS1/4 on input line 409.
+)
+\fwidth=\skip51
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\grffile.sty"
+Package: grffile 2016/05/16 v1.17 Extended file name support for graphics (HO)
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\kvoptions.sty"
+Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\kvsetkeys.sty"
+Package: kvsetkeys 2016/05/16 v1.17 Key value parser (HO)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\etexcmds.sty"
+Package: etexcmds 2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ifluatex.sty"
+Package: ifluatex 2016/05/16 v1.4 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)))
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\pdftexcmds.sty"
+Package: pdftexcmds 2016/05/21 v0.22 Utility functions of pdfTeX for LuaTeX (HO
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+Package grffile Info: Option `multidot' is set to `true'.
+Package grffile Info: Option `extendedchars' is set to `false'.
+Package grffile Info: Option `space' is set to `true'.
+Package grffile Info: \Gin@ii of package `graphicx' fixed on input line 486.
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\float\float.sty"
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count151
+\float@exts=\toks42
+\float@box=\box42
+\@float@everytoks=\toks43
+\@floatcapt=\box43
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\tools\tabularx.sty"
+Package: tabularx 2016/02/03 v2.11 `tabularx' package (DPC)
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\tools\array.sty"
+Package: array 2014/10/28 v2.4c Tabular extension package (FMi)
+\col@sep=\dimen176
+\extrarowheight=\dimen177
+\NC@list=\toks44
+\extratabsurround=\skip52
+\backup@length=\skip53
+)
+\TX@col@width=\dimen178
+\TX@old@table=\dimen179
+\TX@old@col=\dimen180
+\TX@target=\dimen181
+\TX@delta=\dimen182
+\TX@cols=\count152
+\TX@ftn=\toks45
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\ltablex\ltablex.sty"
+Package: ltablex 2014/08/13 v1.1 Modified tabularx
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\tools\longtable.sty"
+Package: longtable 2014/10/28 v4.11 Multi-page Table package (DPC)
+\LTleft=\skip54
+\LTright=\skip55
+\LTpre=\skip56
+\LTpost=\skip57
+\LTchunksize=\count153
+\LTcapwidth=\dimen183
+\LT@head=\box44
+\LT@firsthead=\box45
+\LT@foot=\box46
+\LT@lastfoot=\box47
+\LT@cols=\count154
+\LT@rows=\count155
+\c@LT@tables=\count156
+\c@LT@chunks=\count157
+\LT@p@ftn=\toks46
+))
+("C:\Program Files\MiKTeX 2.9\tex\latex\changes\changes.sty"
+Package: changes 2015/04/27 v2.0.4 changes package
+
+*** changes package 2015/04/27 v2.0.4 ***
+("C:\Program Files\MiKTeX 2.9\tex\latex\xkeyval\xkeyval.sty"
+Package: xkeyval 2014/12/03 v2.7a package option processing (HA)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\xkeyval\xkeyval.tex"
+("C:\Program Files\MiKTeX 2.9\tex\generic\xkeyval\xkvutils.tex"
+\XKV@toks=\toks47
+\XKV@tempa@toks=\toks48
+)
+\XKV@depth=\count158
+File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
+))
+("C:\Program Files\MiKTeX 2.9\tex\latex\xifthen\xifthen.sty"
+Package: xifthen 2015/11/05 v1.4.0 Extended ifthen features
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\tools\calc.sty"
+Package: calc 2014/10/28 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count159
+\calc@Bcount=\count160
+\calc@Adimen=\dimen184
+\calc@Bdimen=\dimen185
+\calc@Askip=\skip58
+\calc@Bskip=\skip59
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count161
+\calc@Cskip=\skip60
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\ifthen.sty"
+Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\ifmtarg\ifmtarg.sty"
+Package: ifmtarg 2009/09/02 v1.2a check for an empty argument
+))
+("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\pdfcolmk.sty"
+Package: pdfcolmk 2016/05/16 v1.3 Color support for pdfTeX via marks (HO)
+Package pdfcolmk Info: The color stack of pdfTeX >= 1.40 is used. Therefore
+(pdfcolmk)             this package is not necessary and not loaded.
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\ulem\ulem.sty"
+\UL@box=\box48
+\UL@hyphenbox=\box49
+\UL@skip=\skip61
+\UL@hook=\toks49
+\UL@height=\dimen186
+\UL@pe=\count162
+\UL@pixel=\dimen187
+\ULC@box=\box50
+Package: ulem 2012/05/18
+\ULdepth=\dimen188
+)
+\c@Changes@AuthorCount=\count163
+\c@Changes@Author=\count164
+\c@Changes@AddCount=\count165
+\c@Changes@DeleteCount=\count166
+\c@Changes@ReplaceCount=\count167
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\truncate\truncate.sty"
+Package: truncate 2001/08/20  ver 3.6
+\@Trunc@RestHyph=\toks50
+)
+\Changes@Len@summ=\skip62
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\todonotes\todonotes.sty"
+Package: todonotes 2015/07/09 .dtx Todonotes source and documentation.
+Package: todonotes 2012/07/25
+\c@@todonotes@numberoftodonotes=\count168
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\doublestroke\dsfont.sty"
+Package: dsfont 1995/08/01 v0.1 Double stroke roman fonts
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\hyperref\hyperref.sty"
+Package: hyperref 2016/06/24 v6.83q Hypertext links for LaTeX
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\hobsub-hyperref.sty"
+Package: hobsub-hyperref 2016/05/16 v1.14 Bundle oberdiek, subset hyperref (HO)
+
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\hobsub-generic.sty"
+Package: hobsub-generic 2016/05/16 v1.14 Bundle oberdiek, subset generic (HO)
+Package: hobsub 2016/05/16 v1.14 Construct package bundles (HO)
+Package hobsub Info: Skipping package `infwarerr' (already loaded).
+Package hobsub Info: Skipping package `ltxcmds' (already loaded).
+Package hobsub Info: Skipping package `ifluatex' (already loaded).
+Package: ifvtex 2016/05/16 v1.6 Detect VTeX and its facilities (HO)
+Package ifvtex Info: VTeX not detected.
+Package: intcalc 2016/05/16 v1.2 Expandable calculations with integers (HO)
+Package hobsub Info: Skipping package `ifpdf' (already loaded).
+Package hobsub Info: Skipping package `etexcmds' (already loaded).
+Package hobsub Info: Skipping package `kvsetkeys' (already loaded).
+Package: kvdefinekeys 2016/05/16 v1.4 Define keys (HO)
+Package hobsub Info: Skipping package `pdftexcmds' (already loaded).
+Package: pdfescape 2016/05/16 v1.14 Implements pdfTeX's escape features (HO)
+Package: bigintcalc 2016/05/16 v1.4 Expandable calculations on big integers (HO
+)
+Package: bitset 2016/05/16 v1.2 Handle bit-vector datatype (HO)
+Package: uniquecounter 2016/05/16 v1.3 Provide unlimited unique counter (HO)
+)
+Package hobsub Info: Skipping package `hobsub' (already loaded).
+Package: letltxmacro 2016/05/16 v1.5 Let assignment for LaTeX macros (HO)
+Package: hopatch 2016/05/16 v1.3 Wrapper for package hooks (HO)
+Package: xcolor-patch 2016/05/16 xcolor patch
+Package: atveryend 2016/05/16 v1.9 Hooks at the very end of document (HO)
+Package atveryend Info: \enddocument detected (standard20110627).
+Package: atbegshi 2016/06/09 v1.18 At begin shipout hook (HO)
+Package: refcount 2016/05/16 v3.5 Data extraction from label references (HO)
+Package: hycolor 2016/05/16 v1.8 Color options for hyperref/bookmark (HO)
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\auxhook.sty"
+Package: auxhook 2016/05/16 v1.4 Hooks for auxiliary files (HO)
+)
+\@linkdim=\dimen189
+\Hy@linkcounter=\count169
+\Hy@pagecounter=\count170
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\hyperref\pd1enc.def"
+File: pd1enc.def 2016/06/24 v6.83q Hyperref: PDFDocEncoding definition (HO)
+)
+\Hy@SavedSpaceFactor=\count171
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\00miktex\hyperref.cfg"
+File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
+)
+Package hyperref Info: Hyper figures OFF on input line 4486.
+Package hyperref Info: Link nesting OFF on input line 4491.
+Package hyperref Info: Hyper index ON on input line 4494.
+Package hyperref Info: Plain pages OFF on input line 4501.
+Package hyperref Info: Backreferencing OFF on input line 4506.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4735.
+\c@Hy@tempcnt=\count172
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\url\url.sty"
+\Urlmuskip=\muskip11
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 5088.
+\XeTeXLinkMargin=\dimen190
+\Fld@menulength=\count173
+\Field@Width=\dimen191
+\Fld@charsize=\dimen192
+Package hyperref Info: Hyper figures OFF on input line 6342.
+Package hyperref Info: Link nesting OFF on input line 6347.
+Package hyperref Info: Hyper index ON on input line 6350.
+Package hyperref Info: backreferencing OFF on input line 6357.
+Package hyperref Info: Link coloring OFF on input line 6362.
+Package hyperref Info: Link coloring with OCG OFF on input line 6367.
+Package hyperref Info: PDF/A mode OFF on input line 6372.
+LaTeX Info: Redefining \ref on input line 6412.
+LaTeX Info: Redefining \pageref on input line 6416.
+\Hy@abspage=\count174
+\c@Item=\count175
+\c@Hfootnote=\count176
+)
+
+Package hyperref Message: Driver (autodetected): hpdftex.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\hyperref\hpdftex.def"
+File: hpdftex.def 2016/06/24 v6.83q Hyperref driver for pdfTeX
+\Fld@listcount=\count177
+\c@bookmark@seq@number=\count178
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\rerunfilecheck.sty"
+Package: rerunfilecheck 2016/05/16 v1.8 Rerun checks for auxiliary files (HO)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+82.
+)
+\Hy@SectionHShift=\skip63
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\amscls\amsthm.sty"
+Package: amsthm 2015/03/04 v2.20.2
+\thm@style=\toks51
+\thm@bodyfont=\toks52
+\thm@headfont=\toks53
+\thm@notefont=\toks54
+\thm@headpunct=\toks55
+\thm@preskip=\skip64
+\thm@postskip=\skip65
+\thm@headsep=\skip66
+\dth@everypar=\toks56
+)
+\c@example=\count179
+\c@remark=\count180
+\c@corollary=\count181
+\c@theorem=\count182
+\c@lemma=\count183
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\settobox.sty"
+Package: settobox 2016/05/16 v1.5 Assign box dimensions to length registers (HO
+)
+)
+\DIFdelgraphicsbox=\box51
+\DIFdelgraphicswidth=\skip67
+\DIFdelgraphicsheight=\skip68
+LaTeX Info: Redefining \DIFaddbegin on input line 106.
+LaTeX Info: Redefining \DIFaddend on input line 107.
+LaTeX Info: Redefining \DIFdelbegin on input line 108.
+LaTeX Info: Redefining \DIFdelend on input line 109.
+LaTeX Info: Redefining \DIFaddbeginFL on input line 114.
+LaTeX Info: Redefining \DIFaddendFL on input line 115.
+LaTeX Info: Redefining \DIFdelbeginFL on input line 116.
+LaTeX Info: Redefining \DIFdelendFL on input line 117.
+ (ReportDiff.aux)
+\openout1 = `ReportDiff.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 120.
+LaTeX Font Info:    ... okay on input line 120.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 120.
+LaTeX Font Info:    ... okay on input line 120.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 120.
+LaTeX Font Info:    ... okay on input line 120.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 120.
+LaTeX Font Info:    ... okay on input line 120.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 120.
+LaTeX Font Info:    ... okay on input line 120.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 120.
+LaTeX Font Info:    ... okay on input line 120.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 120.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 120.
+
+ ("C:\Program Files\MiKTeX 2.9\tex\latex\base\ts1cmr.fd"
+File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    ... okay on input line 120.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 120.
+LaTeX Font Info:    ... okay on input line 120.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\ucs\ucsencs.def"
+File: ucsencs.def 2011/01/21 Fixes to fontencodings LGR, T3
+)
+ABD: EveryShipout initializing macros
+("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count184
+\scratchdimen=\dimen193
+\scratchbox=\box52
+\nofMPsegments=\count185
+\nofMParguments=\count186
+\everyMPshowfont=\toks57
+\MPscratchCnt=\count187
+\MPscratchDim=\dimen194
+\MPnumerator=\count188
+\makeMPintoPDFobject=\count189
+\everyMPtoPDFconversion=\toks58
+) ("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\epstopdf-base.sty"
+Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\grfext.sty"
+Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
+)
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+38.
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 456.
+)
+Package pgfplots notification 'compat/show suggested version=true': document ha
+s been generated with the most recent feature set (\pgfplotsset{compat=1.15}).
+
+\AtBeginShipoutBox=\box53
+Package hyperref Info: Link coloring OFF on input line 120.
+("C:\Program Files\MiKTeX 2.9\tex\latex\hyperref\nameref.sty"
+Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\gettitlestring.sty"
+Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
+)
+\c@section@level=\count190
+)
+LaTeX Info: Redefining \ref on input line 120.
+LaTeX Info: Redefining \pageref on input line 120.
+LaTeX Info: Redefining \nameref on input line 120.
+
+(ReportDiff.out) (ReportDiff.out)
+\@outlinefile=\write4
+\openout4 = `ReportDiff.out'.
+
+LaTeX Font Info:    Try loading font information for U+msa on input line 152.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 152.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+) [1
+
+
+
+{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}] [2
+
+]
+Overfull \hbox (4.58385pt too wide) in paragraph at lines 189--194
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   [] 
+  |   []   |   []   |   []
+ []
+
+[3
+
+]
+Overfull \hbox (4.8617pt too wide) in paragraph at lines 240--242
+[]|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   [
+]   |   []   |   []   |   []   |   []   |   []
+ []
+
+[4] (ReportDiff.toc [5
+
+] [6])
+\tf@toc=\write5
+\openout5 = `ReportDiff.toc'.
+
+ [7]
+Chapter 1.
+[1
+
+
+] [2]
+Chapter 2.
+[3
+
+]
+
+Package natbib Warning: Citation `Puterman2008' on page 4 undefined on input li
+ne 358.
+
+[4]
+Chapter 3.
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\<let>-command' on input line 391.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\includegraphics' on input line 391.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\DIFdelincludegraphics' on input line 391.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\<let>-command' on input line 391.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\includegraphics' on input line 391.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\new@ifnextchar' on input line 391.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\<let>-command' on input line 391.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\includegraphics' on input line 391.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\DIFaddincludegraphics' on input line 391.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\<let>-command' on input line 391.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\includegraphics' on input line 391.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\new@ifnextchar' on input line 391.
+
+[5
+
+]
+
+Package natbib Warning: Citation `Puterman2008' on page 6 undefined on input li
+ne 474.
+
+[6]
+Overfull \hbox (74.28252pt too wide) detected at line 479
+\OML/cmm/m/it/10 V[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 x[]; [][]\OT1/cmr/m/n/10
+ ) = \OML/cmm/m/it/10 g\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 x[]; \OT1/cmr/m/n/10 
+(\OML/cmm/m/it/10 x[]\OT1/cmr/m/n/10 )) + \OML/cmm/m/it/10 [][][][][]:
+ []
+
+
+Overfull \hbox (10.46434pt too wide) in paragraph at lines 512--519
+|   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+[7]
+
+Package natbib Warning: Citation `Puterman2008' on page 8 undefined on input li
+ne 567.
+
+[8]
+Overfull \hbox (21.84229pt too wide) in paragraph at lines 596--600
+[]|   []   |   []   |   []   |   []   |   []
+ []
+
+
+Overfull \hbox (60.79231pt too wide) in paragraph at lines 596--600
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Overfull \hbox (27.2143pt too wide) in paragraph at lines 596--600
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   [] 
+  |   []   |   []
+ []
+
+
+Overfull \hbox (8.08234pt too wide) in paragraph at lines 615--615
+[] 
+ []
+
+[9]
+Overfull \hbox (4.57196pt too wide) in paragraph at lines 634--637
+[]|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   [
+]   |   []   |   []   |   []
+ []
+
+[10]
+Overfull \hbox (116.31963pt too wide) detected at line 728
+[][]
+ []
+
+[11]
+
+Package amsmath Warning: Cannot use `split' here;
+(amsmath)                trying to recover with `aligned' on input line 739.
+
+LaTeX Font Info:    Try loading font information for U+dsrom on input line 763.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\doublestroke\udsrom.fd"
+File: Udsrom.fd 1995/08/01 v0.1 Double stroke roman font definitions
+) [12] [13]
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\<let>-command' on input line 877.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\includegraphics' on input line 877.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\DIFdelincludegraphics' on input line 877.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\<let>-command' on input line 877.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\includegraphics' on input line 877.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\new@ifnextchar' on input line 877.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\<let>-command' on input line 877.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\includegraphics' on input line 877.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\DIFaddincludegraphics' on input line 877.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\<let>-command' on input line 877.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\includegraphics' on input line 877.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\new@ifnextchar' on input line 877.
+
+[14] [15] [16] [17] [18]
+Chapter 4.
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\<let>-command' on input line 1066.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\includegraphics' on input line 1066.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\DIFdelincludegraphics' on input line 1066.
+
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\<let>-command' on input line 1066.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\includegraphics' on input line 1066.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\new@ifnextchar' on input line 1066.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\<let>-command' on input line 1066.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\includegraphics' on input line 1066.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\DIFaddincludegraphics' on input line 1066.
+
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\<let>-command' on input line 1066.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\includegraphics' on input line 1066.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\new@ifnextchar' on input line 1066.
+
+[19
+
+] [20]
+
+Package amsmath Warning: Cannot use `split' here;
+(amsmath)                trying to recover with `aligned' on input line 1153.
+
+[21]
+Overfull \hbox (9.97897pt too wide) in paragraph at lines 1268--1270
+[][]\OT1/cmr/bx/n/10 Corollary 4.1. []\OT1/cmr/m/n/10 The-o-rem []4.1[] im-plie
+s that []|   []   |   []   |   []
+ []
+
+
+Package amsmath Warning: Cannot use `split' here;
+(amsmath)                trying to recover with `aligned' on input line 1325.
+
+
+Package amsmath Warning: Cannot use `split' here;
+(amsmath)                trying to recover with `aligned' on input line 1328.
+
+[22]
+
+Package amsmath Warning: Cannot use `split' here;
+(amsmath)                trying to recover with `aligned' on input line 1372.
+
+
+Overfull \hbox (18.93152pt too wide) detected at line 1376
+\OML/cmm/m/it/10 x[] \OT1/cmr/m/n/10 = \OML/cmm/m/it/10 f\OT1/cmr/m/n/10 (\OML/
+cmm/m/it/10 x[]; u[]; ![]\OT1/cmr/m/n/10 ) := []
+ []
+
+[23]
+
+Package amsmath Warning: Cannot use `split' here;
+(amsmath)                trying to recover with `aligned' on input line 1393.
+
+[24]
+
+Package natbib Warning: Citation `Puterman2008' on page 25 undefined on input l
+ine 1450.
+
+[25] [26] [27] [28] [29pdfTeX warning (ext4): destination with the same identif
+ier (name{section.4.4}) has been already used, duplicate ignored
+
+\@EveryShipout@Output ...@Org@Shipout \box \@cclv 
+                                                  
+l.1679 	\end{remark}
+                    ] [30]
+Chapter 5.
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\<let>-command' on input line 1708.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\includegraphics' on input line 1708.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\DIFdelincludegraphics' on input line 1708.
+
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\<let>-command' on input line 1708.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\includegraphics' on input line 1708.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\new@ifnextchar' on input line 1708.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\<let>-command' on input line 1708.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\includegraphics' on input line 1708.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\DIFaddincludegraphics' on input line 1708.
+
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\<let>-command' on input line 1708.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\includegraphics' on input line 1708.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\new@ifnextchar' on input line 1708.
+
+[31
+
+]
+
+Package amsmath Warning: Cannot use `split' here;
+(amsmath)                trying to recover with `aligned' on input line 1790.
+
+[32]
+Overfull \hbox (5.99658pt too wide) in paragraph at lines 1796--1796
+[]|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   [
+]   |   []
+ []
+
+[33] [34]
+
+Package amsmath Warning: Cannot use `split' here;
+(amsmath)                trying to recover with `aligned' on input line 1953.
+
+
+Overfull \hbox (33.64104pt too wide) detected at line 1957
+\OML/cmm/m/it/10 x[] \OT1/cmr/m/n/10 = \OML/cmm/m/it/10 f\OT1/cmr/m/n/10 (\OML/
+cmm/m/it/10 x[]; u[]; ![]\OT1/cmr/m/n/10 ) := []
+ []
+
+
+Package amsmath Warning: Cannot use `split' here;
+(amsmath)                trying to recover with `aligned' on input line 1978.
+
+[35]
+Overfull \hbox (11.1465pt too wide) in paragraph at lines 1980--1984
+[]|   []   [][]|   []   []\OT1/cmr/m/n/10 is op-ti-mal if []|   []   |   []   |
+   []   |   []   |   []   [][]|   []
+ []
+
+[36]
+
+Package natbib Warning: Citation `Puterman2008' on page 37 undefined on input l
+ine 2088.
+
+[37] [38] [39]
+Overfull \hbox (17.90233pt too wide) in paragraph at lines 2218--2218
+[] 
+ []
+
+
+Overfull \hbox (12.41273pt too wide) in paragraph at lines 2220--2222
+\OT1/cmr/m/n/10 In this sec-tion, we will show how to com-pute the dis-counted 
+prob-a-bil-i-ties $\OML/cmm/m/it/10 D[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 q; ; 
+l\OT1/cmr/m/n/10 )$
+ []
+
+
+Package natbib Warning: Citation `Asmussen1994' on page 40 undefined on input l
+ine 2235.
+
+
+Package natbib Warning: Citation `Asmussen1994' on page 40 undefined on input l
+ine 2235.
+
+[40]
+Overfull \hbox (32.06409pt too wide) in paragraph at lines 2298--2298
+[] 
+ []
+
+[41] [42]
+Missing character: There is no q in font dsrom10!
+ [43] [44] [45]
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\<let>-command' on input line 2523.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\includegraphics' on input line 2523.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\DIFdelincludegraphics' on input line 2523.
+
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\<let>-command' on input line 2523.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\includegraphics' on input line 2523.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\new@ifnextchar' on input line 2523.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\<let>-command' on input line 2523.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\includegraphics' on input line 2523.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\DIFaddincludegraphics' on input line 2523.
+
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\<let>-command' on input line 2523.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\includegraphics' on input line 2523.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\new@ifnextchar' on input line 2523.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\<let>-command' on input line 2523.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\includegraphics' on input line 2523.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\DIFdelincludegraphics' on input line 2523.
+
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\<let>-command' on input line 2523.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\includegraphics' on input line 2523.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\new@ifnextchar' on input line 2523.
+
+
+Overfull \hbox (11.58882pt too wide) detected at line 2530
+\OML/cmm/m/it/10 V\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 x[]; \OT1/cmr/m/n/10 ) = [
+] \OML/cmm/m/it/10 f\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 x\OT1/cmr/m/n/10 )\OML/cm
+m/m/it/10 D[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 x\OT1/cmr/m/n/10 )\OML/cmm/m/it/
+10 dx\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 c \OT1/cmr/m/n/10 + \OML/cmm/m/it/10 a \
+OT1/cmr/m/n/10 + \OML/cmm/m/it/10 V\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 x[]; \OT1
+/cmr/m/n/10 )) + [](\OML/cmm/m/it/10 \OT1/cmr/m/n/10 )\OML/cmm/m/it/10 D[]\OT1
+/cmr/m/n/10 (\OML/cmm/m/it/10 \OT1/cmr/m/n/10 )(\OML/cmm/m/it/10 c \OT1/cmr/m/
+n/10 + \OML/cmm/m/it/10 V\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 x[]; \OT1/cmr/m/n/1
+0 ))\OML/cmm/m/it/10 ;
+ []
+
+[46]
+Overfull \hbox (16.38942pt too wide) in paragraph at lines 2571--2571
+[] 
+ []
+
+[47] [48]
+Chapter 6.
+[49
+
+] [50] [51] [52]
+Chapter 7.
+[53
+
+] [54]
+Overfull \hbox (15.3147pt too wide) detected at line 4627
+[] [] \OML/cmm/m/it/10 L\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 M; \OT1/cmr/m/n/10 )
+ = [] [] [] \OML/cmm/m/it/10 f\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 q[]\OT1/cmr/m/n
+/10 (\OML/cmm/m/it/10 M; []\OT1/cmr/m/n/10 )) = \OMS/cmsy/m/n/10   [] []\OT1/c
+mr/m/n/10 #(\OML/cmm/m/it/10 i; j; []\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 :
+ []
+
+[55] [56]
+Chapter 8.
+
+Overfull \hbox (1.47285pt too wide) in paragraph at lines 4694--4694
+[]|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   [
+]   |   []   |   []   |   []   |   []   |   []
+ []
+
+
+Overfull \hbox (16.65111pt too wide) in paragraph at lines 4706--4707
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   [] 
+  |   []   |   []   |   []   |   []   |   []
+ []
+
+[57
+
+] [58]
+Chapter 9.
+
+Overfull \hbox (22.2413pt too wide) in paragraph at lines 4754--4758
+[]|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   [
+]   |   []   |   []   |   []
+ []
+
+
+Package natbib Warning: Citation `Scheinhardt1998' on page 59 undefined on inpu
+t line 4764.
+
+[59
+
+pdfTeX warning (ext4): destination with the same identifier (name{section.9.2})
+ has been already used, duplicate ignored
+
+\@EveryShipout@Output ...@Org@Shipout \box \@cclv 
+                                                  
+l.4779 
+       ] (ReportDiff.bbl [60]) [61
+
+] [62
+
+
+]
+Chapter A.
+[63
+
+] [64]
+Chapter B.
+
+Overfull \hbox (47.88791pt too wide) detected at line 4896
+\OML/cmm/m/it/10 c \OT1/cmr/m/n/10 + \OML/cmm/m/it/10 V[]\OT1/cmr/m/n/10 (0[]\O
+ML/cmm/m/it/10 ; []\OT1/cmr/m/n/10 ) \OMS/cmsy/m/n/10  \OML/cmm/m/it/10 V[]\O
+T1/cmr/m/n/10 (\OML/cmm/m/it/10 [] \OMS/cmsy/m/n/10   \OML/cmm/m/it/10 ; []\
+OT1/cmr/m/n/10 ) = \OML/cmm/m/it/10 h\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 []\OT1
+/cmr/m/n/10 )(\OML/cmm/m/it/10 c \OT1/cmr/m/n/10 + \OML/cmm/m/it/10 a \OT1/cmr/
+m/n/10 + \OML/cmm/m/it/10 V[]\OT1/cmr/m/n/10 (0[]\OML/cmm/m/it/10 ; []\OT1/cmr
+/m/n/10 )) + (1 \OMS/cmsy/m/n/10   \OML/cmm/m/it/10  \OMS/cmsy/m/n/10   \OML/
+cmm/m/it/10 h\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 []\OT1/cmr/m/n/10 ))\OML/cmm/m
+/it/10 V[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 [] \OT1/cmr/m/n/10 + \OML/cmm/m/it
+/10 \OT1/cmr/m/n/10 ) + \OML/cmm/m/it/10 o\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 [
+]\OT1/cmr/m/n/10 )
+ []
+
+[65
+
+] [66]
+Chapter C.
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\<let>-command' on input line 4912.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\includegraphics' on input line 4912.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\DIFdelincludegraphics' on input line 4912.
+
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\<let>-command' on input line 4912.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\includegraphics' on input line 4912.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\new@ifnextchar' on input line 4912.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\<let>-command' on input line 4912.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\includegraphics' on input line 4912.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\DIFaddincludegraphics' on input line 4912.
+
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\<let>-command' on input line 4912.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\includegraphics' on input line 4912.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\new@ifnextchar' on input line 4912.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\<let>-command' on input line 4913.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\includegraphics' on input line 4913.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\DIFdelincludegraphics' on input line 4913.
+
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\<let>-command' on input line 4913.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\includegraphics' on input line 4913.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\new@ifnextchar' on input line 4913.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\<let>-command' on input line 4913.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\includegraphics' on input line 4913.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\DIFaddincludegraphics' on input line 4913.
+
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\<let>-command' on input line 4913.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\includegraphics' on input line 4913.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\new@ifnextchar' on input line 4913.
+
+[67
+
+]
+Chapter D.
+
+Overfull \hbox (16.25064pt too wide) in paragraph at lines 4927--4931
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   [] 
+  |   []   |   []
+ []
+
+
+Overfull \hbox (2.29688pt too wide) in paragraph at lines 4927--4931
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   [] 
+  |   []   |   []   |   []   |   []
+ []
+
+pdfTeX warning (ext4): destination with the same identifier (name{section.a.C.1
+}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.4945 		\section{\DIFadd{Simple fluid problem}}
+                                                 [68
+
+]pdfTeX warning (ext4): destination with the same identifier (name{section.a.C.
+2}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.4968 ...n{\DIFadd{Markov Modulated fluid model}}
+                                                   [69]
+Overfull \hbox (13.95143pt too wide) in alignment at lines 5018--5018
+ [] [] [] [] [] [] [] [] [] [] [] [] [] [] 
+ []
+
+
+LaTeX Warning: Reference `table:MmfmComputations2' on page 70 undefined on inpu
+t line 5039.
+
+[70
+
+] [71]pdfTeX warning (ext4): destination with the same identifier (name{Appendi
+x.a.D}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.5042 ...IFaddbegin \DIFadd{routines}\DIFaddend }
+                                                  
+Chapter D.
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\<let>-command' on input line 5042.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\includegraphics' on input line 5042.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\DIFdelincludegraphics' on input line 5042.
+
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\<let>-command' on input line 5042.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\includegraphics' on input line 5042.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\new@ifnextchar' on input line 5042.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\<let>-command' on input line 5042.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\includegraphics' on input line 5042.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\DIFaddincludegraphics' on input line 5042.
+
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\<let>-command' on input line 5042.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\includegraphics' on input line 5042.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\new@ifnextchar' on input line 5042.
+
+
+Package natbib Warning: There were undefined citations.
+
+\Changes@OutFile=\write6
+\openout6 = `ReportDiff.soc'.
+
+[72
+
+
+]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 5049.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 5049.
+ (ReportDiff.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 5049.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 5049.
+
+Package rerunfilecheck Info: File `ReportDiff.out' has not changed.
+(rerunfilecheck)             Checksum: 84C34EA4B386F00AC6662BC192CB5C31;7068.
+
+
+LaTeX Warning: There were undefined references.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 5049.
+ ) 
+Here is how much of TeX's memory you used:
+ 31330 strings out of 493333
+ 742500 string characters out of 3139187
+ 1259252 words of memory out of 3000000
+ 33910 multiletter control sequences out of 15000+200000
+ 16960 words of font info for 67 fonts, out of 3000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 74i,29n,128p,730b,2160s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Pr
+ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Fi
+les/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx9.pfb><C:/Program Files/MiKTe
+X 2.9/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Program Files/MiKTeX 2.9/f
+onts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9/fonts/typ
+e1/public/amsfonts/cmextra/cmex7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/p
+ublic/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/am
+sfonts/cm/cmmi12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/c
+m/cmmi5.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.p
+fb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Pr
+ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Program Fil
+es/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX
+ 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/font
+s/type1/public/amsfonts/cm/cmr5.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pu
+blic/amsfonts/cm/cmr7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfo
+nts/cm/cmr9.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cms
+l10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsl12.pfb>
+<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsl9.pfb><C:/Progr
+am Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files
+/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Program Files/MiKTeX 2
+.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files/MiKTeX 2.9/fonts/
+type1/public/amsfonts/cm/cmti10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pu
+blic/amsfonts/cm/cmti12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/dou
+blestroke/dsrom10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/
+latxfont/lasy6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/sym
+bols/msbm10.pfb>
+Output written on ReportDiff.pdf (79 pages, 785313 bytes).
+PDF statistics:
+ 1344 PDF objects out of 1440 (max. 8388607)
+ 354 named destinations out of 1000 (max. 500000)
+ 805 words of extra memory for PDF output out of 10000 (max. 10000000)
+

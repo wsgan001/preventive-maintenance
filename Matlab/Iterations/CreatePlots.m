@@ -1,3 +1,4 @@
+% Creates the plots used in the report.
 % First import TraceLifetimes.csv as a table TraceLifetimes
 addpath('../matlab2tikz/src/');
 lifetimes = table2array(TraceLifetimes)./(1000*3600*24); % From ms to days
@@ -34,7 +35,9 @@ ylabel('Probability density');
 matlab2tikz('lifetimesFits.tex', 'width', '\fwidth' )
 
 % Plots for transition times
-transitionTimes=3600*table2array(TransitionTimes(1:2000,[1,5]))+ones(2000,2)*0.01;
+% We add a random value between 0 and 1 because the transition times seem
+% to be rounded down and this causes a huge spike for the ksdensity.
+transitionTimes=3600*table2array(TransitionTimes(1:2000,[15,20]))+rand(2000,2);
 [density1,pts]=ksdensity(transitionTimes(:,1),'Support','positive');
 density2=ksdensity(transitionTimes(:,2),pts,'Support','positive');
 expFit=fitdist(transitionTimes(:,1),'Exponential');
@@ -42,12 +45,22 @@ plot(pts,density1,pts,expFit.pdf(pts));
 legend('Observed','Exponential fit');
 xlabel('Transition time (s)');
 ylabel('Probability density');
-matlab2tikz('transitionTimesFit.tex', 'width', '\fwidth' )
-plot(pts,density2);
-legend('Observed');
+matlab2tikz('transitionTimesFitGood.tex', 'width', '\fwidth' )
+expFit2=fitdist(transitionTimes(:,2),'Exponential');
+plot(pts,density2,pts,expFit2.pdf(pts));
+legend('Observed','Exponential fit');
 xlabel('Transition time (s)');
 ylabel('Probability density');
-matlab2tikz('transitionTimesBimodal.tex', 'width', '\fwidth' )
+ylim([0 0.001])
+xlim([0 2000])
+matlab2tikz('transitionTimesFitBad.tex', 'width', '\fwidth' )
+
+ps=1:36;
+hs=1:36;
+tT=3600*table2array(TransitionTimes(1:2000,1:20))+rand(2000,20);
+for i=1:20
+    [h(i),p(i)]=adtest(tT(:,i),'Distribution','exp')
+end
 
 % Plot for Q,L0,Lc for chapter 4
 pts = [0 1.5 1.51 3.5 3.51 7.5 11];

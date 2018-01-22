@@ -1,4 +1,4 @@
-function [lifetime,repairedInState,path] = MmfmLifetime(generator, fluidRates, fluidJumps, fluidLevel, controlLimits, maxLifetime)
+function [lifetime,repairedInState,path] = MmfmLifetime(generator, fluidRates, fluidJumps, fluidLevel, controlLimits, startingState, maxLifetime)
 % Generates a positive random variable corresponding to the lifetime of a
 % Markov Modulated Fluid Model.
 % generator should be a square matrix with negative values on the diagonal
@@ -30,6 +30,11 @@ function [lifetime,repairedInState,path] = MmfmLifetime(generator, fluidRates, f
        end
     end
 
+% use startingState 1 if it is not set
+if ~exist('startingState','var')
+   startingState = 1; 
+end
+
 % use maxLifetime infinity if it is not set
 if ~exist('maxLifetime','var')
    maxLifetime = Inf(1); 
@@ -46,7 +51,7 @@ if ~exist('fluidLevel','var')
 end
 
 lifetime = 0;
-currentState = 1;
+currentState = startingState;
 L0=0; % Consumed initial fluid
 Lc=0; % Buffer level
 path = [];
@@ -71,7 +76,7 @@ while fluidLevel > 0 && lifetime < maxLifetime
     end
     
     % Check whether we will fail or preventively repair before the next jump
-    if transitionTime*fluidRates(currentState)>fluidLevel-L0
+    if fluidLevel < controlLimits(currentState) && transitionTime*fluidRates(currentState)>fluidLevel-L0
         % Fail
         timeUntilFailure = (fluidLevel-L0)/fluidRates(currentState);
         lifetime = lifetime + timeUntilFailure;
@@ -82,7 +87,7 @@ while fluidLevel > 0 && lifetime < maxLifetime
         return;
     elseif transitionTime*fluidRates(currentState)>controlLimits(currentState)-L0
        % Repair
-        timeUntilRepair = (controlLimits(currentState)-L0)/fluidRates(currentState);
+        timeUntilRepair = max(0,(controlLimits(currentState)-L0)/fluidRates(currentState));
         lifetime = lifetime + timeUntilRepair;
         repairedInState = currentState;
         

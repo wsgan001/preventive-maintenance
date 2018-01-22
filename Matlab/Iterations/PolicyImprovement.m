@@ -1,4 +1,6 @@
 function [x_convergence, v_convergence] = PolicyImprovement(pdf,cdf,c,a,cDiscount,numIterations,x_init)
+% POLICYIMPROVEMENT Implements a policy iteration approach for the
+% age-based problem.
 valueFunction = @(mu) (c.*(1-cdf(mu)).*exp(-cDiscount.*mu)+(c+a).*integral(@(t) pdf(t).*exp(-cDiscount.*t),0,mu))/(1-integral(@(t) pdf(t).*exp(-cDiscount.*t),0,mu)-(1-cdf(mu)).*exp(-cDiscount.*mu));
 muStep = 1;
 x_convergence = zeros(1,numIterations+1);

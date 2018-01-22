@@ -1,6 +1,6 @@
 function [ policy ] = MmfmGetSimplePolicy( hazard, tdc, cDiscount, c, a, rates, generator, policy_prev )
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
+%MMFMGETSIMPLEPOLICY Finds the control limits for the heuristic policy
+% based on the assumption that no jumps will occur before the next failure. 
 if ~exist('policy_prev','var')
     policy_prev = ones(length(rates),1);
 end

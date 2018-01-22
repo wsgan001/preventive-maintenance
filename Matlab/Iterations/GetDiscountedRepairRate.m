@@ -1,6 +1,6 @@
 function [ drr ] = GetDiscountedRepairRate( discountGenerator,policy,fluid, from )
-%GETDISCOUNTEDREPAIRRATE Summary of this function goes here
-%   Detailed explanation goes here
+%GETDISCOUNTEDREPAIRRATE Computes the discounted density of repairing at
+%fluid level fluid given that it starts in state from.
 if length(fluid)>1
     drr= arrayfun(@(q) GetDiscountedRepairRate( discountGenerator,policy,q ),fluid);
     return;

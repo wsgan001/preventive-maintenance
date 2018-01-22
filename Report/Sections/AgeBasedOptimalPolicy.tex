@@ -83,30 +83,30 @@ Note that this also implies that for decreasing hazard rates $\mu^*=\infty$.
 	However, we can prove that $V(x,\mu^*)$ is increasing for $x<\mu^*$:
 
 \begin{theorem}\label{theorem:TdcNonDecreasing}
-	The expected total discounted cost \eqref{eq:AgeBasedPolicyRemainingTDC} is increasing for $x< \mu^*$, i.e.
+	The expected total discounted cost \eqref{eq:AgeBasedPolicyRemainingTDC} is nondecreasing for $x\leq \mu^*$, i.e.
 	\[
-	\frac{d}{dx}V(x,\mu^*)> 0.
+	\frac{d}{dx}V(x,\mu^*)\geq 0.
 	\]
 	\begin{proof}
-		We will prove that $\frac{d}{dx}V(x,\mu^*)\leq0$ for some $x$ implies $\frac{d^2}{dx^2}V(x,\mu^*)<0$ so that $V(x,\mu^*)$ remains decreasing and will eventually be negative, contradicting the fact that all costs are positive.
+		We will prove that $\frac{d}{dx}V(x,\mu^*)<0$ for some $x$ implies $\frac{d^2}{dx^2}V(x,\mu^*)<0$ so that $V(x,\mu^*)$ remains decreasing and will eventually be negative, contradicting the fact that all costs are positive.
 		
-		Let $x'<\mu^*$, it holds that
+		Let $x'\leq\mu^*$, it holds that
 		\[
 		V(x',\mu^*)\leq V(\mu^*,\mu^*)=c+V(0^+,\mu^*).
 		\]
-		Now we will prove that if $\frac{d}{dx}V(x',\mu^*)\leq 0$, this implies that $\frac{d^2}{dx^2}V(x',\mu^*)<0$.
+		Now we will prove that if $\frac{d}{dx}V(x',\mu^*)< 0$, this implies that $\frac{d^2}{dx^2}V(x',\mu^*)<0$.
 		We take the derivative of \eqref{eq:AgeBasedBellmanODE}:
 		\[
 		\frac{d^2}{dx^2}V(x,\mu^*)=-h'(x)[c+a+V(0^+,\mu^*)-V(x,\mu^*)]+(\beta+h(x))\frac{d}{dx}V(x,\mu^*).
 		\]
 		Note that, in order to take the derivative of $h$, we have to assume that $h$ (or equivalently $f$) is differentiable.
-		We know that for our $x'$, $\frac{d}{dx}V(x,\mu^*)\leq 0$ and $V(x,\mu^*)\leq c+V(0^+,\mu^*)$.
-		Furthermore, by assumption $h'(x')>0$.
+		We know that for our $x'$, $\frac{d}{dx}V(x,\mu^*)< 0$ and $V(x,\mu^*)\leq c+V(0^+,\mu^*)$.
+		Furthermore, by assumption $h'(x')\geq 0$.
 		Concluding
 		\[
 		\frac{d^2}{dx^2}V(x',\mu^*)<0.
 		\]
-		This implies that if $\frac{d}{dx}V(x',\mu^*)\leq0$ for some $x'$, $V(x,\mu^*)$ is concave down after $x'$ so that for all $x>x'$
+		This implies that if $\frac{d}{dx}V(x',\mu^*)<0$ for some $x'$, $V(x,\mu^*)$ is concave after $x'$ so that for all $x>x'$
 		\[
 		V(x,\mu^*)< c+V(0^+,\mu^*).
 		\]

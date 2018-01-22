@@ -5,7 +5,7 @@ Similar to \eqref{eq:SimpleFluidDiscountDefinition}, but keeping in mind that th
 \[
 D_{i}^t(q):=\mathbb{E}[e^{-\beta T_t(q)}|S(t)=i],
 \]
-as the expected discount over the time until the fluid level $Q(t)$ is decreased by $q$, given that it starts in $s_i$.
+as the expected discount over the time until the fluid level $Q(t)$ is decreased by $q$, given that the CTMC was in $s_i$ at time $t$.
 In this definition, we disregard failures and policies (i.e. we briefly assume that $Q_0=\infty$ and all control limits $\mu_i=\infty$).
 Furthermore, we define
 \[
@@ -26,14 +26,14 @@ We define similar quantities:
 &S(t+T_t(q)=j),\\
 &\forall \tau\in[t,t+T_t(q)):
 \begin{split}
-&L_c(\tau)>0\\&\vee L_0(\tau)<\mu_{S(\tau)}
+&L_c(\tau)>0\\&\text{ or } L_0(\tau)<\mu_{S(\tau)}
 \end{split}
 \end{split}\right\}\middle| S(t)=i,L_0(t)=l\right],
 \end{split}
 \]
 and
 \[
-D_{i}^t(q,\pi,l):=\sum\limits_{\mu_j\leq l+q}D_{ij}^t(q,\pi,l).
+D_{i}^t(q,\pi,l):=\sum\limits_{j:\mu_j\leq l+q}D_{ij}^t(q,\pi,l).
 \]
 Where these are similar to the earlier defined $D_{ij}$ but without the asset being repaired before fluid level $Q(t)-q$ is reached.
 These expectations also do not depend on $t$.
@@ -47,10 +47,10 @@ We define the following quantity
 \end{split}
 \]
 The interpretation of this quantity can be difficult, it could be seen as the density of $R$ multiplied by the expected discount factor given that repair is chosen at this level of $L_0$.
-Note that $\Gamma_i^t(q,\pi)$ also does not depend on $t$ so that $t$ will again be omitted in the notation.
+Note that $\Gamma_i^t(q,\pi,l)$ also does not depend on $t$ so that $t$ will again be omitted in the notation.
 \begin{remark}
 	These defined quantities should be interpreted as neither probabilities nor discount factors but more as a combination of these two: The expected discount factor given some event, multiplied by the probability (or density) of this event.
-	We will refer to $D_{ij},D_{i}(q,\pi)$ and $D_{i}(q,\pi,l)$ as 'discounted probabilities' and $\Gamma_i(q,\pi,l)$ as a 'discounted density'.
+	We will refer to $D_{ij}(q),D_{ij}(q,\pi,l)$ and $D_{i}(q,\pi,l)$ as 'discounted probabilities' and $\Gamma_i(q,\pi,l)$ as a 'discounted density'.
 \end{remark}
 These discount quantities will be computed in the next section.
 We will now derive the expected total discounted cost of a policy $\pi$.
@@ -63,14 +63,14 @@ We will split the total discounted cost in terms corresponding to these two scen
 
 \subsubsection{The asset breaks}
 When the asset breaks, it means that $L_0(t)$ has reached $Q_0$ without encountering a control limit.
-Hence, the repair costs are discounted at $D_0(Q_0,\pi,0)$.
+Hence, the repair costs are discounted at $D_1(Q_0,\pi,0)$.
 The expected value of this, is given by
 \[
-\mathbb{E}[D_{i}(Q_0,\pi,0)]=\int\limits_0^\infty f(q)D_{i}(q,\pi,0)dq.
+\mathbb{E}[D_{1}(Q_0,\pi,0)]=\int\limits_0^\infty f(q)D_{1}(q,\pi,0)dq.
 \]
 We get the following term in the expression of the total discounted cost
 \[
-\mathbb{E}[D_{i}(Q_0,\pi,0)](c+a+V(x_{NEW},\pi)).
+\mathbb{E}[D_{1}(Q_0,\pi,0)](c+a+V(x_{NEW},\pi)).
 \]
 
 \subsection{Preventive maintenance is chosen}
@@ -96,15 +96,15 @@ For this to be able to happen, $Q_0>l_0$ must hold with probability $\bar{F}(l_0
 This event would have cost $c$ and discounted density $\Gamma_0(l_0,\pi,0)$.
 Hence, this results in the following term:
 \[
-\left[\int\limits_0^\infty \bar{F}(q)\Gamma_0(q,\pi,0)dq\right](c+V(x_{NEW},\pi)).
+\left[\int\limits_1^\infty \bar{F}(q)\Gamma_0(q,\pi,0)dq\right](c+V(x_{NEW},\pi)).
 \]
 Concluding:
 \begin{theorem}
 	The expected total discounted cost of a policy $\pi$ is given by
 	\begin{equation}\label{eq:MmfmTDC}
 	\begin{split}
-	V(x_{NEW},\pi)=&\mathbb{E}[D_{i}(Q_0,\pi,0)]\left(c+a+V(x_{NEW},\pi)\right)\\
-	&+\left[\int\limits_0^\infty \bar{F}(q)\Gamma_0(q,\pi,0)dq+\sum\limits_i\bar{F}(\mu_i)D_{i}(\mu_i,\pi,0)\right]\left(c+V(x_{NEW},\pi)\right).
+	V(x_{NEW},\pi)=&\mathbb{E}[D_{1}(Q_0,\pi,0)]\left(c+a+V(x_{NEW},\pi)\right)\\
+	&+\left[\int\limits_0^\infty \bar{F}(q)\Gamma_1(q,\pi,0)dq+\sum\limits_i\bar{F}(\mu_i)D_{i}(\mu_i,\pi,0)\right]\left(c+V(x_{NEW},\pi)\right).
 	\end{split}
 	\end{equation}
 \end{theorem}

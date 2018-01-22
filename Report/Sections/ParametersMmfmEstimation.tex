@@ -43,48 +43,48 @@ $$
 Furthermore, let $\#(i,j,\sigma)$ be the number of times a transition from $s_i$ to $s_j$ occurred in trace $\sigma$.
 We will now introduce two lemmas:
 \begin{lemma}
-	The derivative of the initial level $q_0(M,\sigma)$ to the fluid rate $r_i$ is given by
+	The derivative of the initial level $q_0(M,\sigma)$ with respect to the fluid rate $r_i$ is given by
 	\[
-	\frac{d}{dr_i}q_0(M,\sigma)=\tau(i,\sigma).
+	\frac{\partial}{\partial r_i}q_0(M,\sigma)=\tau(i,\sigma).
 	\]
 	\begin{proof}
 		The proof is straightforward:
 		\[
-		\frac{d}{dr_i}q_0(M,\sigma)=\frac{d}{dr_i}\left[\tau_1r_{i_1}+\sum\limits_{l=2}^{L}\tau_lr_{i_l}-J_{i_{l-1}i_l}\right]=\sum\limits_{i_l=i}\tau_l=\tau(i,\sigma).
+		\frac{\partial}{\partial r_i}q_0(M,\sigma)=\frac{\partial}{\partial r_i}\left[\tau_1r_{i_1}+\sum\limits_{l=2}^{L}\tau_lr_{i_l}-J_{i_{l-1}i_l}\right]=\sum\limits_{i_l=i}\tau_l=\tau(i,\sigma).
 		\]
 	\end{proof}
 \end{lemma}
 And similarly, for the jump quantity $J_{ij}$:
 \begin{lemma}
-	The derivative of the initial level  $q_0(M,\sigma)$ to the jump quantity $J_{ij}$ is given by
+	The derivative of the initial level  $q_0(M,\sigma)$ with respect to the jump quantity $J_{ij}$ is given by
 	\[
-	\frac{d}{dJ_{ij}}q_0(M,\sigma)=\#(i,j,\sigma).
+	\frac{\partial}{\partial J_{ij}}q_0(M,\sigma)=\#(i,j,\sigma).
 	\]
 	\begin{proof}
 		Again:
 		\[
-		\frac{d}{dJ_{ij}}q_0(M,\sigma)=\frac{d}{dJ_{ij}}\left[\tau_1r_{i_1}+\sum\limits_{l=2}^{L}\tau_lr_{i_l}-J_{i_{l-1}i_l}\right]=-\#(i,j,\sigma).
+		\frac{\partial}{\partial J_{ij}}q_0(M,\sigma)=\frac{\partial}{\partial J_{ij}}\left[\tau_1r_{i_1}+\sum\limits_{l=2}^{L}\tau_lr_{i_l}-J_{i_{l-1}i_l}\right]=-\#(i,j,\sigma).
 		\]
 	\end{proof}
 \end{lemma}
 
-Before we take the derivative of \eqref{eq:MmfmLikelihood} to $r_i$, we note that only $\log f(q_0(M,\sigma))$ depends on $r_i$ so that the other term vanishes.
+Before we take the derivative of \eqref{eq:MmfmLikelihood} with respect to $r_i$, we note that only $\log f(q_0(M,\sigma))$ depends on $r_i$ so that the other term vanishes.
 Hence:
 \[
-\frac{d}{dr_i}\log L(M,\Sigma)
-=\frac{d}{dr_i}\sum_k\log f(q_0(M,\sigma^{(k)}))=\sum_k\frac{f'(q_0(M,\sigma^{(k)}))}{f(q_0(M,\sigma^{(k)}))}\tau(i,\sigma^{(k)}).
+\frac{\partial}{\partial r_i}\log L(M,\Sigma)
+=\frac{\partial }{\partial r_i}\sum_k\log f(q_0(M,\sigma^{(k)}))=\sum_k\frac{f'(q_0(M,\sigma^{(k)}))}{f(q_0(M,\sigma^{(k)}))}\tau(i,\sigma^{(k)}).
 \]
 Similarly, for the jump quantities $J_{ij}$, we get
 $$
-\frac{d}{dJ_{ij}}\log L(M,\Sigma)=\frac{d}{dJ_{ij}}\sum_k\log f(q_0(M,\sigma^{(k)}))=-\sum_k\frac{f'(q_0(M,\sigma^{(k)}))}{f(q_0(M,\sigma^{(k)}))}\#(i,j,\sigma^{(k)}).
+\frac{\partial}{\partial J_{ij}}\log L(M,\Sigma)=\frac{\partial}{\partial J_{ij}}\sum_k\log f(q_0(M,\sigma^{(k)}))=-\sum_k\frac{f'(q_0(M,\sigma^{(k)}))}{f(q_0(M,\sigma^{(k)}))}\#(i,j,\sigma^{(k)}).
 $$
 The maximum likelihood estimators $\hat r_i$ and $\hat J_{ij}$ are then a solution to the set of equations 
 \[
-\frac{d}{dr_i}\log L(M,\Sigma)=0,
+\frac{\partial}{\partial r_i}\log L(M,\Sigma)=0,
 \]
 and
 \[
-\frac{d}{dJ_{ij}}\log L(M,\Sigma)=0,
+\frac{\partial}{\partial J_{ij}}\log L(M,\Sigma)=0,
 \]
 for all $i,j\in\{1,...,N\}$.
 

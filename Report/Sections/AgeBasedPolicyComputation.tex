@@ -3,7 +3,7 @@ We know that for the optimal policy $\mu^*$, \eqref{eq:AgeBasedHazardBound} hold
 This allows us to choose a control limit based on the total discounted cost.
 Unfortunately, the total discounted cost also depends on the control limit.
 Multiple numerical methods could be used to find the optimal control limit.
-In this section we propose a policy iteration method to find the optimal control limit and the total discounted cost.
+In this section we propose a modified policy iteration method to find the optimal control limit and the total discounted cost.
 Alternatively, value iteration could be used to solve the Bellman equations or the expected total discounted cost \eqref{eq:AgeBasedPolicyTDC} could simply be minimized numerically for $\mu$.
 
 \subsection{Description of iteration method}\label{section:AgeBasedIterationDescription}
@@ -45,7 +45,7 @@ g(\mu):=aF(\mu)\mathbb{E}[e^{-\beta Q_0}|Q_0\leq \mu]+c\mathbb{E}[e^{-\beta(Q_0\
 $$
 We can now write
 $$
-V(0^+,\mu^*)=\sum\limits_{n=0}^\infty \alpha_{\mu^*}^kg(\mu^*).
+V(0^+,\mu^*)=\sum\limits_{k=0}^\infty \alpha_{\mu^*}^kg(\mu^*).
 $$
 And we can rewrite $T$ in the following way
 \[
@@ -118,7 +118,7 @@ This proves that $\hat{V}^{(k)}$ converges.
 Convergence in $\hat\mu^{(k)}$ follows from \eqref{eq:AgeBasedIterationControlConvergence}.
 Concluding:
 \begin{theorem}
-	The policy iteration method as described in section \ref*{section:AgeBasedIterationDescription} converges, i.e.
+	The modified policy iteration method as described in section \ref*{section:AgeBasedIterationDescription} converges, i.e.
 	\[\lim\limits_{k\rightarrow\infty}\hat{V}^{(k)}=V(0^+,\mu^*),\]
 	and
 	\[\lim\limits_{k\rightarrow\infty}\hat{\mu}^{(k)}=\mu^*.\]

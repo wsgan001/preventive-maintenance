@@ -1,4 +1,5 @@
 function [fHazard,fPDF, fCDF] = HazardRatesFromLifetimes(lifetimes) 
+% HAZARDRATESFROMLIFETIMES Finds the hazard rate from the lifetimes.
 pts = zeros(101,1);
 MIN = min(lifetimes);
 MAX = max(lifetimes);

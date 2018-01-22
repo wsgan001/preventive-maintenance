@@ -1,6 +1,6 @@
 function [ policy,costs ] = MmfmValueIteration( cdf,generator, rates, jumps, numTimeSteps, discount,maxT,maxL0,maxLC,c,a,stationary )
-%MMFMVALUEITERATION rates must be integer
-%   Detailed explanation goes here
+%MMFMVALUEITERATION Performs value iteration on the MMFM problem.
+% rates must be integer.
 
     % Failure probability in one timestep
     function [probability] = failProbability(level,state)

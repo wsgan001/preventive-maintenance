@@ -1,5 +1,5 @@
 \section{Structure of optimal policy}
-In this section, we will establish that for the simple fluid model with jumps, the optimal policy is a stationary policy to repair whenever the buffer is empty and the used initial fluid $L_0(t)$ exceeds a certain control limit.
+In this section, we will establish that for the simple fluid model with jumps, the optimal policy is a stationary policy to repair whenever the buffer is empty ($L_c(t)=0$) and the drained initial fluid $L_0(t)$ exceeds a certain control limit.
 By this, we mean that there exists some optimal control limit $\mu^*>0$ and repair should be chosen whenever the buffer $L_c(t)=0$ and $L_0(t)\geq\mu^*$.
 
 \subsection{Stationary policy}
@@ -30,4 +30,4 @@ The optimal policy is a control limit policy by the same argument as for the age
 %	What happens for larger values than this $\mu^*$ is not relevant as these will never be reached.
 %\end{enumerate}
 
-Hence, we have established that the optimal policy is a control limit on the used initial fluid $L_0$.
+Hence, we have established that the optimal policy is a control limit on the drained initial fluid $L_0$.

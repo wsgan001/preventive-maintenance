@@ -3,12 +3,12 @@ In this section, the Bellman equations will be used to find the expected total d
 From the discrete Bellman equations \eqref{eq:AgeBasedBellman}, differential equations will be derived.
 The following Bellman equations will be considered
 \[V_\delta^*(x)=\begin{cases}
-\min\{c+\alpha_\delta V^*_\delta(1),\alpha_\delta \mathbb{E}[V^*_\delta(S(x))]\},&\text{if}\ x>0 \\
+\min\{c+\alpha_\delta V^*_\delta(1),\alpha_\delta \mathbb{E}[V^*_\delta(Z(x))]\},&\text{if}\ x>0 \\
 c+a+\alpha_\delta V^*_\delta(1),&\text{else.}
 \end{cases}\]
 We assume that for $x$
 $$
-c+\alpha_\delta V^*_\delta(0^+)>\alpha_\delta \mathbb{E}[V^*_\delta(S(x)\delta)],
+c+\alpha_\delta V^*_\delta(0^+)>\alpha_\delta \mathbb{E}[V^*_\delta(Z(x)\delta)],
 $$
 i.e. the optimal control limit $\mu^*>\delta x$.
 Now, we can write $V^*_\delta(x)$ in the following way
@@ -49,23 +49,23 @@ $$
 e^{\int\limits_0^x (-\beta - h(q))dq}=e^{-\beta x -H(x)}.
 $$
 Where $H(x)$ is the cumulative hazard function.
-We get
+Note that
+\[e^{H(x)}=(e^{-H(x)})^{-1}=\frac{1}{\bar F(x)},\]
+and
+\[h(x)e^{-H(x)}=f(x).\]
+Hence, we get
 $$
 V^*(x)=e^{\beta x +H(x)} [C + \int\limits_0^x e^{-\beta q -H(q)}(-h(q)(c+a+V^*(0^+)))dq]
 $$
 $$
 =\frac{e^{\beta x}}{\bar F(x)} [C - (c+a+V^*(0^+))\int\limits_0^x e^{-\beta q}f(q)dq].
 $$
-Using the identities 
-\[e^{H(x)}=(e^{-H(x)})^{-1}=\frac{1}{\bar F(x)},\]
-and
-\[h(x)e^{-H(x)}=f(x).\]
 $C$ is an integrating constant and since $\lim\limits_{x\rightarrow 0}V^*(x)=V^*(0^+)$ should hold, we find $C=V^*(0^+)$.
 We can rewrite the expression to
 $$
 V^*(x)=\frac{e^{\beta x}}{\bar F(x)} [V^*(0^+)  - (c+a+V^*(0^+))F(x)\mathbb{E}[e^{-\beta Q_0}|Q_0<x]].
 $$
-Which results in the following theorem:
+When we combine this with the fact that repair is chosen whenever $V^*(x)\geq c+V^*(0^+)$, we get the following expression for the value function corresponding to the optimal policy:
 \begin{theorem}
 	When the asset has age $x$, the expected remaining total discounted cost equals
 	\begin{equation}\label{eq:AgeBasedSolvedBellman}
@@ -78,7 +78,7 @@ Which results in the following theorem:
 	and preventive maintenance is chosen if and only if $V^*(x)\geq c+V^*(0^+)$.
 \end{theorem}
 Unfortunately, the value of $V^*(0^+)$ depends on the optimal policy and it is also difficult to solve $V^*(x)=c+V(0^+)$ analytically for $x$.
-Control limit $\mu^*$ is then chosen as the smallest positive $x$ that satisfies $V(x)=c+V(0^+)$ if such $x$ exist and $\mu^*=\infty$ else.
+The control limit $\mu^*$ is then chosen as the smallest positive $x$ that satisfies $V(x)=c+V(0^+)$ if such $x$ exist and $\mu^*=\infty$ else.
 The policy that we just derived, schedules preventive maintenance at time $\mu^*$ if the asset has not already failed by then.
 We denote the total discounted cost of this policy by $V(0^+,\mu^*)$.
 
@@ -118,7 +118,7 @@ We get a similar expression for $V(x,\mu)$:
 \begin{remark}
 	If $\mu^*=\infty$, then the expected total discounted cost equals
 	\[V(0^+,\infty)=\mathbb{E}[e^{-\beta Q_0}](c+a+V(0^+,\infty)).\]
-	Which can be rewritten to
+	Which can be rewritten as
 	\[V(0^+,\infty)=\frac{\tilde{F}(-\beta)}{1-\tilde{F}(-\beta)}(c+a),\]
 	where $\tilde{F}$ is the moment generating function of $Q_0$.
 \end{remark}

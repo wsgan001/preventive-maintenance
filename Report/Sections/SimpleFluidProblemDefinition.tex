@@ -1,6 +1,6 @@
 \section{Problem formulation and definition}
 In this section, we extend the definition of age-based maintenance from section \ref{section:AgeBasedDefinition}.
-First we define the underlying stochastic process of the the asset degrading over time and instantaneously increasing at the occurrence of jumps.
+First we define the underlying stochastic process of the the asset degrading over time and instantaneously improve at the occurrence of jumps.
 After that, we define a Markov decision process similarly to section \ref{section:AgeBasedDefinition}.
 
 \subsection{Stochastic asset degradation}
@@ -8,32 +8,19 @@ We define the random process $Q(t)$ as the fluid level at age $t$.
 Initially, the fluid level is given by $Q(0)=Q_0\sim F$.
 Then over time this level decreases at a constant rate of $1$.
 The jumps occur according to a Poisson process with rate $\lambda$, i.e. the time interval between two consecutive jumps is exponentially distributed with rate $\lambda$.
-The fluid process is absorbing at $Q(t)=0$.
-Hence, let $P_\lambda(t_1,t_2)$ be a Poisson distributed random variable with rate $\lambda (t_2-t_1)$.
-Then the fluid level at time $t$ is given by 
-\[
-Q(t)\stackrel d=(Q_0+P_\lambda(0,t)J-t)\vee 0.
-\]
-Where $\stackrel d=$ denotes that the random variables on the left and right have the same distribution and $A\vee B$ denotes the maximum of $A$ and $B$.
-$Q(t)$ has the property that
-\[
-\begin{split}
-Q(t_1+t_2)&\stackrel d=( Q_0+P_\lambda(0,t_1)J+P_\lambda(t_1,t_1+t_2)J-t_1-t_2)\vee0\\
-&\stackrel d= (Q(t_1)+P_\lambda(0,t_2)J-t_2)\vee0.
-\end{split}
-\]
-The asset breaks when the fluid level reaches $0$, i.e. at the time $T^*$ given by
+The fluid process is absorbing at $Q(t)=0$ as this resembles the asset failing.
+Hence, the asset breaks at time $T^*$ given by
 \[
 T^*=\inf\{t|Q(t)=0\}.
 \]
-When the asset is repaired, it starts with an age of zero again.
+When the asset is repaired, it starts with an age of zero again, with an initial fluid level from the same distribution $F$.
 
 To derive the distribution of $Q(t)$ for a certain $t$ from the observed jumps, it seems we need to keep track of the exact times at which these jumps occurred.
 This would be a very inconvenient format of the state of the asset.
 Luckily, this information can be condensed into a simpler state description.
 First, we will illustrate this with the following example:
 \begin{example}
-	If the first jump of the process would have occur at some time $t$, then we would know the following at this time $t$:
+	If the first jump of the process would occur at some time $t$ (and the fluid level did not reach $0$ already), then we would know the following at this time $t$:
 	\begin{enumerate}
 		\item $Q(t)\geq J$.
 		Hence, we have a lower bound on the current fluid level.
@@ -81,7 +68,7 @@ These two quantities evolve in the following way:
 %	\begin{equation}\label{eq:SimpleAgeEvolution2}
 %	X(t+\tau)=(L_0(t)+\tau,0).
 %	\end{equation}
-	\item When no jump occurs in a neighborhood of $t$, $S(t)$ remains constant and $L_0$ and $L_c$ evolve according to
+	\item When no jump or failure occurs in a neighborhood of $t$, $S(t)$ remains constant and $L_0$ and $L_c$ evolve according to
 		\begin{equation}\label{eq:SimpleAgeEvolution}
 		\begin{split}
 		\frac{d}{dt}L_c(t)&=\begin{cases}
@@ -98,7 +85,7 @@ These two quantities evolve in the following way:
 		\begin{equation}\label{eq:SimpleSameDecrease}
 		\frac{d}{dt}\left[L_c(t)-L_0(t)\right]=\frac{d}{dt}Q(t)=-1.
 		\end{equation}
-	\item When the fluid drains, i.e. $Q(t)=0$ or equivalently $L_0(t)=Q_0$, the asset breaks so that
+	\item When the fluid drains, i.e. $Q(t)=0$ or equivalently $L_0(t^-)=Q_0$, the asset breaks so that
 	\[
 	X(t)=x_{BREAK},
 	\]
@@ -123,8 +110,7 @@ These two quantities evolve in the following way:
 \end{theorem}
 
 \begin{example}\label{example:SimpleFluidState}
-	For example, if we have the jump quantity $J=3$ and the initial fluid level for a run of the asset equals $5$.
-	If after 1.5 time units and after 2.5 time units a jump occurred, $Q,L_0$ and $L_c$ would evolve as in figure \ref{figure:SimpleFluidExampleQuantities}.
+	For example, if we have the jump quantity $J=3$, the initial fluid level for a run of the asset equals $5$ and after 1.5 and 2.5 time units a jump occurred, $Q,L_0$ and $L_c$ would evolve as in figure \ref{figure:SimpleFluidExampleQuantities}.
 	As you can see, when $Q(t)=0$, it holds that $L_0(t)=Q(0)$.
 \end{example}
 \begin{figure}[H]
@@ -184,14 +170,14 @@ Assuming only one jump can occur in a time interval and letting $x_k=X(t_k)=(l_0
 e^{-\lambda \delta}=1-\delta\lambda+o(\delta^2)&\text{ if }l_c>0,\\
 \begin{split}
 e^{-\lambda \delta} & \bar{F}_{x_k}(l_0+\delta)\\
-=1&-\delta h(l_c)-\delta\lambda+o(\delta^2)
+=1&-\delta h(l_0)-\delta\lambda+o(\delta^2)
 \end{split}&\text{ if }l_c=0.\\
 \end{cases}\\
 \mathbb{P}(\omega_k(x_k)=\Omega_{BREAK})&=\begin{cases}
 0&\text{ if }l_c>0,\\
 \begin{split}
 e^{-\lambda \delta}F_{x_k}&(l_0+\delta)\\
-=&\delta h(l_c)+o(\delta^2)
+=&\delta h(l_0)+o(\delta^2)
 \end{split}&\text{ if }l_c=0.\\
 \end{cases}\\
 \mathbb{P}(\omega_k(x_k)=\Omega_{JUMP})&=\begin{cases}
@@ -224,7 +210,7 @@ x_{BREAK}&\ \text{if }u_k=a_W\text{ and }\omega_k=\Omega_{BREAK}.\\
 \]
 Here we assumed that jumps occur at the start of time intervals.
 For small $\delta$, this approximates the fluid model defined above.
-Again, we use the definition of the random variable $S(x_k):=f(x_k,a_W,\omega_k(x_k))$ as the state after $x_k$.
+Again, we use the definition of the random variable $Z(x_k):=f(x_k,a_W,\omega_k(x_k))$ as the state after $x_k$.
 
 \subsection{Costs and discounting}
 The costs and discounting remain the same as in the age-based maintenance problem.
@@ -233,19 +219,19 @@ The costs and discounting remain the same as in the age-based maintenance proble
 In the next section, we will prove that the optimal policy is a stationary policy.
 Hence, we want to find a stationary policy $\mu:X\rightarrow \{a_W,a_R\}$ that chooses the action $u_k=\mu(x_k)$ that minimizes the expected total discounted cost $V_\delta(x_k,\mu)$ for each state.
 Similarly as in the definition of age-based maintenance, $V_\delta(x_k,\mu)$ is given by
-\[V_\delta(x_k,\mu)=g(x_k,\mu(x_k))+\alpha_\delta \mathbb{E}[V_\delta(S(x_k),\mu)].\]
+\[V_\delta(x_k,\mu)=g(x_k,\mu(x_k))+\alpha_\delta \mathbb{E}[V_\delta(Z(x_k),\mu)].\]
 The Bellman equations for the optimal cost $V_\delta(x_k,\mu^*)$ read
 \begin{equation}\label{eq:SimpleFluidBellman}
 V_\delta(x_k,\mu^*)=\begin{cases}
 c+a+\alpha_\delta V_\delta(x_{NEW},\mu^*),&\text{ if }x_k=x_{BREAK},\\
-\min\left\{\begin{split}&c+\alpha_\delta V_\delta(x_{NEW},\mu^*),\\&\alpha_\delta \mathbb{E}[V_\delta(S(x_k),\mu^*)]\end{split}\right\},&\text{else.}\\
+\min\left\{\begin{split}&c+\alpha_\delta V_\delta(x_{NEW},\mu^*),\\&\alpha_\delta \mathbb{E}[V_\delta(Z(x_k),\mu^*)]\end{split}\right\},&\text{else.}\\
 \end{cases}
 \end{equation}
 $\mu$ is optimal if $V_\delta(x,\mu)=V_\delta(x,\mu^*)$ for all $x$.
-$\mathbb{E}[V_\delta(S(x_k),\mu^*)]$ when $x_k\neq x_{BREAK}$ is given by 
+$\mathbb{E}[V_\delta(Z(x_k),\mu^*)]$ when $x_k\neq x_{BREAK}$ is given by 
 \begin{equation}\label{eq:SimpleFluidNextState}
 \begin{split}
-&\mathbb{E}[V_\delta(S(l_0,l_c),\mu^*)]\\
+&\mathbb{E}[V_\delta(Z(l_0,l_c),\mu^*)]\\
 &=\begin{cases}
 \begin{split}
 &(1-e^{-\lambda \delta})V_\delta(l_0,l_c+J-\delta,\mu^*)\\
@@ -277,7 +263,7 @@ Similar to the previous chapter, we will consider a continuous MDP by letting $\
 The occurrence of fluid jumps can be modeled in many different ways.
 We will briefly mention some alternatives to design choices that were made in the definition above.
 \subsubsection{Decisions at jumps only}
-We could also model the problem such that the choice to repair the asset can only be made the instant after a jump occurs.
+We could also model the problem such that the choice to repair the asset can only be made at the instant after a jump occurs.
 This might be more realistic as the jump could be caused by some mechanic performing some partial maintenance and a mechanic might be needed to completely repair the asset.
 
 \subsubsection{Jumps not according to a Poisson process}

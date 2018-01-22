@@ -96,7 +96,7 @@ for m=1:2
             [uniformPolicy, uniformTdc]=MmfmUniformIteration(generators{m}, rates{m}, jumps{m}, PDF, CDF, cs(p), as(p), cDiscounts(p), 0, ones(length(rates{m}),1),40);
             [exactPolicy, exactTdc]=MmfmExactIteration(generators{m}, rates{m}, jumps{m}, PDF, CDF, cs(p), as(p), cDiscounts(p), 0, ones(length(rates{m}),1),40);
             
-            fprintf( fmmfm, '$%i$ & $%i$ & $%.1f$ & %s & $%.3f$ & $%.3f$ & $%.3f$ & $%.3f$ & $%.3f$ & $%.3f$ & $%.3f$ & $%.3f$ & $%.3f$ & $%.3f$ \\\\ \n', cs(p), as(p), cDiscounts(p), distLabels(dist), exactPolicy(1,20), exactPolicy(2,20), exactPolicy(3,20), exactTdc(20),uniformPolicy(20), uniformTdc(20),simplePolicy(1,20),simplePolicy(2,20),simplePolicy(3,20),simpleTdc(20));
+            fprintf( fmmfm, '$%i$ & $%i$ & $%.1f$ & %s & $%.3f$ & $%.3f$ & $%.3f$ & $%.3f$ & $%.3f$ & $%.3f$ & $%.3f$ & $%.3f$ & $%.3f$ & $%.3f$ \\\\ \n', cs(p), as(p), cDiscounts(p), distLabels(dist), exactPolicy(1,41), exactPolicy(2,41), exactPolicy(3,41), exactTdc(41),uniformPolicy(41), uniformTdc(41),simplePolicy(1,41),simplePolicy(2,41),simplePolicy(3,41),simpleTdc(41));
         end
     end
 end

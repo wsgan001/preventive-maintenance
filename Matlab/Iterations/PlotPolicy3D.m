@@ -1,6 +1,5 @@
 function [  ] = PlotPolicy3D( costs,policy,state,timeStep )
-%PLOTPOLICY3D Summary of this function goes here
-%   Detailed explanation goes here
+%PLOTPOLICY3D Plots result from value iteration on a 3D plot.
 arraySize=size(costs);
 
 %RGB color

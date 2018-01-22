@@ -1,5 +1,6 @@
 function [jumpDiscounts,discountGenerator] = FindJumpDiscounts(generator, jumpQuantities, rates, cDiscount)
-
+% FINDJUMPDISCOUNTS Computes the jump discounts and the discount generator
+% matrix by successive approximation given problem parameters.
 numStates=length(rates);
 
 % We start with iDkm = I(k==m)
@@ -14,11 +15,5 @@ for i=1:10
    discountGenerator =  GetDiscountGenerator( cDiscount, rates,generator,jumpDiscounts );
    jumpDiscounts = GetJumpDiscounts( discountGenerator, jumpQuantities );
 end
-
-% To compare results with the simple two-state jump case. Note that since in
-% that simple case it does not matter in which state you end, we need to
-% sum over the two states in which you can end.
-% ed=ExpectedDiscount(jumpQuantities(1,2),generator(1,2),cDiscount);
-% newEstimate = jumpDiscounts(1,2,2)+jumpDiscounts(1,2,1);
 
 end

@@ -1,5 +1,6 @@
 function [x_convergence,v_convergence] = ValueIteration(cdf, timeStep, discount,numIterations,c,a,initValue, x_init)
-    
+% VALUEITERATION Solves the age-based problem using value iteration.    
+
     function [limit,newValueFunction] = valueIterate(oldValueFunction)
     % Performs one value iteration
         function [time] = timeForStep(step)

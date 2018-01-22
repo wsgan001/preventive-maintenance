@@ -1,5 +1,5 @@
 \section{Structure of optimal policy}
-In this section, we will establish that for the MMFM preventive maintenance problem, the optimal policy is a stationary policy to repair in CTMC-state $s_i$ whenever the buffer $L_c$ is empty and the used initial fluid $L_0$ exceeds a certain control limit $\mu_i^*$.
+In this section, we will establish that for the MMFM preventive maintenance problem, the optimal policy is a stationary policy to repair in CTMC-state $s_i$ whenever the buffer $L_c$ is empty and the drained initial fluid $L_0$ exceeds a certain control limit $\mu_i^*$.
 Note that 'stationary' in this sense means independent of the time. 
 The control limit does depend on the state of the CTMC.
 
@@ -19,7 +19,7 @@ This is illustrated by the following example:
 	Consider a MMFM with two states and control limits $\mu_1<l<\mu_2$ for some $q$.
 	If at some time $t$, $X(t)=(2,l,L_c(t))$, then it is possible that for some $t'>t$, $X(t')=(1,l,0)$ so that $L_0(t')>\mu_1$ and the control limit is exceeded.
 \end{example}
-Although no rigorous proof was found that asserts the optimal policy is a control limit on $L_0$, results from value iteration seem to suggest that this is always the case.
-This also seems natural as for states with used initial fluid $L_0$ higher than the control limit, the asset is in a worse condition than at the control limit and is more likely to fail earlier so that repair would still be chosen after the control limit.
+Although no rigorous proof was found that asserts the optimal policy is a control limit policy, results from value iteration seem to suggest that this is always the case.
+This also seems natural as for states with drained initial fluid $L_0$ higher than the control limit, the asset is in a worse condition than at the control limit and is more likely to fail earlier so that repair would still be chosen after the control limit.
 
 Hence, we will consider stationary policies of the form $\pi=[\mu_1,...,\mu_N]$, where preventive repair is chosen in states $x=(i,l_0,l_c)\in X$ if and only if $l_c=0$ and $l_0\geq \mu_i$.

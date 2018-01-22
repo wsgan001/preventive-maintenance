@@ -1,5 +1,5 @@
 \BOOKMARK [0][-]{chapter.1}{Introduction}{}% 1
-\BOOKMARK [0][-]{chapter.2}{Literature overview}{}% 2
+\BOOKMARK [0][-]{chapter.2}{Preliminaries}{}% 2
 \BOOKMARK [1][-]{section.2.1}{Markov decision theory}{chapter.2}% 3
 \BOOKMARK [0][-]{chapter.3}{Age-based maintenance}{}% 4
 \BOOKMARK [1][-]{section.3.1}{Problem formulation and definition}{chapter.3}% 5
@@ -85,9 +85,10 @@
 \BOOKMARK [0][-]{section*.15}{Appendices}{}% 85
 \BOOKMARK [0][-]{Appendix.a.A}{List of symbols and notation}{}% 86
 \BOOKMARK [0][-]{Appendix.a.B}{Proof of properties of optimal age-based control limits}{}% 87
-\BOOKMARK [0][-]{Appendix.a.C}{Total discounted costs for various problem parameters and policies?}{}% 88
+\BOOKMARK [0][-]{Appendix.a.C}{Total discounted costs for various problem parameters and policies}{}% 88
 \BOOKMARK [1][-]{section.a.C.1}{Age-based problem}{Appendix.a.C}% 89
 \BOOKMARK [1][-]{section.a.C.2}{Simple fluid problem}{Appendix.a.C}% 90
 \BOOKMARK [1][-]{section.a.C.3}{Markov Modulated fluid model}{Appendix.a.C}% 91
-\BOOKMARK [2][-]{subsection.a.C.3.1}{MMFM 2}{section.a.C.3}% 92
-\BOOKMARK [0][-]{Appendix.a.D}{Matlab routines}{}% 93
+\BOOKMARK [2][-]{subsection.a.C.3.1}{MMFM 1}{section.a.C.3}% 92
+\BOOKMARK [2][-]{subsection.a.C.3.2}{MMFM 2}{section.a.C.3}% 93
+\BOOKMARK [0][-]{Appendix.a.D}{Matlab routines}{}% 94

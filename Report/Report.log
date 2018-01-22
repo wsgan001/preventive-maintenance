@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6100 64-bit) (preloaded format=pdflatex 2016.11.29)  14 JAN 2018 14:52
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6100 64-bit) (preloaded format=pdflatex 2016.11.29)  22 JAN 2018 01:45
 entering extended mode
 **./Report.tex
 (Report.tex
@@ -1002,8 +1002,9 @@ Package: amsthm 2015/03/04 v2.20.2
 \c@example=\count179
 \c@remark=\count180
 \c@corollary=\count181
-\c@theorem=\count182
-\c@lemma=\count183
+\c@assumption=\count182
+\c@theorem=\count183
+\c@lemma=\count184
 ) (Report.aux)
 \openout1 = `Report.aux'.
 
@@ -1035,16 +1036,16 @@ File: ucsencs.def 2011/01/21 Fixes to fontencodings LGR, T3
 ABD: EveryShipout initializing macros
 ("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count184
+\scratchcounter=\count185
 \scratchdimen=\dimen193
 \scratchbox=\box51
-\nofMPsegments=\count185
-\nofMParguments=\count186
+\nofMPsegments=\count186
+\nofMParguments=\count187
 \everyMPshowfont=\toks57
-\MPscratchCnt=\count187
+\MPscratchCnt=\count188
 \MPscratchDim=\dimen194
-\MPnumerator=\count188
-\makeMPintoPDFobject=\count189
+\MPnumerator=\count189
+\makeMPintoPDFobject=\count190
 \everyMPtoPDFconversion=\toks58
 ) ("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\epstopdf-base.sty"
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
@@ -1070,7 +1071,7 @@ Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 ("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\gettitlestring.sty"
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count190
+\c@section@level=\count191
 )
 LaTeX Info: Redefining \ref on input line 2.
 LaTeX Info: Redefining \pageref on input line 2.
@@ -1119,50 +1120,49 @@ Chapter 3.
 (Sections/AgeBasedProblemDefinition.tex [5
 
 ] [6] [7])
-(Sections/AgeBasedPolicyStructure.tex) (Sections/AgeBasedTDC.tex [8]
+(Sections/AgeBasedPolicyStructure.tex [8]) (Sections/AgeBasedTDC.tex
 Overfull \hbox (8.08234pt too wide) in paragraph at lines 25--25
 [] 
  []
 
-[9] [10]) (Sections/AgeBasedOptimalPolicy.tex
+[9] [10]) (Sections/AgeBasedOptimalPolicy.tex [11]
 LaTeX Font Info:    Try loading font information for U+dsrom on input line 13.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\doublestroke\udsrom.fd"
 File: Udsrom.fd 1995/08/01 v0.1 Double stroke roman font definitions
-) [11] [12]
-[13]) (Sections/AgeBasedPolicyComputation.tex [14] [15])
-(Sections/AgeBasedStructuralProperties.tex [16]) [17]
+) [12] [13])
+(Sections/AgeBasedPolicyComputation.tex [14] [15] [16])
+(Sections/AgeBasedStructuralProperties.tex [17]) [18]
 Chapter 4.
-(Sections/SimpleFluidProblemDefinition.tex [18
+(Sections/SimpleFluidProblemDefinition.tex [19
 
-] [19]
-(Plots/SimpleFluidExample.tex) [20]
-
-Package amsmath Warning: Cannot use `split' here;
-(amsmath)                trying to recover with `aligned' on input line 173.
-
+] [20]
+(Plots/SimpleFluidExample.tex) [21]
 
 Package amsmath Warning: Cannot use `split' here;
-(amsmath)                trying to recover with `aligned' on input line 176.
+(amsmath)                trying to recover with `aligned' on input line 159.
 
-[21]
 
 Package amsmath Warning: Cannot use `split' here;
-(amsmath)                trying to recover with `aligned' on input line 220.
+(amsmath)                trying to recover with `aligned' on input line 162.
 
 
-Overfull \hbox (18.93152pt too wide) detected at line 224
+Package amsmath Warning: Cannot use `split' here;
+(amsmath)                trying to recover with `aligned' on input line 206.
+
+
+Overfull \hbox (18.93152pt too wide) detected at line 210
 \OML/cmm/m/it/10 x[] \OT1/cmr/m/n/10 = \OML/cmm/m/it/10 f\OT1/cmr/m/n/10 (\OML/
 cmm/m/it/10 x[]; u[]; ![]\OT1/cmr/m/n/10 ) := []
  []
 
+[22]
 
 Package amsmath Warning: Cannot use `split' here;
-(amsmath)                trying to recover with `aligned' on input line 241.
+(amsmath)                trying to recover with `aligned' on input line 227.
 
-[22]) (Sections/SimpleFluidPolicyStructure.tex [23])
-(Sections/SimpleFluidTDC.tex [24] [25] [26])
-(Sections/SimpleFluidOptimalPolicy.tex)
+[23]) (Sections/SimpleFluidPolicyStructure.tex) (Sections/SimpleFluidTDC.tex
+[24] [25] [26]) (Sections/SimpleFluidOptimalPolicy.tex)
 (Sections/SimpleFluidStructuralProperties.tex [27]) [28]
 Chapter 5.
 (Sections/MmfmProblemDefinition.tex [29
@@ -1227,13 +1227,13 @@ Chapter 6.
 
 ]
 (Plots/lifetimesHazard.tex) [46] (Plots/lifetimesFits.tex)
-(Plots/transitionTimesFit.tex) (Plots/transitionTimesBimodal.tex) [47])
+(Plots/transitionTimesFitGood.tex) (Plots/transitionTimesFitBad.tex) [47])
 [48]
 Chapter 7.
 (Sections/ParametersMmfmEstimation.tex [49
 
 ] [50]
-Overfull \hbox (15.3147pt too wide) detected at line 80
+Overfull \hbox (16.63412pt too wide) detected at line 80
 [] [] \OML/cmm/m/it/10 L\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 M; \OT1/cmr/m/n/10 )
  = [] [] [] \OML/cmm/m/it/10 f\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 q[]\OT1/cmr/m/n
 /10 (\OML/cmm/m/it/10 M; []\OT1/cmr/m/n/10 )) = \OMS/cmsy/m/n/10   [] []\OT1/c
@@ -1287,12 +1287,7 @@ y
 Chapter C.
 (Sections/AppendixComputationsTable.tex [62
 
-] [63]
-
-LaTeX Warning: Reference `table:MmfmComputations2' on page 64 undefined on inpu
-t line 109.
-
-[64
+] [63] [64
 
 ] [65])
 Chapter D.
@@ -1308,51 +1303,55 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 290.
  (Report.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 290.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 290.
-Package rerunfilecheck Info: File `Report.out' has not changed.
-(rerunfilecheck)             Checksum: 32207998A9AA78AEB50381F8BCF36126;6776.
 
 
-LaTeX Warning: There were undefined references.
+Package rerunfilecheck Warning: File `Report.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
 
+Package rerunfilecheck Info: Checksums for `Report.out':
+(rerunfilecheck)             Before: 1ADD3E62ACF15A8B41F675DC1A4D0117;6769
+(rerunfilecheck)             After:  16674F5053C4FCA53F81C02CA2060C9D;6834.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 290.
  ) 
 Here is how much of TeX's memory you used:
- 31372 strings out of 493333
- 744447 string characters out of 3139187
- 1146993 words of memory out of 3000000
- 33849 multiletter control sequences out of 15000+200000
- 16960 words of font info for 67 fonts, out of 3000000 for 9000
+ 31378 strings out of 493333
+ 744528 string characters out of 3139187
+ 1141497 words of memory out of 3000000
+ 33853 multiletter control sequences out of 15000+200000
+ 16652 words of font info for 66 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 76i,29n,128p,755b,2160s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 76i,31n,128p,755b,2160s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Pr
 ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Fi
-les/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx9.pfb><C:/Program Files/MiKTe
-X 2.9/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Program Files/MiKTeX 2.9/f
-onts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9/fonts/typ
-e1/public/amsfonts/cmextra/cmex7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/p
-ublic/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/am
-sfonts/cm/cmmi12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/c
-m/cmmi5.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.p
-fb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Pr
-ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Program Fil
-es/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX
- 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/font
-s/type1/public/amsfonts/cm/cmr5.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pu
-blic/amsfonts/cm/cmr6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfo
-nts/cm/cmr7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr
-9.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsl10.pfb><C
-:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsl12.pfb><C:/Progra
-m Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsl9.pfb><C:/Program Files/M
-iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.
-9/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Program Files/MiKTeX 2.9/fonts/t
+les/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Program Files/MiK
+TeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9/
+fonts/type1/public/amsfonts/cmextra/cmex7.pfb><C:/Program Files/MiKTeX 2.9/font
+s/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/
+public/amsfonts/cm/cmmi12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/a
+msfonts/cm/cmmi5.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/c
+m/cmmi6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.p
+fb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Pr
+ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Fil
+es/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX
+ 2.9/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Program Files/MiKTeX 2.9/fonts
+/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pub
+lic/amsfonts/cm/cmr7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfon
+ts/cm/cmr9.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsl
+10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsl12.pfb><
+C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsl9.pfb><C:/Progra
+m Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/
+MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Program Files/MiKTeX 2.
+9/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Program Files/MiKTeX 2.9/fonts/t
 ype1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publ
-ic/amsfonts/cm/cmti10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfo
-nts/cm/cmti12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/doublestroke/
-dsrom10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/ms
-bm10.pfb>
-Output written on Report.pdf (72 pages, 697016 bytes).
+ic/amsfonts/cm/cmsy9.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfon
+ts/cm/cmti10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cm
+ti12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/doublestroke/dsrom10.p
+fb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+
+Output written on Report.pdf (72 pages, 707851 bytes).
 PDF statistics:
- 1296 PDF objects out of 1440 (max. 8388607)
- 350 named destinations out of 1000 (max. 500000)
+ 1306 PDF objects out of 1440 (max. 8388607)
+ 353 named destinations out of 1000 (max. 500000)
  757 words of extra memory for PDF output out of 10000 (max. 10000000)
 
